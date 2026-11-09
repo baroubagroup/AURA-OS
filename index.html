@@ -1458,8 +1458,20 @@
     <div id="sidebar-standard-nav" class="flex-1 flex flex-col min-h-0 overflow-hidden">
 
       <!-- Actions Rapides Prioritaires (Pinned Top) -->
-      <div class="p-3 space-y-1.5 border-b border-[var(--border)] bg-[var(--bg-card-subtle)]">
-      <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-bold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/20 press-effect">
+      <div class="p-3 space-y-2 border-b border-[var(--border)] bg-[var(--bg-card-subtle)]">
+        <!-- Bouton Souverain : Basculer vers le Mode Cartes & Bureau OS -->
+        <button onclick="applyNavInterfaceMode('cards', true)" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-bold text-white bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 shadow-md transition-all press-effect cursor-pointer group" title="Ouvrir le Bureau & le Mode Cartes AURA OS (Alt+I)">
+          <div class="flex items-center gap-2.5">
+            <span class="text-base group-hover:scale-110 transition-transform">🃏</span>
+            <div class="leading-tight">
+              <span class="text-xs font-black block text-white">Mode Cartes & Bureau</span>
+              <span class="text-[10px] text-teal-100 font-medium">Launchpad Visuel OS</span>
+            </div>
+          </div>
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/30 text-white font-bold">Activer</span>
+        </button>
+
+        <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-bold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/20 press-effect">
         <div class="flex items-center gap-2.5">
           <svg class="w-4 h-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
           <span>Tableau de Bord 360°</span>
@@ -1827,21 +1839,21 @@
       </div>
 
       <!-- Actions Rapides & Horloge de caisse -->
-      <div class="flex items-center gap-3">
+      <div class="flex items-center gap-2.5 shrink-0">
         <!-- Recherche globale -->
-        <div class="relative w-64 hidden md:block">
-          <input type="text" id="global-search" oninput="handleGlobalSearch(this.value)" placeholder="Rechercher article, client, N° ticket..." class="app-input pl-9 pr-3 py-1.5 text-xs">
-          <svg class="w-4 h-4 text-[var(--text-muted)] absolute left-3 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        <div class="relative w-32 md:w-44 lg:w-56 hidden md:block">
+          <input type="text" id="global-search" oninput="handleGlobalSearch(this.value)" placeholder="Rechercher article, ticket..." class="app-input pl-8 pr-2.5 py-1.5 text-xs">
+          <svg class="w-3.5 h-3.5 text-[var(--text-muted)] absolute left-2.5 top-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
         </div>
 
         <!-- Badge Offline Sync -->
-        <div class="hidden lg:flex items-center gap-2 px-3 py-1 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] text-[11px] text-[var(--text-secondary)]">
+        <div class="hidden 2xl:flex items-center gap-2 px-2.5 py-1 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] text-[11px] text-[var(--text-secondary)]">
           <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-          <span>1 482 articles synchronisés</span>
+          <span>1 482 articles</span>
         </div>
 
         <!-- Horloge numérique -->
-        <div class="px-3 py-1.5 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] text-xs font-num font-bold text-[var(--text-main)] tracking-wider" id="digital-clock">
+        <div class="hidden xl:flex px-2.5 py-1.5 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] text-xs font-num font-bold text-[var(--text-main)] tracking-wider" id="digital-clock">
           14:32:05
         </div>
 
@@ -1854,18 +1866,18 @@
         <!-- Bouton Paramètres OS Dédié (Mode Cartes / Bureau) -->
         <button id="btn-header-os-settings" type="button" onclick="openOsAppearanceModal()" class="px-2.5 py-1.5 rounded-xl bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] border border-[var(--border)] text-xs font-bold text-[var(--text-main)] flex items-center gap-1.5 transition-all press-effect cursor-pointer" title="Réglages du Bureau & Dock AURA OS">
           <span>⚙️</span>
-          <span class="hidden xl:inline">Réglages OS</span>
+          <span class="hidden sm:inline">Réglages OS</span>
         </button>
 
-        <!-- Basculeur Double Interface (Standard Formel <-> Mode Cartes Visuelles) -->
-        <div class="flex items-center p-0.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card-subtle)] text-xs font-semibold shadow-sm select-none">
-          <button id="btn-mode-formal" type="button" onclick="applyNavInterfaceMode('formal', true)" class="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-[var(--primary)] bg-[var(--bg-card)] font-bold shadow-xs border border-[var(--primary)]/20 press-effect" title="Interface standardisée d'entreprise (menu arborescent vertical)">
+        <!-- Basculeur Double Interface Souverain (Standard Formel <-> Mode Cartes Visuelles) -->
+        <div class="flex items-center p-0.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card-subtle)] text-xs font-semibold shadow-sm select-none shrink-0 z-30">
+          <button id="btn-mode-formal" type="button" onclick="applyNavInterfaceMode('formal', true)" class="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-[var(--primary)] bg-[var(--bg-card)] font-bold shadow-xs border border-[var(--primary)]/20 press-effect cursor-pointer" title="Interface standardisée d'entreprise (menu arborescent vertical)">
             <span>🏢</span>
             <span class="hidden sm:inline">Standard</span>
           </button>
-          <button id="btn-mode-cards" type="button" onclick="applyNavInterfaceMode('cards', true)" class="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect" title="Interface par cartes visuelles (pôles à gauche + ruban horizontal)">
+          <button id="btn-mode-cards" type="button" onclick="applyNavInterfaceMode('cards', true)" class="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect cursor-pointer" title="Interface par cartes visuelles (pôles à gauche + ruban horizontal)">
             <span>🃏</span>
-            <span class="hidden sm:inline">Cartes</span>
+            <span>Cartes</span>
             <span id="nav-mode-badge" class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 font-mono hidden">ACTIF</span>
           </button>
         </div>
@@ -14235,7 +14247,7 @@ window.addEventListener('DOMContentLoaded', () => {
     /* ========================================================
        DUAL INTERFACE SYSTEM (DOUBLE INTERFACE : FORMEL VS CARTES)
        ======================================================== */
-    let currentNavInterfaceMode = 'formal';
+    let currentNavInterfaceMode = 'cards';
     let currentActivePoleId = 'pos_docs';
     let currentActiveSubCardId = 'pos';
 
@@ -14433,7 +14445,22 @@ function getLiveMetricForPole(countKey) {
     }
 
     function initNavInterfaceMode() {
-      const savedMode = (typeof localStorage !== 'undefined' && localStorage.getItem('aura_nav_interface_mode')) || 'formal';
+      let savedMode = 'cards';
+      if (typeof localStorage !== 'undefined') {
+        const storedV3 = localStorage.getItem('aura_nav_interface_mode_v3');
+        if (storedV3 === 'formal') {
+          savedMode = 'formal';
+        } else if (storedV3 === 'cards') {
+          savedMode = 'cards';
+        } else {
+          // Premier chargement ou mise à jour v3 : forcer le Mode Cartes par défaut souverain
+          savedMode = 'cards';
+          try {
+            localStorage.setItem('aura_nav_interface_mode_v3', 'cards');
+            localStorage.setItem('aura_nav_interface_mode', 'cards');
+          } catch (e) {}
+        }
+      }
       applyNavInterfaceMode(savedMode, false);
     }
     window.initNavInterfaceMode = initNavInterfaceMode;
@@ -14447,7 +14474,10 @@ function getLiveMetricForPole(countKey) {
     function applyNavInterfaceMode(mode, showNotification) {
       currentNavInterfaceMode = mode;
       if (typeof localStorage !== 'undefined') {
-        try { localStorage.setItem('aura_nav_interface_mode', mode); } catch (e) {}
+        try {
+          localStorage.setItem('aura_nav_interface_mode_v3', mode);
+          localStorage.setItem('aura_nav_interface_mode', mode);
+        } catch (e) {}
       }
 
       if (typeof document !== 'undefined' && document.body) {
@@ -21012,10 +21042,16 @@ function getLiveMetricForPole(countKey) {
     if (typeof setTimeout !== 'undefined') { setTimeout(updateDesktopClock, 50); }
 
     function showAuraDesktop() {
+      if (typeof currentNavInterfaceMode !== 'undefined' && currentNavInterfaceMode !== 'cards') {
+        if (typeof applyNavInterfaceMode === 'function') {
+          applyNavInterfaceMode('cards', false);
+        }
+      }
       const desktop = document.getElementById('aura-os-desktop');
       const returnBtn = document.getElementById('btn-return-to-desktop');
       if (typeof document !== 'undefined' && document.body) {
         document.body.classList.add('os-desktop-active');
+        document.body.classList.add('interface-cards-mode');
       }
       if (desktop) {
         desktop.classList.remove('hidden');
