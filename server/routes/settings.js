@@ -106,4 +106,21 @@ router.get('/rbac', (req, res) => {
   }
 });
 
+// POST /api/settings/purge-demo - Purge all dummy data for production deployment
+router.post('/purge-demo', (req, res) => {
+  try {
+    const collections = ['products', 'customers', 'suppliers', 'employees', 'sales', 'shifts', 'expenses', 'credits', 'deliveries', 'salaryAdvances', 'documents'];
+    collections.forEach(col => {
+      db.saveCollection(col, []);
+    });
+    db.logAudit('PURGE_PRODUCTION', req.body.operator || 'Admin', 'Système', 'Purge intégrale des données de démo pour bascule en production.');
+    res.json({
+      success: true,
+      message: 'Toutes les données fictives ont été purgées avec succès. Le système est vierge et prêt pour la production.'
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
 export default router;

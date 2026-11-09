@@ -5140,7 +5140,11 @@
                   <button onclick="checkSystemUpdates()" class="w-full app-btn-secondary py-2 text-xs">
                     Vérifier les Mises à Jour du Système
                   </button>
-                  <button onclick="resetSystemFactoryDefaults()" class="w-full text-xs text-rose-500 hover:text-rose-400 py-1 font-semibold transition-colors">
+                  <button onclick="purgeDemoDataForProduction()" class="w-full py-2.5 rounded-xl bg-rose-600/10 hover:bg-rose-600/20 text-rose-500 border border-rose-500/30 text-xs font-bold transition-all flex items-center justify-center gap-2 cursor-pointer shadow-sm">
+                    <svg class="w-4 h-4 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                    <span>🧹 Purger les Données Fictives (Prêt pour Déploiement)</span>
+                  </button>
+                  <button onclick="resetSystemFactoryDefaults()" class="w-full text-xs text-[var(--text-muted)] hover:text-rose-400 py-1 font-medium transition-colors">
                     Réinitialiser les Paramètres par Défaut (Reset Usine)
                   </button>
                 </div>
@@ -14819,6 +14823,11 @@ function getLiveMetricForPole(countKey) {
       const safeList = (list && Array.isArray(list)) ? list : (window.PRODUCTS || (typeof PRODUCTS !== 'undefined' ? PRODUCTS : []));
       if (!Array.isArray(safeList)) return;
 
+      if (safeList.length === 0) {
+        grid.innerHTML = '<div class="col-span-full py-16 flex flex-col items-center justify-center text-center p-6 rounded-2xl border-2 border-dashed border-[var(--border)] bg-[var(--bg-card-subtle)]"><div class="w-14 h-14 rounded-2xl bg-teal-500/10 flex items-center justify-center text-teal-400 mb-3 text-2xl">📦</div><h4 class="font-bold text-sm text-[var(--text-main)] mb-1">Catalogue Vierge (Prêt pour Déploiement)</h4><p class="text-xs text-[var(--text-muted)] max-w-sm mb-4">Aucun article enregistré. Créez vos premiers produits dans l\'onglet Stocks ou importez votre fichier Excel / CSV.</p><button onclick="switchView(\'stock\')" class="px-4 py-2 rounded-xl bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white text-xs font-bold transition-all shadow-md">+ Ajouter un Article</button></div>';
+        return;
+      }
+
       grid.innerHTML = safeList.map(p => {
         const isService = p.type === 'service';
         const visualHtml = getProductVisualHtml(p, 'w-11 h-11');
@@ -20310,6 +20319,64 @@ function getLiveMetricForPole(countKey) {
       showToast('Vérification effectuée : Votre version AURA OS v5.2 Enterprise est parfaitement à jour.', 'info');
     }
     window.checkSystemUpdates = checkSystemUpdates;
+
+    function purgeDemoDataForProduction() {
+      if (typeof confirm === 'function') {
+        const ok = confirm("⚠️ Confirmation de purge de production :\n\nVoulez-vous supprimer DÉFINITIVEMENT toutes les données fictives/démo (articles, clients, ventes, dettes, stocks, livraisons, employés de test) pour démarrer sur une base vierge en exploitation réelle ?\n\nCette action est irréversible.");
+        if (!ok) return;
+      }
+      
+      // 1. Réinitialiser les tableaux en mémoire
+      window.PRODUCTS = [];
+      if (typeof PRODUCTS !== 'undefined') PRODUCTS = [];
+      window.CRM_CLIENTS_DATA = [];
+      if (typeof CRM_CLIENTS_DATA !== 'undefined') CRM_CLIENTS_DATA = [];
+      if (typeof SUPPLIERS !== 'undefined') SUPPLIERS = [];
+      if (typeof EMPLOYEES !== 'undefined') EMPLOYEES = [];
+      if (typeof EXPENSES !== 'undefined') EXPENSES = [];
+      if (typeof CREDITS !== 'undefined') CREDITS = [];
+      if (typeof DELIVERIES !== 'undefined') DELIVERIES = [];
+      if (typeof SALARY_ADVANCES !== 'undefined') SALARY_ADVANCES = [];
+      if (typeof TRANSFERS !== 'undefined') TRANSFERS = [];
+      if (typeof LOSSES !== 'undefined') LOSSES = [];
+      if (typeof ACCOUNTING_LEDGER !== 'undefined') ACCOUNTING_LEDGER = [];
+
+      // 2. Nettoyer le localStorage
+      if (typeof localStorage !== 'undefined') {
+        try {
+          localStorage.removeItem('bizmanager_offline_cache');
+          localStorage.removeItem('aura_pos_cart');
+          localStorage.removeItem('aura_pending_sales');
+          localStorage.removeItem('aura_demo_seeded');
+          localStorage.setItem('aura_production_mode', 'true');
+        } catch(e) {}
+      }
+
+      // 3. Appel API de purge serveur
+      if (typeof fetch !== 'undefined') {
+        fetch('/api/settings/purge-demo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ operator: 'Super Admin' })
+        }).catch(() => {});
+      }
+
+      // 4. Mettre à jour toutes les vues UI
+      if (typeof renderPOSProducts === 'function') renderPOSProducts([]);
+      if (typeof renderStockTable === 'function') renderStockTable();
+      if (typeof renderCRMTableData === 'function') renderCRMTableData();
+      if (typeof updateCRMKpiCounters === 'function') updateCRMKpiCounters();
+      if (typeof renderExpensesTable === 'function') renderExpensesTable();
+      if (typeof renderCreditsTable === 'function') renderCreditsTable();
+      if (typeof renderDeliveriesTable === 'function') renderDeliveriesTable();
+      if (typeof renderHRModule === 'function') renderHRModule();
+      if (typeof renderSuppliersTable === 'function') renderSuppliersTable();
+
+      if (typeof showToast === 'function') {
+        showToast('✨ Toutes les données fictives ont été purgées. Le système est vierge et prêt pour la production !', 'success');
+      }
+    }
+    if (typeof window !== 'undefined') window.purgeDemoDataForProduction = purgeDemoDataForProduction;
 
     function resetSystemFactoryDefaults() {
       SYSTEM_SETTINGS = Object.assign({}, DEFAULT_SYSTEM_SETTINGS);

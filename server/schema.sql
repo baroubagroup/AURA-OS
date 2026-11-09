@@ -1,0 +1,2 @@
+-- Reference pointing to database/schema.sql
+-- Run: psql -U postgres -d aura_pos -f database/schema.sql
