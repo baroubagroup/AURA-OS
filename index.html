@@ -1056,25 +1056,42 @@
     }
     html.light .os-app-label {
       color: #0F172A !important;
-      text-shadow: 0 1px 3px rgba(255, 255, 255, 0.9) !important;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95), 0 0 1px #ffffff !important;
+      font-weight: 800 !important;
     }
-    html.light .os-dock-container {
-      background: rgba(255, 255, 255, 0.75) !important;
-      border: 1px solid rgba(255, 255, 255, 0.9) !important;
-      box-shadow: 0 20px 50px -10px rgba(15, 23, 42, 0.16) !important;
+    html.light .os-folder-squircle {
+      background: rgba(255, 255, 255, 0.65) !important;
+      border: 1px solid rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.12), inset 0 1px 1px rgba(255, 255, 255, 1) !important;
+    }
+    html.light .os-floating-dock {
+      background: rgba(255, 255, 255, 0.68) !important;
+      backdrop-filter: blur(32px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(32px) saturate(180%) !important;
+      border: 1px solid rgba(255, 255, 255, 0.85) !important;
+      box-shadow: 0 25px 60px -10px rgba(15, 23, 42, 0.2), 0 8px 20px -5px rgba(15, 23, 42, 0.1), inset 0 1px 1.5px 0 rgba(255, 255, 255, 1) !important;
     }
     html.light .os-dock-btn {
-      background: rgba(241, 245, 249, 0.85) !important;
-      border-color: rgba(203, 213, 225, 0.8) !important;
-      color: #0F172A !important;
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
     }
-    html.light .os-dock-btn span {
+    html.light .os-dock-label {
       color: #0F172A !important;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+      font-weight: 800 !important;
     }
-    html.light #os-folder-modal > div {
+    html.light .os-dock-tooltip {
       background: rgba(255, 255, 255, 0.96) !important;
-      border: 1px solid rgba(255, 255, 255, 0.95) !important;
-      box-shadow: 0 30px 80px -10px rgba(15, 23, 42, 0.25) !important;
+      border: 1px solid rgba(0, 0, 0, 0.12) !important;
+      color: #0F172A !important;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+    }
+    html.light .os-folder-modal-content {
+      background: rgba(255, 255, 255, 0.92) !important;
+      border: 1.5px solid rgba(255, 255, 255, 1) !important;
+      box-shadow: 0 35px 85px -15px rgba(15, 23, 42, 0.25), 0 0 0 1px rgba(0, 0, 0, 0.08) inset !important;
+      color: #0F172A !important;
     }
     html.light #os-folder-modal h3,
     html.light #os-folder-modal p,
@@ -1083,24 +1100,28 @@
     }
 
     /* ========================================================
-       POSITION DU DOCK MACOS (BOTTOM, LEFT, RIGHT, TOP)
+       POSITION DU DOCK MACOS & BUREAU (BOTTOM, LEFT, RIGHT, TOP)
        ======================================================== */
-    body.dock-pos-left #os-app-window-dock {
-      left: 0.85rem !important;
+    body.dock-pos-left #os-app-window-dock,
+    body.dock-pos-left #aura-os-desktop-dock {
+      position: fixed !important;
+      left: 1.25rem !important;
       right: auto !important;
       top: 50% !important;
       bottom: auto !important;
       transform: translateY(-50%) !important;
+      padding: 0 !important;
+      z-index: 60 !important;
     }
     body.dock-pos-left .os-floating-dock {
       flex-direction: column !important;
-      padding: 0.85rem 0.35rem !important;
-      gap: 0.45rem !important;
+      padding: 0.85rem 0.45rem !important;
+      gap: 0.65rem !important;
       min-height: auto !important;
-      min-width: 3.85rem !important;
+      min-width: 4.5rem !important;
     }
     body.dock-pos-left .os-dock-tooltip {
-      left: calc(100% + 12px) !important;
+      left: calc(100% + 14px) !important;
       top: 50% !important;
       bottom: auto !important;
       transform: translateY(-50%) translateX(-4px) scale(0.95) !important;
@@ -1109,30 +1130,41 @@
       transform: translateY(-50%) translateX(0) scale(1) !important;
     }
     body.dock-pos-left main {
-      left: 5.5rem !important;
-      right: 1.5rem !important;
+      position: fixed !important;
+      left: 6.25rem !important;
+      right: 1.25rem !important;
       top: 1.25rem !important;
       bottom: 1.25rem !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      max-width: none !important;
+      width: calc(100vw - 7.5rem) !important;
       height: calc(100vh - 2.5rem) !important;
-      width: calc(100vw - 7rem) !important;
+    }
+    body.dock-pos-left #desktop-grid-container {
+      padding-left: 5.5rem !important;
     }
 
-    body.dock-pos-right #os-app-window-dock {
-      right: 0.85rem !important;
+    body.dock-pos-right #os-app-window-dock,
+    body.dock-pos-right #aura-os-desktop-dock {
+      position: fixed !important;
+      right: 1.25rem !important;
       left: auto !important;
       top: 50% !important;
       bottom: auto !important;
       transform: translateY(-50%) !important;
+      padding: 0 !important;
+      z-index: 60 !important;
     }
     body.dock-pos-right .os-floating-dock {
       flex-direction: column !important;
-      padding: 0.85rem 0.35rem !important;
-      gap: 0.45rem !important;
+      padding: 0.85rem 0.45rem !important;
+      gap: 0.65rem !important;
       min-height: auto !important;
-      min-width: 3.85rem !important;
+      min-width: 4.5rem !important;
     }
     body.dock-pos-right .os-dock-tooltip {
-      right: calc(100% + 12px) !important;
+      right: calc(100% + 14px) !important;
       left: auto !important;
       top: 50% !important;
       bottom: auto !important;
@@ -1142,23 +1174,39 @@
       transform: translateY(-50%) translateX(0) scale(1) !important;
     }
     body.dock-pos-right main {
-      right: 5.5rem !important;
-      left: 1.5rem !important;
+      position: fixed !important;
+      right: 6.25rem !important;
+      left: 1.25rem !important;
       top: 1.25rem !important;
       bottom: 1.25rem !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      max-width: none !important;
+      width: calc(100vw - 7.5rem) !important;
       height: calc(100vh - 2.5rem) !important;
-      width: calc(100vw - 7rem) !important;
+    }
+    body.dock-pos-right #desktop-grid-container {
+      padding-right: 5.5rem !important;
     }
 
-    body.dock-pos-top #os-app-window-dock {
-      top: 0.85rem !important;
+    body.dock-pos-top #os-app-window-dock,
+    body.dock-pos-top #aura-os-desktop-dock {
+      position: fixed !important;
+      top: 3.75rem !important;
       bottom: auto !important;
       left: 50% !important;
       right: auto !important;
       transform: translateX(-50%) !important;
+      padding: 0 !important;
+      z-index: 60 !important;
+    }
+    body.dock-pos-top .os-floating-dock {
+      flex-direction: row !important;
+      padding: 0.45rem 1rem !important;
+      gap: 0.65rem !important;
     }
     body.dock-pos-top .os-dock-tooltip {
-      top: calc(100% + 12px) !important;
+      top: calc(100% + 14px) !important;
       bottom: auto !important;
       transform: translateX(-50%) translateY(-4px) scale(0.95) !important;
     }
@@ -1166,37 +1214,71 @@
       transform: translateX(-50%) translateY(0) scale(1) !important;
     }
     body.dock-pos-top main {
-      top: 5.5rem !important;
+      position: fixed !important;
+      top: 5.75rem !important;
       bottom: 1.25rem !important;
-      left: 1.5rem !important;
-      right: 1.5rem !important;
-      height: calc(100vh - 6.75rem) !important;
+      left: 1.25rem !important;
+      right: 1.25rem !important;
+      margin: 0 auto !important;
+      max-width: 1560px !important;
+      width: calc(100vw - 2.5rem) !important;
+      height: calc(100vh - 7rem) !important;
+    }
+    body.dock-pos-top #desktop-grid-container {
+      padding-top: 5rem !important;
     }
 
     body.dock-pos-bottom #os-app-window-dock,
-    body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) #os-app-window-dock {
-      bottom: 0.75rem !important;
+    body.dock-pos-bottom #aura-os-desktop-dock,
+    body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) #os-app-window-dock,
+    body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) #aura-os-desktop-dock {
+      position: fixed !important;
+      bottom: 1.25rem !important;
       top: auto !important;
       left: 50% !important;
       right: auto !important;
       transform: translateX(-50%) !important;
+      padding: 0 !important;
+      z-index: 60 !important;
+    }
+    body.dock-pos-bottom .os-floating-dock,
+    body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) .os-floating-dock {
+      flex-direction: row !important;
+      padding: 0.45rem 1rem !important;
+      gap: 0.65rem !important;
+    }
+    body.dock-pos-bottom main,
+    body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) main {
+      position: fixed !important;
+      top: 1.25rem !important;
+      bottom: 5.5rem !important;
+      left: 1.25rem !important;
+      right: 1.25rem !important;
+      margin: 0 auto !important;
+      max-width: 1560px !important;
+      width: calc(100vw - 2.5rem) !important;
+      height: calc(100vh - 6.75rem) !important;
+    }
+    body.dock-pos-bottom #desktop-grid-container,
+    body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) #desktop-grid-container {
+      padding-bottom: 5.5rem !important;
     }
 
     /* macOS Big Sur 3D App Squircle Specification (Dock & Desktop) */
     .macos-dock-squircle {
-      width: 2.35rem;
-      height: 2.35rem;
-      border-radius: 0.72rem;
+      width: 2.85rem;
+      height: 2.85rem;
+      border-radius: 0.85rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.35), 
-                  0 1px 3px rgba(0, 0, 0, 0.2), 
-                  inset 0 1px 1px 0 rgba(255, 255, 255, 0.45),
-                  inset 0 -1px 1px 0 rgba(0, 0, 0, 0.25);
+      box-shadow: 0 6px 14px -2px rgba(0, 0, 0, 0.4), 
+                  0 2px 4px rgba(0, 0, 0, 0.25), 
+                  inset 0 1px 1.5px 0 rgba(255, 255, 255, 0.55),
+                  inset 0 -1.5px 1.5px 0 rgba(0, 0, 0, 0.3);
       position: relative;
       overflow: hidden;
-      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.18s ease;
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease;
     }
     .macos-dock-squircle::before {
       content: '';
@@ -1204,10 +1286,20 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 45%;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.02) 100%);
-      border-top-left-radius: 0.72rem;
-      border-top-right-radius: 0.72rem;
+      height: 46%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.04) 100%);
+      border-top-left-radius: 0.85rem;
+      border-top-right-radius: 0.85rem;
+      pointer-events: none;
+    }
+    .os-dock-btn:hover .macos-dock-squircle {
+      transform: translateY(-5px) scale(1.15);
+      box-shadow: 0 12px 24px -2px rgba(0, 0, 0, 0.55), inset 0 1px 1.5px rgba(255, 255, 255, 0.7);
+    }
+    .macos-dock-squircle svg {
+      width: 1.45rem !important;
+      height: 1.45rem !important;
+    }
       pointer-events: none;
     }
     .os-dock-btn:hover .macos-dock-squircle {
@@ -1321,8 +1413,8 @@
       <path d="M0 740 C 240 690, 480 780, 820 690 C 1040 640, 1260 700, 1440 740 L 1440 900 L 0 900 Z" fill="url(#bs-wave-violet)" opacity="0.88"/>
       <rect width="1440" height="900" fill="black" opacity="0.10"/>
     </svg>
-    <div class="absolute inset-0 bg-gradient-to-b from-[#180C24] via-[#481B34] to-[#A8432A]"></div>
-    <svg id="wallpaper-canyon-svg" style="display:none;" class="absolute inset-0 w-full h-full object-cover" preserveAspectRatio="none" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <div id="global-wallpaper-canyon-sky" class="wallpaper-canyon-sky absolute inset-0 bg-gradient-to-b from-[#180C24] via-[#481B34] to-[#A8432A]" style="display:none;"></div>
+    <svg id="wallpaper-canyon-svg" style="display:none;" class="absolute inset-0 w-full h-full object-cover wallpaper-canyon-svg" preserveAspectRatio="none" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
       <polygon points="0,520 180,440 360,490 540,410 720,470 900,430 1080,480 1260,420 1440,490 1440,900 0,900" fill="#752934" opacity="0.85" />
       <polygon points="180,440 360,490 540,410 720,470" fill="#8C333D" opacity="0.9" />
       <polygon points="720,470 900,430 1080,480 1260,420" fill="#6B242F" opacity="0.9" />
@@ -1336,7 +1428,7 @@
       <polygon points="580,650 760,730 940,640" fill="#5E1A1E" />
       <polygon points="940,640 1120,730 1300,650" fill="#A1362D" />
     </svg>
-    <div class="absolute inset-0 bg-radial-gradient from-amber-400/20 via-transparent to-black/50"></div>
+    <div class="wallpaper-canyon-overlay absolute inset-0 bg-radial-gradient from-amber-400/20 via-transparent to-black/50" style="display:none;"></div>
   </div>
 
   <!-- ==================== SIDEBAR PRINCIPALE ==================== -->
@@ -1763,6 +1855,12 @@
         <button id="header-theme-toggle" type="button" onclick="toggleTheme()" class="px-2.5 py-1.5 rounded-xl bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] border border-[var(--border)] text-xs font-bold text-[var(--text-main)] flex items-center gap-1.5 transition-all press-effect cursor-pointer" title="Basculer Mode Clair / Sombre (Alt+T)">
           <span id="window-theme-icon">☀️</span>
           <span id="window-theme-label" class="hidden sm:inline">Clair</span>
+        </button>
+
+        <!-- Bouton Paramètres OS Dédié (Mode Cartes / Bureau) -->
+        <button id="btn-header-os-settings" type="button" onclick="openOsAppearanceModal()" class="px-2.5 py-1.5 rounded-xl bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] border border-[var(--border)] text-xs font-bold text-[var(--text-main)] flex items-center gap-1.5 transition-all press-effect cursor-pointer" title="Réglages du Bureau & Dock AURA OS">
+          <span>⚙️</span>
+          <span class="hidden xl:inline">Réglages OS</span>
         </button>
 
         <!-- Basculeur Double Interface (Standard Formel <-> Mode Cartes Visuelles) -->
@@ -14707,7 +14805,26 @@ function getLiveMetricForPole(countKey) {
        SOUS-ONGLETS DU MODULE STOCK
        ======================================================== */
     function switchStockTab(tabKey) {
-      ['catalog', 'transfers', 'history', 'loss', 'barcodes'].forEach(k => {
+      const aliasMap = {
+        items: 'catalog',
+        stock: 'catalog',
+        catalogue: 'catalog',
+        in: 'transfers',
+        receptions: 'transfers',
+        transfers: 'transfers',
+        out: 'loss',
+        losses: 'loss',
+        loss: 'loss',
+        categories: 'catalog',
+        inventory: 'catalog',
+        barcodes: 'barcodes',
+        history: 'history'
+      };
+      const validTabs = ['catalog', 'transfers', 'history', 'loss', 'barcodes'];
+      let targetKey = aliasMap[tabKey] || tabKey;
+      if (!validTabs.includes(targetKey)) targetKey = 'catalog';
+
+      validTabs.forEach(k => {
         const el = document.getElementById('subview-stock-' + k);
         const btn = document.getElementById('stock-tab-' + k);
         if (el) el.classList.add('hidden');
@@ -14716,29 +14833,30 @@ function getLiveMetricForPole(countKey) {
           btn.classList.add('border-transparent', 'text-[var(--text-muted)]');
         }
       });
-      const activeEl = document.getElementById('subview-stock-' + tabKey);
-      const activeBtn = document.getElementById('stock-tab-' + tabKey);
+      const activeEl = document.getElementById('subview-stock-' + targetKey) || document.getElementById('subview-stock-catalog');
+      const activeBtn = document.getElementById('stock-tab-' + targetKey) || document.getElementById('stock-tab-catalog');
       if (activeEl) activeEl.classList.remove('hidden');
       if (activeBtn) {
         activeBtn.classList.add('border-[var(--primary)]', 'text-[var(--primary)]');
         activeBtn.classList.remove('border-transparent', 'text-[var(--text-muted)]');
       }
 
-      if (tabKey === 'catalog') {
+      if (targetKey === 'catalog') {
         if (typeof renderStockTable === 'function') renderStockTable();
         if (typeof recalculateStockMetrics === 'function') recalculateStockMetrics();
-      } else if (tabKey === 'transfers') {
+      } else if (targetKey === 'transfers') {
         if (typeof renderStockTransferSelect === 'function') renderStockTransferSelect();
         if (typeof renderTransfersHistory === 'function') renderTransfersHistory();
-      } else if (tabKey === 'history') {
+      } else if (targetKey === 'history') {
         if (typeof renderStockMovements === 'function') renderStockMovements();
-      } else if (tabKey === 'loss') {
+      } else if (targetKey === 'loss') {
         if (typeof renderStockLossForm === 'function') renderStockLossForm();
         if (typeof renderLossHistory === 'function') renderLossHistory();
-      } else if (tabKey === 'barcodes') {
+      } else if (targetKey === 'barcodes') {
         if (typeof renderBarcodeLabels === 'function') renderBarcodeLabels();
       }
 
+      tabKey = targetKey;
       if (typeof syncCardsInterface === 'function') {
         syncCardsInterface('stock', tabKey);
       }
@@ -20842,12 +20960,11 @@ function getLiveMetricForPole(countKey) {
         desc: 'Gestion des articles, entrées, sorties et étiquettes',
         icon: '📦',
         items: [
-          { title: 'État des Stocks', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>', bg: 'from-amber-600 to-amber-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('items'); } },
-          { title: 'Entrées & Réceptions', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>', bg: 'from-emerald-600 to-teal-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('in'); } },
-          { title: 'Sorties & Pertes', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>', bg: 'from-rose-600 to-rose-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('out'); } },
-          { title: 'Planches Codes-barres A4', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8v8M11 8v8M15 8v8M17 8v8"/></svg>', bg: 'from-indigo-600 to-indigo-500', action: () => { if (typeof openBarcodeSheetModal === 'function') openBarcodeSheetModal(); else switchView('stock'); } },
-          { title: 'Catégories d\'Articles', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>', bg: 'from-purple-600 to-purple-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('categories'); } },
-          { title: 'Inventaire Tournant', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>', bg: 'from-blue-600 to-blue-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('inventory'); } }
+          { title: 'Catalogue & Double Stock', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>', bg: 'from-amber-600 to-amber-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('catalog'); } },
+          { title: 'Entrées & Réceptions', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 5v14M19 12l-7 7-7-7"/></svg>', bg: 'from-emerald-600 to-teal-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('transfers'); } },
+          { title: 'Historique des Flux', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', bg: 'from-blue-600 to-indigo-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('history'); } },
+          { title: 'Sorties & Pertes de Stock', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 19V5M5 12l7-7 7 7"/></svg>', bg: 'from-rose-600 to-rose-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('loss'); } },
+          { title: 'Planches Codes-barres A4', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8v8M11 8v8M15 8v8M17 8v8"/></svg>', bg: 'from-indigo-600 to-indigo-500', action: () => { switchView('stock'); if (typeof switchStockTab === 'function') switchStockTab('barcodes'); } }
         ]
       },
       crm: {
@@ -20992,30 +21109,25 @@ function getLiveMetricForPole(countKey) {
 
     function launchAppFromDesktop(viewKey, clickedElement) {
       if (clickedElement && clickedElement.classList) {
-        clickedElement.classList.add('scale-95', 'ring-2', 'ring-emerald-400');
+        clickedElement.classList.add('scale-95');
+        setTimeout(() => { if (clickedElement && clickedElement.classList) clickedElement.classList.remove('scale-95'); }, 140);
       }
       triggerAppLaunchProgress();
-
-      setTimeout(() => {
-        hideAuraDesktop();
-        switchView(viewKey);
-        syncDockActive(viewKey);
-        // Sync folder sibling bar if this view belongs to a folder
-        const folderMap = { stock: 'stock', clients: 'crm', credits: 'crm', hr: 'hr', expenses: 'finances', accounting: 'finances' };
-        if (folderMap[viewKey]) {
-          window.currentActiveFolderKey = folderMap[viewKey];
-          updateAppWindowFolderNavigation(folderMap[viewKey], 0);
-        } else {
-          const container = document.getElementById('os-folder-nav-container');
-          if (container) {
-            container.classList.add('hidden');
-            container.classList.remove('flex');
-          }
+      hideAuraDesktop();
+      switchView(viewKey);
+      syncDockActive(viewKey);
+      // Sync folder sibling bar if this view belongs to a folder
+      const folderMap = { stock: 'stock', clients: 'crm', credits: 'crm', hr: 'hr', expenses: 'finances', accounting: 'finances' };
+      if (folderMap[viewKey]) {
+        window.currentActiveFolderKey = folderMap[viewKey];
+        updateAppWindowFolderNavigation(folderMap[viewKey], 0);
+      } else {
+        const container = document.getElementById('os-folder-nav-container');
+        if (container) {
+          container.classList.add('hidden');
+          container.classList.remove('flex');
         }
-        if (clickedElement && clickedElement.classList) {
-          clickedElement.classList.remove('scale-95', 'ring-2', 'ring-emerald-400');
-        }
-      }, 140);
+      }
     }
     window.launchAppFromDesktop = launchAppFromDesktop;
 
@@ -21113,37 +21225,20 @@ function getLiveMetricForPole(countKey) {
       const folder = AURA_OS_DESKTOP_FOLDERS[folderKey];
       if (!folder || !folder.items[itemIndex]) return;
 
-      // 1. Tactile feedback & spinner inside clicked button
-      if (btn) {
-        btn.style.pointerEvents = 'none';
-        btn.classList.add('scale-95', 'ring-2', 'ring-emerald-400');
-        const spinner = btn.querySelector('.launch-spinner');
-        if (spinner) spinner.classList.remove('hidden');
+      if (btn && btn.classList) {
+        btn.classList.add('scale-95');
+        setTimeout(() => { if (btn && btn.classList) btn.classList.remove('scale-95'); }, 140);
       }
-
-      // 2. Trigger sleek Apple top progress bar
       triggerAppLaunchProgress();
-
-      // 3. Save active folder reference and update sibling switcher
       window.currentActiveFolderKey = folderKey;
       window.currentActiveFolderItemIndex = itemIndex;
       updateAppWindowFolderNavigation(folderKey, itemIndex);
-
-      // 4. Smooth transition to target module
-      setTimeout(() => {
-        closeDesktopFolder();
-        hideAuraDesktop();
-        folder.items[itemIndex].action();
-        if (typeof state !== 'undefined' && state.currentView) {
-          syncDockActive(state.currentView);
-        }
-        if (btn) {
-          btn.style.pointerEvents = '';
-          btn.classList.remove('scale-95', 'ring-2', 'ring-emerald-400');
-          const spinner = btn.querySelector('.launch-spinner');
-          if (spinner) spinner.classList.add('hidden');
-        }
-      }, 150);
+      closeDesktopFolder();
+      hideAuraDesktop();
+      folder.items[itemIndex].action();
+      if (typeof state !== 'undefined' && state.currentView) {
+        syncDockActive(state.currentView);
+      }
     }
     window.launchSubAppFromFolder = launchSubAppFromFolder;
 
@@ -21268,7 +21363,7 @@ function getLiveMetricForPole(countKey) {
 
     const AURA_WALLPAPER_STYLES = {
       bigsur: { type: 'bigsur' },
-      canyon: { type: 'svg' },
+      canyon: { type: 'canyon' },
       sonoma: { type: 'css', bg: 'linear-gradient(135deg, #1C0B2B 0%, #4D1234 40%, #A83232 75%, #F0783C 100%)' },
       sequoia: { type: 'css', bg: 'radial-gradient(circle at 50% 20%, #1E4E42 0%, #0D2821 55%, #051410 100%)' },
       cosmos: { type: 'css', bg: 'radial-gradient(ellipse at 70% 30%, #5B2182 0%, #1B0F33 45%, #070612 100%)' },
@@ -21276,30 +21371,71 @@ function getLiveMetricForPole(countKey) {
       cyberpunk: { type: 'css', bg: 'radial-gradient(circle at 30% 70%, #9D0191 0%, #2D0036 40%, #071E22 100%)' }
     };
 
-    function openWallpaperEngineModal() {
-      const m = document.getElementById('modal-wallpaper-engine');
+    function openOsAppearanceModal() {
+      const m = document.getElementById('modal-os-appearance-settings') || document.getElementById('modal-wallpaper-engine');
       if (m) {
         m.classList.remove('hidden');
         m.style.display = 'flex';
       }
+      if (typeof syncOsAppearanceSettingsModal === 'function') syncOsAppearanceSettingsModal();
     }
-    window.openWallpaperEngineModal = openWallpaperEngineModal;
+    window.openOsAppearanceModal = openOsAppearanceModal;
+    window.openWallpaperEngineModal = openOsAppearanceModal;
 
-    function closeWallpaperEngineModal(e) {
-      const m = document.getElementById('modal-wallpaper-engine');
+    function closeOsAppearanceModal(e) {
+      const m = document.getElementById('modal-os-appearance-settings') || document.getElementById('modal-wallpaper-engine');
       if (m) {
         m.classList.add('hidden');
         m.style.display = 'none';
       }
     }
-    window.closeWallpaperEngineModal = closeWallpaperEngineModal;
+    window.closeOsAppearanceModal = closeOsAppearanceModal;
+    window.closeWallpaperEngineModal = closeOsAppearanceModal;
+
+    function syncOsAppearanceSettingsModal() {
+      if (typeof document === 'undefined') return;
+      let pos = 'bottom';
+      let wp = 'bigsur';
+      try {
+        if (typeof localStorage !== 'undefined') {
+          pos = localStorage.getItem('aura_dock_position') || 'bottom';
+          wp = localStorage.getItem('aura_desktop_wallpaper') || 'bigsur';
+        }
+      } catch(e) {}
+      
+      ['bottom', 'left', 'right', 'top'].forEach(p => {
+        const btn = document.getElementById('dock-opt-' + p);
+        if (btn && btn.classList) {
+          if (p === pos) {
+            btn.classList.add('border-sky-500', 'bg-sky-500/10', 'ring-2', 'ring-sky-500');
+            btn.classList.remove('border-[var(--border)]', 'bg-[var(--bg-card)]', 'border-white/15', 'bg-white/5');
+          } else {
+            btn.classList.remove('border-sky-500', 'bg-sky-500/10', 'ring-2', 'ring-sky-500');
+            btn.classList.add('border-[var(--border)]', 'bg-[var(--bg-card)]');
+          }
+        }
+      });
+
+      if (typeof document.querySelectorAll === 'function') {
+        document.querySelectorAll('.wallpaper-card').forEach(card => {
+          const onclickAttr = card.getAttribute('onclick') || '';
+          if (onclickAttr.includes("'" + wp + "'")) {
+            card.classList.add('ring-2', 'ring-amber-400', 'border-amber-400');
+          } else {
+            card.classList.remove('ring-2', 'ring-amber-400', 'border-amber-400');
+          }
+        });
+      }
+    }
+    window.syncOsAppearanceSettingsModal = syncOsAppearanceSettingsModal;
 
     function setAuraWallpaper(key) {
       if (typeof localStorage !== 'undefined') {
         try { localStorage.setItem('aura_desktop_wallpaper', key); } catch(e) {}
       }
       applyAuraWallpaperKey(key);
-      closeWallpaperEngineModal();
+      closeOsAppearanceModal();
+      if (typeof syncOsAppearanceSettingsModal === 'function') syncOsAppearanceSettingsModal();
       if (typeof showToast === 'function') {
         showToast('✨ Fond d\'écran appliqué avec succès !', 'success');
       }
@@ -21313,10 +21449,14 @@ function getLiveMetricForPole(countKey) {
       
       const applySvgDisplay = (parent, showBigSur, showCanyon) => {
         if (!parent || typeof parent.querySelector !== 'function') return;
-        const bs = parent.querySelector('#wallpaper-bigsur-svg');
+        const bs = parent.querySelector('#wallpaper-bigsur-svg') || parent.querySelector('.wallpaper-bigsur-svg');
         const cy = parent.querySelector('#wallpaper-canyon-svg') || parent.querySelector('svg:not(#wallpaper-bigsur-svg)');
+        const cySky = parent.querySelector('.wallpaper-canyon-sky') || parent.querySelector('#desktop-wallpaper-canyon-sky') || parent.querySelector('#global-wallpaper-canyon-sky');
+        const cyOverlay = parent.querySelector('.wallpaper-canyon-overlay');
         if (bs && bs.style) bs.style.display = showBigSur ? 'block' : 'none';
         if (cy && cy.style) cy.style.display = showCanyon ? 'block' : 'none';
+        if (cySky && cySky.style) cySky.style.display = showCanyon ? 'block' : 'none';
+        if (cyOverlay && cyOverlay.style) cyOverlay.style.display = showCanyon ? 'block' : 'none';
       };
 
       if (key === 'bigsur' || (!AURA_WALLPAPER_STYLES[key] && key !== 'custom')) {
@@ -21350,7 +21490,7 @@ function getLiveMetricForPole(countKey) {
             localStorage.setItem('aura_custom_wallpaper_data', dataUrl);
           }
           applyCustomWallpaperData(dataUrl);
-          closeWallpaperEngineModal();
+          closeOsAppearanceModal();
           if (typeof showToast === 'function') {
             showToast('✨ Votre photo a été définie comme fond d\'écran !', 'success');
           }
@@ -21366,18 +21506,18 @@ function getLiveMetricForPole(countKey) {
 
     function applyCustomWallpaperData(dataUrl) {
       const globalWp = document.getElementById('aura-os-global-wallpaper');
-      const desktopWp = document.querySelector('#aura-os-desktop > div.absolute.inset-0.-z-10');
+      const desktopWp = document.querySelector('#aura-os-desktop > div.absolute.inset-0.-z-10') || document.getElementById('aura-os-desktop');
       const cssVal = 'url("' + dataUrl + '") center/cover no-repeat fixed';
-      if (globalWp) {
-        globalWp.style.background = cssVal;
-        const svg = globalWp.querySelector('svg');
-        if (svg) svg.style.display = 'none';
-      }
-      if (desktopWp) {
-        desktopWp.style.background = cssVal;
-        const svg = desktopWp.querySelector('svg');
-        if (svg) svg.style.display = 'none';
-      }
+      [globalWp, desktopWp].forEach(wp => {
+        if (!wp) return;
+        wp.style.background = cssVal;
+        const svgs = wp.querySelectorAll ? wp.querySelectorAll('svg') : [];
+        if (svgs && svgs.forEach) svgs.forEach(s => s.style.display = 'none');
+        const cySky = wp.querySelector ? (wp.querySelector('.wallpaper-canyon-sky') || wp.querySelector('#desktop-wallpaper-canyon-sky') || wp.querySelector('#global-wallpaper-canyon-sky')) : null;
+        if (cySky && cySky.style) cySky.style.display = 'none';
+        const cyOverlay = wp.querySelector ? wp.querySelector('.wallpaper-canyon-overlay') : null;
+        if (cyOverlay && cyOverlay.style) cyOverlay.style.display = 'none';
+      });
     }
     window.applyCustomWallpaperData = applyCustomWallpaperData;
 
@@ -21527,10 +21667,10 @@ function getLiveMetricForPole(countKey) {
       <rect width="1440" height="900" fill="black" opacity="0.10"/>
     </svg>
       <!-- Ciel dégradé coucher de soleil -->
-      <div class="absolute inset-0 bg-gradient-to-b from-[#180C24] via-[#481B34] to-[#A8432A]"></div>
+      <div id="desktop-wallpaper-canyon-sky" class="wallpaper-canyon-sky absolute inset-0 bg-gradient-to-b from-[#180C24] via-[#481B34] to-[#A8432A]" style="display:none;"></div>
       
       <!-- Canyon Géométrique SVG Low-Poly -->
-      <svg id="wallpaper-canyon-svg" style="display:none;" class="absolute inset-0 w-full h-full object-cover" preserveAspectRatio="none" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg id="wallpaper-canyon-svg" style="display:none;" class="absolute inset-0 w-full h-full object-cover wallpaper-canyon-svg" preserveAspectRatio="none" viewBox="0 0 1440 900" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Montagnes d'arrière-plan -->
         <polygon points="0,520 180,440 360,490 540,410 720,470 900,430 1080,480 1260,420 1440,490 1440,900 0,900" fill="#752934" opacity="0.85" />
         <polygon points="180,440 360,490 540,410 720,470" fill="#8C333D" opacity="0.9" />
@@ -21551,7 +21691,7 @@ function getLiveMetricForPole(countKey) {
       </svg>
       
       <!-- Lueur solaire diffuse & vignettage cinéma -->
-      <div class="absolute inset-0 bg-radial-gradient from-amber-400/20 via-transparent to-black/50"></div>
+      <div class="wallpaper-canyon-overlay absolute inset-0 bg-radial-gradient from-amber-400/20 via-transparent to-black/50" style="display:none;"></div>
     </div>
 
     <!-- Barre supérieure OS (Activities / Date-Heure / Statut Système) -->
@@ -21573,7 +21713,7 @@ function getLiveMetricForPole(countKey) {
       </div>
 
       <!-- Contrôles système et bascule -->
-      <div class="flex items-center gap-3 text-white/90">
+      <div class="flex items-center gap-2.5 text-white/90">
         <div class="flex items-center gap-1.5 text-[11px] bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10">
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span class="font-semibold text-white">Magasin Central</span>
@@ -21582,9 +21722,9 @@ function getLiveMetricForPole(countKey) {
           <span id="os-topbar-theme-icon">☀️</span>
           <span id="os-topbar-theme-label">Mode Clair</span>
         </button>
-        <button onclick="openWallpaperEngineModal()" class="text-[10px] px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold transition-all border border-white/15 flex items-center gap-1.5 press-effect cursor-pointer" title="Changer le fond d'écran ou charger une photo">
-          <svg class="w-3.5 h-3.5 text-amber-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-          <span>Fonds d'Écran</span>
+        <button onclick="openOsAppearanceModal()" class="text-[10px] px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold transition-all border border-white/15 flex items-center gap-1.5 press-effect cursor-pointer" title="Paramètres du Bureau, Dock & Fonds d'Écran">
+          <span>⚙️</span>
+          <span>Réglages Bureau</span>
         </button>
         <button onclick="applyNavInterfaceMode('formal', true)" class="text-[10px] px-2.5 py-1 rounded-lg bg-white/15 hover:bg-white/25 text-white font-bold transition-all border border-white/20 press-effect cursor-pointer" title="Basculer vers le mode entreprise formel">
           🏢 Mode Standard
@@ -21601,8 +21741,8 @@ function getLiveMetricForPole(countKey) {
     </div>
 
     <!-- Grille Principale des Applications & Dossiers Glassmorphes -->
-    <div class="flex-1 overflow-y-auto custom-scroll p-6 md:p-10 flex flex-col items-center justify-center z-10">
-      <div id="desktop-grid-container" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-6 md:gap-8 max-w-4xl mx-auto items-start justify-items-center">
+    <div class="flex-1 overflow-y-auto custom-scroll px-6 py-6 md:py-8 flex flex-col items-center justify-start z-10 launchpad-scroll-area">
+      <div id="desktop-grid-container" class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 gap-8 md:gap-10 w-full max-w-6xl mx-auto items-start justify-items-center">
         
         <!-- App 1 : Caisse POS -->
         <div onclick="launchAppFromDesktop('pos')" class="os-app-tile group">
@@ -21709,7 +21849,7 @@ function getLiveMetricForPole(countKey) {
     </div>
 
     <!-- Dock Flottant Inférieur (Centré en bas avec reflet de verre) -->
-    <div class="pb-6 flex justify-center shrink-0 z-20">
+    <div id="aura-os-desktop-dock" class="pb-6 flex justify-center shrink-0 z-20">
       <div class="os-floating-dock">
         <button onclick="showAuraDesktop()" class="os-dock-btn dock-active group" title="Bureau AURA OS">
           <div class="os-dock-tooltip"><span>Bureau AURA OS</span><span class="text-[9px] font-mono px-1 py-0.2 rounded bg-white/20 text-white/90">Échap</span></div>
@@ -21795,88 +21935,161 @@ function getLiveMetricForPole(countKey) {
       </div>
     </div>
 
-    <!-- Modal Personnalisation Fond d'Écran AURA OS (Apple Wallpaper Engine) -->
-    <div id="modal-wallpaper-engine" class="fixed inset-0 bg-black/75 backdrop-blur-xl flex items-center justify-center p-4 hidden" style="z-index: 100001;" onclick="closeWallpaperEngineModal(event)">
-      <div class="os-folder-modal-content w-full max-w-2xl p-6 space-y-5 transform transition-transform" onclick="event.stopPropagation()">
+    <!-- Modal Personnalisation Fond d'Écran AURA OS & Dock Engine -->
+    <div id="modal-wallpaper-engine" class="fixed inset-0 bg-black/80 backdrop-blur-2xl flex items-center justify-center p-4 hidden" style="z-index: 100001;" onclick="closeOsAppearanceModal(event)">
+      <div id="modal-os-appearance-settings" class="os-folder-modal-content w-full max-w-3xl max-h-[90vh] overflow-y-auto custom-scroll p-6 md:p-8 space-y-6 transform transition-all shadow-2xl" onclick="event.stopPropagation()">
         
         <div class="flex items-center justify-between border-b border-white/15 pb-4">
           <div class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 to-rose-500 flex items-center justify-center text-xl shadow-lg">
-              🖼️
+            <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-sky-500 via-indigo-600 to-purple-600 flex items-center justify-center text-xl shadow-lg shadow-indigo-500/30">
+              ⚙️
             </div>
             <div>
-              <h3 class="font-heading font-black text-white text-lg tracking-tight">Fonds d'Écran & Personnalisation OS</h3>
-              <p class="text-xs text-white/60">Choisissez une ambiance haute définition ou importez votre propre photo.</p>
+              <h3 class="font-heading font-black text-white text-xl tracking-tight">Réglages Bureau & Système AURA OS</h3>
+              <p class="text-xs text-white/70">Personnalisez l'emplacement de votre barre de navigation, vos fonds d'écran HD et l'ambiance.</p>
             </div>
           </div>
-          <button onclick="closeWallpaperEngineModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold text-sm transition-colors cursor-pointer">
+          <button type="button" onclick="closeOsAppearanceModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center font-bold text-sm transition-colors cursor-pointer">
             ✕
           </button>
         </div>
 
-        <!-- Grille des 6 fonds d'écran prédéfinis -->
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
-          <!-- Preset 1 : Canyon Sunset -->
-          <div onclick="setAuraWallpaper('canyon')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-amber-400 cursor-pointer transition-all flex flex-col gap-2 group">
-            <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-b from-[#180C24] via-[#481B34] to-[#A8432A] flex items-end p-2">
-              <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Canyon Sunset</span>
-            </div>
-            <span class="text-xs font-semibold text-white/90 group-hover:text-amber-300 transition-colors">Endless Low-Poly (Défaut)</span>
+        <!-- Section 1 : Position de la Barre de Navigation (Dock) -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+              <span>Position de la Barre de Navigation (Dock)</span>
+            </h4>
+            <span class="text-[11px] text-white/60">macOS / Windows Ergonomics</span>
           </div>
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <!-- Option 1 : Bas (Défaut) -->
+            <button type="button" id="dock-opt-bottom" onclick="setAuraDockPosition('bottom')" class="p-3.5 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-all flex flex-col items-center gap-2 text-center group cursor-pointer press-effect">
+              <div class="w-16 h-10 rounded-lg bg-black/40 border border-white/20 flex flex-col justify-end p-1">
+                <div class="h-2 w-10 mx-auto rounded-full bg-sky-400"></div>
+              </div>
+              <span class="text-xs font-bold text-white group-hover:text-sky-300">⬇️ En Bas</span>
+              <span class="text-[10px] text-white/60">Horizontal (Classique)</span>
+            </button>
 
-          <!-- Preset 2 : macOS Sonoma Dawn -->
-          <div onclick="setAuraWallpaper('sonoma')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-rose-400 cursor-pointer transition-all flex flex-col gap-2 group">
-            <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#1C0B2B] via-[#A83232] to-[#F0783C] flex items-end p-2">
-              <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Sonoma Dawn</span>
-            </div>
-            <span class="text-xs font-semibold text-white/90 group-hover:text-rose-300 transition-colors">Ambré & Chaleureux</span>
-          </div>
+            <!-- Option 2 : À Gauche -->
+            <button type="button" id="dock-opt-left" onclick="setAuraDockPosition('left')" class="p-3.5 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-all flex flex-col items-center gap-2 text-center group cursor-pointer press-effect">
+              <div class="w-16 h-10 rounded-lg bg-black/40 border border-white/20 flex items-center p-1">
+                <div class="w-2 h-7 rounded-full bg-sky-400"></div>
+              </div>
+              <span class="text-xs font-bold text-white group-hover:text-sky-300">⬅️ À Gauche</span>
+              <span class="text-[10px] text-white/60">Vertical Ergonomique</span>
+            </button>
 
-          <!-- Preset 3 : macOS Sequoia Forest -->
-          <div onclick="setAuraWallpaper('sequoia')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-emerald-400 cursor-pointer transition-all flex flex-col gap-2 group">
-            <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#051410] via-[#0D2821] to-[#1E4E42] flex items-end p-2">
-              <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Sequoia Pines</span>
-            </div>
-            <span class="text-xs font-semibold text-white/90 group-hover:text-emerald-300 transition-colors">Émeraude & Forêt</span>
-          </div>
+            <!-- Option 3 : À Droite -->
+            <button type="button" id="dock-opt-right" onclick="setAuraDockPosition('right')" class="p-3.5 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-all flex flex-col items-center gap-2 text-center group cursor-pointer press-effect">
+              <div class="w-16 h-10 rounded-lg bg-black/40 border border-white/20 flex items-center justify-end p-1">
+                <div class="w-2 h-7 rounded-full bg-sky-400"></div>
+              </div>
+              <span class="text-xs font-bold text-white group-hover:text-sky-300">➡️ À Droite</span>
+              <span class="text-[10px] text-white/60">Vertical Droite</span>
+            </button>
 
-          <!-- Preset 4 : Deep Space Cosmos -->
-          <div onclick="setAuraWallpaper('cosmos')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-indigo-400 cursor-pointer transition-all flex flex-col gap-2 group">
-            <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#070612] via-[#1B0F33] to-[#5B2182] flex items-end p-2">
-              <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Cosmos Nebula</span>
-            </div>
-            <span class="text-xs font-semibold text-white/90 group-hover:text-indigo-300 transition-colors">Nébuleuse Royale</span>
-          </div>
-
-          <!-- Preset 5 : Dark Obsidian -->
-          <div onclick="setAuraWallpaper('obsidian')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-slate-400 cursor-pointer transition-all flex flex-col gap-2 group">
-            <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#0A0B0D] via-[#16181C] to-[#2A2D34] flex items-end p-2">
-              <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Dark Obsidian</span>
-            </div>
-            <span class="text-xs font-semibold text-white/90 group-hover:text-slate-300 transition-colors">Titane Furtif Apple</span>
-          </div>
-
-          <!-- Preset 6 : Cyberpunk Aurora -->
-          <div onclick="setAuraWallpaper('cyberpunk')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-pink-400 cursor-pointer transition-all flex flex-col gap-2 group">
-            <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#071E22] via-[#2D0036] to-[#9D0191] flex items-end p-2">
-              <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Cyber Aurora</span>
-            </div>
-            <span class="text-xs font-semibold text-white/90 group-hover:text-pink-300 transition-colors">Néon & Électrique</span>
+            <!-- Option 4 : En Haut -->
+            <button type="button" id="dock-opt-top" onclick="setAuraDockPosition('top')" class="p-3.5 rounded-2xl border border-white/15 bg-white/5 hover:bg-white/10 transition-all flex flex-col items-center gap-2 text-center group cursor-pointer press-effect">
+              <div class="w-16 h-10 rounded-lg bg-black/40 border border-white/20 flex flex-col justify-start p-1">
+                <div class="h-2 w-10 mx-auto rounded-full bg-sky-400"></div>
+              </div>
+              <span class="text-xs font-bold text-white group-hover:text-sky-300">⬆️ En Haut</span>
+              <span class="text-[10px] text-white/60">Horizontal Supérieur</span>
+            </button>
           </div>
         </div>
 
-        <!-- Section Import Personnalisé -->
-        <div class="pt-3 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div class="text-xs text-white/70">
-            <span class="font-bold text-white">Votre propre image :</span> Téléversez n'importe quelle photo depuis votre PC.
+        <!-- Section 2 : Fonds d'Écran Haute Définition -->
+        <div class="space-y-3 pt-2 border-t border-white/15">
+          <div class="flex items-center justify-between">
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              <span>Fonds d'Écran Haute Définition (Wallpapers)</span>
+            </h4>
+            <span class="text-[11px] text-white/60">Résolution Retina 4K</span>
           </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3.5">
+            <!-- Preset 0 : macOS Big Sur Chromatique -->
+            <div onclick="setAuraWallpaper('bigsur')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-sky-400 cursor-pointer transition-all flex flex-col gap-2 group">
+              <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#021B38] via-[#0B56A4] to-[#F59E0B] flex items-end p-2">
+                <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Big Sur Waves</span>
+              </div>
+              <span class="text-xs font-semibold text-white/90 group-hover:text-sky-300 transition-colors">macOS Big Sur Chromatique</span>
+            </div>
+
+            <!-- Preset 1 : Canyon Sunset -->
+            <div onclick="setAuraWallpaper('canyon')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-amber-400 cursor-pointer transition-all flex flex-col gap-2 group">
+              <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-b from-[#180C24] via-[#481B34] to-[#A8432A] flex items-end p-2">
+                <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Canyon Sunset</span>
+              </div>
+              <span class="text-xs font-semibold text-white/90 group-hover:text-amber-300 transition-colors">Grand Canyon Low-Poly</span>
+            </div>
+
+            <!-- Preset 2 : macOS Sonoma Dawn -->
+            <div onclick="setAuraWallpaper('sonoma')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-rose-400 cursor-pointer transition-all flex flex-col gap-2 group">
+              <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#1C0B2B] via-[#A83232] to-[#F0783C] flex items-end p-2">
+                <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Sonoma Dawn</span>
+              </div>
+              <span class="text-xs font-semibold text-white/90 group-hover:text-rose-300 transition-colors">macOS Sonoma Horizon</span>
+            </div>
+
+            <!-- Preset 3 : macOS Sequoia Forest -->
+            <div onclick="setAuraWallpaper('sequoia')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-emerald-400 cursor-pointer transition-all flex flex-col gap-2 group">
+              <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#051410] via-[#0D2821] to-[#1E4E42] flex items-end p-2">
+                <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Sequoia Pines</span>
+              </div>
+              <span class="text-xs font-semibold text-white/90 group-hover:text-emerald-300 transition-colors">macOS Sequoia Émeraude</span>
+            </div>
+
+            <!-- Preset 4 : Deep Space Cosmos -->
+            <div onclick="setAuraWallpaper('cosmos')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-indigo-400 cursor-pointer transition-all flex flex-col gap-2 group">
+              <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#070612] via-[#1B0F33] to-[#5B2182] flex items-end p-2">
+                <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Cosmos Nebula</span>
+              </div>
+              <span class="text-xs font-semibold text-white/90 group-hover:text-indigo-300 transition-colors">Nébuleuse Royale</span>
+            </div>
+
+            <!-- Preset 5 : Dark Obsidian -->
+            <div onclick="setAuraWallpaper('obsidian')" class="wallpaper-card p-3 rounded-2xl bg-white/5 hover:bg-white/15 border border-white/15 hover:border-slate-400 cursor-pointer transition-all flex flex-col gap-2 group">
+              <div class="h-20 rounded-xl overflow-hidden relative border border-white/20 bg-gradient-to-tr from-[#0A0B0D] via-[#16181C] to-[#2A2D34] flex items-end p-2">
+                <span class="text-[10px] font-bold text-white bg-black/50 px-2 py-0.5 rounded-full backdrop-blur-sm">Dark Obsidian</span>
+              </div>
+              <span class="text-xs font-semibold text-white/90 group-hover:text-slate-300 transition-colors">Titane Apple Pro</span>
+            </div>
+          </div>
+
+          <!-- Section Import Personnalisé -->
+          <div class="pt-3 border-t border-white/15 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="text-xs text-white/70">
+              <span class="font-bold text-white">Fond personnalisé :</span> Téléversez n'importe quelle photo depuis votre PC.
+            </div>
+            <div>
+              <input type="file" id="custom-wallpaper-input" accept="image/*" class="hidden" onchange="handleCustomWallpaperUpload(event)">
+              <input type="file" id="setting-custom-wp-input" accept="image/*" class="hidden" onchange="handleCustomWallpaperUpload(event)">
+              <button type="button" onclick="document.getElementById('custom-wallpaper-input').click()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-400 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-teal-500/20 flex items-center gap-2 transition-all press-effect cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                <span>Importer une photo...</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section 3 : Mode Thème Visuel -->
+        <div class="pt-2 border-t border-white/15 flex items-center justify-between">
           <div>
-            <input type="file" id="custom-wallpaper-input" accept="image/*" class="hidden" onchange="handleCustomWallpaperUpload(event)">
-            <button type="button" onclick="document.getElementById('custom-wallpaper-input').click()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-teal-500 to-indigo-600 hover:from-teal-400 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-teal-500/20 flex items-center gap-2 transition-all press-effect cursor-pointer">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-              <span>Importer une photo...</span>
-            </button>
+            <h4 class="text-xs font-bold text-white uppercase tracking-wider flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <span>Ambiance & Thème</span>
+            </h4>
+            <p class="text-[11px] text-white/60">Basculez entre le mode sombre profond et le mode clair satiné.</p>
           </div>
+          <button type="button" onclick="toggleTheme()" class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs flex items-center gap-2 transition-all press-effect cursor-pointer">
+            <span>🌓 Basculer Thème Clair / Sombre</span>
+          </button>
         </div>
 
       </div>
