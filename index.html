@@ -1070,6 +1070,15 @@
     body.interface-cards-mode #btn-return-to-desktop {
       display: flex !important;
     }
+    body.interface-cards-mode #os-window-drag-handle {
+      display: flex !important;
+    }
+    body.interface-cards-mode header {
+      cursor: grab !important;
+    }
+    body.interface-cards-mode header.is-dragging {
+      cursor: grabbing !important;
+    }
     body.interface-cards-mode:not(.os-desktop-active) #os-app-window-dock {
       display: block !important;
     }
@@ -1963,6 +1972,12 @@
         </button>
 
         <!-- Sélecteur rapide de composants & Retour Dossier Parent -->
+        <!-- Poignée de glisser-déplacer de la fenêtre OS -->
+        <div id="os-window-drag-handle" class="hidden items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/15 text-white/80 hover:text-white cursor-grab active:cursor-grabbing text-[11px] select-none transition-all shadow-xs" title="Cliquer et glisser pour déplacer la fenêtre - Double-clic pour recentrer">
+          <svg class="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/></svg>
+          <span class="font-medium hidden lg:inline">Déplacer la fenêtre</span>
+        </div>
+
         <div id="os-folder-nav-container" class="hidden items-center gap-1.5 shrink-0">
           <button id="btn-return-to-folder" type="button" onclick="reopenCurrentActiveFolder()" class="px-2.5 py-1.5 rounded-xl bg-indigo-500/20 hover:bg-indigo-500/35 border border-indigo-400/40 text-indigo-300 hover:text-white font-bold text-xs shadow-sm flex items-center gap-1.5 transition-all press-effect cursor-pointer" title="Changer de sous-module dans ce dossier">
             <svg class="w-3.5 h-3.5 text-indigo-300" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/></svg>
@@ -4737,6 +4752,10 @@
             <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
             <span>8. Bureau & Dock OS</span>
           </button>
+          <button onclick="switchSettingsTab('ai')" id="settings-tab-ai" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
+            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            <span>9. Agent IA & Copilot</span>
+          </button>
         </div>
 
         <!-- SOUS-ONGLET 1 : GÉNÉRAL & BOUTIQUE -->
@@ -5824,6 +5843,198 @@
 
           </div>
         </div>
+
+        <!-- SOUS-ONGLET 9 : CONFIGURATION AGENT IA & COPILOT -->
+        <div id="subview-settings-ai" class="hidden space-y-6">
+          <div class="app-card p-6 space-y-6">
+            
+            <!-- En-tête du module IA -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[var(--border)] pb-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 flex items-center justify-center text-white shadow-md">
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                </div>
+                <div>
+                  <h3 class="text-base font-bold text-[var(--text-main)]">Configuration de l'Agent IA & AURA Copilot</h3>
+                  <p class="text-xs text-[var(--text-muted)]">Activez, désactivez ou personnalisez le moteur d'intelligence artificielle qui assiste vos décisions.</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-3">
+                <label class="relative inline-flex items-center cursor-pointer select-none">
+                  <input type="checkbox" id="setting-ai-enabled" checked onchange="toggleAIAssistantEnabled(this.checked)" class="sr-only peer">
+                  <div class="w-11 h-6 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600"></div>
+                  <span class="ml-2.5 text-xs font-bold text-[var(--text-main)]" id="label-ai-enabled-status">Agent IA Actif</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Grille des Fournisseurs d'IA -->
+            <div class="space-y-3">
+              <label class="block text-xs font-bold text-[var(--text-main)] uppercase tracking-wider">
+                Sélection du Cerveau & Fournisseur d'IA
+              </label>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3" id="ai-providers-grid">
+                
+                <!-- 1. Moteur Local Déterministe (Gratuit / Sans clé) -->
+                <div onclick="selectAIProvider('local')" id="ai-prov-card-local" class="ai-prov-card p-3.5 rounded-xl border-2 border-purple-500 bg-purple-500/10 cursor-pointer transition-all flex flex-col justify-between group">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-xs font-extrabold text-purple-300">AURA Local</span>
+                      <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-500/20 text-emerald-300">100% Inclus</span>
+                    </div>
+                    <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">Moteur sémantique d'entreprise hors-ligne. Zéro hallucination, calcul direct sur stocks, dettes, caisse et RH.</p>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-purple-500/20 text-[10px] text-purple-400 font-bold flex items-center gap-1">
+                    <span>Sans clé API</span>
+                  </div>
+                </div>
+
+                <!-- 2. OpenAI (ChatGPT) -->
+                <div onclick="selectAIProvider('openai')" id="ai-prov-card-openai" class="ai-prov-card p-3.5 rounded-xl border border-[var(--border)] hover:border-purple-500/50 bg-[var(--bg-card)] cursor-pointer transition-all flex flex-col justify-between group">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-xs font-extrabold text-[var(--text-main)]">OpenAI</span>
+                      <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-slate-500/20 text-slate-300">ChatGPT</span>
+                    </div>
+                    <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">Modèles GPT-4o & GPT-4o-mini connectés à votre base de données avec raisonnement conversationnel avancé.</p>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-[var(--border)] text-[10px] text-[var(--text-muted)] font-mono">
+                    Clé API requise
+                  </div>
+                </div>
+
+                <!-- 3. Google Gemini -->
+                <div onclick="selectAIProvider('gemini')" id="ai-prov-card-gemini" class="ai-prov-card p-3.5 rounded-xl border border-[var(--border)] hover:border-purple-500/50 bg-[var(--bg-card)] cursor-pointer transition-all flex flex-col justify-between group">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-xs font-extrabold text-[var(--text-main)]">Google Gemini</span>
+                      <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-sky-500/20 text-sky-300">Flash 2.0</span>
+                    </div>
+                    <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">Modèles Gemini 2.0 Flash & 1.5 Pro haute vitesse, optimisés pour l'analyse analytique et financière.</p>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-[var(--border)] text-[10px] text-[var(--text-muted)] font-mono">
+                    Clé API requise
+                  </div>
+                </div>
+
+                <!-- 4. Anthropic Claude -->
+                <div onclick="selectAIProvider('anthropic')" id="ai-prov-card-anthropic" class="ai-prov-card p-3.5 rounded-xl border border-[var(--border)] hover:border-purple-500/50 bg-[var(--bg-card)] cursor-pointer transition-all flex flex-col justify-between group">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-xs font-extrabold text-[var(--text-main)]">Anthropic</span>
+                      <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-300">Claude 3.5</span>
+                    </div>
+                    <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">Claude 3.5 Sonnet & Haiku avec rédaction professionnelle, synthèse stratégique et rigueur comptable.</p>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-[var(--border)] text-[10px] text-[var(--text-muted)] font-mono">
+                    Clé API requise
+                  </div>
+                </div>
+
+                <!-- 5. Passerelle Personnalisée (Ollama / LocalAI) -->
+                <div onclick="selectAIProvider('custom')" id="ai-prov-card-custom" class="ai-prov-card p-3.5 rounded-xl border border-[var(--border)] hover:border-purple-500/50 bg-[var(--bg-card)] cursor-pointer transition-all flex flex-col justify-between group">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-xs font-extrabold text-[var(--text-main)]">Personnalisé</span>
+                      <span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-teal-500/20 text-teal-300">Custom API</span>
+                    </div>
+                    <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">Connectez votre serveur local Ollama, LocalAI, vLLM ou n'importe quel endpoint compatible OpenAI.</p>
+                  </div>
+                  <div class="mt-3 pt-2 border-t border-[var(--border)] text-[10px] text-[var(--text-muted)] font-mono">
+                    URL & Token
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Formulaire de Configuration du Fournisseur -->
+            <div id="ai-provider-form" class="space-y-4 pt-2">
+              
+              <!-- Message d'information pour le moteur local -->
+              <div id="ai-local-info-box" class="p-4 rounded-xl bg-purple-500/10 border border-purple-500/30 text-xs text-purple-200 flex items-start gap-3">
+                <svg class="w-5 h-5 text-purple-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div class="space-y-1">
+                  <strong class="font-bold block text-white">Le moteur local AURA est activé par défaut</strong>
+                  <p class="text-[11px] text-purple-200/80 leading-relaxed">
+                    Il analyse directement vos données réelles sans aucun appel internet extérieur. Vous pouvez lui demander les quantités en stock, les marges, les clients endettés ou le chiffre d'affaires. Pour des analyses de texte conversationnelles libres, vous pouvez connecter OpenAI, Google Gemini ou Claude ci-dessus.
+                  </p>
+                </div>
+              </div>
+
+              <!-- Champs de Clé API et Modèle (visibles si fournisseur externe) -->
+              <div id="ai-external-fields" class="hidden space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  
+                  <!-- Clé API -->
+                  <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[var(--text-main)]" id="label-ai-apikey">
+                      Clé API
+                    </label>
+                    <div class="relative">
+                      <input type="password" id="setting-ai-apikey" placeholder="Collez votre clé API ici (ex: sk-... ou AIza...)" class="app-input w-full pr-10 text-xs font-mono">
+                      <button type="button" onclick="toggleAIApiKeyVisibility()" class="absolute right-2.5 top-2.5 text-[var(--text-muted)] hover:text-white" title="Afficher/Masquer la clé">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                      </button>
+                    </div>
+                    <span class="text-[10px] text-[var(--text-muted)] block" id="help-ai-apikey">Votre clé reste strictement sécurisée et stockée localement dans votre instance.</span>
+                  </div>
+
+                  <!-- Choix du modèle -->
+                  <div class="space-y-1.5">
+                    <label class="block text-xs font-bold text-[var(--text-main)]">
+                      Modèle Sélectionné
+                    </label>
+                    <select id="setting-ai-model" class="app-input w-full text-xs">
+                      <!-- Rempli dynamiquement en fonction du provider -->
+                    </select>
+                    <span class="text-[10px] text-[var(--text-muted)] block">Modèle de langage utilisé pour répondre aux questions.</span>
+                  </div>
+
+                </div>
+
+                <!-- URL API Personnalisée (si provider == custom) -->
+                <div id="ai-custom-url-container" class="hidden space-y-1.5">
+                  <label class="block text-xs font-bold text-[var(--text-main)]">
+                    URL de l'Endpoint API Personnalisé (Format compatible OpenAI)
+                  </label>
+                  <input type="text" id="setting-ai-custom-url" placeholder="http://localhost:11434/v1" class="app-input w-full text-xs font-mono">
+                  <span class="text-[10px] text-[var(--text-muted)] block">Exemple pour Ollama local : http://localhost:11434/v1 ou votre serveur proxy sécurisé.</span>
+                </div>
+
+                <!-- Curseur de Température / Rigueur Comptable -->
+                <div class="space-y-1.5 p-3 rounded-xl bg-[var(--bg-app)] border border-[var(--border)]">
+                  <div class="flex items-center justify-between">
+                    <label class="text-xs font-bold text-[var(--text-main)]">Température / Rigueur de Réponse : <span id="label-ai-temp-val" class="font-mono text-purple-400">0.2</span></label>
+                    <span class="text-[10px] text-[var(--text-muted)]">0.0 (Rigueur stricte) à 1.0 (Créatif)</span>
+                  </div>
+                  <input type="range" id="setting-ai-temperature" min="0" max="1" step="0.1" value="0.2" oninput="document.getElementById('label-ai-temp-val').innerText = this.value" class="w-full accent-purple-500 cursor-pointer">
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- Actions : Tester et Sauvegarder -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-4 border-t border-[var(--border)]">
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="testAIConnection()" id="btn-test-ai-connection" class="app-btn-secondary text-xs flex items-center gap-2">
+                  <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                  <span>Tester la Connexion API</span>
+                </button>
+                <span id="ai-test-result-badge" class="hidden px-2.5 py-1 rounded-lg text-xs font-bold items-center gap-1.5"></span>
+              </div>
+              <div class="flex items-center gap-2">
+                <button type="button" onclick="saveAISettings()" id="btn-save-ai-settings" class="app-btn-primary text-xs flex items-center gap-2 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500">
+                  <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                  <span>Enregistrer la Configuration IA</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
 </section>
 
     </div><!-- Fin Conteneur des vues -->
@@ -15786,7 +15997,7 @@ function getLiveMetricForPole(countKey) {
        SOUS-ONGLETS DU MODULE PARAMÈTRES (7 SOUS-ONGLETS)
        ======================================================== */
     function switchSettingsTab(tabKey) {
-      ['general', 'rbac', 'printers', 'tickets', 'zones', 'backups', 'payroll', 'appearance'].forEach(k => {
+      ['general', 'rbac', 'printers', 'tickets', 'zones', 'backups', 'payroll', 'appearance', 'ai'].forEach(k => {
         const el = document.getElementById('subview-settings-' + k);
         const btn = document.getElementById('settings-tab-' + k);
         if (el) el.classList.add('hidden');
@@ -16314,6 +16525,55 @@ function getLiveMetricForPole(countKey) {
       // 4. Mettre à jour les ventes locales
       if (!window.SALES) window.SALES = [];
       window.SALES.unshift(window.lastCompletedSale);
+
+      // 4b. Mise à jour DYNAMIQUE de la session de Caisse active (Fini les chiffres statiques)
+      if (!window.ACTIVE_SHIFT) {
+        window.ACTIVE_SHIFT = {
+          id: 1,
+          cashierName: 'Abdoul C.',
+          postName: 'Poste #01',
+          startedAt: '07:45',
+          startDate: new Date().toLocaleDateString('fr-FR'),
+          initialAmount: 50000,
+          cashSales: 0,
+          cashExpenses: 0,
+          digitalSales: 0,
+          creditSales: 0,
+          status: 'open'
+        };
+      }
+
+      if (selectedPayMode === 'cash') {
+        window.ACTIVE_SHIFT.cashSales = (Number(window.ACTIVE_SHIFT.cashSales) || 0) + total;
+      } else if (selectedPayMode === 'split') {
+        const cashVal = parseFloat(document.getElementById('split-cash-input')?.value) || 0;
+        const mobVal = parseFloat(document.getElementById('split-mobile-input')?.value) || Math.max(0, total - cashVal);
+        window.ACTIVE_SHIFT.cashSales = (Number(window.ACTIVE_SHIFT.cashSales) || 0) + cashVal;
+        window.ACTIVE_SHIFT.digitalSales = (Number(window.ACTIVE_SHIFT.digitalSales) || 0) + mobVal;
+      } else if (selectedPayMode === 'credit') {
+        window.ACTIVE_SHIFT.creditSales = (Number(window.ACTIVE_SHIFT.creditSales) || 0) + total;
+      } else {
+        // wave, orange, card
+        window.ACTIVE_SHIFT.digitalSales = (Number(window.ACTIVE_SHIFT.digitalSales) || 0) + total;
+      }
+
+      try {
+        localStorage.setItem('aura_active_shift', JSON.stringify(window.ACTIVE_SHIFT));
+      } catch (e) {}
+
+      // Mettre à jour en direct le stock magasin dans STOCK_ARTICLES_DATA
+      if (docType === 'sale' && window.STOCK_ARTICLES_DATA) {
+        cart.forEach(item => {
+          const art = window.STOCK_ARTICLES_DATA.find(a => String(a.id) === String(item.id) || a.code === item.ref);
+          if (art) {
+            art.stockStore = Math.max(0, (art.stockStore || 0) - item.qty);
+          }
+        });
+      }
+
+      if (typeof renderShiftSummary === 'function') {
+        renderShiftSummary();
+      }
 
       // 5. Persister vers l'API backend si disponible
       if (typeof apiFetch === 'function') {
@@ -22046,52 +22306,78 @@ function getLiveMetricForPole(countKey) {
       const main = document.querySelector('main');
       if (!header || !main || typeof header.addEventListener !== 'function') return;
 
-      header.addEventListener('mousedown', (e) => {
-        // Ignorer le clic sur les boutons, champs de saisie, liens et sélecteurs
-        if (e.target.closest('button, input, select, textarea, a, #os-window-controls, .press-effect, #global-search, #os-folder-nav-container')) {
-          return;
+      if (header._dragInitialized) return;
+      header._dragInitialized = true;
+
+      const onStart = (clientX, clientY, target) => {
+        // Ignorer les clics sur les contrôles interactifs
+        if (target.closest('button, input, select, textarea, a, #os-window-controls, .press-effect, #global-search, #os-folder-nav-container, .no-drag')) {
+          return false;
         }
-        if (!document.body.classList.contains('interface-cards-mode')) return;
-        if (document.body.classList.contains('os-desktop-active')) return;
+        if (!document.body.classList.contains('interface-cards-mode')) return false;
+        if (document.body.classList.contains('os-desktop-active')) return false;
 
         isDraggingWindow = true;
-        windowDragStartX = e.clientX - windowCurrentX;
-        windowDragStartY = e.clientY - windowCurrentY;
+        windowDragStartX = clientX - windowCurrentX;
+        windowDragStartY = clientY - windowCurrentY;
+        header.classList.add('is-dragging');
         header.style.cursor = 'grabbing';
+        document.body.style.cursor = 'grabbing';
         main.style.transition = 'none';
         document.body.style.userSelect = 'none';
-      });
+        return true;
+      };
 
-      window.addEventListener('mousemove', (e) => {
+      const onMove = (clientX, clientY) => {
         if (!isDraggingWindow) return;
-        const mainEl = document.querySelector('main');
-        if (!mainEl) return;
-
-        windowCurrentX = e.clientX - windowDragStartX;
-        windowCurrentY = e.clientY - windowDragStartY;
+        windowCurrentX = clientX - windowDragStartX;
+        windowCurrentY = clientY - windowDragStartY;
 
         // Limites souples pour éviter de perdre la fenêtre hors écran
-        const maxLimitX = Math.max(200, (window.innerWidth || 1200) - 250);
-        const maxLimitY = Math.max(100, (window.innerHeight || 800) - 100);
+        const maxLimitX = Math.max(300, (window.innerWidth || 1200) - 150);
+        const maxLimitY = Math.max(200, (window.innerHeight || 800) - 100);
         if (windowCurrentX < -maxLimitX) windowCurrentX = -maxLimitX;
         if (windowCurrentX > maxLimitX) windowCurrentX = maxLimitX;
-        if (windowCurrentY < -10) windowCurrentY = -10;
+        if (windowCurrentY < -100) windowCurrentY = -100;
         if (windowCurrentY > maxLimitY) windowCurrentY = maxLimitY;
 
-        mainEl.style.transform = `translate3d(${windowCurrentX}px, ${windowCurrentY}px, 0)`;
-      });
+        main.style.transform = `translate3d(${windowCurrentX}px, ${windowCurrentY}px, 0)`;
+      };
 
-      const handleDragEnd = () => {
+      const onEnd = () => {
         if (isDraggingWindow) {
           isDraggingWindow = false;
-          if (header) header.style.cursor = '';
-          const mainEl = document.querySelector('main');
-          if (mainEl) mainEl.style.transition = 'transform 0.28s cubic-bezier(0.16, 1, 0.3, 1)';
+          header.classList.remove('is-dragging');
+          header.style.cursor = '';
+          document.body.style.cursor = '';
+          main.style.transition = 'transform 0.28s cubic-bezier(0.16, 1, 0.3, 1)';
           document.body.style.userSelect = '';
         }
       };
 
-      window.addEventListener('mouseup', handleDragEnd);
+      // Mouse events
+      header.addEventListener('mousedown', (e) => {
+        if (onStart(e.clientX, e.clientY, e.target)) {
+          e.preventDefault();
+        }
+      });
+      window.addEventListener('mousemove', (e) => {
+        onMove(e.clientX, e.clientY);
+      });
+      window.addEventListener('mouseup', onEnd);
+
+      // Touch events (tablettes & écrans tactiles)
+      header.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) {
+          onStart(e.touches[0].clientX, e.touches[0].clientY, e.target);
+        }
+      }, { passive: true });
+      window.addEventListener('touchmove', (e) => {
+        if (isDraggingWindow && e.touches && e.touches[0]) {
+          onMove(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+      window.addEventListener('touchend', onEnd);
 
       // Double-clic sur l'en-tête pour recentrer la fenêtre
       header.addEventListener('dblclick', (e) => {
@@ -22100,8 +22386,243 @@ function getLiveMetricForPole(countKey) {
       });
     }
     window.initWindowDragging = initWindowDragging;
-    if (typeof document !== 'undefined' && document.readyState !== 'loading') {
-      setTimeout(initWindowDragging, 50);
+
+    // Garanti d'être appelé à l'état de chargement ET après
+    if (typeof document !== 'undefined') {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initWindowDragging);
+      } else {
+        setTimeout(initWindowDragging, 50);
+      }
+      window.addEventListener('load', initWindowDragging);
+    }
+
+    /* ========================================================
+       GESTION & CONFIGURATION DE L'AGENT IA DANS LES PARAMÈTRES
+       ======================================================== */
+    const AI_MODELS_BY_PROVIDER = {
+      local: [{ value: 'aura-local-semantic', label: 'AURA Moteur Local (Règles & Données Réelles)' }],
+      openai: [
+        { value: 'gpt-4o-mini', label: 'GPT-4o-mini (Ultra-rapide & Économique - Recommandé)' },
+        { value: 'gpt-4o', label: 'GPT-4o (Raisonnement Complexe & Analyse Poussée)' },
+        { value: 'gpt-3.5-turbo', label: 'GPT-3.5 Turbo (Classique)' }
+      ],
+      gemini: [
+        { value: 'gemini-2.0-flash', label: 'Gemini 2.0 Flash (Recommandé - Ultra Réactif)' },
+        { value: 'gemini-1.5-flash', label: 'Gemini 1.5 Flash' },
+        { value: 'gemini-1.5-pro', label: 'Gemini 1.5 Pro (Haute Précision)' }
+      ],
+      anthropic: [
+        { value: 'claude-3-5-sonnet-20241022', label: 'Claude 3.5 Sonnet (Recommandé - Rigueur Stratégique)' },
+        { value: 'claude-3-haiku-20240307', label: 'Claude 3 Haiku (Rapide)' }
+      ],
+      custom: [
+        { value: 'custom-model', label: 'Modèle Déclaré sur l\'Endpoint' }
+      ]
+    };
+
+    let CURRENT_AI_CONFIG = {
+      enabled: true,
+      provider: 'local',
+      apiKey: '',
+      model: 'aura-local-semantic',
+      customUrl: '',
+      temperature: 0.2
+    };
+
+    function loadAISettings() {
+      try {
+        const saved = localStorage.getItem('aura_ai_config');
+        if (saved) {
+          CURRENT_AI_CONFIG = Object.assign(CURRENT_AI_CONFIG, JSON.parse(saved));
+        }
+      } catch (e) {}
+
+      const chk = document.getElementById('setting-ai-enabled');
+      if (chk) chk.checked = (CURRENT_AI_CONFIG.enabled !== false);
+      const lbl = document.getElementById('label-ai-enabled-status');
+      if (lbl) lbl.innerText = CURRENT_AI_CONFIG.enabled !== false ? 'Agent IA Actif' : 'Agent IA Désactivé';
+
+      selectAIProvider(CURRENT_AI_CONFIG.provider || 'local', false);
+
+      const apiKeyInp = document.getElementById('setting-ai-apikey');
+      if (apiKeyInp) apiKeyInp.value = CURRENT_AI_CONFIG.apiKey || '';
+
+      const modelSelect = document.getElementById('setting-ai-model');
+      if (modelSelect && CURRENT_AI_CONFIG.model) modelSelect.value = CURRENT_AI_CONFIG.model;
+
+      const customUrlInp = document.getElementById('setting-ai-custom-url');
+      if (customUrlInp) customUrlInp.value = CURRENT_AI_CONFIG.customUrl || '';
+
+      const tempInp = document.getElementById('setting-ai-temperature');
+      if (tempInp) {
+        tempInp.value = CURRENT_AI_CONFIG.temperature || 0.2;
+        const tempLbl = document.getElementById('label-ai-temp-val');
+        if (tempLbl) tempLbl.innerText = tempInp.value;
+      }
+
+      applyAIAvailabilityUI();
+    }
+
+    function selectAIProvider(provider, updateModel = true) {
+      if (typeof document === 'undefined') return;
+      CURRENT_AI_CONFIG.provider = provider;
+
+      // Cartes de sélection
+      if (typeof document.querySelectorAll === 'function') document.querySelectorAll('.ai-prov-card').forEach(card => {
+        card.classList.remove('border-2', 'border-purple-500', 'bg-purple-500/10');
+        card.classList.add('border', 'border-[var(--border)]', 'bg-[var(--bg-card)]');
+      });
+
+      const activeCard = document.getElementById('ai-prov-card-' + provider);
+      if (activeCard) {
+        activeCard.classList.remove('border', 'border-[var(--border)]', 'bg-[var(--bg-card)]');
+        activeCard.classList.add('border-2', 'border-purple-500', 'bg-purple-500/10');
+      }
+
+      const localBox = document.getElementById('ai-local-info-box');
+      const extFields = document.getElementById('ai-external-fields');
+      const customUrlBox = document.getElementById('ai-custom-url-container');
+      const apiKeyLabel = document.getElementById('label-ai-apikey');
+      const modelSelect = document.getElementById('setting-ai-model');
+
+      if (provider === 'local') {
+        if (localBox) localBox.classList.remove('hidden');
+        if (extFields) extFields.classList.add('hidden');
+      } else {
+        if (localBox) localBox.classList.add('hidden');
+        if (extFields) extFields.classList.remove('hidden');
+
+        if (apiKeyLabel) {
+          if (provider === 'openai') apiKeyLabel.innerText = 'Clé API OpenAI (sk-...)';
+          else if (provider === 'gemini') apiKeyLabel.innerText = 'Clé API Google Gemini (AIza...)';
+          else if (provider === 'anthropic') apiKeyLabel.innerText = 'Clé API Anthropic (sk-ant-...)';
+          else apiKeyLabel.innerText = 'Token / Clé API Optionnelle';
+        }
+
+        if (provider === 'custom') {
+          if (customUrlBox) customUrlBox.classList.remove('hidden');
+        } else {
+          if (customUrlBox) customUrlBox.classList.add('hidden');
+        }
+
+        // Remplir la liste des modèles
+        if (modelSelect) {
+          const models = AI_MODELS_BY_PROVIDER[provider] || [];
+          modelSelect.innerHTML = models.map(m => `<option value="${m.value}">${m.label}</option>`).join('');
+          if (updateModel && models[0]) {
+            modelSelect.value = models[0].value;
+          }
+        }
+      }
+    }
+
+    function toggleAIApiKeyVisibility() {
+      const inp = document.getElementById('setting-ai-apikey');
+      if (!inp) return;
+      inp.type = inp.type === 'password' ? 'text' : 'password';
+    }
+
+    function toggleAIAssistantEnabled(enabled) {
+      CURRENT_AI_CONFIG.enabled = Boolean(enabled);
+      const lbl = document.getElementById('label-ai-enabled-status');
+      if (lbl) lbl.innerText = enabled ? 'Agent IA Actif' : 'Agent IA Désactivé';
+      applyAIAvailabilityUI();
+      saveAISettings(false);
+    }
+
+    function applyAIAvailabilityUI() {
+      const isEnabled = (CURRENT_AI_CONFIG.enabled !== false);
+      const orb = document.getElementById('aura-floating-copilot-orb');
+      const dockBtn = document.getElementById('dock-btn-copilot');
+
+      if (orb && orb.style) orb.style.display = isEnabled ? 'flex' : 'none';
+      if (dockBtn && dockBtn.style) dockBtn.style.display = isEnabled ? 'flex' : 'none';
+    }
+
+    async function testAIConnection() {
+      const provider = CURRENT_AI_CONFIG.provider || 'local';
+      const apiKey = document.getElementById('setting-ai-apikey')?.value || '';
+      const model = document.getElementById('setting-ai-model')?.value || '';
+      const customUrl = document.getElementById('setting-ai-custom-url')?.value || '';
+
+      const badge = document.getElementById('ai-test-result-badge');
+      const btn = document.getElementById('btn-test-ai-connection');
+      if (btn) btn.disabled = true;
+
+      if (badge) {
+        badge.classList.remove('hidden', 'bg-emerald-500/20', 'text-emerald-300', 'bg-rose-500/20', 'text-rose-300');
+        badge.classList.add('flex', 'bg-purple-500/20', 'text-purple-300');
+        badge.innerHTML = '<span class="animate-spin inline-block">⏳</span> Test en cours...';
+      }
+
+      try {
+        const res = await fetch('http://localhost:3001/api/copilot/test', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ provider, apiKey, model, customUrl })
+        });
+        const data = await res.json();
+        if (data && data.success) {
+          if (badge) {
+            badge.classList.remove('bg-purple-500/20', 'text-purple-300');
+            badge.classList.add('bg-emerald-500/20', 'text-emerald-300');
+            badge.innerHTML = '✓ ' + (data.message || 'Connexion réussie !');
+          }
+          showToast(data.message || 'Connexion IA validée avec succès !', 'success');
+        } else {
+          if (badge) {
+            badge.classList.remove('bg-purple-500/20', 'text-purple-300');
+            badge.classList.add('bg-rose-500/20', 'text-rose-300');
+            badge.innerHTML = '✕ ' + (data.error || 'Échec de connexion');
+          }
+          showToast(data.error || 'Erreur lors du test de l\'API IA', 'error');
+        }
+      } catch (err) {
+        if (badge) {
+          badge.classList.remove('bg-purple-500/20', 'text-purple-300');
+          badge.classList.add('bg-rose-500/20', 'text-rose-300');
+          badge.innerHTML = '✕ Serveur backend injoignable';
+        }
+        showToast('Impossible de contacter le serveur backend pour tester l\'IA.', 'error');
+      } finally {
+        if (btn) btn.disabled = false;
+      }
+    }
+
+    function saveAISettings(showFeedback = true) {
+      const chk = document.getElementById('setting-ai-enabled');
+      CURRENT_AI_CONFIG.enabled = chk ? chk.checked : true;
+      CURRENT_AI_CONFIG.apiKey = document.getElementById('setting-ai-apikey')?.value || '';
+      CURRENT_AI_CONFIG.model = document.getElementById('setting-ai-model')?.value || '';
+      CURRENT_AI_CONFIG.customUrl = document.getElementById('setting-ai-custom-url')?.value || '';
+      CURRENT_AI_CONFIG.temperature = parseFloat(document.getElementById('setting-ai-temperature')?.value) || 0.2;
+
+      try {
+        localStorage.setItem('aura_ai_config', JSON.stringify(CURRENT_AI_CONFIG));
+      } catch (e) {}
+
+      applyAIAvailabilityUI();
+
+      if (showFeedback) {
+        showToast('Configuration de l\'Agent IA enregistrée avec succès !', 'success');
+      }
+    }
+
+    window.selectAIProvider = selectAIProvider;
+    window.toggleAIApiKeyVisibility = toggleAIApiKeyVisibility;
+    window.toggleAIAssistantEnabled = toggleAIAssistantEnabled;
+    window.testAIConnection = testAIConnection;
+    window.saveAISettings = saveAISettings;
+    window.loadAISettings = loadAISettings;
+
+    // Initialiser les paramètres IA
+    if (typeof document !== 'undefined') {
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', loadAISettings);
+      } else {
+        setTimeout(loadAISettings, 100);
+      }
     }
 
     // Loading / Progress Bar Engine for App Launches
