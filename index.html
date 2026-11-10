@@ -1507,6 +1507,92 @@
       color: var(--primary) !important;
       box-shadow: 0 0 0 1px var(--primary), 0 2px 8px rgba(13, 148, 136, 0.2);
     }
+
+    /* ========================================================
+       MODE SIDEBAR RÉDUITE / PLIÉE (SIDEBAR COLLAPSED & SLIM)
+       ======================================================== */
+    body.sidebar-collapsed #sidebar {
+      width: 4.75rem !important; /* 76px */
+      min-width: 4.75rem !important;
+      max-width: 4.75rem !important;
+      transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s ease !important;
+    }
+    body.sidebar-collapsed .sidebar-brand-text,
+    body.sidebar-collapsed #store-selector-container,
+    body.sidebar-collapsed .sidebar-user-details,
+    body.sidebar-collapsed .sidebar-folder-label,
+    body.sidebar-collapsed .sidebar-folder-meta,
+    body.sidebar-collapsed .sidebar-nav-label,
+    body.sidebar-collapsed .sidebar-folder-anim,
+    body.sidebar-collapsed #sidebar-cards-mode-text,
+    body.sidebar-collapsed #sidebar-quick-actions-container,
+    body.sidebar-collapsed .sidebar-status-dot {
+      display: none !important;
+    }
+    body.sidebar-collapsed #sidebar .h-16 {
+      padding-left: 0.5rem !important;
+      padding-right: 0.5rem !important;
+      justify-content: center !important;
+      gap: 0.5rem !important;
+    }
+    body.sidebar-collapsed #btn-sidebar-collapse-inner svg {
+      transform: rotate(180deg) !important;
+    }
+    body.sidebar-collapsed #sidebar-standard-nav .p-3 {
+      padding: 0.5rem 0.4rem !important;
+    }
+    body.sidebar-collapsed .accordion-group {
+      border: none !important;
+      background: transparent !important;
+      margin-bottom: 0.25rem !important;
+    }
+    body.sidebar-collapsed .accordion-group > button {
+      justify-content: center !important;
+      padding: 0.65rem 0.5rem !important;
+      border-radius: 0.75rem !important;
+    }
+    body.sidebar-collapsed .accordion-group > button:hover {
+      background: rgba(255, 255, 255, 0.08) !important;
+    }
+    body.sidebar-collapsed .accordion-group > button > div:first-child {
+      justify-content: center !important;
+      margin: 0 !important;
+    }
+    body.sidebar-collapsed .accordion-group > button svg {
+      width: 1.25rem !important;
+      height: 1.25rem !important;
+    }
+    body.sidebar-collapsed .nav-btn {
+      justify-content: center !important;
+      padding: 0.65rem 0.5rem !important;
+    }
+    body.sidebar-collapsed .nav-btn div {
+      justify-content: center !important;
+    }
+    body.sidebar-collapsed .nav-btn svg {
+      width: 1.25rem !important;
+      height: 1.25rem !important;
+    }
+    body.sidebar-collapsed #sidebar-btn-cards-mode {
+      justify-content: center !important;
+      padding: 0.65rem 0.5rem !important;
+    }
+    body.sidebar-collapsed #sidebar-user-container {
+      justify-content: center !important;
+    }
+    body.sidebar-collapsed #sidebar-footer-actions {
+      flex-direction: column !important;
+      gap: 0.25rem !important;
+    }
+    body.sidebar-collapsed #btn-toggle-sidebar {
+      background: rgba(99, 102, 241, 0.15) !important;
+      color: #818CF8 !important;
+      border-color: rgba(99, 102, 241, 0.3) !important;
+    }
+    body.interface-cards-mode #btn-toggle-sidebar {
+      display: none !important;
+    }
+
   </style>
 
 </head>
@@ -1587,18 +1673,18 @@
   <aside id="sidebar" class="w-64 bg-[var(--bg-sidebar)] border-r border-[var(--border)] flex flex-col shrink-0 z-30 transition-all duration-200 select-none">
     
     <!-- En-tête : Logo & Sélecteur d'établissement multi-boutique -->
-    <div class="h-16 px-4 border-b border-[var(--border)] flex items-center justify-between">
-      <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-500 to-indigo-600 flex items-center justify-center font-black text-white text-base shadow-lg shadow-teal-500/20">
+    <div class="h-16 px-3.5 border-b border-[var(--border)] flex items-center justify-between">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-500 to-indigo-600 flex items-center justify-center font-black text-white text-base shadow-lg shadow-teal-500/20 shrink-0 cursor-pointer" onclick="toggleSidebarCollapse()" title="Cliquer pour réduire / agrandir la barre">
           A
         </div>
-        <div>
+        <div class="sidebar-brand-text truncate">
           <div class="font-extrabold text-sm tracking-tight flex items-center gap-1.5 text-[var(--text-main)]">
             <span>AURA OS</span>
             <span class="text-[9px] px-1.5 py-0.5 rounded-md bg-[var(--primary-light)] text-[var(--primary)] font-bold border border-[var(--primary)]/30">ALL-IN-ONE</span>
           </div>
           <!-- Sélecteur de magasin -->
-          <div class="flex items-center gap-1">
+          <div class="flex items-center gap-1" id="store-selector-container">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
             <select id="store-selector" onchange="switchStore()" class="bg-transparent text-[11px] text-[var(--text-muted)] focus:outline-none cursor-pointer hover:text-[var(--primary)] font-medium -ml-0.5">
               <option value="s1">Magasin Central</option>
@@ -1608,8 +1694,14 @@
           </div>
         </div>
       </div>
-      <!-- Statut Web Locks / Offline -->
-      <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 live-pulse" title="Système en ligne et synchronisé (IndexedDB Actif)"></span>
+      <div class="flex items-center gap-1 shrink-0">
+        <!-- Bouton Pliage / Dépliage Sidebar -->
+        <button id="btn-sidebar-collapse-inner" type="button" onclick="toggleSidebarCollapse()" class="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/10 transition-all cursor-pointer" title="Réduire la barre latérale (Ctrl+B)">
+          <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+        </button>
+        <!-- Statut Web Locks / Offline -->
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 live-pulse sidebar-status-dot ml-0.5" title="Système en ligne et synchronisé (IndexedDB Actif)"></span>
+      </div>
     </div>
 
     <!-- ==================== NAVIGATION EN MODE STANDARD (CLASSIQUE) ==================== -->
@@ -1618,15 +1710,15 @@
       <!-- Actions Rapides Prioritaires (Pinned Top) -->
       <div class="p-3 space-y-2 border-b border-[var(--border)] bg-[var(--bg-card-subtle)]">
         <!-- Bouton Souverain : Basculer vers le Mode Cartes & Bureau OS -->
-        <button onclick="applyNavInterfaceMode('cards', true)" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-bold text-white bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 shadow-md transition-all press-effect cursor-pointer group" title="Ouvrir le Bureau & le Mode Cartes AURA OS (Alt+I)">
+        <button id="sidebar-btn-cards-mode" onclick="applyNavInterfaceMode('cards', true)" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-bold text-white bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 shadow-md transition-all press-effect cursor-pointer group" title="Ouvrir le Bureau & le Mode Cartes AURA OS (Alt+I)">
           <div class="flex items-center gap-2.5">
-            <span class="text-base group-hover:scale-110 transition-transform">🃏</span>
-            <div class="leading-tight">
+            <span class="text-base group-hover:scale-110 transition-transform shrink-0">🃏</span>
+            <div class="leading-tight" id="sidebar-cards-mode-text">
               <span class="text-xs font-black block text-white">Mode Cartes & Bureau</span>
               <span class="text-[10px] text-teal-100 font-medium">Launchpad Visuel OS</span>
             </div>
           </div>
-          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/30 text-white font-bold">Activer</span>
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/30 text-white font-bold sidebar-folder-meta">Activer</span>
         </button>
 
         <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-bold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/20 press-effect">
@@ -1666,10 +1758,9 @@
         <button onclick="toggleSidebarFolder('folder-sales')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider">Ventes & Facturation</span>
+            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Ventes & Facturation</span>
           </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">2</span>
+          <div class="flex items-center gap-1.5 sidebar-folder-meta"><span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">2</span>
             <svg id="chevron-folder-sales" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </div>
         </button>
@@ -1696,10 +1787,9 @@
         <button onclick="toggleSidebarFolder('folder-crm')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider">Clients & Partenaires</span>
+            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Clients & Partenaires</span>
           </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">2</span>
+          <div class="flex items-center gap-1.5 sidebar-folder-meta"><span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">2</span>
             <svg id="chevron-folder-crm" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </div>
         </button>
@@ -1726,7 +1816,7 @@
         <button onclick="toggleSidebarFolder('folder-stock')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider">Gestion des Stocks</span>
+            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Gestion des Stocks</span>
           </div>
           <div class="flex items-center gap-1.5">
             <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">Stock</span>
@@ -1763,7 +1853,7 @@
         <button onclick="toggleSidebarFolder('folder-logistics')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider">Logistique & Flotte</span>
+            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Logistique & Flotte</span>
           </div>
           <div class="flex items-center gap-1.5">
             <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">Livr.</span>
@@ -1786,7 +1876,7 @@
         <button onclick="toggleSidebarFolder('folder-hr')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider">Ressources Humaines</span>
+            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Ressources Humaines</span>
           </div>
           <div class="flex items-center gap-1.5">
             <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">RH</span>
@@ -1809,10 +1899,9 @@
         <button onclick="toggleSidebarFolder('folder-finances')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider">Finances & OHADA</span>
+            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Finances & OHADA</span>
           </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">4</span>
+          <div class="flex items-center gap-1.5 sidebar-folder-meta"><span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">4</span>
             <svg id="chevron-folder-finances" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </div>
         </button>
@@ -1853,7 +1942,7 @@
         <button onclick="toggleSidebarFolder('folder-marketing')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider">Marketing & WhatsApp</span>
+            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Marketing & WhatsApp</span>
           </div>
           <div class="flex items-center gap-1.5">
             <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">Promo</span>
@@ -1876,7 +1965,7 @@
         <button onclick="toggleSidebarFolder('folder-system')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider">Administration</span>
+            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Administration</span>
           </div>
           <div class="flex items-center gap-1.5">
             <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">Config</span>
@@ -1919,8 +2008,8 @@
     </div>
 
     <!-- Pied de page Sidebar : Profil Utilisateur, Bascule Thème & Verrouillage PIN -->
-    <div class="p-3 border-t border-[var(--border)] bg-[var(--bg-card-subtle)] flex items-center justify-between">
-      <div class="flex items-center gap-2.5">
+    <div class="p-3 border-t border-[var(--border)] bg-[var(--bg-card-subtle)] flex items-center justify-between" id="sidebar-footer-container">
+      <div class="flex items-center gap-2.5 min-w-0" id="sidebar-user-container">
         <div class="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center font-bold text-xs text-white shadow-sm">
           AC
         </div>
@@ -1929,7 +2018,7 @@
           <div class="text-[10px] text-[var(--primary)] font-medium">Gérant / Super Admin</div>
         </div>
       </div>
-      <div class="flex items-center gap-1">
+      <div class="flex items-center gap-1 shrink-0" id="sidebar-footer-actions">
         <button onclick="toggleNavInterfaceMode()" id="sidebar-toggle-nav-interface" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-indigo-400 hover:bg-[var(--border)] press-effect" title="Basculer Mode Standard / Mode Cartes Visuelles">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
         </button>
@@ -1951,6 +2040,10 @@
     <header class="h-16 px-6 border-b border-[var(--border)] bg-[var(--bg-sidebar)] flex items-center justify-between shrink-0 z-20">
       
       <div class="flex items-center gap-3.5 min-w-0 flex-1">
+        <!-- Bouton Réduire / Agrandir la Barre Latérale (Mode Standard) -->
+        <button id="btn-toggle-sidebar" type="button" onclick="toggleSidebarCollapse()" class="p-2 rounded-xl text-[var(--text-muted)] hover:text-white hover:bg-white/10 border border-[var(--border)] transition-all cursor-pointer flex items-center justify-center shrink-0 mr-1 group shadow-xs" title="Réduire / Agrandir la barre latérale (Ctrl+B)">
+          <svg class="w-4 h-4 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"/></svg>
+        </button>
         <!-- Contrôles Fenêtre OS (visibles en Mode Bureau OS / Cartes) -->
         <div id="os-window-controls" class="hidden items-center gap-2 group/lights pr-2.5 border-r border-white/15 shrink-0 cursor-pointer">
           <button type="button" onclick="showAuraDesktop()" class="w-3.5 h-3.5 rounded-full bg-[#FF5F56] border border-[#E0443E] flex items-center justify-center text-[9px] text-[#4A0002] font-black opacity-90 hover:opacity-100 transition-all hover:scale-110 shadow-xs cursor-pointer" title="Fermer la fenêtre (Retour au Bureau - Échap)">
@@ -14991,7 +15084,71 @@ function renderA4DocumentView() {
       }, 380);
     }
 
+    function toggleSidebarCollapse(forceState) {
+      if (typeof document === 'undefined') return;
+      const isCurrentlyCollapsed = document.body.classList.contains('sidebar-collapsed');
+      const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyCollapsed;
+
+      if (newState) {
+        document.body.classList.add('sidebar-collapsed');
+        if (typeof showToast === 'function') {
+          showToast('Barre latérale réduite (Raccourci : Ctrl+B)', 'info');
+        }
+      } else {
+        document.body.classList.remove('sidebar-collapsed');
+        if (typeof showToast === 'function') {
+          showToast('Barre latérale agrandie', 'info');
+        }
+      }
+
+      try {
+        localStorage.setItem('aura_sidebar_collapsed', newState ? 'true' : 'false');
+      } catch (e) {}
+
+      // Mettre à jour les info-bulles des boutons
+      const btnInner = document.getElementById('btn-sidebar-collapse-inner');
+      const btnTop = document.getElementById('btn-toggle-sidebar');
+      if (btnInner) btnInner.title = newState ? 'Agrandir la barre latérale (Ctrl+B)' : 'Réduire la barre latérale (Ctrl+B)';
+      if (btnTop) btnTop.title = newState ? 'Agrandir la barre latérale (Ctrl+B)' : 'Réduire la barre latérale (Ctrl+B)';
+    }
+    window.toggleSidebarCollapse = toggleSidebarCollapse;
+
+    // Restaurer l'état au démarrage
+    if (typeof document !== 'undefined') {
+      const initSidebarCollapse = () => {
+        try {
+          if (localStorage.getItem('aura_sidebar_collapsed') === 'true') {
+            document.body.classList.add('sidebar-collapsed');
+          }
+        } catch (e) {}
+      };
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initSidebarCollapse);
+      } else {
+        setTimeout(initSidebarCollapse, 20);
+      }
+    }
+
     function toggleSidebarFolder(folderId) {
+      // Si la barre est réduite, cliquer sur l'icône navigue directement vers le module principal
+      if (document.body.classList.contains('sidebar-collapsed')) {
+        const folderToViewMap = {
+          'folder-sales': 'documents',
+          'folder-crm': 'clients',
+          'folder-stock': 'stock',
+          'folder-logistics': 'deliveries',
+          'folder-hr': 'hr',
+          'folder-finances': 'accounting',
+          'folder-marketing': 'clients',
+          'folder-system': 'settings'
+        };
+        const targetView = folderToViewMap[folderId];
+        if (targetView && typeof switchView === 'function') {
+          switchView(targetView);
+          return;
+        }
+      }
+
       const folder = document.getElementById(folderId);
       if (!folder) return;
 
@@ -21780,7 +21937,14 @@ function getLiveMetricForPole(countKey) {
 
     /* Raccourcis Clavier Globaux */
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'F1') { e.preventDefault(); switchView('dashboard'); } else if (e.key === 'F2') {
+      if ((e.ctrlKey || e.metaKey || e.altKey) && (e.key === 'b' || e.key === 'B')) {
+        const tag = (e.target && e.target.tagName) ? e.target.tagName.toLowerCase() : '';
+        if (tag !== 'input' && tag !== 'textarea' && tag !== 'select') {
+          e.preventDefault();
+          if (typeof toggleSidebarCollapse === 'function') toggleSidebarCollapse();
+          return;
+        }
+      } else if (e.key === 'F1') { e.preventDefault(); switchView('dashboard'); } else if (e.key === 'F2') {
         e.preventDefault();
         switchView('pos');
       } else if (e.key === 'F9') {
