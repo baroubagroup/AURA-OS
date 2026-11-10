@@ -17,6 +17,7 @@ import accountingRouter from './routes/accounting.js';
 import auditRouter from './routes/audit.js';
 import settingsRouter from './routes/settings.js';
 import syncRouter from './routes/sync.js';
+import copilotRouter from './routes/copilot.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -83,6 +84,7 @@ app.use('/api/accounting', accountingRouter);
 app.use('/api/audit', auditRouter);
 app.use('/api/settings', settingsRouter);
 app.use('/api/sync', syncRouter);
+app.use('/api/copilot', copilotRouter);
 
 // 404 handler for API routes
 app.use('/api', (req, res) => {
