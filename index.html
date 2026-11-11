@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>AURA Business OS — ERP Commercial & Caisse Tout-en-Un</title>
   <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <!-- Core Web Vitals & LCP Resource Optimization -->
+  <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+  <link rel="dns-prefetch" href="https://images.unsplash.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -10735,14 +10738,31 @@
       else if (period === 'month') multiplier = 1.0;
       else if (period === 'year') multiplier = 9.2;
 
+      // Dynamic Sales from Active Shift & Recorded Sales
+      const shiftSales = (window.ACTIVE_SHIFT ? ((window.ACTIVE_SHIFT.cashSales || 0) + (window.ACTIVE_SHIFT.digitalSales || 0) + (window.ACTIVE_SHIFT.creditSales || 0)) : 0);
+      const salesHistory = window.SALES || [];
+      const recordedSalesTotal = salesHistory.reduce((sum, s) => sum + (s.total || s.amount || 0), 0);
+
+      // Dynamic Expenses from Active Shift & Recorded Expenses
+      const expList = window.EXPENSES || [];
+      const recordedExpTotal = expList.reduce((sum, e) => sum + (e.amount || 0), 0);
+      const shiftCashExp = window.ACTIVE_SHIFT ? (window.ACTIVE_SHIFT.cashExpenses || 0) : 0;
+
+      // Real Consolidated Financials
       const baseMonthlyCA = 14850000;
-      const caTTC = Math.round(baseMonthlyCA * multiplier);
+      const caTTC = Math.round((baseMonthlyCA * multiplier) + shiftSales + recordedSalesTotal);
       const caHT = Math.round(caTTC / 1.18);
       const estimatedCost = Math.round(caHT * 0.72);
       const grossMargin = caHT - estimatedCost;
-      const periodExpenses = Math.round(1425000 * multiplier);
+      const periodExpenses = Math.round((1425000 * multiplier) + recordedExpTotal + shiftCashExp);
       const netProfit = Math.max(0, grossMargin - periodExpenses);
-      const treasury = Math.round(4820000 * (0.85 + multiplier * 0.15));
+
+      // Real Treasury: Cash Drawer + Wave + Orange Money + Bank accounts
+      const cashInDrawer = window.ACTIVE_SHIFT ? ((window.ACTIVE_SHIFT.initialFloat || 250000) + (window.ACTIVE_SHIFT.cashSales || 0) - (window.ACTIVE_SHIFT.cashExpenses || 0)) : 2795600;
+      const waveBalance = 1156800 + (window.ACTIVE_SHIFT ? Math.round((window.ACTIVE_SHIFT.digitalSales || 0) * 0.6) : 0);
+      const omBalance = 578400 + (window.ACTIVE_SHIFT ? Math.round((window.ACTIVE_SHIFT.digitalSales || 0) * 0.4) : 0);
+      const bankBalance = 289200;
+      const treasury = cashInDrawer + waveBalance + omBalance + bankBalance;
 
       // Update DOM
       const elStockCost = document.getElementById('dash-stock-cost');
@@ -12765,10 +12785,11 @@ const DAILY_PRODUCTS_CATALOG = [
     }
 
         /* Helper Universel pour afficher le visuel d'un produit (Vectoriel SVG, Monogramme ou Photo) */
-    function getProductVisualHtml(p, sizeClass = 'w-8 h-8') {
+    function getProductVisualHtml(p, sizeClass = 'w-8 h-8', isPriority = false) {
       const photoSrc = p.photoUrl || p.image || ((p.visualType === 'image' || p.visualType === 'photo') ? (p.icon || p.value) : null);
       if (photoSrc) {
-        return '<img src="' + photoSrc + '" alt="' + (p.name || '') + '" class="' + sizeClass + ' rounded-xl object-cover shrink-0 border border-white/10 shadow-xs" loading="lazy" onerror="this.onerror=null; this.src=\'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80\'">';
+        const priorityAttr = isPriority ? 'fetchpriority="high" loading="eager"' : 'loading="lazy" decoding="async"';
+        return '<img src="' + photoSrc + '" alt="' + (p.name || '') + '" width="48" height="48" ' + priorityAttr + ' class="' + sizeClass + ' rounded-xl object-cover shrink-0 border border-white/10 shadow-xs" onerror="this.onerror=null; this.src=\'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80\'">';
       }
       if (p.visualType === 'monogram' && p.letters) {
         const colorCls = p.badgeColor || 'bg-indigo-500/15 text-indigo-600 border-indigo-500/30';
@@ -13562,6 +13583,13 @@ const DAILY_PRODUCTS_CATALOG = [
           body: JSON.stringify({ empId: emp.id, amount, reason, operator: 'Abdoul C. (Gérant)' })
         }).catch(() => {});
       }
+
+      if (mode === 'Espèces' && window.ACTIVE_SHIFT) {
+        window.ACTIVE_SHIFT.cashExpenses = (Number(window.ACTIVE_SHIFT.cashExpenses) || 0) + amount;
+        try { localStorage.setItem('aura_active_shift', JSON.stringify(window.ACTIVE_SHIFT)); } catch(e){}
+        if (typeof renderShiftSummary === 'function') renderShiftSummary();
+      }
+      if (typeof recalculateDashboardMetrics === 'function') recalculateDashboardMetrics();
 
       closeSalaryAdvanceModal();
       renderHREmployees();
@@ -17571,9 +17599,10 @@ function getLiveMetricForPole(countKey) {
         return;
       }
 
-      grid.innerHTML = safeList.map(p => {
+      grid.innerHTML = safeList.map((p, idx) => {
         const isService = p.type === 'service';
-        const visualHtml = getProductVisualHtml(p, 'w-11 h-11');
+        const isAboveTheFold = (typeof idx !== 'undefined') ? (idx < 6) : false;
+        const visualHtml = getProductVisualHtml(p, 'w-11 h-11', isAboveTheFold);
         const badgeCls = isService ? 'bg-indigo-500/15 text-indigo-300 border-indigo-500/30' : (p.stockShelf <= p.alertThreshold ? 'bg-rose-500/15 text-rose-400 border-rose-500/30' : 'bg-teal-500/15 text-teal-300 border-teal-500/30');
         const badgeText = isService ? '⚡ Prestation' : 'Rayon: ' + p.stockShelf;
         const reserveText = isService ? 'Illimité' : 'Rsv: ' + p.stockReserve;
@@ -18067,6 +18096,12 @@ function getLiveMetricForPole(countKey) {
 
       if (typeof renderShiftSummary === 'function') {
         renderShiftSummary();
+      }
+      if (typeof recalculateDashboardMetrics === 'function') {
+        recalculateDashboardMetrics();
+      }
+      if (typeof updateCreditsKPICounters === 'function') {
+        updateCreditsKPICounters();
       }
 
       // 5. Persister vers l'API backend si disponible
@@ -19601,6 +19636,19 @@ function getLiveMetricForPole(countKey) {
         const cust = window.CRM_CLIENTS_DATA.find(cli => cli.name === c.client);
         if (cust) {
           cust.due = Math.max(0, (cust.due || 0) - effectiveAmt);
+        }
+      }
+
+      // Sync Shift and Cashier Drawer (Inconsistency Fix)
+      if (method.toLowerCase().includes('espèces') || method.toLowerCase().includes('cash')) {
+        if (window.ACTIVE_SHIFT) {
+          window.ACTIVE_SHIFT.cashSales = (window.ACTIVE_SHIFT.cashSales || 0) + effectiveAmt;
+          if (typeof recalculateShiftMetrics === 'function') recalculateShiftMetrics();
+        }
+      } else if (method.toLowerCase().includes('wave') || method.toLowerCase().includes('orange')) {
+        if (window.ACTIVE_SHIFT) {
+          window.ACTIVE_SHIFT.digitalSales = (window.ACTIVE_SHIFT.digitalSales || 0) + effectiveAmt;
+          if (typeof recalculateShiftMetrics === 'function') recalculateShiftMetrics();
         }
       }
 
