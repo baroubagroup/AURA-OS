@@ -6,7 +6,8 @@ console.log('================================================================');
 console.log('  TEST SUITE: BUREAU & DOCK OS / WALLPAPERS & CUSTOMIZATION     ');
 console.log('================================================================\n');
 
-const html = fs.readFileSync('aura-pos/index.html', 'utf8');
+const htmlPath = fs.existsSync('aura-pos/index.html') ? 'aura-pos/index.html' : 'index.html';
+const html = fs.readFileSync(htmlPath, 'utf8');
 
 // 1. Audit DOM Elements
 console.log('--- 1. DOM Elements & Templates Audit ---');

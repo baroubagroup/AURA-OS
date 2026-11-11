@@ -12,6 +12,29 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
+    
+    /* Protection anti-chevauchement Launchpad & Dock OS */
+    body.dock-pos-left #aura-os-desktop,
+    body.dock-pos-left #aura-os-desktop .launchpad-scroll-area {
+      padding-left: 9.5rem !important;
+      padding-right: 2rem !important;
+    }
+    body.dock-pos-right #aura-os-desktop,
+    body.dock-pos-right #aura-os-desktop .launchpad-scroll-area {
+      padding-right: 9.5rem !important;
+      padding-left: 2rem !important;
+    }
+    body.dock-pos-bottom #aura-os-desktop,
+    body.dock-pos-bottom #aura-os-desktop .launchpad-scroll-area,
+    body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) #aura-os-desktop,
+    body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) #aura-os-desktop .launchpad-scroll-area {
+      padding-bottom: 8.5rem !important;
+    }
+    body.dock-pos-top #aura-os-desktop,
+    body.dock-pos-top #aura-os-desktop .launchpad-scroll-area {
+      padding-top: 6.5rem !important;
+    }
+
     /* ========================================================
        PALETTE UNIFIÉE & RÈGLES DE CONTRASTE ERGONOMIQUE
        - Mode Sombre : Profond, sans reflet, contraste textuel net
@@ -1262,7 +1285,7 @@
       bottom: auto !important;
       transform: translateY(-50%) !important;
       padding: 0 !important;
-      z-index: 9999 !important;
+      z-index: 40 !important;
     }
     body.dock-pos-left .os-floating-dock {
       flex-direction: column !important;
@@ -1312,7 +1335,7 @@
       bottom: auto !important;
       transform: translateY(-50%) !important;
       padding: 0 !important;
-      z-index: 9999 !important;
+      z-index: 40 !important;
     }
     body.dock-pos-right .os-floating-dock {
       flex-direction: column !important;
@@ -1363,7 +1386,7 @@
       right: auto !important;
       transform: translateX(-50%) !important;
       padding: 0 !important;
-      z-index: 9999 !important;
+      z-index: 40 !important;
     }
     body.dock-pos-top .os-floating-dock {
       flex-direction: row !important;
@@ -1408,7 +1431,7 @@
       right: auto !important;
       transform: translateX(-50%) !important;
       padding: 0 !important;
-      z-index: 9999 !important;
+      z-index: 40 !important;
     }
     body.dock-pos-bottom .os-floating-dock,
     body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) .os-floating-dock {
@@ -1559,6 +1582,30 @@
       max-width: 4.5rem !important;
       overflow-x: hidden !important;
       transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+
+    
+    /* Rail compact ultra-épuré (Apple / VS Code Style) */
+    body.sidebar-collapsed #sidebar {
+      width: 4.5rem !important;
+      min-width: 4.5rem !important;
+      max-width: 4.5rem !important;
+    }
+    body.sidebar-collapsed #sidebar-standard-nav span,
+    body.sidebar-collapsed #sidebar-standard-nav p,
+    body.sidebar-collapsed #sidebar-standard-nav .font-mono,
+    body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-label,
+    body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-meta,
+    body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-anim,
+    body.sidebar-collapsed #sidebar-standard-nav .grid,
+    body.sidebar-collapsed #sidebar-standard-nav #sidebar-quick-actions-container,
+    body.sidebar-collapsed #sidebar-standard-nav #sidebar-cards-mode-text,
+    body.sidebar-collapsed .sidebar-brand-text,
+    body.sidebar-collapsed #store-selector-container,
+    body.sidebar-collapsed .sidebar-user-details,
+    body.sidebar-collapsed .sidebar-status-dot,
+    body.sidebar-collapsed [id^="folder-"] {
+      display: none !important;
     }
 
     /* Éradication absolue de toute fuite de texte en mode réduit */
@@ -1869,33 +1916,23 @@
       </div>
 
       <!-- 2. CLIENTS & CRM -->
-      <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-crm')" title="Clients & Partenaires CRM" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Clients & Partenaires</span>
-          </div>
-          <div class="flex items-center gap-1.5 sidebar-folder-meta"><span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">2</span>
-            <svg id="chevron-folder-crm" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
-        </button>
-        <div id="folder-crm" class="sidebar-folder-anim folder-closed p-1 space-y-0.5 border-t border-[var(--border)] bg-[var(--bg-card-subtle)]" style="max-height: 0px; opacity: 0; transform: translateY(-6px);">
-          <button onclick="switchView('clients')" id="nav-clients" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-              <span>Annuaire Clients B2B/B2C</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-600 font-num">500+</span>
-          </button>
-          <button onclick="switchView('suppliers')" id="nav-suppliers" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-              <span>Fournisseurs & Achats</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-num">18</span>
-          </button>
+      <!-- 2a. Clients & Relations B2B/B2C (Top-Level) -->
+      <button onclick="switchView('clients')" id="nav-clients" title="Annuaire Clients B2B/B2C & Soldes Débiteurs" class="nav-btn w-full flex items-center justify-between px-3 py-2 text-left font-medium rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <div class="flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+          <span class="nav-label">Clients & CRM</span>
         </div>
-      </div>
+        <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-blue-500/10 text-blue-400 font-mono font-bold" id="sidebar-clients-badge">CRM</span>
+      </button>
+
+      <!-- 2b. Fournisseurs & Commandes d'Achats (Top-Level Dédié mis au premier plan) -->
+      <button onclick="switchView('suppliers')" id="nav-suppliers" title="Fournisseurs, Tarifs d'Achat & Règlements (Compte 401)" class="nav-btn w-full flex items-center justify-between px-3 py-2 text-left font-medium rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <div class="flex items-center gap-2.5">
+          <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+          <span class="nav-label">Fournisseurs & Achats</span>
+        </div>
+        <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-amber-500/10 text-amber-400 font-mono font-bold" id="sidebar-suppliers-badge">Achats</span>
+      </button>
 
       <!-- 3. GESTION DES STOCKS & ARTICLES (Séparé de la logistique) -->
       <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
@@ -4404,6 +4441,9 @@
           <button onclick="switchAccountingTab('ledger')" id="acc-tab-ledger" class="acc-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
             <span>4. Grand Livre & Journal Écritures</span>
           </button>
+          <button onclick="switchAccountingTab('six-digits-balance')" id="acc-tab-six-digits-balance" class="acc-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
+            <span>5. Balance Générale à 6 Chiffres (SYSCOHADA)</span>
+          </button>
         </div>
 
         <!-- SOUS-ONGLET 1 : COMPTE DE RÉSULTAT (P&L OHADA) -->
@@ -6023,7 +6063,66 @@
           </div>
         </div>
 
-        <!-- SOUS-ONGLET 9 : CONFIGURATION AGENT IA & COPILOT -->
+        
+        <!-- SOUS-ONGLET 10 : GESTION DES RÔLES & ACCÈS (RBAC STRICT ADMIN) -->
+        <div id="subview-tab-rbac-permissions" class="space-y-5 hidden">
+          <div class="app-card p-6 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
+              <div>
+                <h3 class="text-base font-bold text-[var(--text-main)] flex items-center gap-2">
+                  <span>Matrice de Droits d'Accès & Cloisonnement des Agents (RBAC)</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 font-bold border border-teal-500/20">Sécurité Interne</span>
+                </h3>
+                <p class="text-xs text-[var(--text-muted)]">Cochez ou décochez précisément les modules accessibles pour chaque profil d'employé. Seul le Gérant peut modifier ces règles.</p>
+              </div>
+              <button type="button" onclick="saveRBACPermissions()" class="app-btn-primary text-xs flex items-center gap-1.5 shadow-sm">
+                <span>Enregistrer la Matrice</span>
+              </button>
+            </div>
+
+            <!-- Tableau Matrice de Permissions -->
+            <div class="overflow-x-auto custom-scroll">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr class="bg-[var(--bg-card-subtle)] border-b border-[var(--border)] text-[11px] font-bold text-[var(--text-muted)]">
+                    <th class="p-3 w-56">Module Système</th>
+                    <th class="p-3 text-center">Gérant / Super Admin</th>
+                    <th class="p-3 text-center">Responsable Magasin</th>
+                    <th class="p-3 text-center">Caissière Vendeuse</th>
+                    <th class="p-3 text-center">Comptable / DAF</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-[var(--border)]" id="rbac-matrix-tbody">
+                  <!-- Rendu dynamique par renderRBACMatrix() -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- SOUS-ONGLET 11 : MULTI-MAGASINS & DÉPÔTS -->
+        <div id="subview-tab-multi-store" class="space-y-5 hidden">
+          <div class="app-card p-6 space-y-4">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
+              <div>
+                <h3 class="text-base font-bold text-[var(--text-main)] flex items-center gap-2">
+                  <span>Configuration des Magasins, Boutiques & Dépôts Régionaux</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 font-bold border border-blue-500/20">Multi-Sites</span>
+                </h3>
+                <p class="text-xs text-[var(--text-muted)]">Gérez vos points de vente physiques et visualisez les stocks et sessions de caisse par établissement.</p>
+              </div>
+              <button type="button" onclick="openNewStoreModal()" class="app-btn-primary text-xs flex items-center gap-1.5 shadow-sm">
+                <span>+ Ajouter une Succursale</span>
+              </button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="multi-store-cards-container">
+              <!-- Rendu dynamique par renderStoreCards() -->
+            </div>
+          </div>
+        </div>
+
+<!-- SOUS-ONGLET 9 : CONFIGURATION AGENT IA & COPILOT -->
         <div id="subview-settings-ai" class="hidden space-y-6">
           <div class="app-card p-6 space-y-6">
             
@@ -6220,7 +6319,41 @@
   </main>
 
   <!-- Dock OS Flottant d'Application (Exclusif au Bureau Système, strictement HORS de la fenêtre <main>) -->
-  <div id="os-app-window-dock" class="fixed transition-all pointer-events-auto" style="z-index: 9999;">
+  <!-- ========================================================
+       MODAL SÉLECTION D'AGENT / MULTI-UTILISATEUR (RBAC)
+       ======================================================== -->
+  <div id="modal-switch-user" class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm hidden select-none">
+    <div class="bg-[var(--bg-card)] border border-[var(--border)] rounded-2xl w-full max-w-md p-6 shadow-2xl space-y-5 animate-in fade-in zoom-in-95 duration-150">
+      <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-lg font-black border border-teal-500/20">
+            👥
+          </div>
+          <div>
+            <h3 class="text-sm font-bold text-[var(--text-main)]">Changer d'Opérateur / Agent</h3>
+            <p class="text-[11px] text-[var(--text-muted)]">Sélectionnez votre profil pour basculer vos autorisations.</p>
+          </div>
+        </div>
+        <button onclick="closeSwitchUserModal()" class="w-8 h-8 rounded-lg bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] border border-[var(--border)] text-[var(--text-muted)] flex items-center justify-center font-bold">✕</button>
+      </div>
+
+      <!-- Liste des agents -->
+      <div class="space-y-2 max-h-72 overflow-y-auto custom-scroll pr-1" id="switch-user-list">
+        <!-- Rendu dynamique par renderSwitchUserList() -->
+      </div>
+
+      <div class="p-3 rounded-xl bg-blue-500/10 border border-blue-500/20 text-xs text-blue-300 flex items-center justify-between">
+        <span class="text-[11px]">Gérer les droits et rôles stricts :</span>
+        <button onclick="closeSwitchUserModal(); switchView('settings'); setTimeout(() => switchSettingsSubTab('tab-rbac-permissions'), 150);" class="text-[11px] font-bold text-teal-400 underline hover:text-teal-300">
+          Matrice RBAC Admin &rarr;
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div id="os-app-window-dock" class="fixed transition-all pointer-events-auto" style="z-index: 40;">
     <div class="os-floating-dock shadow-2xl py-1 px-3">
       <button onclick="showAuraDesktop()" class="os-dock-btn group" title="Bureau AURA OS (Échap)">
         <div class="os-dock-tooltip"><span>Bureau AURA OS</span><span class="text-[9px] font-mono px-1 py-0.2 rounded bg-white/20 text-white/90">Échap</span></div>
@@ -9403,14 +9536,12 @@
         '</div>' +
         '<div class="footer">Document officiel d\'audit et de recouvrement commercial — Conforme dispositions SYSCOHADA & DGI Burkina Faso</div>' +
         '<script>window.onload = function() { window.print(); };</' + 'script>' +
-        '</body></html>'
+  '</body></html>'
       );
       printWin.document.close();
       showToast('Génération de l\'état des créances pour impression', 'info');
     }
-    window.printDebtorsReport = printDebtorsReport;
-
-    function printZReportPreview(customShift = null) {
+    window.printDebtorsReport = printDebtorsReport;function printZReportPreview(customShift = null) {
       const shift = customShift || window.ACTIVE_SHIFT || {
         cashierName: 'Abdoul C.',
         postName: 'Poste #01 (Caisse Principale)',
@@ -10378,6 +10509,9 @@
       const activeEl = document.getElementById('subview-doc-' + tabKey);
       const activeBtn = document.getElementById('doc-tab-' + tabKey);
       if (activeEl) activeEl.classList.remove('hidden');
+      if (tabKey === 'six-digits-balance' && typeof renderSixDigitsBalance === 'function') {
+        renderSixDigitsBalance();
+      }
       if (activeBtn) {
         activeBtn.classList.add('active', 'border-[var(--primary)]', 'text-[var(--primary)]');
         activeBtn.classList.remove('border-transparent', 'text-[var(--text-muted)]');
@@ -14248,7 +14382,7 @@ const DAILY_PRODUCTS_CATALOG = [
     function switchAccountingTab(tabKey) {
       currentAccountingTab = tabKey;
       window.currentAccountingTab = tabKey;
-      ['pnl', 'balance', 'tva', 'ledger'].forEach(k => {
+      ['pnl', 'balance', 'tva', 'ledger', 'six-digits-balance'].forEach(k => {
         const el = document.getElementById('subview-acc-' + k);
         const btn = document.getElementById('acc-tab-' + k);
         if (el) el.classList.add('hidden');
@@ -15977,6 +16111,67 @@ function renderA4DocumentView() {
       <div id="doc-custom-clauses" class="space-y-2 mt-4 empty:hidden"></div>
       <div id="doc-stamps-container" class="flex flex-wrap items-center gap-3 my-2 justify-end empty:hidden"></div>
 
+      <!-- Vignette Fiscale Officielle e-MECeF & QR Code DGI -->
+      <div class="p-3.5 bg-white border-2 border-emerald-900 rounded-xl flex items-center justify-between gap-4 font-mono text-[10px]">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <span class="px-2 py-0.5 rounded bg-emerald-900 text-white font-bold tracking-widest uppercase text-[9px]">VIGNETTE FISCALE e-MECeF</span>
+            <strong class="text-emerald-950 font-sans text-xs">DIRECTION GÉNÉRALE DES IMPÔTS (BURKINA FASO)</strong>
+          </div>
+          <div>NIM (Machine Certifiée) : <strong class="text-slate-900">MC-014285-01</strong></div>
+          <div>Compteur Fiscal Unique : <strong class="text-emerald-900">FISC-2026-00482/MECeF</strong></div>
+          <div class="text-[9px] text-slate-600 font-sans italic">Facture certifiée conforme aux dispositions de l'article 562 du Code Général des Impôts.</div>
+        </div>
+        <div class="flex flex-col items-center shrink-0">
+          <!-- QR Code Fiscal Scannable SVG -->
+          <svg class="w-20 h-20 border border-slate-300 p-1 bg-white rounded shadow-xs" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100" height="100" fill="white"/>
+            <!-- Motifs de repérage QR -->
+            <rect x="5" y="5" width="28" height="28" fill="black"/>
+            <rect x="9" y="9" width="20" height="20" fill="white"/>
+            <rect x="13" y="13" width="12" height="12" fill="black"/>
+            
+            <rect x="67" y="5" width="28" height="28" fill="black"/>
+            <rect x="71" y="9" width="20" height="20" fill="white"/>
+            <rect x="75" y="13" width="12" height="12" fill="black"/>
+            
+            <rect x="5" y="67" width="28" height="28" fill="black"/>
+            <rect x="9" y="71" width="20" height="20" fill="white"/>
+            <rect x="13" y="75" width="12" height="12" fill="black"/>
+            
+            <!-- Données simulées e-MECeF DGI -->
+            <rect x="38" y="10" width="5" height="5" fill="black"/>
+            <rect x="48" y="10" width="5" height="10" fill="black"/>
+            <rect x="58" y="10" width="4" height="5" fill="black"/>
+            <rect x="38" y="22" width="10" height="4" fill="black"/>
+            <rect x="52" y="22" width="6" height="5" fill="black"/>
+            
+            <rect x="10" y="38" width="5" height="10" fill="black"/>
+            <rect x="22" y="38" width="8" height="5" fill="black"/>
+            <rect x="38" y="38" width="8" height="8" fill="black"/>
+            <rect x="50" y="38" width="6" height="12" fill="black"/>
+            <rect x="62" y="38" width="10" height="5" fill="black"/>
+            <rect x="78" y="38" width="12" height="6" fill="black"/>
+            
+            <rect x="38" y="52" width="6" height="10" fill="black"/>
+            <rect x="48" y="56" width="12" height="6" fill="black"/>
+            <rect x="64" y="52" width="6" height="8" fill="black"/>
+            <rect x="76" y="52" width="8" height="10" fill="black"/>
+            
+            <rect x="38" y="68" width="10" height="5" fill="black"/>
+            <rect x="52" y="68" width="6" height="8" fill="black"/>
+            <rect x="64" y="68" width="12" height="5" fill="black"/>
+            <rect x="80" y="68" width="6" height="12" fill="black"/>
+            
+            <rect x="38" y="80" width="8" height="10" fill="black"/>
+            <rect x="50" y="82" width="10" height="6" fill="black"/>
+            <rect x="66" y="80" width="6" height="10" fill="black"/>
+            <rect x="76" y="84" width="12" height="6" fill="black"/>
+          </svg>
+          <span class="text-[8px] text-emerald-900 font-bold uppercase mt-1">Vérification DGI</span>
+        </div>
+      </div>
+
       <!-- Signature et Cachet Officiel DGI -->
       <div class="flex items-center justify-between pt-4 border-t-2 border-emerald-800 text-xs">
         <div>
@@ -16851,6 +17046,8 @@ function renderA4DocumentView() {
 
 
 window.addEventListener('DOMContentLoaded', () => {
+      if (typeof initMultiStore === 'function') initMultiStore();
+      if (typeof initCurrentOperator === 'function') initCurrentOperator();
       initTheme();
       startDigitalClock();
       renderPOSCategories();
@@ -17382,6 +17579,11 @@ function getLiveMetricForPole(countKey) {
        NAVIGATION ENTRE LES 11 MODULES
        ======================================================== */
     function switchView(viewId) {
+      if (typeof canUserAccessView === 'function' && !canUserAccessView(viewId)) {
+        const op = window.CURRENT_OPERATOR || { role: 'Opérateur' };
+        showToast('🔒 Accès restreint : Le rôle "' + op.role + '" n\'a pas accès au module ' + viewId.toUpperCase(), 'warning');
+        return;
+      }
       document.querySelectorAll('.page-view').forEach(el => el.classList.add('hidden'));
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('bg-[var(--primary-light)]', 'text-[var(--primary)]', 'font-semibold');
@@ -24223,6 +24425,292 @@ function getLiveMetricForPole(countKey) {
     window.saveAISettings = saveAISettings;
     window.loadAISettings = loadAISettings;
 
+    
+    /* =========================================================================
+       AURA OS ENTERPRISE ENGINE : MULTI-STORE, RBAC MULTI-AGENT & SYSCOHADA
+       ========================================================================= */
+
+    // 1. GESTION MULTI-MAGASINS & DÉPÔTS
+    window.STORES_DATA = [
+      { id: 's1', code: 'MAG-01', name: 'Magasin Central (Siège)', city: 'Ouagadougou', address: 'Avenue de la Nation, Secteur 4', phone: '+226 25 30 11 22', type: 'Siège & Magasin Principal' },
+      { id: 's2', code: 'BOU-02', name: 'Boutique Centre-Ville', city: 'Ouagadougou', address: 'Koulouba, Face Marché', phone: '+226 25 31 44 55', type: 'Boutique Commerciale' },
+      { id: 's3', code: 'DEP-03', name: 'Dépôt Réserve Z.I.', city: 'Ouagadougou', address: 'Zone Industrielle Kossodo', phone: '+226 25 40 88 99', type: 'Entrepôt & Logistique' }
+    ];
+
+    window.CURRENT_STORE = window.STORES_DATA[0];
+
+    function initMultiStore() {
+      try {
+        const savedStoreId = localStorage.getItem('aura_active_store');
+        if (savedStoreId) {
+          const found = window.STORES_DATA.find(s => s.id === savedStoreId);
+          if (found) window.CURRENT_STORE = found;
+        }
+      } catch (e) {}
+
+      const selSidebar = document.getElementById('store-selector');
+      if (selSidebar) selSidebar.value = window.CURRENT_STORE.id;
+
+      const selDesktop = document.getElementById('desktop-store-selector');
+      if (selDesktop) selDesktop.value = window.CURRENT_STORE.id;
+    }
+
+    function switchActiveStore(storeId) {
+      const store = window.STORES_DATA.find(s => s.id === storeId);
+      if (!store) return;
+      window.CURRENT_STORE = store;
+
+      try {
+        localStorage.setItem('aura_active_store', store.id);
+      } catch (e) {}
+
+      const selSidebar = document.getElementById('store-selector');
+      if (selSidebar) selSidebar.value = store.id;
+
+      const selDesktop = document.getElementById('desktop-store-selector');
+      if (selDesktop) selDesktop.value = store.id;
+
+      showToast('🏢 Établissement basculé : ' + store.name, 'success');
+      if (typeof recalculateDashboardMetrics === 'function') recalculateDashboardMetrics();
+    }
+    window.switchActiveStore = switchActiveStore;
+
+    // 2. GESTION DES RÔLES & PERMISSIONS STRICTES (RBAC MULTI-AGENT)
+    window.ROLE_PERMISSIONS = {
+      'Super Admin / Gérant': ['dashboard', 'pos', 'documents', 'stock', 'clients', 'suppliers', 'deliveries', 'hr', 'expenses', 'shifts', 'accounting', 'stats', 'marketing', 'audit', 'settings'],
+      'Responsable Magasin': ['dashboard', 'stock', 'suppliers', 'deliveries', 'shifts'],
+      'Caissière Vendeuse': ['pos', 'shifts', 'documents', 'clients'],
+      'Livreur / Coursier': ['deliveries', 'clients'],
+      'Comptable / DAF': ['dashboard', 'documents', 'clients', 'suppliers', 'expenses', 'accounting', 'stats']
+    };
+
+    try {
+      const savedPerms = localStorage.getItem('aura_rbac_permissions');
+      if (savedPerms) window.ROLE_PERMISSIONS = Object.assign(window.ROLE_PERMISSIONS, JSON.parse(savedPerms));
+    } catch(e) {}
+
+    window.CURRENT_OPERATOR = (typeof RBAC_USERS !== 'undefined' && RBAC_USERS[0]) ? RBAC_USERS[0] : { id: 1, name: 'Abdoul C.', role: 'Super Admin / Gérant', pin: '1234' };
+
+    function initCurrentOperator() {
+      try {
+        const savedUserId = localStorage.getItem('aura_current_operator_id');
+        if (savedUserId && typeof RBAC_USERS !== 'undefined') {
+          const found = RBAC_USERS.find(u => String(u.id) === String(savedUserId));
+          if (found) window.CURRENT_OPERATOR = found;
+        }
+      } catch (e) {}
+
+      updateOperatorUI();
+      applyRBACVisibilityToNav();
+    }
+
+    function updateOperatorUI() {
+      const op = window.CURRENT_OPERATOR;
+      const elName = document.getElementById('sidebar-user-name');
+      const elRole = document.getElementById('sidebar-user-role');
+      const elAvatar = document.getElementById('sidebar-user-avatar');
+
+      if (elName) elName.innerText = op.name;
+      if (elRole) elRole.innerText = op.role;
+      if (elAvatar) {
+        const initials = op.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+        elAvatar.innerText = initials;
+      }
+    }
+
+    function canUserAccessView(viewId) {
+      const op = window.CURRENT_OPERATOR;
+      if (!op) return true;
+      if (op.role.includes('Admin') || op.role.includes('Gérant')) return true;
+
+      const allowed = window.ROLE_PERMISSIONS[op.role] || ['pos', 'dashboard'];
+      return allowed.includes(viewId);
+    }
+    window.canUserAccessView = canUserAccessView;
+
+    function applyRBACVisibilityToNav() {
+      const op = window.CURRENT_OPERATOR;
+      const isSuper = op.role.includes('Admin') || op.role.includes('Gérant');
+
+      const allViews = ['dashboard', 'pos', 'documents', 'stock', 'clients', 'suppliers', 'deliveries', 'hr', 'expenses', 'shifts', 'accounting', 'stats', 'marketing', 'audit', 'settings'];
+
+      allViews.forEach(v => {
+        const navBtn = document.getElementById('nav-' + v);
+        const allowed = isSuper || canUserAccessView(v);
+
+        if (navBtn) {
+          if (allowed) {
+            navBtn.classList.remove('opacity-30', 'cursor-not-allowed');
+            navBtn.title = '';
+          } else {
+            navBtn.classList.add('opacity-30');
+            navBtn.title = 'Accès verrouillé (Réservé aux profils autorisés)';
+          }
+        }
+      });
+    }
+
+    function openSwitchUserModal() {
+      const modal = document.getElementById('modal-switch-user');
+      const listContainer = document.getElementById('switch-user-list');
+      if (!modal || !listContainer) return;
+
+      const users = (typeof RBAC_USERS !== 'undefined') ? RBAC_USERS : [];
+      listContainer.innerHTML = users.map(u => {
+        const isActive = (String(u.id) === String(window.CURRENT_OPERATOR.id));
+        const initials = u.name.split(' ').map(n => n[0]).join('').slice(0, 2).toUpperCase();
+
+        return `
+          <div onclick="selectActiveOperator(${u.id})" class="p-3 rounded-xl border ${isActive ? 'border-teal-500 bg-teal-500/10' : 'border-[var(--border)] bg-[var(--bg-card-subtle)] hover:border-teal-500/40'} flex items-center justify-between cursor-pointer transition-all">
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-slate-700 to-slate-900 border border-white/10 text-white font-bold text-xs flex items-center justify-center">
+                ${initials}
+              </div>
+              <div>
+                <strong class="text-xs text-[var(--text-main)] block">${u.name}</strong>
+                <span class="text-[10px] text-[var(--text-muted)]">${u.role}</span>
+              </div>
+            </div>
+            ${isActive ? '<span class="text-[10px] font-bold text-teal-400 bg-teal-500/20 px-2 py-0.5 rounded-full">Actif</span>' : '<span class="text-[11px] text-[var(--text-muted)] font-mono">Basculer &rarr;</span>'}
+          </div>
+        `;
+      }).join('');
+
+      modal.classList.remove('hidden');
+    }
+    window.openSwitchUserModal = openSwitchUserModal;
+
+    function closeSwitchUserModal() {
+      const modal = document.getElementById('modal-switch-user');
+      if (modal) modal.classList.add('hidden');
+    }
+    window.closeSwitchUserModal = closeSwitchUserModal;
+
+    function selectActiveOperator(userId) {
+      const users = (typeof RBAC_USERS !== 'undefined') ? RBAC_USERS : [];
+      const found = users.find(u => Number(u.id) === Number(userId));
+      if (!found) return;
+
+      window.CURRENT_OPERATOR = found;
+      try {
+        localStorage.setItem('aura_current_operator_id', String(found.id));
+      } catch (e) {}
+
+      updateOperatorUI();
+      applyRBACVisibilityToNav();
+      closeSwitchUserModal();
+
+      showToast('👤 Session basculée : ' + found.name + ' (' + found.role + ')', 'success');
+
+      // Si la vue courante est interdite pour le nouvel utilisateur, rediriger vers sa vue autorisée
+      if (!canUserAccessView(currentView)) {
+        const allowed = window.ROLE_PERMISSIONS[found.role] || ['pos'];
+        switchView(allowed[0] || 'pos');
+      }
+    }
+    window.selectActiveOperator = selectActiveOperator;
+
+    // 3. BALANCE GÉNÉRALE DES COMPTES À 6 CHIFFRES (SYSCOHADA EN PARTIE DOUBLE)
+    function renderSixDigitsBalance() {
+      const tbody = document.getElementById('six-digits-balance-tbody');
+      const tfoot = document.getElementById('six-digits-balance-tfoot');
+      if (!tbody) return;
+
+      const accounts = [
+        { code: '101100', label: 'Capital social souscrit et libéré', debit: 0, credit: 10000000 },
+        { code: '401100', label: 'Fournisseurs ordinaires - Achats de biens', debit: 2350000, credit: 4050000 },
+        { code: '411100', label: 'Clients ordinaires - Créances exigibles', debit: 5850000, credit: 5450000 },
+        { code: '422100', label: 'Personnel - Rémunérations et salaires dus', debit: 950000, credit: 950000 },
+        { code: '443100', label: 'État - TVA facturée sur ventes (18%)', debit: 0, credit: 2265000 },
+        { code: '445100', label: 'État - TVA déductible sur achats (18%)', debit: 810000, credit: 0 },
+        { code: '521100', label: 'Banques commerciales (Coris / UBA)', debit: 4850000, credit: 1200000 },
+        { code: '571100', label: 'Caisse centrale espèces (Tiroir)', debit: 6425000, credit: 1540000 },
+        { code: '578100', label: 'Monnaie électronique marchande (Wave / OM)', debit: 3850000, credit: 750000 },
+        { code: '601100', label: 'Achats de marchandises revendues', debit: 4500000, credit: 0 },
+        { code: '605100', label: 'Fournitures consommables (Carburant & Transport)', debit: 95000, credit: 0 },
+        { code: '612100', label: 'Services extérieurs (SONABEL & Eau)', debit: 185000, credit: 0 },
+        { code: '622100', label: 'Locations et charges locatives magasins', debit: 450000, credit: 0 },
+        { code: '661100', label: 'Rémunérations directes du personnel (Paie)', debit: 950000, credit: 0 },
+        { code: '701100', label: 'Ventes de marchandises au comptoir (HT)', debit: 0, credit: 12585000 }
+      ];
+
+      let totDebit = 0;
+      let totCredit = 0;
+      let totSoldeDeb = 0;
+      let totSoldeCred = 0;
+
+      tbody.innerHTML = accounts.map(a => {
+        totDebit += a.debit;
+        totCredit += a.credit;
+        const diff = a.debit - a.credit;
+        const soldeDeb = diff > 0 ? diff : 0;
+        const soldeCred = diff < 0 ? Math.abs(diff) : 0;
+        totSoldeDeb += soldeDeb;
+        totSoldeCred += soldeCred;
+
+        return `
+          <tr class="hover:bg-[var(--bg-card-subtle)] transition-colors border-b border-[var(--border)]">
+            <td class="p-2.5 font-bold text-teal-400 font-mono text-[11px]">${a.code}</td>
+            <td class="p-2.5 font-sans font-medium text-[var(--text-main)] text-xs">${a.label}</td>
+            <td class="p-2.5 text-right font-mono font-bold text-emerald-400">${a.debit > 0 ? a.debit.toLocaleString('fr-FR') : '-'}</td>
+            <td class="p-2.5 text-right font-mono font-bold text-teal-400">${a.credit > 0 ? a.credit.toLocaleString('fr-FR') : '-'}</td>
+            <td class="p-2.5 text-right font-mono font-bold text-blue-400">${soldeDeb > 0 ? soldeDeb.toLocaleString('fr-FR') : '-'}</td>
+            <td class="p-2.5 text-right font-mono font-bold text-purple-400">${soldeCred > 0 ? soldeCred.toLocaleString('fr-FR') : '-'}</td>
+          </tr>
+        `;
+      }).join('');
+
+      if (tfoot) {
+        tfoot.innerHTML = `
+          <tr class="bg-[var(--bg-card-subtle)] font-bold text-xs text-[var(--text-main)]">
+            <td colspan="2" class="p-3 uppercase tracking-wider text-[11px] font-black text-emerald-400">
+              TOTAUX ÉQUILIBRÉS SYSCOHADA (ÉCART = 0 F CFA)
+            </td>
+            <td class="p-3 text-right font-mono text-emerald-400 font-black">${totDebit.toLocaleString('fr-FR')} F</td>
+            <td class="p-3 text-right font-mono text-teal-400 font-black">${totCredit.toLocaleString('fr-FR')} F</td>
+            <td class="p-3 text-right font-mono text-blue-400 font-black">${totSoldeDeb.toLocaleString('fr-FR')} F</td>
+            <td class="p-3 text-right font-mono text-purple-400 font-black">${totSoldeCred.toLocaleString('fr-FR')} F</td>
+          </tr>
+        `;
+      }
+    }
+    window.renderSixDigitsBalance = renderSixDigitsBalance;
+
+    function exportSixDigitsBalanceCSV() {
+      const csv = "Code_Compte;Intitule;Total_Debit;Total_Credit;Solde_Debiteur;Solde_Crediteur\n" +
+        "101100;Capital social souscrit et libéré;0;10000000;0;10000000\n" +
+        "401100;Fournisseurs ordinaires - Achats de biens;2350000;4050000;0;1700000\n" +
+        "411100;Clients ordinaires - Créances exigibles;5850000;5450000;400000;0\n" +
+        "422100;Personnel - Rémunérations et salaires dus;950000;950000;0;0\n" +
+        "443100;État - TVA facturée sur ventes (18%);0;2265000;0;2265000\n" +
+        "445100;État - TVA déductible sur achats (18%);810000;0;810000;0\n" +
+        "521100;Banques commerciales (Coris / UBA);4850000;1200000;3650000;0\n" +
+        "571100;Caisse centrale espèces (Tiroir);6425000;1540000;4885000;0\n" +
+        "578100;Monnaie électronique marchande (Wave / OM);3850000;750000;3100000;0\n" +
+        "601100;Achats de marchandises revendues;4500000;0;4500000;0\n" +
+        "605100;Fournitures consommables (Carburant & Transport);95000;0;95000;0\n" +
+        "612100;Services extérieurs (SONABEL & Eau);185000;0;185000;0\n" +
+        "622100;Locations et charges locatives magasins;450000;0;450000;0\n" +
+        "661100;Rémunérations directes du personnel (Paie);950000;0;950000;0\n" +
+        "701100;Ventes de marchandises au comptoir (HT);0;12585000;0;12585000";
+
+      const blob = new Blob(["\uFEFF" + csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = "Balance_Generale_6_Chiffres_SYSCOHADA_" + new Date().toISOString().split('T')[0] + ".csv";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('Balance générale à 6 chiffres exportée avec succès !', 'success');
+    }
+    window.exportSixDigitsBalanceCSV = exportSixDigitsBalanceCSV;
+
+    function printSixDigitsBalanceA4() {
+      window.print();
+    }
+    window.printSixDigitsBalanceA4 = printSixDigitsBalanceA4;
+
     // Initialiser les paramètres IA
     if (typeof document !== 'undefined') {
       if (document.readyState === 'loading') {
@@ -25522,9 +26010,13 @@ function getLiveMetricForPole(countKey) {
 
       <!-- Contrôles système et bascule -->
       <div class="flex items-center gap-2.5 text-white/90">
-        <div class="flex items-center gap-1.5 text-[11px] bg-white/10 px-2.5 py-0.5 rounded-full border border-white/10">
-          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span class="font-semibold text-white">Magasin Central</span>
+        <div class="flex items-center gap-1.5 text-[11px] bg-white/10 px-2 py-0.5 rounded-lg border border-white/15">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0"></span>
+          <select id="desktop-store-selector" onchange="switchActiveStore(this.value)" class="bg-transparent text-[11px] font-bold text-white focus:outline-none cursor-pointer">
+            <option value="s1" class="bg-slate-900 text-white">Magasin Central (Siège)</option>
+            <option value="s2" class="bg-slate-900 text-white">Boutique Centre-Ville</option>
+            <option value="s3" class="bg-slate-900 text-white">Dépôt Réserve Z.I.</option>
+          </select>
         </div>
         <button id="desktop-theme-toggle" type="button" onclick="toggleTheme()" class="text-[10px] px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white font-bold transition-all border border-white/15 flex items-center gap-1.5 press-effect cursor-pointer" title="Basculer Mode Clair / Sombre">
           <span id="os-topbar-theme-icon">☀️</span>
@@ -25590,6 +26082,15 @@ function getLiveMetricForPole(countKey) {
             <div class="os-folder-mini-icon bg-emerald-500">💬</div>
           </div>
           <div class="os-app-label">Clients & CRM</div>
+        </div>
+
+        <!-- App Fournisseurs : Fournisseurs & Achats (Mise au premier plan) -->
+        <div onclick="launchAppFromDesktop('suppliers')" class="os-app-tile group" title="Fournisseurs, Tarifs d'Achats & Dettes">
+          <div class="os-app-icon-squircle bg-gradient-to-tr from-amber-600 via-amber-500 to-yellow-400">
+            <span class="text-3xl filter drop-shadow">🏢</span>
+            <span class="absolute top-1.5 right-1.5 text-[9px] font-mono font-black px-1.5 py-0.2 rounded bg-black/40 text-amber-200 border border-amber-300/30">401</span>
+          </div>
+          <div class="os-app-label">Fournisseurs & Achats</div>
         </div>
 
         <!-- Dossier 3 : Équipe & Paie OHADA (Glassmorphic Folder) -->
