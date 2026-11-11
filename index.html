@@ -8033,10 +8033,11 @@
       <div id="icon-picker-view-library" class="hidden space-y-3">
         <!-- Recherche et Filtre Métier -->
         <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
-          <div class="sm:col-span-6">
-            <input type="text" id="icon-search-input" oninput="filterIconCatalog(this.value)" placeholder="Rechercher une icône (riz, pain, huile, polo, smartphone, café...)" class="app-input text-xs">
+          <div class="sm:col-span-5 relative">
+            <input type="text" id="icon-search-input" oninput="filterIconCatalog(this.value)" placeholder="Rechercher (polo, poulet, ciment, smartphone...)" class="app-input text-xs pl-8">
+            <svg class="w-4 h-4 text-teal-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           </div>
-          <div class="sm:col-span-6">
+          <div class="sm:col-span-4">
             <select id="icon-domain-select" onchange="filterIconByDomain(this.value)" class="app-input text-xs font-semibold">
               <option value="all">Toutes les catégories de commerces</option>
               <option value="grocery">Alimentation Générale & Épicerie (Riz, Huile, Sucre, Tomate...)</option>
@@ -8049,6 +8050,14 @@
               <option value="auto">Auto & Moto (Huile moteur, Casque, Pneus...)</option>
               <option value="services">Prestations de Services & Professionnels</option>
             </select>
+          </div>
+          <div class="sm:col-span-3 flex items-center gap-1 bg-[var(--bg-card)] p-1 rounded-xl border border-[var(--border)]">
+            <button type="button" onclick="toggleDailyViewMode('apple'); this.className='flex-1 py-1 rounded-lg bg-teal-500 text-white font-bold text-[10px] shadow-xs'; this.nextElementSibling.className='flex-1 py-1 rounded-lg text-[var(--text-muted)] hover:text-white font-bold text-[10px]';" class="flex-1 py-1 rounded-lg bg-teal-500 text-white font-bold text-[10px] shadow-xs">
+              💎 3D SF
+            </button>
+            <button type="button" onclick="toggleDailyViewMode('photo'); this.className='flex-1 py-1 rounded-lg bg-teal-500 text-white font-bold text-[10px] shadow-xs'; this.previousElementSibling.className='flex-1 py-1 rounded-lg text-[var(--text-muted)] hover:text-white font-bold text-[10px]';" class="flex-1 py-1 rounded-lg text-[var(--text-muted)] hover:text-white font-bold text-[10px]">
+              📸 Photos
+            </button>
           </div>
         </div>
 
@@ -11016,7 +11025,7 @@
        ======================================================== */
     const SVG_ICONS = {
       // 1. Céréales & Sac de Riz (Toile texturée 3D, étiquette or & sceau émeraude)
-      rice_sack: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      rice_sack: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_rice" x1="6" y1="6" x2="30" y2="34" gradientUnits="userSpaceOnUse">
             <stop stop-color="#FCD34D"/>
@@ -11035,7 +11044,7 @@
         <rect x="14" y="22.5" width="8" height="2" rx="1" fill="#D97706"/>
       </svg>`,
 
-      sack: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      sack: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_sack" x1="6" y1="6" x2="30" y2="34" gradientUnits="userSpaceOnUse">
             <stop stop-color="#FDE68A"/>
@@ -11049,7 +11058,7 @@
       </svg>`,
 
       // 2. Pain Baguette Croustillante Dorée
-      bread: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      bread: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_bread" x1="6" y1="10" x2="30" y2="26" gradientUnits="userSpaceOnUse">
             <stop stop-color="#FBBF24"/>
@@ -11064,7 +11073,7 @@
       </svg>`,
 
       // 3. Boîte Métallique & Conserve Pure
-      can: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      can: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_can_body" x1="8" y1="10" x2="28" y2="30" gradientUnits="userSpaceOnUse">
             <stop stop-color="#EF4444"/>
@@ -11082,14 +11091,14 @@
         <circle cx="18" cy="19.5" r="3.2" fill="#DC2626"/>
       </svg>`,
 
-      can_food: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      can_food: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="9" y="10" width="18" height="19" rx="3.5" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.2"/>
         <ellipse cx="18" cy="10" rx="9" ry="3.5" fill="#E2E8F0" stroke="#64748B" stroke-width="1"/>
         <circle cx="18" cy="19.5" r="3.2" fill="#EF4444"/>
       </svg>`,
 
       // 4. Bouteille d'Huile / Boisson Verre Translucide
-      bottle: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      bottle: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_bottle" x1="12" y1="4" x2="24" y2="32" gradientUnits="userSpaceOnUse">
             <stop stop-color="#FDE047"/>
@@ -11104,7 +11113,7 @@
       </svg>`,
 
       // 5. Bidon d'Huile Végétale 5L Ergonomique
-      jug: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      jug: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_jug" x1="8" y1="8" x2="28" y2="32" gradientUnits="userSpaceOnUse">
             <stop stop-color="#FEF08A"/>
@@ -11120,7 +11129,7 @@
       </svg>`,
 
       // 6. Burger Gourmand 3D
-      burger: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      burger: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_bun" x1="6" y1="6" x2="30" y2="15" gradientUnits="userSpaceOnUse">
             <stop stop-color="#FBBF24"/>
@@ -11135,7 +11144,7 @@
       </svg>`,
 
       // 7. Poulet Braisé Doré
-      chicken: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      chicken: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_chicken" x1="8" y1="8" x2="28" y2="28" gradientUnits="userSpaceOnUse">
             <stop stop-color="#F97316"/>
@@ -11148,7 +11157,7 @@
       </svg>`,
 
       // 8. Tasse Café Touba / Espresso Moussant
-      coffee: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      coffee: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_cup" x1="8" y1="12" x2="26" y2="30" gradientUnits="userSpaceOnUse">
             <stop stop-color="#E2E8F0"/>
@@ -11166,7 +11175,7 @@
       </svg>`,
 
       // 9. Canette Soda Fraîche 33cl
-      soda: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      soda: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_soda" x1="10" y1="8" x2="26" y2="30" gradientUnits="userSpaceOnUse">
             <stop stop-color="#EF4444"/>
@@ -11181,7 +11190,7 @@
       </svg>`,
 
       // 10. Polo Homme Élégant
-      shirt: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      shirt: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_polo" x1="8" y1="8" x2="28" y2="30" gradientUnits="userSpaceOnUse">
             <stop stop-color="#3B82F6"/>
@@ -11193,7 +11202,7 @@
       </svg>`,
 
       // 11. Smartphone Moderne Sans Bords
-      phone: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      phone: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_screen" x1="12" y1="6" x2="24" y2="30" gradientUnits="userSpaceOnUse">
             <stop stop-color="#6366F1"/>
@@ -11207,7 +11216,7 @@
       </svg>`,
 
       // 12. Parfum de Luxe Flacon Ambré
-      perfume: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      perfume: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_glass" x1="9" y1="12" x2="27" y2="30" gradientUnits="userSpaceOnUse">
             <stop stop-color="#F472B6"/>
@@ -11222,7 +11231,7 @@
       </svg>`,
 
       // 13. Ampoule LED Économie
-      lightbulb: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      lightbulb: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_bulb" x1="10" y1="4" x2="26" y2="22" gradientUnits="userSpaceOnUse">
             <stop stop-color="#FDE047"/>
@@ -11236,7 +11245,7 @@
       </svg>`,
 
       // 14. Moto / Tricycle Express
-      moto: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      moto: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <circle cx="10" cy="24" r="5" fill="#334155" stroke="#0F172A" stroke-width="1.5"/>
         <circle cx="26" cy="24" r="5" fill="#334155" stroke="#0F172A" stroke-width="1.5"/>
         <circle cx="10" cy="24" r="2" fill="#E2E8F0"/>
@@ -11246,7 +11255,7 @@
       </svg>`,
 
       // 15. Poisson Braisé Capitaine
-      fish: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      fish: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_fish" x1="6" y1="12" x2="30" y2="24" gradientUnits="userSpaceOnUse">
             <stop stop-color="#06B6D4"/>
@@ -11260,129 +11269,129 @@
       </svg>`,
 
       // 16. Outillage Chantier & Clé
-      tool: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      tool: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M27 9C29 11 29 14 27 16L15 28C14 29 12 29 11 28L8 25C7 24 7 22 8 21L20 9C22 7 25 7 27 9Z" fill="#64748B" stroke="#334155" stroke-width="1.2"/>
         <circle cx="24" cy="12" r="2.5" fill="#E2E8F0"/>
         <rect x="8" y="24" width="6" height="3" transform="rotate(-45 8 24)" fill="#DC2626"/>
       </svg>`,
 
       // 17. Pharmacie & Gélules
-      pill: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      pill: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="8" y="14" width="20" height="8" rx="4" transform="rotate(-30 18 18)" fill="#EF4444" stroke="#991B1B" stroke-width="1.2"/>
         <path d="M13 21L17 14L22 17L18 24Z" fill="#3B82F6"/>
       </svg>`,
 
       // 18. Pagne & Robe Tissée
-      dress: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      dress: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M14 6H22L20 14L28 30H8L16 14L14 6Z" fill="#EC4899" stroke="#9D174D" stroke-width="1.2"/>
         <path d="M8 30C12 28 16 32 20 28C24 32 28 28 28 30" stroke="#FCE7F3" stroke-width="1.5"/>
       </svg>`,
 
       // 19. Plat Chaud & Cloche
-      dish: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      dish: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M6 22C6 15 11 11 18 11C25 11 30 15 30 22H6Z" fill="#F59E0B" stroke="#B45309" stroke-width="1.2"/>
         <circle cx="18" cy="9.5" r="2" fill="#D97706"/>
         <rect x="4" y="23" width="28" height="3" rx="1.5" fill="#64748B"/>
       </svg>`,
 
       // 20. Verre Cocktail & Boisson Fraîche
-      drink: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      drink: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M9 7L18 18V28M13 28H23M9 7H27L22 14H14L9 7Z" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <circle cx="21" cy="7" r="3" fill="#EC4899"/>
       </svg>`,
 
       // 21. Thé Traditionnel Menthe
-      tea: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      tea: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="11" y="10" width="14" height="20" rx="3" fill="#10B981" fill-opacity="0.8" stroke="#047857" stroke-width="1.2"/>
         <path d="M14 6C14 4 15 3 15 2M18 7C18 5 19 4 19 3M21 6C21 4 22 3 22 2" stroke="#6EE7B7" stroke-width="1.2" stroke-linecap="round"/>
       </svg>`,
 
       // 22. Bière Fraîche Mousseuse
-      beer: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      beer: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="10" y="11" width="14" height="19" rx="3" fill="#F59E0B" stroke="#B45309" stroke-width="1.2"/>
         <path d="M24 14C27 14 27 23 24 23" stroke="#B45309" stroke-width="2" stroke-linecap="round"/>
         <path d="M8 11C8 9 10 8 13 9C15 7 19 7 21 9C23 8 26 9 26 11H8Z" fill="#FFFFFF"/>
       </svg>`,
 
       // 23. Chawarma & Sandwich Roulé
-      sandwich: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      sandwich: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="8" y="13" width="20" height="10" rx="5" transform="rotate(-15 18 18)" fill="#F59E0B" stroke="#B45309" stroke-width="1.2"/>
         <path d="M12 18L18 16L24 18" stroke="#22C55E" stroke-width="2"/>
       </svg>`,
 
       // 24. Brochettes Grillées
-      skewer: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      skewer: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <line x1="6" y1="30" x2="30" y2="6" stroke="#B45309" stroke-width="2" stroke-linecap="round"/>
         <rect x="10" y="18" width="6" height="6" rx="1.5" transform="rotate(45 10 18)" fill="#DC2626"/>
         <rect x="16" y="12" width="6" height="6" rx="1.5" transform="rotate(45 16 12)" fill="#D97706"/>
       </svg>`,
 
       // 25. Sucre Pur en Morceaux
-      sugar: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      sugar: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="8" y="14" width="11" height="11" rx="2" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.2"/>
         <rect x="17" y="9" width="11" height="11" rx="2" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.2"/>
       </svg>`,
 
       // 26. Lait en Brique / Poudre
-      milk: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      milk: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="11" y="11" width="14" height="20" rx="3" fill="#3B82F6" stroke="#1D4ED8" stroke-width="1.2"/>
         <path d="M11 11L15 6H21L25 11" fill="#60A5FA"/>
         <circle cx="18" cy="21" r="3" fill="#FFFFFF"/>
       </svg>`,
 
       // 27. Pâtes Alimentaires
-      pasta: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      pasta: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M10 8V28M14 8V28M18 8V28M22 8V28M26 8V28" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
         <rect x="8" y="16" width="20" height="4" rx="1" fill="#DC2626"/>
       </svg>`,
 
       // 28. Tomate Ronde Purée
-      tomato: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      tomato: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <circle cx="18" cy="19" r="10" fill="#EF4444" stroke="#B91C1C" stroke-width="1.2"/>
         <path d="M18 9V6M15 8L18 9L21 8" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
       </svg>`,
 
       // 29. Pomme & Fruits Frais
-      apple: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      apple: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <circle cx="15" cy="19" r="8" fill="#22C55E" stroke="#15803D" stroke-width="1.2"/>
         <circle cx="21" cy="19" r="8" fill="#22C55E" stroke="#15803D" stroke-width="1.2"/>
         <path d="M18 11C18 7 21 6 23 6" stroke="#78350F" stroke-width="1.5" stroke-linecap="round"/>
       </svg>`,
 
       // 30. Pantalon Jeans Denim
-      pants: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      pants: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M10 6H26V13L24 30H19L18 16L17 30H12L10 13V6Z" fill="#2563EB" stroke="#1E40AF" stroke-width="1.2"/>
         <line x1="10" y1="9" x2="26" y2="9" stroke="#93C5FD" stroke-width="1.5"/>
       </svg>`,
 
       // 31. Chaussure Élégante
-      shoe: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      shoe: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M6 22L12 16H20L28 20V26H6V22Z" fill="#78350F" stroke="#451A03" stroke-width="1.2"/>
         <rect x="6" y="24" width="22" height="3" rx="1" fill="#0F172A"/>
       </svg>`,
 
       // 32. Sac à Main Maroquinerie
-      bag: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      bag: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="8" y="14" width="20" height="17" rx="4" fill="#EC4899" stroke="#9D174D" stroke-width="1.2"/>
         <path d="M13 14V9C13 6.5 15 5 18 5C21 5 23 6.5 23 9V14" stroke="#9D174D" stroke-width="2"/>
       </svg>`,
 
       // 33. Ordinateur Portable
-      laptop: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      laptop: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="8" y="8" width="20" height="15" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.2"/>
         <rect x="10" y="10" width="16" height="11" rx="1" fill="#38BDF8"/>
         <path d="M5 26H31L28 23H8L5 26Z" fill="#64748B"/>
       </svg>`,
 
       // 34. Écouteurs Sans-Fil
-      headphones: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      headphones: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M8 19C8 13.5 12.5 9 18 9C23.5 9 28 13.5 28 19" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
         <rect x="6" y="19" width="4" height="8" rx="2" fill="#4F46E5"/>
         <rect x="26" y="19" width="4" height="8" rx="2" fill="#4F46E5"/>
       </svg>`,
 
       // 35. Chargeur Rapide USB-C
-      charger: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      charger: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="9" y="12" width="18" height="18" rx="4" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.2"/>
         <rect x="13" y="5" width="2.5" height="7" rx="1" fill="#64748B"/>
         <rect x="20.5" y="5" width="2.5" height="7" rx="1" fill="#64748B"/>
@@ -11390,24 +11399,24 @@
       </svg>`,
 
       // 36. Câble Tressé
-      wire: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      wire: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M7 18C7 11 15 11 18 18C21 25 29 25 29 18" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
       </svg>`,
 
       // 37. Clé USB Métal
-      usb: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      usb: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="11" y="14" width="14" height="17" rx="2" fill="#475569" stroke="#1E293B" stroke-width="1.2"/>
         <rect x="14" y="6" width="8" height="8" rx="1" fill="#CBD5E1" stroke="#64748B" stroke-width="1"/>
       </svg>`,
 
       // 38. Pain de Savon Surgras
-      soap: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      soap: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="8" y="12" width="20" height="14" rx="6" fill="#14B8A6" stroke="#0F766E" stroke-width="1.2"/>
         <ellipse cx="14" cy="16" rx="3" ry="1.5" fill="#FFFFFF" fill-opacity="0.5"/>
       </svg>`,
 
       // 39. Sac de Ciment BTP Portland
-      cement: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      cement: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <defs>
           <linearGradient id="grd_cement" x1="8" y1="8" x2="28" y2="30" gradientUnits="userSpaceOnUse">
             <stop stop-color="#94A3B8"/>
@@ -11420,44 +11429,44 @@
       </svg>`,
 
       // 40. Pot de Peinture Pro
-      paint: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      paint: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M9 14L11 30H25L27 14H9Z" fill="#0EA5E9" stroke="#0369A1" stroke-width="1.2"/>
         <ellipse cx="18" cy="14" rx="9" ry="3" fill="#E0F2FE" stroke="#0369A1" stroke-width="1"/>
         <path d="M8 14C8 7 28 7 28 14" stroke="#64748B" stroke-width="1.5"/>
       </svg>`,
 
       // 41. Casque Moto Sécurité
-      helmet: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      helmet: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M8 20C8 12 13 8 20 8C27 8 30 12 30 20C30 26 27 28 20 28H14L8 20Z" fill="#DC2626" stroke="#991B1B" stroke-width="1.2"/>
         <rect x="16" y="15" width="13" height="6" rx="2" fill="#0F172A"/>
       </svg>`,
 
       // 42. Carton Colis & Expédition
-      package: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      package: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M18 4L30 10V24L18 30L6 24V10L18 4Z" fill="#D97706" stroke="#78350F" stroke-width="1.2"/>
         <path d="M18 4V17M30 10L18 17M6 10L18 17" stroke="#FEF3C7" stroke-width="1.2"/>
       </svg>`,
 
       // 43. Interrupteur & Énergie
-      switch: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      switch: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="9" y="12" width="18" height="12" rx="6" fill="#10B981"/>
         <circle cx="21" cy="18" r="4.5" fill="#FFFFFF" stroke="#047857" stroke-width="1"/>
       </svg>`,
 
       // 44. Cadenas Haute Sécurité
-      lock: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      lock: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="9" y="15" width="18" height="15" rx="3.5" fill="#F59E0B" stroke="#B45309" stroke-width="1.2"/>
         <path d="M13 15V10C13 7.2 15.2 5 18 5C20.8 5 23 7.2 23 10V15" stroke="#64748B" stroke-width="2.5" stroke-linecap="round"/>
         <circle cx="18" cy="22" r="2" fill="#78350F"/>
       </svg>`,
 
       // 45. Tuyau & Plomberie
-      pipe: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      pipe: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M8 12H20C24 12 28 16 28 20V28" stroke="#3B82F6" stroke-width="4" stroke-linecap="round"/>
       </svg>`,
 
       // 46. Fer à Béton Industriel
-      iron: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      iron: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <line x1="8" y1="28" x2="28" y2="8" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
         <line x1="12" y1="22" x2="16" y2="26" stroke="#CBD5E1" stroke-width="2"/>
         <line x1="17" y1="17" x2="21" y2="21" stroke="#CBD5E1" stroke-width="2"/>
@@ -11465,7 +11474,7 @@
       </svg>`,
 
       // 47. Camion Livraison Chantier
-      truck: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      truck: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <rect x="5" y="12" width="17" height="13" rx="2" fill="#3B82F6" stroke="#1D4ED8" stroke-width="1.2"/>
         <path d="M22 16H27L30 20V25H22V16Z" fill="#60A5FA" stroke="#1D4ED8" stroke-width="1.2"/>
         <circle cx="10" cy="27" r="3" fill="#1E293B"/>
@@ -11473,7 +11482,7 @@
       </svg>`,
 
       // 48. Panier de Caisse Rapide
-      cart: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+      cart: `<svg class="w-10 h-10" viewBox="0 0 36 36" fill="none">
         <path d="M7 8H11L14 22H27L30 11H12" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
         <circle cx="15" cy="27" r="2.5" fill="#047857"/>
         <circle cx="25" cy="27" r="2.5" fill="#047857"/>
@@ -11482,71 +11491,493 @@
 
 const DAILY_PRODUCTS_CATALOG = [
       // 1. Alimentation Générale & Épicerie
-      { id: 'v_riz_parfume', name: 'Sac de Riz Blanc Parfumé', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Sac', icon: 'rice_sack', color: 'bg-emerald-500/15 text-emerald-600 border-emerald-500/30' },
-      { id: 'v_riz_local', name: 'Sac de Riz Local Brisé', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Sac', icon: 'rice_sack', color: 'bg-emerald-500/15 text-emerald-600 border-emerald-500/30' },
-      { id: 'v_sucre', name: 'Paquet de Sucre en Morceaux', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Paquet', icon: 'sugar', color: 'bg-sky-500/15 text-sky-600 border-sky-500/30' },
-      { id: 'v_huile_bidon', name: 'Bidon d\'Huile Végétale 5L', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Bidon', icon: 'jug', color: 'bg-amber-500/15 text-amber-600 border-amber-500/30' },
-      { id: 'v_huile_bouteille', name: 'Bouteille d\'Huile 1L', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Bouteille', icon: 'bottle', color: 'bg-amber-500/15 text-amber-600 border-amber-500/30' },
-      { id: 'v_lait_poudre', name: 'Boîte de Lait en Poudre', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Boîte', icon: 'milk', color: 'bg-blue-500/15 text-blue-600 border-blue-500/30' },
-      { id: 'v_pates', name: 'Carton Pâtes Alimentaires', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Carton', icon: 'pasta', color: 'bg-amber-600/15 text-amber-700 border-amber-600/30' },
-      { id: 'v_tomate', name: 'Boîte Tomate Concentrée', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Boîte', icon: 'tomato', color: 'bg-rose-500/15 text-rose-600 border-rose-500/30' },
-      { id: 'v_pain', name: 'Baguette de Pain Frais', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Unité', icon: 'bread', color: 'bg-amber-600/15 text-amber-700 border-amber-600/30' },
-      { id: 'v_fruits', name: 'Fruits & Légumes Frais', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Kilo', icon: 'apple', color: 'bg-emerald-600/15 text-emerald-700 border-emerald-600/30' },
+      { 
+        id: 'v_riz_parfume', 
+        name: 'Sac de Riz Blanc Parfumé', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Sac', 
+        icon: 'rice_sack', 
+        color: 'from-amber-500 to-yellow-600 text-white shadow-amber-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_riz_local', 
+        name: 'Sac de Riz Local Brisé', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Sac', 
+        icon: 'rice_sack', 
+        color: 'from-yellow-600 to-amber-700 text-white shadow-yellow-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_sucre', 
+        name: 'Paquet de Sucre en Morceaux', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Paquet', 
+        icon: 'sugar', 
+        color: 'from-sky-500 to-blue-600 text-white shadow-sky-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1581441363689-1f3c3c414635?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_huile_bidon', 
+        name: 'Bidon d\'Huile Végétale 5L', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Bidon', 
+        icon: 'jug', 
+        color: 'from-amber-400 to-orange-500 text-white shadow-amber-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_huile_bouteille', 
+        name: 'Bouteille d\'Huile 1L', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Bouteille', 
+        icon: 'bottle', 
+        color: 'from-yellow-500 to-amber-600 text-white shadow-yellow-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_lait_poudre', 
+        name: 'Boîte de Lait en Poudre', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Boîte', 
+        icon: 'milk', 
+        color: 'from-blue-500 to-indigo-600 text-white shadow-blue-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_pates', 
+        name: 'Carton Pâtes Alimentaires', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Carton', 
+        icon: 'pasta', 
+        color: 'from-orange-500 to-amber-600 text-white shadow-orange-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_tomate', 
+        name: 'Boîte Tomate Concentrée', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Boîte', 
+        icon: 'tomato', 
+        color: 'from-rose-500 to-red-600 text-white shadow-rose-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1534483509719-3feaee7c30da?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_pain', 
+        name: 'Baguette de Pain Frais', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Unité', 
+        icon: 'bread', 
+        color: 'from-amber-600 to-yellow-700 text-white shadow-amber-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_fruits', 
+        name: 'Fruits & Légumes Frais', 
+        domain: 'grocery', 
+        cat: 'Alimentation & Épicerie', 
+        unit: 'Kilo', 
+        icon: 'apple', 
+        color: 'from-emerald-500 to-teal-600 text-white shadow-emerald-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=600&q=80'
+      },
 
       // 2. Boissons & Brasserie
-      { id: 'v_eau_min', name: 'Pack Eau Minérale (6x1.5L)', domain: 'beverage', cat: 'Boissons & Brasserie', unit: 'Pack', icon: 'bottle', color: 'bg-cyan-500/15 text-cyan-600 border-cyan-500/30' },
-      { id: 'v_soda_can', name: 'Canette de Soda / Boisson Fraîche', domain: 'beverage', cat: 'Boissons & Brasserie', unit: 'Canette', icon: 'soda', color: 'bg-red-500/15 text-red-600 border-red-500/30' },
-      { id: 'v_jus_local', name: 'Bouteille Jus Naturel (Bissap, Gingembre)', domain: 'beverage', cat: 'Boissons & Brasserie', unit: 'Bouteille', icon: 'drink', color: 'bg-purple-500/15 text-purple-600 border-purple-500/30' },
-      { id: 'v_biere', name: 'Bouteille de Bière / Brasserie 65cl', domain: 'beverage', cat: 'Boissons & Brasserie', unit: 'Bouteille', icon: 'beer', color: 'bg-amber-500/15 text-amber-600 border-amber-500/30' },
-      { id: 'v_cafe', name: 'Tasse Café Touba / Espresso', domain: 'beverage', cat: 'Boissons & Brasserie', unit: 'Tasse', icon: 'coffee', color: 'bg-amber-800/15 text-amber-800 border-amber-800/30' },
-      { id: 'v_the', name: 'Thé Vert Menthe Traditionnel', domain: 'beverage', cat: 'Boissons & Brasserie', unit: 'Verre', icon: 'tea', color: 'bg-emerald-600/15 text-emerald-600 border-emerald-600/30' },
+      { 
+        id: 'v_eau_min', 
+        name: 'Pack Eau Minérale (6x1.5L)', 
+        domain: 'beverage', 
+        cat: 'Boissons & Brasserie', 
+        unit: 'Pack', 
+        icon: 'bottle', 
+        color: 'from-cyan-500 to-blue-600 text-white shadow-cyan-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_soda_can', 
+        name: 'Canette de Soda / Boisson Fraîche', 
+        domain: 'beverage', 
+        cat: 'Boissons & Brasserie', 
+        unit: 'Canette', 
+        icon: 'soda', 
+        color: 'from-red-500 to-rose-600 text-white shadow-red-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_jus_local', 
+        name: 'Bouteille Jus Naturel (Bissap, Gingembre)', 
+        domain: 'beverage', 
+        cat: 'Boissons & Brasserie', 
+        unit: 'Bouteille', 
+        icon: 'drink', 
+        color: 'from-purple-500 to-pink-600 text-white shadow-purple-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_biere', 
+        name: 'Bouteille de Bière / Brasserie 65cl', 
+        domain: 'beverage', 
+        cat: 'Boissons & Brasserie', 
+        unit: 'Bouteille', 
+        icon: 'beer', 
+        color: 'from-amber-500 to-yellow-600 text-white shadow-amber-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1608270190566-4c9103e5c942?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_cafe', 
+        name: 'Tasse Café Touba / Espresso', 
+        domain: 'beverage', 
+        cat: 'Boissons & Brasserie', 
+        unit: 'Tasse', 
+        icon: 'coffee', 
+        color: 'from-stone-700 to-amber-900 text-white shadow-stone-700/30',
+        photoUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_the', 
+        name: 'Thé Vert Menthe Traditionnel', 
+        domain: 'beverage', 
+        cat: 'Boissons & Brasserie', 
+        unit: 'Verre', 
+        icon: 'tea', 
+        color: 'from-emerald-600 to-teal-700 text-white shadow-emerald-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80'
+      },
 
       // 3. Restauration, Maquis & Fast-Food
-      { id: 'v_chawarma', name: 'Chawarma Viande / Poulet', domain: 'food', cat: 'Restauration & Maquis', unit: 'Plat', icon: 'sandwich', color: 'bg-orange-500/15 text-orange-600 border-orange-500/30' },
-      { id: 'v_burger', name: 'Hamburger Maison Gourmand', domain: 'food', cat: 'Restauration & Maquis', unit: 'Plat', icon: 'burger', color: 'bg-amber-500/15 text-amber-600 border-amber-500/30' },
-      { id: 'v_poulet_braise', name: 'Poulet Bicyclette Braisé Frais', domain: 'food', cat: 'Restauration & Maquis', unit: 'Plat', icon: 'chicken', color: 'bg-orange-600/15 text-orange-600 border-orange-600/30' },
-      { id: 'v_poisson', name: 'Poisson Braisé / Capitaine', domain: 'food', cat: 'Restauration & Maquis', unit: 'Plat', icon: 'fish', color: 'bg-cyan-600/15 text-cyan-600 border-cyan-600/30' },
-      { id: 'v_brochettes', name: 'Brochettes de Bœuf / Mouton', domain: 'food', cat: 'Restauration & Maquis', unit: 'Portion', icon: 'skewer', color: 'bg-red-500/15 text-red-600 border-red-500/30' },
-      { id: 'v_plat_riz', name: 'Plat Riz Gras / Tchêp / Alloco', domain: 'food', cat: 'Restauration & Maquis', unit: 'Plat', icon: 'dish', color: 'bg-amber-500/15 text-amber-600 border-amber-500/30' },
+      { 
+        id: 'v_chawarma', 
+        name: 'Chawarma Viande / Poulet', 
+        domain: 'food', 
+        cat: 'Restauration & Maquis', 
+        unit: 'Plat', 
+        icon: 'sandwich', 
+        color: 'from-orange-500 to-red-600 text-white shadow-orange-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_burger', 
+        name: 'Hamburger Maison Gourmand', 
+        domain: 'food', 
+        cat: 'Restauration & Maquis', 
+        unit: 'Plat', 
+        icon: 'burger', 
+        color: 'from-amber-500 to-orange-600 text-white shadow-amber-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_poulet_braise', 
+        name: 'Poulet Bicyclette Braisé Frais', 
+        domain: 'food', 
+        cat: 'Restauration & Maquis', 
+        unit: 'Plat', 
+        icon: 'chicken', 
+        color: 'from-orange-600 to-amber-700 text-white shadow-orange-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_poisson', 
+        name: 'Poisson Braisé / Capitaine', 
+        domain: 'food', 
+        cat: 'Restauration & Maquis', 
+        unit: 'Plat', 
+        icon: 'fish', 
+        color: 'from-cyan-500 to-teal-600 text-white shadow-cyan-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_brochettes', 
+        name: 'Brochettes de Bœuf / Mouton', 
+        domain: 'food', 
+        cat: 'Restauration & Maquis', 
+        unit: 'Portion', 
+        icon: 'skewer', 
+        color: 'from-red-600 to-rose-700 text-white shadow-red-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_plat_riz', 
+        name: 'Plat Riz Gras / Tchêp / Alloco', 
+        domain: 'food', 
+        cat: 'Restauration & Maquis', 
+        unit: 'Plat', 
+        icon: 'dish', 
+        color: 'from-amber-500 to-yellow-600 text-white shadow-amber-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80'
+      },
 
       // 4. Boutique, Mode & Prêt-à-Porter
-      { id: 'v_polo', name: 'Polo Coton Homme / Femme', domain: 'fashion', cat: 'Boutique & Prêt-à-Porter', unit: 'Unité', icon: 'shirt', color: 'bg-blue-500/15 text-blue-600 border-blue-500/30' },
-      { id: 'v_danfani', name: 'Pagne Faso Dan Fani Tissé', domain: 'fashion', cat: 'Boutique & Prêt-à-Porter', unit: 'Complet', icon: 'dress', color: 'bg-rose-500/15 text-rose-600 border-rose-500/30' },
-      { id: 'v_wax', name: 'Pagne Wax Véritable (6 Yards)', domain: 'fashion', cat: 'Boutique & Prêt-à-Porter', unit: 'Pagne', icon: 'dress', color: 'bg-purple-500/15 text-purple-600 border-purple-500/30' },
-      { id: 'v_jeans', name: 'Pantalon Jeans Regular', domain: 'fashion', cat: 'Boutique & Prêt-à-Porter', unit: 'Unité', icon: 'pants', color: 'bg-indigo-500/15 text-indigo-600 border-indigo-500/30' },
-      { id: 'v_chaussures', name: 'Chaussures / Sandales Cuir', domain: 'fashion', cat: 'Boutique & Prêt-à-Porter', unit: 'Paire', icon: 'shoe', color: 'bg-amber-700/15 text-amber-700 border-amber-700/30' },
-      { id: 'v_sac_main', name: 'Sac à Main & Maroquinerie', domain: 'fashion', cat: 'Boutique & Prêt-à-Porter', unit: 'Unité', icon: 'bag', color: 'bg-pink-500/15 text-pink-600 border-pink-500/30' },
+      { 
+        id: 'v_polo', 
+        name: 'Polo Coton Homme / Femme', 
+        domain: 'fashion', 
+        cat: 'Boutique & Prêt-à-Porter', 
+        unit: 'Unité', 
+        icon: 'shirt', 
+        color: 'from-blue-600 to-indigo-700 text-white shadow-blue-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_danfani', 
+        name: 'Pagne Faso Dan Fani Tissé', 
+        domain: 'fashion', 
+        cat: 'Boutique & Prêt-à-Porter', 
+        unit: 'Complet', 
+        icon: 'dress', 
+        color: 'from-rose-500 to-purple-600 text-white shadow-rose-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_wax', 
+        name: 'Pagne Wax Véritable (6 Yards)', 
+        domain: 'fashion', 
+        cat: 'Boutique & Prêt-à-Porter', 
+        unit: 'Pagne', 
+        icon: 'dress', 
+        color: 'from-purple-600 to-pink-600 text-white shadow-purple-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_jeans', 
+        name: 'Pantalon Jeans Regular', 
+        domain: 'fashion', 
+        cat: 'Boutique & Prêt-à-Porter', 
+        unit: 'Unité', 
+        icon: 'pants', 
+        color: 'from-indigo-600 to-blue-700 text-white shadow-indigo-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1542272604-780c96856592?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_chaussures', 
+        name: 'Chaussures / Sandales Cuir', 
+        domain: 'fashion', 
+        cat: 'Boutique & Prêt-à-Porter', 
+        unit: 'Paire', 
+        icon: 'shoe', 
+        color: 'from-amber-700 to-stone-800 text-white shadow-amber-700/30',
+        photoUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_sac_main', 
+        name: 'Sac à Main & Maroquinerie', 
+        domain: 'fashion', 
+        cat: 'Boutique & Prêt-à-Porter', 
+        unit: 'Unité', 
+        icon: 'bag', 
+        color: 'from-pink-500 to-rose-600 text-white shadow-pink-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=600&q=80'
+      },
 
       // 5. GSM, Téléphonie & Informatique
-      { id: 'v_smartphone', name: 'Smartphone Android / iOS', domain: 'tech', cat: 'GSM & Multimédia', unit: 'Unité', icon: 'phone', color: 'bg-indigo-500/15 text-indigo-600 border-indigo-500/30' },
-      { id: 'v_cable_usb', name: 'Câble USB-C / Lightning Rapide', domain: 'tech', cat: 'GSM & Multimédia', unit: 'Unité', icon: 'wire', color: 'bg-blue-500/15 text-blue-600 border-blue-500/30' },
-      { id: 'v_chargeur', name: 'Chargeur Rapide Mural 20W/33W', domain: 'tech', cat: 'GSM & Multimédia', unit: 'Unité', icon: 'charger', color: 'bg-amber-500/15 text-amber-600 border-amber-500/30' },
-      { id: 'v_ecouteurs', name: 'Écouteurs Sans-Fil Bluetooth', domain: 'tech', cat: 'GSM & Multimédia', unit: 'Paire', icon: 'headphones', color: 'bg-indigo-600/15 text-indigo-600 border-indigo-600/30' },
-      { id: 'v_cle_usb', name: 'Clé USB 32 Go / 64 Go Métal', domain: 'tech', cat: 'GSM & Multimédia', unit: 'Unité', icon: 'usb', color: 'bg-slate-500/15 text-slate-600 border-slate-500/30' },
-      { id: 'v_laptop', name: 'Ordinateur Portable & Accessoires', domain: 'tech', cat: 'GSM & Multimédia', unit: 'Unité', icon: 'laptop', color: 'bg-sky-600/15 text-sky-600 border-sky-600/30' },
+      { 
+        id: 'v_smartphone', 
+        name: 'Smartphone Android / iOS', 
+        domain: 'tech', 
+        cat: 'GSM & Multimédia', 
+        unit: 'Unité', 
+        icon: 'phone', 
+        color: 'from-slate-800 to-indigo-900 text-white shadow-indigo-800/30',
+        photoUrl: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_cable_usb', 
+        name: 'Câble USB-C / Lightning Rapide', 
+        domain: 'tech', 
+        cat: 'GSM & Multimédia', 
+        unit: 'Unité', 
+        icon: 'wire', 
+        color: 'from-blue-500 to-cyan-600 text-white shadow-blue-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_chargeur', 
+        name: 'Chargeur Rapide Mural 20W/33W', 
+        domain: 'tech', 
+        cat: 'GSM & Multimédia', 
+        unit: 'Unité', 
+        icon: 'charger', 
+        color: 'from-teal-500 to-emerald-600 text-white shadow-teal-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_ecouteurs', 
+        name: 'Écouteurs Sans-Fil Bluetooth', 
+        domain: 'tech', 
+        cat: 'GSM & Multimédia', 
+        unit: 'Paire', 
+        icon: 'headphones', 
+        color: 'from-indigo-600 to-purple-700 text-white shadow-indigo-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_cle_usb', 
+        name: 'Clé USB 32 Go / 64 Go Métal', 
+        domain: 'tech', 
+        cat: 'GSM & Multimédia', 
+        unit: 'Unité', 
+        icon: 'usb', 
+        color: 'from-slate-600 to-zinc-700 text-white shadow-slate-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1624823183493-5f65ff14187e?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_laptop', 
+        name: 'Ordinateur Portable & Accessoires', 
+        domain: 'tech', 
+        cat: 'GSM & Multimédia', 
+        unit: 'Unité', 
+        icon: 'laptop', 
+        color: 'from-sky-600 to-blue-700 text-white shadow-sky-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80'
+      },
 
       // 6. Cosmétiques, Beauté & Santé
-      { id: 'v_parfum', name: 'Flacon de Parfum / Eau de Toilette', domain: 'health', cat: 'Cosmétiques & Beauté', unit: 'Flacon', icon: 'perfume', color: 'bg-pink-500/15 text-pink-600 border-pink-500/30' },
-      { id: 'v_karite', name: 'Pot de Beurre de Karité Pur', domain: 'health', cat: 'Cosmétiques & Beauté', unit: 'Pot', icon: 'soap', color: 'bg-yellow-600/15 text-yellow-700 border-yellow-600/30' },
-      { id: 'v_savon', name: 'Savon de Toilette & Soins', domain: 'health', cat: 'Cosmétiques & Beauté', unit: 'Pain', icon: 'soap', color: 'bg-teal-500/15 text-teal-600 border-teal-500/30' },
-      { id: 'v_medicament', name: 'Boîte de Comprimés / Pharmacie', domain: 'health', cat: 'Cosmétiques & Beauté', unit: 'Boîte', icon: 'pill', color: 'bg-rose-500/15 text-rose-600 border-rose-500/30' },
+      { 
+        id: 'v_parfum', 
+        name: 'Flacon de Parfum / Eau de Toilette', 
+        domain: 'health', 
+        cat: 'Cosmétiques & Beauté', 
+        unit: 'Flacon', 
+        icon: 'perfume', 
+        color: 'from-pink-500 to-purple-600 text-white shadow-pink-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_karite', 
+        name: 'Pot de Beurre de Karité Pur', 
+        domain: 'health', 
+        cat: 'Cosmétiques & Beauté', 
+        unit: 'Pot', 
+        icon: 'soap', 
+        color: 'from-yellow-600 to-amber-700 text-white shadow-yellow-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1608248597359-2b0285a2f8b5?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_savon', 
+        name: 'Savon de Toilette & Soins', 
+        domain: 'health', 
+        cat: 'Cosmétiques & Beauté', 
+        unit: 'Pain', 
+        icon: 'soap', 
+        color: 'from-teal-500 to-emerald-600 text-white shadow-teal-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1607006314605-618d80e42042?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_medicament', 
+        name: 'Boîte de Comprimés / Pharmacie', 
+        domain: 'health', 
+        cat: 'Cosmétiques & Beauté', 
+        unit: 'Boîte', 
+        icon: 'pill', 
+        color: 'from-rose-500 to-red-600 text-white shadow-rose-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80'
+      },
 
       // 7. Maison, Bricolage & Quincaillerie
-      { id: 'v_ampoule', name: 'Ampoule LED Haute Économie', domain: 'btp', cat: 'Bricolage & Maison', unit: 'Unité', icon: 'lightbulb', color: 'bg-amber-500/15 text-amber-600 border-amber-500/30' },
-      { id: 'v_outil', name: 'Outillage à Main (Marteau, Clé)', domain: 'btp', cat: 'Bricolage & Maison', unit: 'Unité', icon: 'tool', color: 'bg-slate-500/15 text-slate-600 border-slate-500/30' },
-      { id: 'v_peinture', name: 'Peinture Intérieure (Seau)', domain: 'btp', cat: 'Bricolage & Maison', unit: 'Seau', icon: 'paint', color: 'bg-indigo-500/15 text-indigo-600 border-indigo-500/30' },
-      { id: 'v_cadenas', name: 'Cadenas Blindé de Sécurité', domain: 'btp', cat: 'Bricolage & Maison', unit: 'Unité', icon: 'lock', color: 'bg-amber-600/15 text-amber-700 border-amber-600/30' },
-      { id: 'v_ciment', name: 'Ciment Portland (Sac 50kg)', domain: 'btp', cat: 'Bricolage & Maison', unit: 'Sac', icon: 'cement', color: 'bg-amber-700/15 text-amber-800 border-amber-700/30' },
+      { 
+        id: 'v_ampoule', 
+        name: 'Ampoule LED Haute Économie', 
+        domain: 'btp', 
+        cat: 'Bricolage & Maison', 
+        unit: 'Unité', 
+        icon: 'lightbulb', 
+        color: 'from-amber-400 to-yellow-500 text-white shadow-amber-400/30',
+        photoUrl: 'https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_outil', 
+        name: 'Outillage à Main (Marteau, Clé)', 
+        domain: 'btp', 
+        cat: 'Bricolage & Maison', 
+        unit: 'Unité', 
+        icon: 'tool', 
+        color: 'from-slate-600 to-stone-700 text-white shadow-slate-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_peinture', 
+        name: 'Peinture Intérieure (Seau)', 
+        domain: 'btp', 
+        cat: 'Bricolage & Maison', 
+        unit: 'Seau', 
+        icon: 'paint', 
+        color: 'from-sky-500 to-blue-600 text-white shadow-sky-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_cadenas', 
+        name: 'Cadenas Blindé de Sécurité', 
+        domain: 'btp', 
+        cat: 'Bricolage & Maison', 
+        unit: 'Unité', 
+        icon: 'lock', 
+        color: 'from-amber-500 to-yellow-600 text-white shadow-amber-500/30',
+        photoUrl: 'https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_ciment', 
+        name: 'Ciment Portland (Sac 50kg)', 
+        domain: 'btp', 
+        cat: 'Bricolage & Maison', 
+        unit: 'Sac', 
+        icon: 'cement', 
+        color: 'from-stone-600 to-zinc-700 text-white shadow-stone-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80'
+      },
 
       // 8. Auto & Moto
-      { id: 'v_huile_moteur', name: 'Bidon Huile Moteur 4T (1L)', domain: 'auto', cat: 'Pièces Moto & Auto', unit: 'Bidon', icon: 'jug', color: 'bg-zinc-500/15 text-zinc-600 border-zinc-500/30' },
-      { id: 'v_casque', name: 'Casque de Moto Homologué', domain: 'auto', cat: 'Pièces Moto & Auto', unit: 'Unité', icon: 'helmet', color: 'bg-red-500/15 text-red-600 border-red-500/30' },
-      { id: 'v_moto', name: 'Moto / Tricycle de Livraison', domain: 'auto', cat: 'Pièces Moto & Auto', unit: 'Unité', icon: 'moto', color: 'bg-purple-500/15 text-purple-600 border-purple-500/30' },
+      { 
+        id: 'v_huile_moteur', 
+        name: 'Bidon Huile Moteur 4T (1L)', 
+        domain: 'auto', 
+        cat: 'Pièces Moto & Auto', 
+        unit: 'Bidon', 
+        icon: 'jug', 
+        color: 'from-zinc-700 to-stone-800 text-white shadow-zinc-700/30',
+        photoUrl: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_casque', 
+        name: 'Casque de Moto Homologué', 
+        domain: 'auto', 
+        cat: 'Pièces Moto & Auto', 
+        unit: 'Unité', 
+        icon: 'helmet', 
+        color: 'from-red-600 to-rose-700 text-white shadow-red-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80'
+      },
+      { 
+        id: 'v_moto', 
+        name: 'Moto / Tricycle de Livraison', 
+        domain: 'auto', 
+        cat: 'Pièces Moto & Auto', 
+        unit: 'Unité', 
+        icon: 'moto', 
+        color: 'from-purple-600 to-indigo-700 text-white shadow-purple-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80'
+      },
 
       // 9. Prestations & Services
-      { id: 'v_prestation', name: 'Prestation & Service Client', domain: 'services', cat: 'Prestations & Services', unit: 'Heure', icon: 'package', color: 'bg-blue-500/15 text-blue-600 border-blue-500/30' }
+      { 
+        id: 'v_prestation', 
+        name: 'Prestation & Service Client', 
+        domain: 'services', 
+        cat: 'Prestations & Services', 
+        unit: 'Heure', 
+        icon: 'package', 
+        color: 'from-indigo-600 to-blue-700 text-white shadow-indigo-600/30',
+        photoUrl: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=600&q=80'
+      }
     ];
-
 
     let selectedProductVisual = { type: 'svg', iconKey: 'cement', badgeColor: 'bg-amber-600/10 text-amber-600 border-amber-600/20' };
 
@@ -12116,6 +12547,16 @@ const DAILY_PRODUCTS_CATALOG = [
     window.selectRealPhotoItem = selectRealPhotoItem;
 
 
+        let dailyIconViewMode = 'apple'; // 'apple' | 'photo'
+
+    function toggleDailyViewMode(mode) {
+      dailyIconViewMode = mode;
+      const q = document.getElementById('icon-search-input')?.value || '';
+      const domain = document.getElementById('icon-domain-select')?.value || 'all';
+      renderDailyProductsGrid(domain, q);
+    }
+    window.toggleDailyViewMode = toggleDailyViewMode;
+
     function renderDailyProductsGrid(domain = 'all', query = '') {
       const grid = document.getElementById('icon-picker-grid');
       if (!grid) return;
@@ -12131,22 +12572,53 @@ const DAILY_PRODUCTS_CATALOG = [
         list = list.filter(p => p.name.toLowerCase().includes(q) || p.cat.toLowerCase().includes(q) || (p.icon && p.icon.toLowerCase().includes(q)));
       }
 
+      // Check if matching real photos exist to offer quick switch
+      const matchingPhotosCount = REAL_PRODUCTS_PHOTOS.filter(item => 
+        item.name.toLowerCase().includes(q) || item.cat.toLowerCase().includes(q) || item.tag.toLowerCase().includes(q)
+      ).length;
+
+      const photoSuggestionBanner = q && matchingPhotosCount > 0 ? `
+        <div class="col-span-full p-2.5 rounded-xl bg-teal-500/10 border border-teal-500/20 text-xs flex items-center justify-between mb-2">
+          <div class="flex items-center gap-2 text-teal-300">
+            <span>📸</span>
+            <span><strong>${matchingPhotosCount} Packshot(s) Réel(s) 4K</strong> trouvé(s) pour "${q}"</span>
+          </div>
+          <button type="button" onclick="switchIconPickerTab('photos'); document.getElementById('real-photo-search-input').value = '${q}'; filterRealPhotosCatalog('${q}');" class="px-2.5 py-1 rounded-lg bg-teal-600 hover:bg-teal-500 text-white font-bold text-[11px] transition-all shadow-xs">
+            Voir les Photos Réelles →
+          </button>
+        </div>
+      ` : '';
+
       if (list.length === 0) {
-        grid.innerHTML = '<div class="col-span-3 py-10 text-center text-xs text-[var(--text-muted)] font-medium">Aucune icône trouvée pour cette recherche.<br><span class="text-[11px] opacity-75">Essayez un autre mot-clé ou parcourez les catégories.</span></div>';
+        grid.innerHTML = photoSuggestionBanner + '<div class="col-span-full py-10 text-center text-xs text-[var(--text-muted)] font-medium">Aucun résultat trouvé pour cette recherche.<br><span class="text-[11px] opacity-75">Essayez un autre mot-clé ou basculez sur l\'onglet Photos Réelles.</span></div>';
         return;
       }
 
-      grid.innerHTML = list.map(item => {
+      grid.innerHTML = photoSuggestionBanner + list.map(item => {
         const svgCode = SVG_ICONS[item.icon] || SVG_ICONS.cart;
-        return '<button type="button" onclick="selectDailyProduct(\'' + item.id + '\')" class="p-3 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--primary)] hover:shadow-md flex flex-col items-center justify-center text-center gap-2 transition-all group press-effect">' +
-          '<div class="w-14 h-14 rounded-2xl ' + item.color + ' border flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 transition-transform">' +
-            svgCode +
-          '</div>' +
-          '<div class="w-full overflow-hidden">' +
-            '<div class="font-bold text-xs text-[var(--text-main)] truncate">' + item.name + '</div>' +
-            '<div class="text-[10px] text-[var(--text-muted)] truncate mt-0.5">' + item.cat + '</div>' +
-          '</div>' +
-        '</button>';
+        const isPhoto = dailyIconViewMode === 'photo' && item.photoUrl;
+
+        const visualContent = isPhoto 
+          ? `<img src="${item.photoUrl}" alt="${item.name}" class="w-full h-full object-cover rounded-2xl group-hover:scale-105 transition-transform" loading="lazy">`
+          : `<div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${item.color} border border-white/20 flex items-center justify-center shrink-0 shadow-lg group-hover:scale-110 group-hover:rotate-1 transition-all p-2.5">
+              ${svgCode}
+            </div>`;
+
+        return `
+          <button type="button" onclick="selectDailyProduct('${item.id}')" class="p-3.5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-teal-400 hover:shadow-xl flex flex-col items-center justify-center text-center gap-2.5 transition-all group press-effect relative overflow-hidden select-none">
+            <div class="${isPhoto ? 'w-full h-24 rounded-2xl overflow-hidden bg-slate-900 border border-white/10' : 'py-1'} flex items-center justify-center">
+              ${visualContent}
+            </div>
+            <div class="w-full overflow-hidden">
+              <div class="font-bold text-xs text-[var(--text-main)] truncate group-hover:text-teal-300 transition-colors">${item.name}</div>
+              <div class="text-[10px] text-[var(--text-muted)] truncate mt-0.5">${item.cat}</div>
+            </div>
+            <div class="w-full pt-1.5 border-t border-[var(--border)] flex items-center justify-between text-[9px] font-mono font-bold text-teal-400">
+              <span class="px-1.5 py-0.2 rounded bg-teal-500/10 border border-teal-500/20">${isPhoto ? 'PHOTO 4K' : 'APPLE 3D'}</span>
+              <span class="opacity-0 group-hover:opacity-100 transition-opacity">Choisir →</span>
+            </div>
+          </button>
+        `;
       }).join('');
     }
 
@@ -12183,19 +12655,32 @@ const DAILY_PRODUCTS_CATALOG = [
       const item = DAILY_PRODUCTS_CATALOG.find(x => x.id === prodId);
       if (!item) return;
 
-      selectedProductVisual = {
-        type: 'svg',
-        svgKey: item.icon,
-        badgeColor: item.color,
-        name: item.name
-      };
-
-      // Mettre à jour l'aperçu dans le modal création produit
-      const preview = document.getElementById('new-prod-icon-preview');
-      if (preview) {
-        const svgCode = SVG_ICONS[item.icon] || SVG_ICONS.cart;
-        preview.className = 'w-12 h-12 rounded-xl ' + item.color + ' border flex items-center justify-center shadow-xs overflow-hidden';
-        preview.innerHTML = svgCode;
+      if (typeof dailyIconViewMode !== 'undefined' && dailyIconViewMode === 'photo' && item.photoUrl) {
+        selectedProductVisual = {
+          type: 'photo',
+          photoUrl: item.photoUrl,
+          name: item.name,
+          badgeColor: 'bg-teal-500/10 text-teal-400 border-teal-500/20'
+        };
+        const preview = document.getElementById('new-prod-icon-preview');
+        if (preview) {
+          preview.className = 'w-12 h-12 rounded-xl border border-teal-400/50 shadow-md overflow-hidden p-0';
+          preview.innerHTML = '<img src="' + item.photoUrl + '" class="w-full h-full object-cover">';
+        }
+      } else {
+        selectedProductVisual = {
+          type: 'svg',
+          svgKey: item.icon,
+          badgeColor: 'bg-gradient-to-br ' + item.color,
+          photoUrl: item.photoUrl || null,
+          name: item.name
+        };
+        const preview = document.getElementById('new-prod-icon-preview');
+        if (preview) {
+          const svgCode = SVG_ICONS[item.icon] || SVG_ICONS.cart;
+          preview.className = 'w-12 h-12 rounded-xl bg-gradient-to-br ' + item.color + ' border border-white/20 flex items-center justify-center shadow-md overflow-hidden p-1.5';
+          preview.innerHTML = svgCode;
+        }
       }
 
       // Pré-remplir intelligemment les champs du formulaire produit s'ils sont vierges
