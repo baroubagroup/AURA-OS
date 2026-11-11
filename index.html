@@ -1509,80 +1509,146 @@
     }
 
     /* ========================================================
-       MODE SIDEBAR RÉDUITE / PLIÉE (SIDEBAR COLLAPSED & SLIM)
+       1. MODE SIDEBAR COMPLÈTEMENT MASQUÉE (PLEIN ÉCRAN TOTAL 100%)
+       ======================================================== */
+    body.sidebar-hidden #sidebar {
+      margin-left: -16.5rem !important;
+      width: 0 !important;
+      min-width: 0 !important;
+      max-width: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+      border: none !important;
+      overflow: hidden !important;
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    body.sidebar-hidden main {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      flex: 1 1 100% !important;
+    }
+    body.sidebar-hidden #btn-toggle-sidebar {
+      background: rgba(99, 102, 241, 0.25) !important;
+      border-color: rgba(99, 102, 241, 0.5) !important;
+      color: #A5B4FC !important;
+      box-shadow: 0 0 12px rgba(99, 102, 241, 0.3) !important;
+    }
+
+    /* ========================================================
+       2. MODE SIDEBAR RÉDUITE / RAIL ICÔNES ÉPURÉ (PIXEL-PERFECT)
        ======================================================== */
     body.sidebar-collapsed #sidebar {
-      width: 4.75rem !important; /* 76px */
-      min-width: 4.75rem !important;
-      max-width: 4.75rem !important;
-      transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1), transform 0.24s ease !important;
+      width: 4.5rem !important; /* 72px */
+      min-width: 4.5rem !important;
+      max-width: 4.5rem !important;
+      overflow-x: hidden !important;
+      transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
+
+    /* Éradication absolue de toute fuite de texte en mode réduit */
+    body.sidebar-collapsed #sidebar-standard-nav span,
+    body.sidebar-collapsed #sidebar-standard-nav p,
+    body.sidebar-collapsed #sidebar-standard-nav .font-mono,
+    body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-label,
+    body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-meta,
+    body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-anim,
+    body.sidebar-collapsed #sidebar-standard-nav .grid,
+    body.sidebar-collapsed #sidebar-standard-nav #sidebar-quick-actions-container,
+    body.sidebar-collapsed #sidebar-standard-nav #sidebar-cards-mode-text,
     body.sidebar-collapsed .sidebar-brand-text,
     body.sidebar-collapsed #store-selector-container,
     body.sidebar-collapsed .sidebar-user-details,
-    body.sidebar-collapsed .sidebar-folder-label,
-    body.sidebar-collapsed .sidebar-folder-meta,
-    body.sidebar-collapsed .sidebar-nav-label,
-    body.sidebar-collapsed .sidebar-folder-anim,
-    body.sidebar-collapsed #sidebar-cards-mode-text,
-    body.sidebar-collapsed #sidebar-quick-actions-container,
     body.sidebar-collapsed .sidebar-status-dot {
       display: none !important;
     }
+
+    /* En-tête centré du rail réduit */
     body.sidebar-collapsed #sidebar .h-16 {
-      padding-left: 0.5rem !important;
-      padding-right: 0.5rem !important;
+      padding: 0 !important;
       justify-content: center !important;
-      gap: 0.5rem !important;
+      gap: 0 !important;
     }
-    body.sidebar-collapsed #btn-sidebar-collapse-inner svg {
-      transform: rotate(180deg) !important;
+    body.sidebar-collapsed #sidebar .h-16 > div:first-child {
+      justify-content: center !important;
+      margin: 0 !important;
     }
+    body.sidebar-collapsed #btn-sidebar-collapse-inner {
+      position: absolute;
+      right: -10px;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    /* Normalisation des boutons en tuiles icônes 44x44 centrées */
     body.sidebar-collapsed #sidebar-standard-nav .p-3 {
-      padding: 0.5rem 0.4rem !important;
+      padding: 0.5rem 0.25rem !important;
+    }
+    body.sidebar-collapsed #sidebar-standard-nav nav {
+      padding-left: 0.25rem !important;
+      padding-right: 0.25rem !important;
+    }
+    body.sidebar-collapsed .nav-btn,
+    body.sidebar-collapsed .accordion-group > button,
+    body.sidebar-collapsed #sidebar-btn-cards-mode {
+      width: 2.85rem !important; /* 45px */
+      height: 2.85rem !important;
+      margin: 0.35rem auto !important;
+      padding: 0 !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      border-radius: 0.75rem !important;
+      border: 1px solid transparent !important;
+      background: transparent !important;
+    }
+    body.sidebar-collapsed .nav-btn:hover,
+    body.sidebar-collapsed .accordion-group > button:hover,
+    body.sidebar-collapsed #sidebar-btn-cards-mode:hover {
+      background: rgba(255, 255, 255, 0.08) !important;
+      border-color: rgba(255, 255, 255, 0.12) !important;
     }
     body.sidebar-collapsed .accordion-group {
       border: none !important;
       background: transparent !important;
-      margin-bottom: 0.25rem !important;
-    }
-    body.sidebar-collapsed .accordion-group > button {
-      justify-content: center !important;
-      padding: 0.65rem 0.5rem !important;
-      border-radius: 0.75rem !important;
-    }
-    body.sidebar-collapsed .accordion-group > button:hover {
-      background: rgba(255, 255, 255, 0.08) !important;
-    }
-    body.sidebar-collapsed .accordion-group > button > div:first-child {
-      justify-content: center !important;
       margin: 0 !important;
     }
-    body.sidebar-collapsed .accordion-group > button svg {
-      width: 1.25rem !important;
-      height: 1.25rem !important;
-    }
-    body.sidebar-collapsed .nav-btn {
+    body.sidebar-collapsed .accordion-group > button > div:first-child,
+    body.sidebar-collapsed .nav-btn > div:first-child {
+      margin: 0 !important;
+      display: flex !important;
+      align-items: center !important;
       justify-content: center !important;
-      padding: 0.65rem 0.5rem !important;
+      width: 100% !important;
+      height: 100% !important;
     }
-    body.sidebar-collapsed .nav-btn div {
+    body.sidebar-collapsed svg {
+      width: 1.35rem !important;
+      height: 1.35rem !important;
+      margin: 0 !important;
+      display: block !important;
+    }
+
+    /* Style actif haute visibilité pour la tuile sélectionnée */
+    body.sidebar-collapsed #nav-dashboard.bg-\[var\(--primary-light\)\] {
+      background: rgba(20, 184, 166, 0.2) !important;
+      border-color: rgba(20, 184, 166, 0.4) !important;
+    }
+
+    /* Pied de page centré */
+    body.sidebar-collapsed #sidebar-footer-container {
+      padding: 0.75rem 0.25rem !important;
+      flex-direction: column !important;
+      gap: 0.5rem !important;
       justify-content: center !important;
-    }
-    body.sidebar-collapsed .nav-btn svg {
-      width: 1.25rem !important;
-      height: 1.25rem !important;
-    }
-    body.sidebar-collapsed #sidebar-btn-cards-mode {
-      justify-content: center !important;
-      padding: 0.65rem 0.5rem !important;
     }
     body.sidebar-collapsed #sidebar-user-container {
       justify-content: center !important;
+      margin: 0 auto !important;
     }
     body.sidebar-collapsed #sidebar-footer-actions {
       flex-direction: column !important;
       gap: 0.25rem !important;
+      margin: 0 auto !important;
     }
     body.sidebar-collapsed #btn-toggle-sidebar {
       background: rgba(99, 102, 241, 0.15) !important;
@@ -1695,9 +1761,13 @@
         </div>
       </div>
       <div class="flex items-center gap-1 shrink-0">
-        <!-- Bouton Pliage / Dépliage Sidebar -->
-        <button id="btn-sidebar-collapse-inner" type="button" onclick="toggleSidebarCollapse()" class="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/10 transition-all cursor-pointer" title="Réduire la barre latérale (Ctrl+B)">
-          <svg class="w-4 h-4 transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+        <!-- Bouton Réduire en Rail Icônes -->
+        <button type="button" onclick="toggleSidebarCompact()" class="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-white hover:bg-white/10 transition-all cursor-pointer" title="Réduire en barre d'icônes compacte">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"/></svg>
+        </button>
+        <!-- Bouton Masquer Complètement (Plein écran) -->
+        <button id="btn-sidebar-collapse-inner" type="button" onclick="toggleSidebarHide(true)" class="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-rose-400 hover:bg-rose-500/10 transition-all cursor-pointer" title="Masquer totalement la barre (Plein écran)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
         </button>
         <!-- Statut Web Locks / Offline -->
         <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 live-pulse sidebar-status-dot ml-0.5" title="Système en ligne et synchronisé (IndexedDB Actif)"></span>
@@ -1755,7 +1825,7 @@
 
       <!-- 1. VENTES & FACTURATION -->
       <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-sales')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <button onclick="toggleSidebarFolder('folder-sales')" title="Ventes & Facturation A4" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
             <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Ventes & Facturation</span>
@@ -1784,7 +1854,7 @@
 
       <!-- 2. CLIENTS & CRM -->
       <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-crm')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <button onclick="toggleSidebarFolder('folder-crm')" title="Clients & Partenaires CRM" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
             <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Clients & Partenaires</span>
@@ -1813,7 +1883,7 @@
 
       <!-- 3. GESTION DES STOCKS & ARTICLES (Séparé de la logistique) -->
       <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-stock')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <button onclick="toggleSidebarFolder('folder-stock')" title="Gestion des Stocks & Dépôts" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
             <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Gestion des Stocks</span>
@@ -1850,7 +1920,7 @@
 
       <!-- 4. LOGISTIQUE & EXPÉDITIONS (Département Dédié) -->
       <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-logistics')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <button onclick="toggleSidebarFolder('folder-logistics')" title="Logistique & Livraisons" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
             <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Logistique & Flotte</span>
@@ -1873,7 +1943,7 @@
 
       <!-- 5. RESSOURCES HUMAINES & PAIE -->
       <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-hr')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <button onclick="toggleSidebarFolder('folder-hr')" title="Ressources Humaines & Paie" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
             <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Ressources Humaines</span>
@@ -1896,7 +1966,7 @@
 
       <!-- 6. FINANCES & COMPTABILITÉ OHADA -->
       <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-finances')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <button onclick="toggleSidebarFolder('folder-finances')" title="Finances, Caisse & Trésorerie" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
             <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Finances & OHADA</span>
@@ -1939,7 +2009,7 @@
 
       <!-- 7. MARKETING & WHATSAPP (Dédié) -->
       <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-marketing')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <button onclick="toggleSidebarFolder('folder-marketing')" title="Marketing & WhatsApp" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
             <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Marketing & WhatsApp</span>
@@ -1962,7 +2032,7 @@
 
       <!-- 8. SYSTÈME & ADMINISTRATION -->
       <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-system')" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
+        <button onclick="toggleSidebarFolder('folder-system')" title="Administration & Paramètres" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
           <div class="flex items-center gap-2">
             <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
             <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Administration</span>
@@ -15084,15 +15154,44 @@ function renderA4DocumentView() {
       }, 380);
     }
 
-    function toggleSidebarCollapse(forceState) {
+    // Bascule de masquage complet (Plein écran pur / Masquer la barre)
+    function toggleSidebarHide(forceState) {
       if (typeof document === 'undefined') return;
+      const isCurrentlyHidden = document.body.classList.contains('sidebar-hidden');
+      const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyHidden;
+
+      if (newState) {
+        document.body.classList.add('sidebar-hidden');
+        document.body.classList.remove('sidebar-collapsed');
+        if (typeof showToast === 'function') {
+          showToast('Barre latérale masquée (Plein écran - Ctrl+B pour réafficher)', 'info');
+        }
+      } else {
+        document.body.classList.remove('sidebar-hidden');
+        if (typeof showToast === 'function') {
+          showToast('Barre latérale affichée', 'info');
+        }
+      }
+
+      try {
+        localStorage.setItem('aura_sidebar_state', newState ? 'hidden' : 'visible');
+      } catch (e) {}
+
+      updateSidebarToggleButtons();
+    }
+    window.toggleSidebarHide = toggleSidebarHide;
+
+    // Bascule du mode compact (Rail d'icônes 72px sans texte)
+    function toggleSidebarCompact(forceState) {
+      if (typeof document === 'undefined') return;
+      document.body.classList.remove('sidebar-hidden');
       const isCurrentlyCollapsed = document.body.classList.contains('sidebar-collapsed');
       const newState = (typeof forceState === 'boolean') ? forceState : !isCurrentlyCollapsed;
 
       if (newState) {
         document.body.classList.add('sidebar-collapsed');
         if (typeof showToast === 'function') {
-          showToast('Barre latérale réduite (Raccourci : Ctrl+B)', 'info');
+          showToast('Mode icônes compact activé', 'info');
         }
       } else {
         document.body.classList.remove('sidebar-collapsed');
@@ -15102,35 +15201,62 @@ function renderA4DocumentView() {
       }
 
       try {
-        localStorage.setItem('aura_sidebar_collapsed', newState ? 'true' : 'false');
+        localStorage.setItem('aura_sidebar_state', newState ? 'collapsed' : 'visible');
       } catch (e) {}
 
-      // Mettre à jour les info-bulles des boutons
-      const btnInner = document.getElementById('btn-sidebar-collapse-inner');
-      const btnTop = document.getElementById('btn-toggle-sidebar');
-      if (btnInner) btnInner.title = newState ? 'Agrandir la barre latérale (Ctrl+B)' : 'Réduire la barre latérale (Ctrl+B)';
-      if (btnTop) btnTop.title = newState ? 'Agrandir la barre latérale (Ctrl+B)' : 'Réduire la barre latérale (Ctrl+B)';
+      updateSidebarToggleButtons();
+    }
+    window.toggleSidebarCompact = toggleSidebarCompact;
+
+    // Fonction principale toggleSidebarCollapse (utilise le masquage complet par défaut)
+    function toggleSidebarCollapse(forceState) {
+      // Si la barre est masquée, la réafficher
+      if (document.body.classList.contains('sidebar-hidden')) {
+        toggleSidebarHide(false);
+      } else {
+        // Sinon, la masquer complètement pour libérer 100% de l'écran
+        toggleSidebarHide(true);
+      }
     }
     window.toggleSidebarCollapse = toggleSidebarCollapse;
 
+    function updateSidebarToggleButtons() {
+      const isHidden = document.body.classList.contains('sidebar-hidden');
+      const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+      const btnTop = document.getElementById('btn-toggle-sidebar');
+      if (btnTop) {
+        if (isHidden) {
+          btnTop.title = 'Afficher la barre latérale (Ctrl+B)';
+          btnTop.classList.add('bg-indigo-500/20', 'text-indigo-300', 'border-indigo-400/40');
+        } else {
+          btnTop.title = 'Masquer la barre latérale (Plein écran - Ctrl+B)';
+          btnTop.classList.remove('bg-indigo-500/20', 'text-indigo-300', 'border-indigo-400/40');
+        }
+      }
+    }
+
     // Restaurer l'état au démarrage
     if (typeof document !== 'undefined') {
-      const initSidebarCollapse = () => {
+      const initSidebarState = () => {
         try {
-          if (localStorage.getItem('aura_sidebar_collapsed') === 'true') {
+          const saved = localStorage.getItem('aura_sidebar_state');
+          if (saved === 'hidden') {
+            document.body.classList.add('sidebar-hidden');
+          } else if (saved === 'collapsed') {
             document.body.classList.add('sidebar-collapsed');
           }
+          updateSidebarToggleButtons();
         } catch (e) {}
       };
       if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initSidebarCollapse);
+        document.addEventListener('DOMContentLoaded', initSidebarState);
       } else {
-        setTimeout(initSidebarCollapse, 20);
+        setTimeout(initSidebarState, 20);
       }
     }
 
     function toggleSidebarFolder(folderId) {
-      // Si la barre est réduite, cliquer sur l'icône navigue directement vers le module principal
+      // Si la barre est en mode compact (icônes seules), cliquer navigue directement vers le module
       if (document.body.classList.contains('sidebar-collapsed')) {
         const folderToViewMap = {
           'folder-sales': 'documents',
@@ -15155,10 +15281,8 @@ function renderA4DocumentView() {
       const isCurrentlyOpen = folder.classList.contains('folder-opened') && folder.style.maxHeight !== '0px';
 
       if (isCurrentlyOpen) {
-        // L'utilisateur clique sur le dossier déjà ouvert -> le refermer en douceur
         closeFolderSmoothly(folderId);
       } else {
-        // Accordéon exclusif : fermer simultanément tous les autres dossiers avec la même fluidité
         ALL_SIDEBAR_FOLDERS.forEach(fId => {
           if (fId !== folderId) {
             closeFolderSmoothly(fId);
