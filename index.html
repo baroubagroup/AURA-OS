@@ -7995,42 +7995,42 @@
       <!-- En-tête du Modal -->
       <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
         <div class="flex items-center gap-3">
-          <div class="w-10 h-10 rounded-xl bg-[var(--primary-light)] text-[var(--primary)] flex items-center justify-center font-bold">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+          <div class="w-10 h-10 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center font-bold shadow-sm border border-teal-500/20">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/><circle cx="12" cy="13" r="4"/></svg>
           </div>
           <div>
             <h3 class="font-bold text-base text-[var(--text-main)] flex items-center gap-2">
-              <span>Visuel de l'Article : Icônes HD & Photos</span>
-              <span class="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 font-bold border border-emerald-500/20 font-mono">100% Vectoriel</span>
+              <span>Visuel de l'Article : Photos Réelles Studio & Icônes 3D</span>
+              <span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/15 text-teal-400 font-bold border border-teal-500/30 font-mono">Packshots 4K Studio</span>
             </h3>
-            <p class="text-xs text-[var(--text-muted)]">Choisissez une icône illustrée nette, un badge monogramme bicolore ou importez une photo réelle.</p>
+            <p class="text-xs text-[var(--text-muted)]">Sélectionnez une véritable photo packshot commerciale, une icône 3D Apple ou importez votre propre fichier.</p>
           </div>
         </div>
         <button onclick="closeIconPickerModal()" class="w-8 h-8 rounded-lg flex items-center justify-center text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] font-bold text-lg transition-colors">✕</button>
       </div>
 
-      <!-- 3 Onglets Modernes : Icônes Illustrées HD / Badges Monogrammes / Photo Fichier -->
-      <div class="flex border-b border-[var(--border)] text-xs font-semibold gap-2">
-        <button onclick="switchIconPickerTab('library')" id="icon-tab-library" class="pb-2.5 px-3 border-b-2 border-[var(--primary)] text-[var(--primary)] flex items-center gap-1.5 transition-all">
+      <!-- 4 Onglets Modernes avec Photos Réelles en Premier (Recommandé) -->
+      <div class="flex border-b border-[var(--border)] text-xs font-semibold gap-2 overflow-x-auto pb-1">
+        <button onclick="switchIconPickerTab('photos')" id="icon-tab-photos" class="pb-2.5 px-3 border-b-2 border-teal-500 text-teal-400 flex items-center gap-1.5 font-bold transition-all shrink-0">
+          <svg class="w-4 h-4 text-teal-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="4"/></svg>
+          <span>📸 Photos Réelles Studio (Recommandé)</span>
+        </button>
+        <button onclick="switchIconPickerTab('library')" id="icon-tab-library" class="pb-2.5 px-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 transition-all shrink-0">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
-          <span>Galerie d'Icônes HD</span>
+          <span>💎 Icônes 3D Apple / SF</span>
         </button>
-        <button onclick="switchIconPickerTab('monogram')" id="icon-tab-monogram" class="pb-2.5 px-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 transition-all">
+        <button onclick="switchIconPickerTab('monogram')" id="icon-tab-monogram" class="pb-2.5 px-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 transition-all shrink-0">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h10M7 12h10M7 17h10"/></svg>
-          <span>Badges Monogrammes Colorés</span>
+          <span>🏷️ Badges Monogrammes</span>
         </button>
-        <button onclick="switchIconPickerTab('custom-upload')" id="icon-tab-custom-upload" class="pb-2.5 px-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 transition-all">
+        <button onclick="switchIconPickerTab('custom-upload')" id="icon-tab-custom-upload" class="pb-2.5 px-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 transition-all shrink-0">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-          <span>Importer Fichier</span>
-        </button>
-        <button onclick="switchIconPickerTab('photos')" id="icon-tab-photos" class="pb-2.5 px-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 transition-all">
-          <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><circle cx="12" cy="13" r="4"/></svg>
-          <span class="font-bold text-emerald-600">Photos Réelles Prêtes</span>
+          <span>📁 Importer mon Fichier</span>
         </button>
       </div>
 
       <!-- ONGLET 1 : GALERIE D'ICÔNES HD -->
-      <div id="icon-picker-view-library" class="space-y-3">
+      <div id="icon-picker-view-library" class="hidden space-y-3">
         <!-- Recherche et Filtre Métier -->
         <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
           <div class="sm:col-span-6">
@@ -8113,15 +8113,51 @@
 
       
       <!-- ONGLET 4 : PHOTOTHÈQUE DE PRODUITS RÉELS HAUTE DÉFINITION -->
-      <div id="icon-picker-view-photos" class="hidden space-y-4">
-        <div class="flex items-center justify-between">
-          <div class="text-xs text-[var(--text-muted)]">
-            Sélectionnez une photo réaliste prête à l'emploi pour votre article :
+      <div id="icon-picker-view-photos" class="space-y-3">
+        <!-- Barre de recherche intelligente et filtre de catégorie pour les vraies photos -->
+        <div class="grid grid-cols-1 sm:grid-cols-12 gap-2">
+          <div class="sm:col-span-7 relative">
+            <input type="text" id="real-photo-search-input" oninput="filterRealPhotosCatalog(this.value)" placeholder="🔍 Rechercher une vraie photo (ciment, huile, riz, bière, coca, café, parfum, smartphone, pain...)" class="app-input text-xs pl-8">
+            <svg class="w-4 h-4 text-teal-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
           </div>
-          <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-600">PHOTO-PACK BURKINA & UEMOA</span>
+          <div class="sm:col-span-5">
+            <select id="real-photo-cat-select" onchange="filterRealPhotosByCat(this.value)" class="app-input text-xs font-semibold">
+              <option value="all">Toutes les catégories (Studio Packshots)</option>
+              <option value="Alimentation">Alimentation Générale & Épicerie</option>
+              <option value="Boissons">Boissons, Brasserie & Frais</option>
+              <option value="Quincaillerie">BTP, Quincaillerie & Matériaux</option>
+              <option value="GSM & Tech">GSM, Multimédia & Informatique</option>
+              <option value="Cosmétiques">Cosmétiques, Parfumerie & Soins</option>
+              <option value="Restauration">Restauration, Maquis & Fast-Food</option>
+              <option value="Boutique">Boutique, Mode & Prêt-à-Porter</option>
+              <option value="Auto & Moto">Auto, Moto & Transport</option>
+            </select>
+          </div>
         </div>
-        <div id="real-photos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-96 overflow-y-auto custom-scroll p-2">
+
+        <!-- Bannière d'information qualité studio -->
+        <div class="flex items-center justify-between px-3 py-2 rounded-xl bg-teal-500/10 border border-teal-500/20 text-xs">
+          <div class="flex items-center gap-2 text-teal-300">
+            <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+            <span><strong>Packshots Studio Ultra-HD :</strong> Photos réelles de produits commerciaux prêtes en 1 clic.</span>
+          </div>
+          <span class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-teal-500/20 text-teal-300 border border-teal-500/30">4K COMMERCIAL PACKSHOTS</span>
+        </div>
+
+        <!-- Grille des Vraies Photos Packshots -->
+        <div id="real-photos-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 max-h-[380px] overflow-y-auto custom-scroll p-1">
           <!-- Rempli dynamiquement via renderRealPhotosCatalog() -->
+        </div>
+
+        <!-- Recherche Web & Unsplash Instantanée -->
+        <div id="real-photos-web-search-box" class="p-3 rounded-xl bg-indigo-500/10 border border-indigo-500/30 text-xs flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="text-indigo-400 text-base">🌐</span>
+            <span class="text-indigo-200">Mot-clé spécifique ? Générer un packshot photo HD sur le web :</span>
+          </div>
+          <button type="button" onclick="searchOnlinePackshot()" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold transition-all shadow-sm flex items-center gap-1.5">
+            <span>Rechercher en Ligne</span>
+          </button>
         </div>
       </div>
 
@@ -8652,10 +8688,11 @@
           barcode,
           svgKey: selectedProductVisual && selectedProductVisual.type === 'svg' ? selectedProductVisual.svgKey : (isService ? 'switch' : 'package'),
           badgeColor: selectedProductVisual && selectedProductVisual.badgeColor ? selectedProductVisual.badgeColor : 'bg-emerald-500/15 text-emerald-600 border-emerald-500/30',
-          visualType: selectedProductVisual ? selectedProductVisual.type : 'svg',
+          visualType: selectedProductVisual ? selectedProductVisual.type : 'photo',
           letters: selectedProductVisual && selectedProductVisual.type === 'monogram' ? selectedProductVisual.letters : null,
-          icon: selectedProductVisual && selectedProductVisual.type === 'image' ? selectedProductVisual.value : null,
-          badgeColor: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'
+          photoUrl: selectedProductVisual && (selectedProductVisual.type === 'photo' || selectedProductVisual.type === 'image') ? (selectedProductVisual.photoUrl || selectedProductVisual.value) : null,
+          image: selectedProductVisual && (selectedProductVisual.type === 'photo' || selectedProductVisual.type === 'image') ? (selectedProductVisual.photoUrl || selectedProductVisual.value) : null,
+          icon: selectedProductVisual && (selectedProductVisual.type === 'photo' || selectedProductVisual.type === 'image') ? (selectedProductVisual.photoUrl || selectedProductVisual.value) : null
         };
 
         window.PRODUCTS.unshift(newProd);
@@ -9626,35 +9663,35 @@
        BASE DE DONNÉES ET ÉTAT RÉACTIF (CLIENT-SIDE ENGINE)
        ======================================================== */
     let PRODUCTS = [
-      // Quincaillerie & Électricité
-      { id: 1, ref: 'QUIN-001', name: 'Ampoule LED 15W Haute Économie', cat: 'Quincaillerie', svgKey: 'lightbulb', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 900, priceSell: 1500, stockShelf: 40, stockReserve: 150, alertThreshold: 10, barcode: '600100100010' },
-      { id: 2, ref: 'QUIN-002', name: 'Câble Électrique 1.5mm² (Rouleau 100m)', cat: 'Quincaillerie', svgKey: 'wire', badgeColor: 'bg-blue-500/10 text-blue-500 border-blue-500/20', priceBuy: 14000, priceSell: 18500, stockShelf: 12, stockReserve: 50, alertThreshold: 5, barcode: '600100100011' },
-      { id: 3, ref: 'QUIN-003', name: 'Ciment Portland CPJ 42.5 (Sac 50kg)', cat: 'Quincaillerie', svgKey: 'cement', badgeColor: 'bg-amber-600/10 text-amber-600 border-amber-600/20', priceBuy: 5200, priceSell: 6500, stockShelf: 45, stockReserve: 350, alertThreshold: 15, barcode: '600100100001' },
-      { id: 4, ref: 'QUIN-004', name: 'Fer à Béton FeE500 Ø 10mm (Barre 12m)', cat: 'Quincaillerie', svgKey: 'iron', badgeColor: 'bg-slate-500/10 text-slate-400 border-slate-500/20', priceBuy: 3400, priceSell: 4200, stockShelf: 30, stockReserve: 200, alertThreshold: 15, barcode: '600100100002' },
-      { id: 5, ref: 'QUIN-005', name: 'Peinture Blanche Mate 15L (Seau)', cat: 'Quincaillerie', svgKey: 'paint', badgeColor: 'bg-rose-500/10 text-rose-500 border-rose-500/20', priceBuy: 18000, priceSell: 24500, stockShelf: 8, stockReserve: 40, alertThreshold: 5, barcode: '600100100003' },
-      { id: 6, ref: 'QUIN-006', name: 'Cadenas Blindé Haute Sécurité 60mm', cat: 'Quincaillerie', svgKey: 'lock', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 3000, priceSell: 4500, stockShelf: 15, stockReserve: 60, alertThreshold: 5, barcode: '600100100012' },
+      // Quincaillerie, BTP & Électricité (Packshots Réels Studio)
+      { id: 1, ref: 'QUIN-001', name: 'Ampoule LED 15W Haute Économie', cat: 'Quincaillerie', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=400&q=80', svgKey: 'lightbulb', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 900, priceSell: 1500, stockShelf: 40, stockReserve: 150, alertThreshold: 10, barcode: '600100100010' },
+      { id: 2, ref: 'QUIN-002', name: 'Câble Électrique 1.5mm² (Rouleau 100m)', cat: 'Quincaillerie', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80', svgKey: 'wire', badgeColor: 'bg-blue-500/10 text-blue-500 border-blue-500/20', priceBuy: 14000, priceSell: 18500, stockShelf: 12, stockReserve: 50, alertThreshold: 5, barcode: '600100100011' },
+      { id: 3, ref: 'QUIN-003', name: 'Ciment Portland CPJ 42.5 (Sac 50kg)', cat: 'Quincaillerie', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=400&q=80', svgKey: 'cement', badgeColor: 'bg-amber-600/10 text-amber-600 border-amber-600/20', priceBuy: 5200, priceSell: 6500, stockShelf: 45, stockReserve: 350, alertThreshold: 15, barcode: '600100100001' },
+      { id: 4, ref: 'QUIN-004', name: 'Fer à Béton FeE500 Ø 10mm (Barre 12m)', cat: 'Quincaillerie', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1535813547-99c456a41d4a?auto=format&fit=crop&w=400&q=80', svgKey: 'iron', badgeColor: 'bg-slate-500/10 text-slate-400 border-slate-500/20', priceBuy: 3400, priceSell: 4200, stockShelf: 30, stockReserve: 200, alertThreshold: 15, barcode: '600100100002' },
+      { id: 5, ref: 'QUIN-005', name: 'Peinture Blanche Mate 15L (Seau)', cat: 'Quincaillerie', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=400&q=80', svgKey: 'paint', badgeColor: 'bg-rose-500/10 text-rose-500 border-rose-500/20', priceBuy: 18000, priceSell: 24500, stockShelf: 8, stockReserve: 40, alertThreshold: 5, barcode: '600100100003' },
+      { id: 6, ref: 'QUIN-006', name: 'Cadenas Blindé Haute Sécurité 60mm', cat: 'Quincaillerie', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?auto=format&fit=crop&w=400&q=80', svgKey: 'lock', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 3000, priceSell: 4500, stockShelf: 15, stockReserve: 60, alertThreshold: 5, barcode: '600100100012' },
 
-      // Boissons & Brasserie
-      { id: 7, ref: 'BOIS-001', name: 'Brakina Canette 33cl (Pack de 24)', cat: 'Boissons', svgKey: 'can', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 11000, priceSell: 14400, stockShelf: 14, stockReserve: 80, alertThreshold: 6, barcode: '600100200001' },
-      { id: 8, ref: 'BOIS-002', name: 'Bière Brakina Bouteille 65cl (Casier 12)', cat: 'Boissons', svgKey: 'bottle', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 6500, priceSell: 7800, stockShelf: 20, stockReserve: 60, alertThreshold: 8, barcode: '600100200004' },
-      { id: 9, ref: 'BOIS-003', name: 'Eau Minérale Naturelle 1.5L (Pack x6)', cat: 'Boissons', svgKey: 'bottle', badgeColor: 'bg-cyan-500/10 text-cyan-600 border-cyan-500/20', priceBuy: 2200, priceSell: 3000, stockShelf: 22, stockReserve: 120, alertThreshold: 10, barcode: '600100200002' },
-      { id: 10, ref: 'BOIS-004', name: 'Canette Énergisante XXL Energy 33cl', cat: 'Boissons', svgKey: 'can', badgeColor: 'bg-purple-500/10 text-purple-500 border-purple-500/20', priceBuy: 500, priceSell: 700, stockShelf: 35, stockReserve: 150, alertThreshold: 15, barcode: '600100200005' },
+      // Boissons & Brasserie (Packshots Réels Studio)
+      { id: 7, ref: 'BOIS-001', name: 'Brakina Canette 33cl (Pack de 24)', cat: 'Boissons', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=400&q=80', svgKey: 'can', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 11000, priceSell: 14400, stockShelf: 14, stockReserve: 80, alertThreshold: 6, barcode: '600100200001' },
+      { id: 8, ref: 'BOIS-002', name: 'Bière Brakina Bouteille 65cl (Casier 12)', cat: 'Boissons', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1608270190566-4c9103e5c942?auto=format&fit=crop&w=400&q=80', svgKey: 'bottle', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 6500, priceSell: 7800, stockShelf: 20, stockReserve: 60, alertThreshold: 8, barcode: '600100200004' },
+      { id: 9, ref: 'BOIS-003', name: 'Eau Minérale Naturelle 1.5L (Pack x6)', cat: 'Boissons', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=400&q=80', svgKey: 'bottle', badgeColor: 'bg-cyan-500/10 text-cyan-600 border-cyan-500/20', priceBuy: 2200, priceSell: 3000, stockShelf: 22, stockReserve: 120, alertThreshold: 10, barcode: '600100200002' },
+      { id: 10, ref: 'BOIS-004', name: 'Canette Énergisante XXL Energy 33cl', cat: 'Boissons', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=400&q=80', svgKey: 'can', badgeColor: 'bg-purple-500/10 text-purple-500 border-purple-500/20', priceBuy: 500, priceSell: 700, stockShelf: 35, stockReserve: 150, alertThreshold: 15, barcode: '600100200005' },
 
-      // Alimentation & Épicerie
-      { id: 11, ref: 'ALIM-001', name: 'Baguette de Pain Frais (250g)', cat: 'Alimentation', svgKey: 'bread', badgeColor: 'bg-amber-600/10 text-amber-600 border-amber-600/20', priceBuy: 125, priceSell: 150, stockShelf: 50, stockReserve: 200, alertThreshold: 20, barcode: '600100300001' },
-      { id: 12, ref: 'ALIM-002', name: 'Sac de Riz Parfumé (50kg)', cat: 'Alimentation', svgKey: 'sack', badgeColor: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20', priceBuy: 21500, priceSell: 24500, stockShelf: 18, stockReserve: 90, alertThreshold: 5, barcode: '600100300002' },
-      { id: 13, ref: 'ALIM-003', name: 'Bidon d\'Huile Végétale 5L', cat: 'Alimentation', svgKey: 'jug', badgeColor: 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20', priceBuy: 5400, priceSell: 6250, stockShelf: 15, stockReserve: 60, alertThreshold: 5, barcode: '600100300003' },
-      { id: 14, ref: 'ALIM-004', name: 'Paquet de Sucre Morceaux SOSUCO (1kg)', cat: 'Alimentation', svgKey: 'sack', badgeColor: 'bg-blue-500/10 text-blue-500 border-blue-500/20', priceBuy: 750, priceSell: 900, stockShelf: 30, stockReserve: 100, alertThreshold: 10, barcode: '600100300004' },
+      // Alimentation & Épicerie (Packshots Réels Studio)
+      { id: 11, ref: 'ALIM-001', name: 'Baguette de Pain Frais (250g)', cat: 'Alimentation', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80', svgKey: 'bread', badgeColor: 'bg-amber-600/10 text-amber-600 border-amber-600/20', priceBuy: 125, priceSell: 150, stockShelf: 50, stockReserve: 200, alertThreshold: 20, barcode: '600100300001' },
+      { id: 12, ref: 'ALIM-002', name: 'Sac de Riz Parfumé (50kg)', cat: 'Alimentation', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80', svgKey: 'sack', badgeColor: 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20', priceBuy: 21500, priceSell: 24500, stockShelf: 18, stockReserve: 90, alertThreshold: 5, barcode: '600100300002' },
+      { id: 13, ref: 'ALIM-003', name: 'Bidon d\'Huile Végétale 5L', cat: 'Alimentation', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80', svgKey: 'jug', badgeColor: 'bg-yellow-500/10 text-yellow-500 border-yellow-500/20', priceBuy: 5400, priceSell: 6250, stockShelf: 15, stockReserve: 60, alertThreshold: 5, barcode: '600100300003' },
+      { id: 14, ref: 'ALIM-004', name: 'Paquet de Sucre Morceaux SOSUCO (1kg)', cat: 'Alimentation', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1581441363689-1f3c3c414635?auto=format&fit=crop&w=400&q=80', svgKey: 'sack', badgeColor: 'bg-blue-500/10 text-blue-500 border-blue-500/20', priceBuy: 750, priceSell: 900, stockShelf: 30, stockReserve: 100, alertThreshold: 10, barcode: '600100300004' },
 
-      // Restauration & Maquis
-      { id: 15, ref: 'REST-001', name: 'Plat de Poulet Bicyclette Braisé (Entier)', cat: 'Restauration', svgKey: 'chicken', badgeColor: 'bg-orange-500/10 text-orange-500 border-orange-500/20', priceBuy: 3200, priceSell: 4500, stockShelf: 15, stockReserve: 40, alertThreshold: 5, barcode: '600100400001' },
-      { id: 16, ref: 'REST-002', name: 'Poisson Braisé Carpe / Capitaine (Portion)', cat: 'Restauration', svgKey: 'fish', badgeColor: 'bg-cyan-500/10 text-cyan-600 border-cyan-500/20', priceBuy: 2400, priceSell: 3500, stockShelf: 12, stockReserve: 30, alertThreshold: 4, barcode: '600100400002' },
-      { id: 17, ref: 'REST-003', name: 'Plat de Riz au Gras / Tchêp Poulet', cat: 'Restauration', svgKey: 'dish', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 900, priceSell: 1500, stockShelf: 25, stockReserve: 50, alertThreshold: 8, barcode: '600100400003' },
+      // Restauration & Maquis (Packshots Réels Studio)
+      { id: 15, ref: 'REST-001', name: 'Plat de Poulet Bicyclette Braisé (Entier)', cat: 'Restauration', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=400&q=80', svgKey: 'chicken', badgeColor: 'bg-orange-500/10 text-orange-500 border-orange-500/20', priceBuy: 3200, priceSell: 4500, stockShelf: 15, stockReserve: 40, alertThreshold: 5, barcode: '600100400001' },
+      { id: 16, ref: 'REST-002', name: 'Poisson Braisé Carpe / Capitaine (Portion)', cat: 'Restauration', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=400&q=80', svgKey: 'fish', badgeColor: 'bg-cyan-500/10 text-cyan-600 border-cyan-500/20', priceBuy: 2400, priceSell: 3500, stockShelf: 12, stockReserve: 30, alertThreshold: 4, barcode: '600100400002' },
+      { id: 17, ref: 'REST-003', name: 'Plat de Riz au Gras / Tchêp Poulet', cat: 'Restauration', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=400&q=80', svgKey: 'dish', badgeColor: 'bg-amber-500/10 text-amber-500 border-amber-500/20', priceBuy: 900, priceSell: 1500, stockShelf: 25, stockReserve: 50, alertThreshold: 8, barcode: '600100400003' },
 
-      // Prestations de Services
-      { id: 18, ref: 'SRV-TR01', name: 'Transport & Déchargement Chantier (Camion 10T)', type: 'service', cat: 'Prestations & Services', unit: 'Forfait', svgKey: 'truck', badgeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20', priceBuy: 0, priceSell: 35000, stockShelf: 999999, stockReserve: 0, alertThreshold: 0, barcode: '600901001' },
-      { id: 19, ref: 'SRV-MC02', name: 'Main-d\'œuvre Pose & Maçonnerie (Équipe / Jour)', type: 'service', cat: 'Prestations & Services', unit: 'Journée', svgKey: 'tool', badgeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20', priceBuy: 0, priceSell: 25000, stockShelf: 999999, stockReserve: 0, alertThreshold: 0, barcode: '600902002' },
-      { id: 20, ref: 'SRV-ET03', name: 'Étude Technique, Métré & Devis Gros-Œuvre', type: 'service', cat: 'Prestations & Services', unit: 'Forfait', svgKey: 'tool', badgeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20', priceBuy: 0, priceSell: 50000, stockShelf: 999999, stockReserve: 0, alertThreshold: 0, barcode: '600903003' }
+      // Prestations de Services (Packshots Réels Studio)
+      { id: 18, ref: 'SRV-TR01', name: 'Transport & Déchargement Chantier (Camion 10T)', type: 'service', cat: 'Prestations & Services', unit: 'Forfait', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=400&q=80', svgKey: 'truck', badgeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20', priceBuy: 0, priceSell: 35000, stockShelf: 999999, stockReserve: 0, alertThreshold: 0, barcode: '600901001' },
+      { id: 19, ref: 'SRV-MC02', name: 'Main-d\'œuvre Pose & Maçonnerie (Équipe / Jour)', type: 'service', cat: 'Prestations & Services', unit: 'Journée', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=400&q=80', svgKey: 'tool', badgeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20', priceBuy: 0, priceSell: 25000, stockShelf: 999999, stockReserve: 0, alertThreshold: 0, barcode: '600902002' },
+      { id: 20, ref: 'SRV-ET03', name: 'Étude Technique, Métré & Devis Gros-Œuvre', type: 'service', cat: 'Prestations & Services', unit: 'Forfait', visualType: 'photo', photoUrl: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80', svgKey: 'tool', badgeColor: 'bg-indigo-500/10 text-indigo-400 border-indigo-500/20', priceBuy: 0, priceSell: 50000, stockShelf: 999999, stockReserve: 0, alertThreshold: 0, barcode: '600903003' }
     ];
 
     
@@ -10973,225 +11010,477 @@
             /* ========================================================
        ICÔNES RÉALISTES MULTI-COULEURS & 3D (VOLUME, DÉGRADÉS & DÉTAILS)
        ======================================================== */
+        /* ========================================================
+       SUITE D'ICÔNES VECTORIELLES APPLE SF / 3D GLASSMORPHIC
+       Design Ultra-Premium, gradients multi-tons & reflets studio
+       ======================================================== */
     const SVG_ICONS = {
-      // 1. Sac de Riz / Céréales (Toile de jute beige, lien noué, épi de riz et tampon 25KG)
+      // 1. Céréales & Sac de Riz (Toile texturée 3D, étiquette or & sceau émeraude)
       rice_sack: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M9 13C9 9 13 7 18 7C23 7 27 9 27 13C27 24 29 29 25 31C22 32 14 32 11 31C7 29 9 24 9 13Z" fill="#E8D5B5" stroke="#B89F7A" stroke-width="1.5"/>
-        <path d="M14 6C14 4.5 15.5 3 18 3C20.5 3 22 4.5 22 6C20 7.5 16 7.5 14 6Z" fill="#C49A45" stroke="#967226" stroke-width="1.2"/>
-        <path d="M16 7L13 10M20 7L23 10" stroke="#967226" stroke-width="1.2" stroke-linecap="round"/>
-        <rect x="13" y="16" width="10" height="9" rx="2" fill="#FFFFFF" fill-opacity="0.85" stroke="#B89F7A" stroke-width="0.8"/>
-        <path d="M18 18V23M16 20L18 18L20 20" stroke="#10B981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-        <text x="18" y="27" font-size="3.5" font-family="sans-serif" font-weight="900" fill="#92400E" text-anchor="middle">25 KG</text>
+        <defs>
+          <linearGradient id="grd_rice" x1="6" y1="6" x2="30" y2="34" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FCD34D"/>
+            <stop offset="0.6" stop-color="#D97706"/>
+            <stop offset="1" stop-color="#92400E"/>
+          </linearGradient>
+          <linearGradient id="grd_tie" x1="12" y1="2" x2="24" y2="8" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F59E0B"/>
+            <stop offset="1" stop-color="#78350F"/>
+          </linearGradient>
+        </defs>
+        <path d="M10 13C10 8 14 6 18 6C22 6 26 8 26 13C26 23 28 29 25 31.5C22 33 14 33 11 31.5C8 29 10 23 10 13Z" fill="url(#grd_rice)" stroke="#78350F" stroke-width="1.2"/>
+        <ellipse cx="18" cy="5.5" rx="4.5" ry="2.5" fill="url(#grd_tie)"/>
+        <rect x="12.5" y="15" width="11" height="11" rx="2.5" fill="#FFFFFF" fill-opacity="0.95"/>
+        <path d="M18 17.5V23M16 19.5L18 17.5L20 19.5" stroke="#059669" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <rect x="14" y="22.5" width="8" height="2" rx="1" fill="#D97706"/>
       </svg>`,
 
       sack: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M9 13C9 9 13 7 18 7C23 7 27 9 27 13C27 24 29 29 25 31C22 32 14 32 11 31C7 29 9 24 9 13Z" fill="#E8D5B5" stroke="#B89F7A" stroke-width="1.5"/>
-        <path d="M14 6C14 4.5 15.5 3 18 3C20.5 3 22 4.5 22 6C20 7.5 16 7.5 14 6Z" fill="#C49A45" stroke="#967226" stroke-width="1.2"/>
-        <rect x="13" y="16" width="10" height="9" rx="2" fill="#FFFFFF" fill-opacity="0.85" stroke="#B89F7A" stroke-width="0.8"/>
-        <path d="M18 18V23M16 20L18 18L20 20" stroke="#10B981" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+        <defs>
+          <linearGradient id="grd_sack" x1="6" y1="6" x2="30" y2="34" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FDE68A"/>
+            <stop offset="1" stop-color="#B45309"/>
+          </linearGradient>
+        </defs>
+        <path d="M10 13C10 8 14 6 18 6C22 6 26 8 26 13C26 23 28 29 25 31.5C22 33 14 33 11 31.5C8 29 10 23 10 13Z" fill="url(#grd_sack)" stroke="#78350F" stroke-width="1.2"/>
+        <ellipse cx="18" cy="5.5" rx="4.5" ry="2.5" fill="#D97706"/>
+        <rect x="13" y="16" width="10" height="9" rx="2" fill="#FFFFFF" fill-opacity="0.9"/>
+        <path d="M18 18V22" stroke="#059669" stroke-width="1.5" stroke-linecap="round"/>
       </svg>`,
 
-      // 2. Pain Baguette Croustillante (Croûte dorée cuite, scarifications et mie claire)
+      // 2. Pain Baguette Croustillante Dorée
       bread: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <ellipse cx="18" cy="18" rx="15" ry="7" transform="rotate(-25 18 18)" fill="#D97706" stroke="#92400E" stroke-width="1.5"/>
-        <ellipse cx="18" cy="16" rx="14" ry="5.5" transform="rotate(-25 18 18)" fill="#F59E0B"/>
-        <path d="M10 20C12 18 13 16 14 14" stroke="#FEF3C7" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M16 18C18 16 19 14 20 12" stroke="#FEF3C7" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M22 16C24 14 25 12 26 10" stroke="#FEF3C7" stroke-width="2.5" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="grd_bread" x1="6" y1="10" x2="30" y2="26" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FBBF24"/>
+            <stop offset="0.5" stop-color="#D97706"/>
+            <stop offset="1" stop-color="#78350F"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="18" cy="18" rx="14.5" ry="7.5" transform="rotate(-25 18 18)" fill="url(#grd_bread)" stroke="#78350F" stroke-width="1.2"/>
+        <path d="M10 20C12.5 17.5 13.5 15.5 14.5 13" stroke="#FEF3C7" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M16 18C18.5 15.5 19.5 13.5 20.5 11" stroke="#FEF3C7" stroke-width="2.2" stroke-linecap="round"/>
+        <path d="M22 16C24.5 13.5 25.5 11.5 26.5 9" stroke="#FEF3C7" stroke-width="2.2" stroke-linecap="round"/>
       </svg>`,
 
-      // 3. Boîte de Tomate Concentrée (Boîte rouge vif, cannelures argentées et tomate fraîche)
+      // 3. Boîte Métallique & Conserve Pure
       can: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <rect x="9" y="9" width="18" height="20" rx="3" fill="#DC2626" stroke="#991B1B" stroke-width="1.5"/>
-        <ellipse cx="18" cy="9" rx="9" ry="3.5" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
-        <ellipse cx="18" cy="8.5" rx="6" ry="2" fill="#CBD5E1"/>
-        <ellipse cx="18" cy="29" rx="9" ry="3.5" fill="#B91C1C" stroke="#991B1B" stroke-width="1.5"/>
-        <rect x="9" y="14" width="18" height="10" fill="#FEF2F2"/>
-        <circle cx="18" cy="19" r="3.5" fill="#EF4444"/>
-        <path d="M18 15.5V14M16.5 15L18 16L19.5 15" stroke="#16A34A" stroke-width="1.2" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="grd_can_body" x1="8" y1="10" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#EF4444"/>
+            <stop offset="1" stop-color="#991B1B"/>
+          </linearGradient>
+          <linearGradient id="grd_can_lid" x1="10" y1="6" x2="26" y2="10" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F1F5F9"/>
+            <stop offset="1" stop-color="#94A3B8"/>
+          </linearGradient>
+        </defs>
+        <rect x="9" y="10" width="18" height="19" rx="3.5" fill="url(#grd_can_body)" stroke="#7F1D1D" stroke-width="1.2"/>
+        <ellipse cx="18" cy="10" rx="9" ry="3.5" fill="url(#grd_can_lid)" stroke="#64748B" stroke-width="1"/>
+        <ellipse cx="18" cy="29" rx="9" ry="3.5" fill="#7F1D1D"/>
+        <rect x="9" y="15" width="18" height="9" fill="#FFFFFF" fill-opacity="0.95"/>
+        <circle cx="18" cy="19.5" r="3.2" fill="#DC2626"/>
       </svg>`,
 
       can_food: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <rect x="9" y="9" width="18" height="20" rx="3" fill="#DC2626" stroke="#991B1B" stroke-width="1.5"/>
-        <ellipse cx="18" cy="9" rx="9" ry="3.5" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.5"/>
-        <circle cx="18" cy="19" r="3.5" fill="#EF4444"/>
+        <rect x="9" y="10" width="18" height="19" rx="3.5" fill="#DC2626" stroke="#7F1D1D" stroke-width="1.2"/>
+        <ellipse cx="18" cy="10" rx="9" ry="3.5" fill="#E2E8F0" stroke="#64748B" stroke-width="1"/>
+        <circle cx="18" cy="19.5" r="3.2" fill="#EF4444"/>
       </svg>`,
 
-      // 4. Bouteille d'Huile / Boisson (Verre translucide, liquide ambré doré et bouchon)
+      // 4. Bouteille d'Huile / Boisson Verre Translucide
       bottle: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M14 4H22V8L24 12V30C24 31.5 22.5 33 21 33H15C13.5 33 12 31.5 12 30V12L14 8V4Z" fill="#FBBF24" fill-opacity="0.85" stroke="#D97706" stroke-width="1.5"/>
-        <rect x="14" y="2" width="8" height="4" rx="1" fill="#16A34A" stroke="#15803D" stroke-width="1"/>
-        <rect x="12" y="18" width="12" height="9" rx="1.5" fill="#FFFFFF" fill-opacity="0.9" stroke="#E5E7EB" stroke-width="0.8"/>
-        <circle cx="18" cy="22.5" r="2.5" fill="#F59E0B"/>
-        <path d="M15 13V29" stroke="#FFFFFF" stroke-width="1.5" stroke-linecap="round" stroke-opacity="0.7"/>
+        <defs>
+          <linearGradient id="grd_bottle" x1="12" y1="4" x2="24" y2="32" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FDE047"/>
+            <stop offset="0.6" stop-color="#D97706"/>
+            <stop offset="1" stop-color="#B45309"/>
+          </linearGradient>
+        </defs>
+        <path d="M15 4H21V8L23.5 12V30C23.5 31.5 22 33 20 33H16C14 33 12.5 31.5 12.5 30V12L15 8V4Z" fill="url(#grd_bottle)" stroke="#78350F" stroke-width="1.2"/>
+        <rect x="15" y="2" width="6" height="4" rx="1.5" fill="#059669" stroke="#047857" stroke-width="0.8"/>
+        <rect x="13.5" y="18" width="9" height="8" rx="1.5" fill="#FFFFFF" fill-opacity="0.9"/>
+        <circle cx="18" cy="22" r="2" fill="#D97706"/>
       </svg>`,
 
-      // 5. Bidon d'Huile Végétale 5L (Bidon cubique jaune, poignée robuste et bouchon rouge)
+      // 5. Bidon d'Huile Végétale 5L Ergonomique
       jug: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <rect x="8" y="11" width="20" height="21" rx="3.5" fill="#FDE047" stroke="#CA8A04" stroke-width="1.5"/>
-        <rect x="14" y="4" width="8" height="6" rx="1" fill="#DC2626" stroke="#B91C1C" stroke-width="1.2"/>
-        <path d="M8 16C5 18 5 24 8 26" stroke="#CA8A04" stroke-width="2" stroke-linecap="round"/>
-        <rect x="11" y="16" width="14" height="11" rx="2" fill="#FEF08A" stroke="#EAB308" stroke-width="0.8"/>
-        <text x="18" y="23" font-size="4" font-family="sans-serif" font-weight="900" fill="#854D0E" text-anchor="middle">5 L</text>
+        <defs>
+          <linearGradient id="grd_jug" x1="8" y1="8" x2="28" y2="32" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FEF08A"/>
+            <stop offset="0.5" stop-color="#EAB308"/>
+            <stop offset="1" stop-color="#CA8A04"/>
+          </linearGradient>
+        </defs>
+        <rect x="8.5" y="11" width="19" height="21" rx="4" fill="url(#grd_jug)" stroke="#854D0E" stroke-width="1.2"/>
+        <rect x="14" y="4" width="8" height="6" rx="1.5" fill="#DC2626" stroke="#991B1B" stroke-width="1"/>
+        <path d="M8.5 16C5 18.5 5 24.5 8.5 27" stroke="#854D0E" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="12" y="17" width="12" height="9" rx="2" fill="#FFFFFF" fill-opacity="0.95"/>
+        <text x="18" y="23.5" font-size="4.2" font-family="sans-serif" font-weight="900" fill="#854D0E" text-anchor="middle">5 L</text>
       </svg>`,
 
-      // 6. Hamburger Gourmand (Pain sésame bombé, salade, tomate, cheddar, steak grillé)
+      // 6. Burger Gourmand 3D
       burger: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M6 14C6 8 11 5 18 5C25 5 30 8 30 14H6Z" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
-        <circle cx="12" cy="9" r="0.8" fill="#FEF3C7"/>
-        <circle cx="18" cy="7.5" r="0.8" fill="#FEF3C7"/>
-        <circle cx="24" cy="9" r="0.8" fill="#FEF3C7"/>
+        <defs>
+          <linearGradient id="grd_bun" x1="6" y1="6" x2="30" y2="15" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FBBF24"/>
+            <stop offset="1" stop-color="#B45309"/>
+          </linearGradient>
+        </defs>
+        <path d="M6 14C6 8 11.5 5 18 5C24.5 5 30 8 30 14H6Z" fill="url(#grd_bun)" stroke="#78350F" stroke-width="1.2"/>
         <path d="M5 16C7 14.5 9 17 11 15.5C13 14 15 16.5 17 15C19 13.5 21 16 23 14.5C25 13 27 15.5 29 14C30 15 31 16 31 16H5Z" fill="#22C55E"/>
         <rect x="6" y="17" width="24" height="3" rx="1.5" fill="#EF4444"/>
-        <path d="M8 20L18 24L28 20" stroke="#FBBF24" stroke-width="2" stroke-linejoin="round"/>
-        <rect x="6" y="22" width="24" height="4.5" rx="2" fill="#78350F" stroke="#451A03" stroke-width="1.2"/>
-        <rect x="7" y="27.5" width="22" height="3.5" rx="1.8" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/>
+        <rect x="6" y="22" width="24" height="4.5" rx="2" fill="#78350F"/>
+        <rect x="7" y="28" width="22" height="3.5" rx="1.8" fill="url(#grd_bun)"/>
       </svg>`,
 
-      // 7. Cuisse de Poulet Braisé Dorée (Glacée croustillante avec os blanc)
+      // 7. Poulet Braisé Doré
       chicken: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <ellipse cx="21" cy="14" rx="9" ry="8" fill="#B45309" stroke="#78350F" stroke-width="1.5"/>
-        <ellipse cx="20" cy="13" rx="7" ry="6" fill="#D97706"/>
-        <path d="M15 19L9 26" stroke="#F8FAFC" stroke-width="4.5" stroke-linecap="round"/>
-        <circle cx="8" cy="27" r="2.5" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
-        <circle cx="11" cy="28" r="2" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1"/>
+        <defs>
+          <linearGradient id="grd_chicken" x1="8" y1="8" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F97316"/>
+            <stop offset="1" stop-color="#7C2D12"/>
+          </linearGradient>
+        </defs>
+        <ellipse cx="17" cy="18" rx="11" ry="8.5" fill="url(#grd_chicken)" stroke="#431407" stroke-width="1.2"/>
+        <path d="M26 14C28 11 31 11 33 13C34 15 32 18 27 18" stroke="#431407" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="32" cy="12" r="2" fill="#FEF3C7"/>
       </svg>`,
 
-      // 8. Tasse Café Touba / Espresso (Céramique blanche, café foncé, crème et volutes de vapeur)
+      // 8. Tasse Café Touba / Espresso Moussant
       coffee: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M25 15C29 15 31 18 31 21C31 24 28 26 25 26" stroke="#E2E8F0" stroke-width="3" stroke-linecap="round"/>
-        <path d="M7 13H25V24C25 28 21 31 16 31C11 31 7 28 7 24V13Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-        <ellipse cx="16" cy="13" rx="9" ry="3" fill="#451A03"/>
-        <ellipse cx="16" cy="13" rx="7" ry="2" fill="#78350F"/>
-        <path d="M13 8C13 6 15 5 15 3M18 8C18 6 20 5 20 3" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round"/>
-        <ellipse cx="16" cy="32" rx="13" ry="2" fill="#E2E8F0"/>
+        <defs>
+          <linearGradient id="grd_cup" x1="8" y1="12" x2="26" y2="30" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#E2E8F0"/>
+            <stop offset="1" stop-color="#94A3B8"/>
+          </linearGradient>
+          <linearGradient id="grd_brew" x1="10" y1="12" x2="24" y2="18" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#78350F"/>
+            <stop offset="1" stop-color="#451A03"/>
+          </linearGradient>
+        </defs>
+        <path d="M9 13H25V24C25 28 21.5 30 17 30C12.5 30 9 28 9 24V13Z" fill="url(#grd_cup)" stroke="#475569" stroke-width="1.2"/>
+        <ellipse cx="17" cy="13" rx="8" ry="3.5" fill="url(#grd_brew)"/>
+        <path d="M25 15C29 15 29 22 25 22" stroke="#475569" stroke-width="2" stroke-linecap="round"/>
+        <path d="M14 8C14 6 15 5 15 3M17 9C17 7 18 6 18 4M20 8C20 6 21 5 21 3" stroke="#CBD5E1" stroke-width="1.2" stroke-linecap="round"/>
       </svg>`,
 
-      // 9. Canette Fraîche de Soda / Brasserie (Aluminium rouge et biseau argenté)
+      // 9. Canette Soda Fraîche 33cl
       soda: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <rect x="11" y="8" width="14" height="21" rx="3.5" fill="#E11D48" stroke="#BE123C" stroke-width="1.5"/>
-        <ellipse cx="18" cy="8" rx="7" ry="2.5" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.2"/>
-        <ellipse cx="18" cy="7.8" rx="4" ry="1.2" fill="#CBD5E1"/>
-        <ellipse cx="18" cy="29" rx="7" ry="2.5" fill="#BE123C"/>
-        <path d="M13 11V27" stroke="#FFFFFF" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round"/>
-        <path d="M15 19L21 16" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="grd_soda" x1="10" y1="8" x2="26" y2="30" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#EF4444"/>
+            <stop offset="0.7" stop-color="#DC2626"/>
+            <stop offset="1" stop-color="#991B1B"/>
+          </linearGradient>
+        </defs>
+        <rect x="11" y="8" width="14" height="22" rx="4" fill="url(#grd_soda)" stroke="#7F1D1D" stroke-width="1.2"/>
+        <ellipse cx="18" cy="8" rx="7" ry="2.5" fill="#E2E8F0" stroke="#64748B" stroke-width="0.8"/>
+        <ellipse cx="18" cy="30" rx="7" ry="2.5" fill="#7F1D1D"/>
+        <path d="M13 15C16 19 20 17 23 21" stroke="#FFFFFF" stroke-width="2.2" stroke-linecap="round" stroke-opacity="0.9"/>
       </svg>`,
 
-      // 10. Polo Coton & Mode (Polo bleu roi avec col côtelé, boutons blancs et coupe nette)
+      // 10. Polo Homme Élégant
       shirt: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M11 6L5 10L8 16L11 14V30H25V14L28 16L31 10L25 6H11Z" fill="#2563EB" stroke="#1D4ED8" stroke-width="1.5"/>
-        <path d="M13 6L18 12L23 6" fill="#1E40AF"/>
-        <line x1="18" y1="12" x2="18" y2="19" stroke="#1E40AF" stroke-width="1.5"/>
-        <circle cx="18" cy="14" r="0.8" fill="#FFFFFF"/>
-        <circle cx="18" cy="17" r="0.8" fill="#FFFFFF"/>
+        <defs>
+          <linearGradient id="grd_polo" x1="8" y1="8" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#3B82F6"/>
+            <stop offset="1" stop-color="#1D4ED8"/>
+          </linearGradient>
+        </defs>
+        <path d="M11 9L6 14L10 18L12 16V31H24V16L26 18L30 14L25 9H21L18 12L15 9H11Z" fill="url(#grd_polo)" stroke="#1E3A8A" stroke-width="1.2"/>
+        <path d="M15 9L18 13L21 9" stroke="#DBEAFE" stroke-width="1.2"/>
       </svg>`,
 
-      // 11. Smartphone AMOLED (Châssis noir titane, écran bord-à-bord et dégradé applications)
+      // 11. Smartphone Moderne Sans Bords
       phone: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <rect x="9" y="3" width="18" height="30" rx="4" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
-        <rect x="10.5" y="5.5" width="15" height="25" rx="2.5" fill="#1E293B"/>
-        <rect x="12" y="7" width="12" height="16" rx="1.5" fill="#38BDF8" fill-opacity="0.8"/>
-        <circle cx="18" cy="4.5" r="0.8" fill="#64748B"/>
-        <line x1="16" y1="28.5" x2="20" y2="28.5" stroke="#94A3B8" stroke-width="1.2" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="grd_screen" x1="12" y1="6" x2="24" y2="30" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#6366F1"/>
+            <stop offset="1" stop-color="#3B82F6"/>
+          </linearGradient>
+        </defs>
+        <rect x="10" y="4" width="16" height="28" rx="4.5" fill="#0F172A" stroke="#334155" stroke-width="1.5"/>
+        <rect x="11.5" y="6" width="13" height="24" rx="3" fill="url(#grd_screen)"/>
+        <circle cx="18" cy="8" r="0.8" fill="#0F172A"/>
+        <rect x="15" y="27.5" width="6" height="1" rx="0.5" fill="#FFFFFF" fill-opacity="0.8"/>
       </svg>`,
 
-      // 12. Flacon de Parfum Luxe (Verre cristal facetté, essence rose dorée et vaporisateur)
+      // 12. Parfum de Luxe Flacon Ambré
       perfume: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <rect x="10" y="14" width="16" height="18" rx="4" fill="#FCE7F3" stroke="#F472B6" stroke-width="1.5"/>
-        <rect x="12" y="17" width="12" height="12" rx="2" fill="#F43F5E" fill-opacity="0.85"/>
-        <rect x="15" y="8" width="6" height="6" fill="#F59E0B" stroke="#D97706" stroke-width="1"/>
-        <path d="M18 8V5M16 5H20" stroke="#F59E0B" stroke-width="1.5" stroke-linecap="round"/>
-        <path d="M21 5C23 4 25 5 26 6" stroke="#F472B6" stroke-width="1.2" stroke-linecap="round"/>
+        <defs>
+          <linearGradient id="grd_glass" x1="9" y1="12" x2="27" y2="30" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#F472B6"/>
+            <stop offset="0.6" stop-color="#EC4899"/>
+            <stop offset="1" stop-color="#BE185D"/>
+          </linearGradient>
+        </defs>
+        <rect x="10" y="13" width="16" height="17" rx="4" fill="url(#grd_glass)" stroke="#831843" stroke-width="1.2"/>
+        <rect x="14" y="9" width="8" height="4" rx="1.5" fill="#FBBF24" stroke="#B45309" stroke-width="0.8"/>
+        <rect x="16" y="5" width="4" height="4" rx="1" fill="#D97706"/>
+        <circle cx="18" cy="21.5" r="3" fill="#FFFFFF" fill-opacity="0.3"/>
       </svg>`,
 
-      // 13. Ampoule LED Allumée (Verre jaune rayonnant, filament visible et culot argenté)
+      // 13. Ampoule LED Économie
       lightbulb: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M12 18C10 15 10 10 14 6C18 2 24 4 25 9C26 13 22 16 21 18V22H14V18H12Z" fill="#FDE047" stroke="#EAB308" stroke-width="1.5"/>
-        <path d="M15 13C16 11 17 11 18 13C19 15 20 15 21 13" stroke="#CA8A04" stroke-width="1.2"/>
-        <rect x="14" y="22" width="7" height="4" fill="#94A3B8" stroke="#64748B" stroke-width="1"/>
-        <path d="M15 26C15 28 19 28 19 26" stroke="#64748B" stroke-width="1.2"/>
+        <defs>
+          <linearGradient id="grd_bulb" x1="10" y1="4" x2="26" y2="22" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#FDE047"/>
+            <stop offset="1" stop-color="#EAB308"/>
+          </linearGradient>
+        </defs>
+        <path d="M12 14C12 8.5 14.5 5 18 5C21.5 5 24 8.5 24 14C24 18 22 20 22 23H14C14 20 12 18 12 14Z" fill="url(#grd_bulb)" stroke="#A16207" stroke-width="1.2"/>
+        <rect x="15" y="24" width="6" height="3" rx="1" fill="#94A3B8"/>
+        <rect x="16" y="28" width="4" height="2" rx="1" fill="#64748B"/>
+        <path d="M18 10V15M16 12L20 12" stroke="#FFFFFF" stroke-width="1.4" stroke-linecap="round"/>
       </svg>`,
 
-      // 14. Moto de Livraison (Châssis rouge, selle cuir, moteur argenté et roues complètes)
+      // 14. Moto / Tricycle Express
       moto: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <circle cx="9" cy="24" r="5" fill="#1E293B" stroke="#0F172A" stroke-width="1.5"/>
-        <circle cx="9" cy="24" r="2.5" fill="#94A3B8"/>
-        <circle cx="27" cy="24" r="5" fill="#1E293B" stroke="#0F172A" stroke-width="1.5"/>
-        <circle cx="27" cy="24" r="2.5" fill="#94A3B8"/>
-        <path d="M9 24L15 18H21L27 24" stroke="#DC2626" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M13 14H19L16 18H10L13 14Z" fill="#DC2626"/>
-        <rect x="12" y="12" width="7" height="3" rx="1.5" fill="#0F172A"/>
-        <path d="M21 14L24 9H27" stroke="#475569" stroke-width="1.8" stroke-linecap="round"/>
+        <circle cx="10" cy="24" r="5" fill="#334155" stroke="#0F172A" stroke-width="1.5"/>
+        <circle cx="26" cy="24" r="5" fill="#334155" stroke="#0F172A" stroke-width="1.5"/>
+        <circle cx="10" cy="24" r="2" fill="#E2E8F0"/>
+        <circle cx="26" cy="24" r="2" fill="#E2E8F0"/>
+        <path d="M10 24L16 15H21L26 24" stroke="#DC2626" stroke-width="2.5" stroke-linejoin="round"/>
+        <path d="M18 12H24" stroke="#0F172A" stroke-width="2" stroke-linecap="round"/>
       </svg>`,
 
-      // 15. Poisson Frais / Capitaine (Écailles argent-cyan, nageoires et œil)
+      // 15. Poisson Braisé Capitaine
       fish: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M4 18C10 11 26 11 31 18C26 25 10 25 4 18Z" fill="#06B6D4" stroke="#0891B2" stroke-width="1.5"/>
-        <path d="M28 18L33 13V23L28 18Z" fill="#0891B2"/>
-        <circle cx="10" cy="16" r="1.5" fill="#FFFFFF"/>
-        <circle cx="10" cy="16" r="0.8" fill="#0F172A"/>
-        <path d="M15 14C17 18 17 18 15 22" stroke="#FFFFFF" stroke-width="1.2" stroke-linecap="round" stroke-opacity="0.8"/>
+        <defs>
+          <linearGradient id="grd_fish" x1="6" y1="12" x2="30" y2="24" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#06B6D4"/>
+            <stop offset="1" stop-color="#0E7490"/>
+          </linearGradient>
+        </defs>
+        <path d="M6 18C11 11 25 11 30 18C25 25 11 25 6 18Z" fill="url(#grd_fish)" stroke="#164E63" stroke-width="1.2"/>
+        <path d="M6 18L3 13V23L6 18Z" fill="#0E7490"/>
+        <circle cx="24" cy="16" r="1.5" fill="#FFFFFF"/>
+        <circle cx="24.5" cy="16" r="0.8" fill="#0F172A"/>
       </svg>`,
 
-      // 16. Outil / Bricolage (Clé anglaise et marteau d'artisan croisés)
+      // 16. Outillage Chantier & Clé
       tool: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M22 6L29 13L27 15L20 8L22 6Z" fill="#94A3B8" stroke="#475569" stroke-width="1.2"/>
-        <path d="M20 8L8 20L11 23L23 11" fill="#D97706" stroke="#92400E" stroke-width="1.5"/>
-        <path d="M10 9C7 10 7 14 9 16L21 28L25 24L13 12C11 10 11 7 14 6L11 4C9 4 8 7 10 9Z" fill="#CBD5E1" stroke="#475569" stroke-width="1.2"/>
+        <path d="M27 9C29 11 29 14 27 16L15 28C14 29 12 29 11 28L8 25C7 24 7 22 8 21L20 9C22 7 25 7 27 9Z" fill="#64748B" stroke="#334155" stroke-width="1.2"/>
+        <circle cx="24" cy="12" r="2.5" fill="#E2E8F0"/>
+        <rect x="8" y="24" width="6" height="3" transform="rotate(-45 8 24)" fill="#DC2626"/>
       </svg>`,
 
-      // 17. Gélules / Médicaments (Gélule bicolore rouge & blanc avec étui)
+      // 17. Pharmacie & Gélules
       pill: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <rect x="7" y="11" width="22" height="14" rx="7" transform="rotate(-30 18 18)" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
-        <path d="M7 18C7 14 10 11 14 11L18 11L18 25L14 25C10 25 7 22 7 18Z" transform="rotate(-30 18 18)" fill="#EF4444"/>
-        <line x1="18" y1="11" x2="18" y2="25" transform="rotate(-30 18 18)" stroke="#DC2626" stroke-width="1.2"/>
+        <rect x="8" y="14" width="20" height="8" rx="4" transform="rotate(-30 18 18)" fill="#EF4444" stroke="#991B1B" stroke-width="1.2"/>
+        <path d="M13 21L17 14L22 17L18 24Z" fill="#3B82F6"/>
       </svg>`,
 
-      // 18. Pagne Traditionnel / Robe (Motifs Wax flamboyants)
+      // 18. Pagne & Robe Tissée
       dress: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
-        <path d="M13 5L8 12L12 14L7 31H29L24 14L28 12L23 5H13Z" fill="#F43F5E" stroke="#BE123C" stroke-width="1.5"/>
-        <path d="M12 14L18 18L24 14" stroke="#FDE047" stroke-width="2"/>
-        <circle cx="18" cy="24" r="3" fill="#FDE047" stroke="#CA8A04" stroke-width="1"/>
+        <path d="M14 6H22L20 14L28 30H8L16 14L14 6Z" fill="#EC4899" stroke="#9D174D" stroke-width="1.2"/>
+        <path d="M8 30C12 28 16 32 20 28C24 32 28 28 28 30" stroke="#FCE7F3" stroke-width="1.5"/>
       </svg>`,
 
-      // Raccourcis et alias sécurisés
-      dish: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M6 14C6 8 11 5 18 5C25 5 30 8 30 14H6Z" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/><rect x="6" y="17" width="24" height="3" rx="1.5" fill="#EF4444"/><rect x="7" y="22" width="22" height="4" rx="2" fill="#78350F"/><rect x="7" y="27" width="22" height="3.5" rx="1.8" fill="#F59E0B"/></svg>`,
-      drink: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M10 6H26L23 29C23 30.5 21.5 32 20 32H16C14.5 32 13 30.5 13 29L10 6Z" fill="#A855F7" fill-opacity="0.85" stroke="#7E22CE" stroke-width="1.5"/><line x1="20" y1="4" x2="23" y2="1" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg>`,
-      tea: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M10 11H26L23 27C23 29 21 31 19 31H17C15 31 13 29 13 27L10 11Z" fill="#10B981" fill-opacity="0.85" stroke="#059669" stroke-width="1.5"/><path d="M16 6C16 4 18 3 20 5" stroke="#10B981" stroke-width="1.5" stroke-linecap="round"/></svg>`,
-      beer: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="10" y="11" width="16" height="19" rx="3" fill="#F59E0B" stroke="#D97706" stroke-width="1.5"/><path d="M26 15C29 15 31 17 31 20C31 23 29 25 26 25" stroke="#D97706" stroke-width="2.5"/><ellipse cx="18" cy="11" rx="8" ry="3.5" fill="#FFFFFF"/></svg>`,
-      sandwich: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M6 14C6 11 11 9 18 9C25 9 30 11 30 14V17H6V14Z" fill="#D97706"/><rect x="6" y="17" width="24" height="2" fill="#22C55E"/><rect x="6" y="19" width="24" height="2.5" fill="#DC2626"/><rect x="6" y="21.5" width="24" height="3" fill="#78350F"/><path d="M6 24.5H30V27C30 29 25 30 18 30C11 30 6 29 6 27V24.5Z" fill="#F59E0B"/></svg>`,
-      skewer: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><line x1="5" y1="31" x2="31" y2="5" stroke="#94A3B8" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="24" r="3.5" fill="#B45309"/><circle cx="18" cy="18" r="3.5" fill="#DC2626"/><circle cx="24" cy="12" r="3.5" fill="#B45309"/></svg>`,
-      sugar: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="8" y="10" width="20" height="19" rx="2.5" fill="#38BDF8" stroke="#0284C7" stroke-width="1.5"/><rect x="12" y="14" width="5" height="5" rx="1" fill="#FFFFFF"/><rect x="19" y="14" width="5" height="5" rx="1" fill="#FFFFFF"/><rect x="15" y="21" width="5" height="5" rx="1" fill="#FFFFFF"/></svg>`,
-      milk: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M12 4L18 2L24 4V8H12V4Z" fill="#0284C7"/><rect x="12" y="8" width="12" height="23" rx="1.5" fill="#FFFFFF" stroke="#0284C7" stroke-width="1.5"/><rect x="12" y="14" width="12" height="8" fill="#38BDF8"/><circle cx="18" cy="18" r="2.5" fill="#FFFFFF"/></svg>`,
-      pasta: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="9" y="6" width="18" height="25" rx="2" fill="#D97706" stroke="#B45309" stroke-width="1.5"/><rect x="13" y="12" width="10" height="12" rx="1.5" fill="#FEF3C7"/><line x1="15" y1="14" x2="15" y2="22" stroke="#D97706" stroke-width="1.2"/><line x1="18" y1="14" x2="18" y2="22" stroke="#D97706" stroke-width="1.2"/><line x1="21" y1="14" x2="21" y2="22" stroke="#D97706" stroke-width="1.2"/></svg>`,
-      tomato: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><circle cx="18" cy="20" r="11" fill="#DC2626" stroke="#991B1B" stroke-width="1.5"/><path d="M18 9V5M14 8L18 10L22 8" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/></svg>`,
-      apple: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M18 29C11 29 7 24 7 18C7 12 12 9 18 9C24 9 29 12 29 18C29 24 25 29 18 29Z" fill="#16A34A" stroke="#15803D" stroke-width="1.5"/><path d="M18 9V4C20 4 22 5 22 7" stroke="#854D0E" stroke-width="1.5" stroke-linecap="round"/></svg>`,
-      pants: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M9 5H27V29L20 27L18 17L16 27L9 29V5Z" fill="#1E40AF" stroke="#1D4ED8" stroke-width="1.5"/></svg>`,
-      shoe: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M5 23H31V27C31 29 29 30 27 30H8C5.5 30 5 28 5 26V23Z" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><path d="M7 23L13 11L21 14L28 17L31 23H7Z" fill="#EA580C"/></svg>`,
-      bag: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="7" y="12" width="22" height="19" rx="3.5" fill="#DB2777" stroke="#BE185D" stroke-width="1.5"/><path d="M13 12V8C13 5.5 15 4 18 4C21 4 23 5.5 23 8V12" stroke="#BE185D" stroke-width="2"/></svg>`,
-      laptop: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="7" y="7" width="22" height="15" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.5"/><rect x="9" y="9" width="18" height="11" fill="#38BDF8"/><path d="M3 26H33L30 22H6L3 26Z" fill="#94A3B8"/></svg>`,
-      headphones: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M6 22V16C6 9 11 5 18 5C25 5 30 9 30 16V22" stroke="#475569" stroke-width="3"/><rect x="4" y="20" width="5" height="9" rx="2.5" fill="#0F172A"/><rect x="27" y="20" width="5" height="9" rx="2.5" fill="#0F172A"/></svg>`,
-      charger: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="10" y="11" width="16" height="17" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><line x1="14" y1="5" x2="14" y2="11" stroke="#94A3B8" stroke-width="2.5"/><line x1="22" y1="5" x2="22" y2="11" stroke="#94A3B8" stroke-width="2.5"/><circle cx="18" cy="20" r="1.5" fill="#10B981"/></svg>`,
-      wire: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M8 6V16C8 22 28 22 28 16V6" stroke="#2563EB" stroke-width="2.5"/><rect x="6" y="4" width="4" height="4" fill="#94A3B8"/><rect x="26" y="4" width="4" height="4" fill="#94A3B8"/></svg>`,
-      usb: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="12" y="12" width="12" height="18" rx="2" fill="#475569"/><rect x="14" y="5" width="8" height="7" fill="#CBD5E1"/></svg>`,
-      soap: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="6" y="11" width="24" height="17" rx="5" fill="#EAB308" stroke="#CA8A04" stroke-width="1.5"/><ellipse cx="14" cy="16" rx="4" ry="2" fill="#FEF08A"/><circle cx="27" cy="8" r="2" fill="#38BDF8" fill-opacity="0.6"/><circle cx="23" cy="5" r="1.2" fill="#38BDF8" fill-opacity="0.6"/></svg>`,
-      cement: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="6" y="7" width="24" height="22" rx="2" fill="#78716C" stroke="#57534E" stroke-width="1.5"/><text x="18" y="20" font-size="5" font-family="sans-serif" font-weight="900" fill="#FFFFFF" text-anchor="middle">CPJ 42.5</text></svg>`,
-      paint: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="8" y="10" width="20" height="20" rx="3" fill="#94A3B8" stroke="#64748B" stroke-width="1.5"/><path d="M8 17H28V20C28 20 22 23 18 20C14 17 8 20 8 20V17Z" fill="#3B82F6"/></svg>`,
-      helmet: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M6 20C6 11 11 7 20 7C29 7 31 12 31 20V26H16L6 20Z" fill="#DC2626" stroke="#991B1B" stroke-width="1.5"/><path d="M14 17H29V23H14V17Z" fill="#0F172A"/></svg>`,
-      package: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M18 4L31 10V24L18 31L5 24V10L18 4Z" fill="#D97706" stroke="#B45309" stroke-width="1.5"/><path d="M18 4V31M5 10L18 17L31 10" stroke="#B45309" stroke-width="1.5"/></svg>`,
-      switch: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="6" y="6" width="24" height="24" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/><circle cx="18" cy="18" r="6" fill="#4F46E5"/><circle cx="18" cy="18" r="2.5" fill="#FFFFFF"/></svg>`,
-      lock: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="8" y="15" width="20" height="16" rx="3" fill="#F59E0B" stroke="#B45309" stroke-width="1.5"/><path d="M13 15V10C13 7 15 5 18 5C21 5 23 7 23 10V15" stroke="#94A3B8" stroke-width="3"/></svg>`,
-      pipe: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M6 10H18C22 10 26 14 26 18V30" stroke="#0D9488" stroke-width="5" stroke-linecap="round"/></svg>`,
-      iron: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><line x1="6" y1="8" x2="30" y2="8" stroke="#475569" stroke-width="3"/><line x1="6" y1="18" x2="30" y2="18" stroke="#475569" stroke-width="3"/><line x1="6" y1="28" x2="30" y2="28" stroke="#475569" stroke-width="3"/></svg>`,
-      truck: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><rect x="4" y="10" width="18" height="15" rx="1.5" fill="#3B82F6"/><path d="M22 14H28L32 19V25H22V14Z" fill="#60A5FA"/><circle cx="10" cy="27" r="3.5" fill="#1E293B"/><circle cx="26" cy="27" r="3.5" fill="#1E293B"/></svg>`,
-      cart: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none"><path d="M5 6H9L12 21H27L30 10H10" stroke="#059669" stroke-width="2.5" stroke-linecap="round"/><circle cx="14" cy="26" r="2.5" fill="#047857"/><circle cx="25" cy="26" r="2.5" fill="#047857"/></svg>`
+      // 19. Plat Chaud & Cloche
+      dish: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M6 22C6 15 11 11 18 11C25 11 30 15 30 22H6Z" fill="#F59E0B" stroke="#B45309" stroke-width="1.2"/>
+        <circle cx="18" cy="9.5" r="2" fill="#D97706"/>
+        <rect x="4" y="23" width="28" height="3" rx="1.5" fill="#64748B"/>
+      </svg>`,
+
+      // 20. Verre Cocktail & Boisson Fraîche
+      drink: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M9 7L18 18V28M13 28H23M9 7H27L22 14H14L9 7Z" stroke="#8B5CF6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="21" cy="7" r="3" fill="#EC4899"/>
+      </svg>`,
+
+      // 21. Thé Traditionnel Menthe
+      tea: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="11" y="10" width="14" height="20" rx="3" fill="#10B981" fill-opacity="0.8" stroke="#047857" stroke-width="1.2"/>
+        <path d="M14 6C14 4 15 3 15 2M18 7C18 5 19 4 19 3M21 6C21 4 22 3 22 2" stroke="#6EE7B7" stroke-width="1.2" stroke-linecap="round"/>
+      </svg>`,
+
+      // 22. Bière Fraîche Mousseuse
+      beer: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="10" y="11" width="14" height="19" rx="3" fill="#F59E0B" stroke="#B45309" stroke-width="1.2"/>
+        <path d="M24 14C27 14 27 23 24 23" stroke="#B45309" stroke-width="2" stroke-linecap="round"/>
+        <path d="M8 11C8 9 10 8 13 9C15 7 19 7 21 9C23 8 26 9 26 11H8Z" fill="#FFFFFF"/>
+      </svg>`,
+
+      // 23. Chawarma & Sandwich Roulé
+      sandwich: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="8" y="13" width="20" height="10" rx="5" transform="rotate(-15 18 18)" fill="#F59E0B" stroke="#B45309" stroke-width="1.2"/>
+        <path d="M12 18L18 16L24 18" stroke="#22C55E" stroke-width="2"/>
+      </svg>`,
+
+      // 24. Brochettes Grillées
+      skewer: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <line x1="6" y1="30" x2="30" y2="6" stroke="#B45309" stroke-width="2" stroke-linecap="round"/>
+        <rect x="10" y="18" width="6" height="6" rx="1.5" transform="rotate(45 10 18)" fill="#DC2626"/>
+        <rect x="16" y="12" width="6" height="6" rx="1.5" transform="rotate(45 16 12)" fill="#D97706"/>
+      </svg>`,
+
+      // 25. Sucre Pur en Morceaux
+      sugar: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="8" y="14" width="11" height="11" rx="2" fill="#E0F2FE" stroke="#0284C7" stroke-width="1.2"/>
+        <rect x="17" y="9" width="11" height="11" rx="2" fill="#BAE6FD" stroke="#0284C7" stroke-width="1.2"/>
+      </svg>`,
+
+      // 26. Lait en Brique / Poudre
+      milk: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="11" y="11" width="14" height="20" rx="3" fill="#3B82F6" stroke="#1D4ED8" stroke-width="1.2"/>
+        <path d="M11 11L15 6H21L25 11" fill="#60A5FA"/>
+        <circle cx="18" cy="21" r="3" fill="#FFFFFF"/>
+      </svg>`,
+
+      // 27. Pâtes Alimentaires
+      pasta: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M10 8V28M14 8V28M18 8V28M22 8V28M26 8V28" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/>
+        <rect x="8" y="16" width="20" height="4" rx="1" fill="#DC2626"/>
+      </svg>`,
+
+      // 28. Tomate Ronde Purée
+      tomato: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <circle cx="18" cy="19" r="10" fill="#EF4444" stroke="#B91C1C" stroke-width="1.2"/>
+        <path d="M18 9V6M15 8L18 9L21 8" stroke="#16A34A" stroke-width="2" stroke-linecap="round"/>
+      </svg>`,
+
+      // 29. Pomme & Fruits Frais
+      apple: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <circle cx="15" cy="19" r="8" fill="#22C55E" stroke="#15803D" stroke-width="1.2"/>
+        <circle cx="21" cy="19" r="8" fill="#22C55E" stroke="#15803D" stroke-width="1.2"/>
+        <path d="M18 11C18 7 21 6 23 6" stroke="#78350F" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>`,
+
+      // 30. Pantalon Jeans Denim
+      pants: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M10 6H26V13L24 30H19L18 16L17 30H12L10 13V6Z" fill="#2563EB" stroke="#1E40AF" stroke-width="1.2"/>
+        <line x1="10" y1="9" x2="26" y2="9" stroke="#93C5FD" stroke-width="1.5"/>
+      </svg>`,
+
+      // 31. Chaussure Élégante
+      shoe: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M6 22L12 16H20L28 20V26H6V22Z" fill="#78350F" stroke="#451A03" stroke-width="1.2"/>
+        <rect x="6" y="24" width="22" height="3" rx="1" fill="#0F172A"/>
+      </svg>`,
+
+      // 32. Sac à Main Maroquinerie
+      bag: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="8" y="14" width="20" height="17" rx="4" fill="#EC4899" stroke="#9D174D" stroke-width="1.2"/>
+        <path d="M13 14V9C13 6.5 15 5 18 5C21 5 23 6.5 23 9V14" stroke="#9D174D" stroke-width="2"/>
+      </svg>`,
+
+      // 33. Ordinateur Portable
+      laptop: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="8" y="8" width="20" height="15" rx="2" fill="#0F172A" stroke="#334155" stroke-width="1.2"/>
+        <rect x="10" y="10" width="16" height="11" rx="1" fill="#38BDF8"/>
+        <path d="M5 26H31L28 23H8L5 26Z" fill="#64748B"/>
+      </svg>`,
+
+      // 34. Écouteurs Sans-Fil
+      headphones: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M8 19C8 13.5 12.5 9 18 9C23.5 9 28 13.5 28 19" stroke="#6366F1" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="6" y="19" width="4" height="8" rx="2" fill="#4F46E5"/>
+        <rect x="26" y="19" width="4" height="8" rx="2" fill="#4F46E5"/>
+      </svg>`,
+
+      // 35. Chargeur Rapide USB-C
+      charger: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="9" y="12" width="18" height="18" rx="4" fill="#E2E8F0" stroke="#94A3B8" stroke-width="1.2"/>
+        <rect x="13" y="5" width="2.5" height="7" rx="1" fill="#64748B"/>
+        <rect x="20.5" y="5" width="2.5" height="7" rx="1" fill="#64748B"/>
+        <rect x="15" y="24" width="6" height="2" rx="1" fill="#3B82F6"/>
+      </svg>`,
+
+      // 36. Câble Tressé
+      wire: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M7 18C7 11 15 11 18 18C21 25 29 25 29 18" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+      </svg>`,
+
+      // 37. Clé USB Métal
+      usb: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="11" y="14" width="14" height="17" rx="2" fill="#475569" stroke="#1E293B" stroke-width="1.2"/>
+        <rect x="14" y="6" width="8" height="8" rx="1" fill="#CBD5E1" stroke="#64748B" stroke-width="1"/>
+      </svg>`,
+
+      // 38. Pain de Savon Surgras
+      soap: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="8" y="12" width="20" height="14" rx="6" fill="#14B8A6" stroke="#0F766E" stroke-width="1.2"/>
+        <ellipse cx="14" cy="16" rx="3" ry="1.5" fill="#FFFFFF" fill-opacity="0.5"/>
+      </svg>`,
+
+      // 39. Sac de Ciment BTP Portland
+      cement: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <defs>
+          <linearGradient id="grd_cement" x1="8" y1="8" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#94A3B8"/>
+            <stop offset="1" stop-color="#475569"/>
+          </linearGradient>
+        </defs>
+        <rect x="8" y="8" width="20" height="22" rx="3" fill="url(#grd_cement)" stroke="#334155" stroke-width="1.2"/>
+        <rect x="11" y="14" width="14" height="9" fill="#DC2626"/>
+        <text x="18" y="20.5" font-size="4" font-family="sans-serif" font-weight="900" fill="#FFFFFF" text-anchor="middle">CPJ 42.5</text>
+      </svg>`,
+
+      // 40. Pot de Peinture Pro
+      paint: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M9 14L11 30H25L27 14H9Z" fill="#0EA5E9" stroke="#0369A1" stroke-width="1.2"/>
+        <ellipse cx="18" cy="14" rx="9" ry="3" fill="#E0F2FE" stroke="#0369A1" stroke-width="1"/>
+        <path d="M8 14C8 7 28 7 28 14" stroke="#64748B" stroke-width="1.5"/>
+      </svg>`,
+
+      // 41. Casque Moto Sécurité
+      helmet: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M8 20C8 12 13 8 20 8C27 8 30 12 30 20C30 26 27 28 20 28H14L8 20Z" fill="#DC2626" stroke="#991B1B" stroke-width="1.2"/>
+        <rect x="16" y="15" width="13" height="6" rx="2" fill="#0F172A"/>
+      </svg>`,
+
+      // 42. Carton Colis & Expédition
+      package: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M18 4L30 10V24L18 30L6 24V10L18 4Z" fill="#D97706" stroke="#78350F" stroke-width="1.2"/>
+        <path d="M18 4V17M30 10L18 17M6 10L18 17" stroke="#FEF3C7" stroke-width="1.2"/>
+      </svg>`,
+
+      // 43. Interrupteur & Énergie
+      switch: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="9" y="12" width="18" height="12" rx="6" fill="#10B981"/>
+        <circle cx="21" cy="18" r="4.5" fill="#FFFFFF" stroke="#047857" stroke-width="1"/>
+      </svg>`,
+
+      // 44. Cadenas Haute Sécurité
+      lock: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="9" y="15" width="18" height="15" rx="3.5" fill="#F59E0B" stroke="#B45309" stroke-width="1.2"/>
+        <path d="M13 15V10C13 7.2 15.2 5 18 5C20.8 5 23 7.2 23 10V15" stroke="#64748B" stroke-width="2.5" stroke-linecap="round"/>
+        <circle cx="18" cy="22" r="2" fill="#78350F"/>
+      </svg>`,
+
+      // 45. Tuyau & Plomberie
+      pipe: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M8 12H20C24 12 28 16 28 20V28" stroke="#3B82F6" stroke-width="4" stroke-linecap="round"/>
+      </svg>`,
+
+      // 46. Fer à Béton Industriel
+      iron: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <line x1="8" y1="28" x2="28" y2="8" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+        <line x1="12" y1="22" x2="16" y2="26" stroke="#CBD5E1" stroke-width="2"/>
+        <line x1="17" y1="17" x2="21" y2="21" stroke="#CBD5E1" stroke-width="2"/>
+        <line x1="22" y1="12" x2="26" y2="16" stroke="#CBD5E1" stroke-width="2"/>
+      </svg>`,
+
+      // 47. Camion Livraison Chantier
+      truck: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <rect x="5" y="12" width="17" height="13" rx="2" fill="#3B82F6" stroke="#1D4ED8" stroke-width="1.2"/>
+        <path d="M22 16H27L30 20V25H22V16Z" fill="#60A5FA" stroke="#1D4ED8" stroke-width="1.2"/>
+        <circle cx="10" cy="27" r="3" fill="#1E293B"/>
+        <circle cx="26" cy="27" r="3" fill="#1E293B"/>
+      </svg>`,
+
+      // 48. Panier de Caisse Rapide
+      cart: `<svg class="w-8 h-8" viewBox="0 0 36 36" fill="none">
+        <path d="M7 8H11L14 22H27L30 11H12" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="15" cy="27" r="2.5" fill="#047857"/>
+        <circle cx="25" cy="27" r="2.5" fill="#047857"/>
+      </svg>`
     };
 
-/* ========================================================
-       CATALOGUE DES PRODUITS RÉELS DU QUOTIDIEN (BURKINA & UEMOA)
-       (Quincaillerie, Restauration, Alimentation, Boissons, Tech...)
-       ======================================================== */
-        const DAILY_PRODUCTS_CATALOG = [
+const DAILY_PRODUCTS_CATALOG = [
       // 1. Alimentation Générale & Épicerie
       { id: 'v_riz_parfume', name: 'Sac de Riz Blanc Parfumé', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Sac', icon: 'rice_sack', color: 'bg-emerald-500/15 text-emerald-600 border-emerald-500/30' },
       { id: 'v_riz_local', name: 'Sac de Riz Local Brisé', domain: 'grocery', cat: 'Alimentation & Épicerie', unit: 'Sac', icon: 'rice_sack', color: 'bg-emerald-500/15 text-emerald-600 border-emerald-500/30' },
@@ -11262,7 +11551,7 @@
     let selectedProductVisual = { type: 'svg', iconKey: 'cement', badgeColor: 'bg-amber-600/10 text-amber-600 border-amber-600/20' };
 
     function openIconPickerModal() {
-      renderDailyProductsGrid('all', '');
+      switchIconPickerTab('photos');
       const modal = document.getElementById('modal-icon-picker');
       if (modal) modal.classList.remove('hidden');
     }
@@ -11320,47 +11609,451 @@
     window.confirmMonogramSelection = confirmMonogramSelection;
 
     
+        /* ========================================================
+       PHOTOTHÈQUE COMMERCIALE STUDIO ULTRA-HD 4K (PACKSHOTS RÉELS)
+       Photos réelles de produits commerciaux prêtes à l'emploi
+       ======================================================== */
     const REAL_PRODUCTS_PHOTOS = [
-      { id: 'p_riz', name: 'Sac de Riz Blanc 25kg / 50kg', cat: 'Alimentation', iconKey: 'rice_sack', tag: 'RIZ PARFUMÉ', color: 'from-amber-100 to-amber-200 text-amber-900 border-amber-300' },
-      { id: 'p_huile_dinor', name: 'Bouteille Huile Dinor / Végétale 1L', cat: 'Alimentation', iconKey: 'bottle', tag: 'HUILE RAFFINÉE', color: 'from-yellow-100 to-amber-200 text-yellow-900 border-yellow-300' },
-      { id: 'p_huile_5l', name: 'Bidon d\'Huile 5L Végétale', cat: 'Alimentation', iconKey: 'jug', tag: 'BIDON 5L', color: 'from-amber-200 to-yellow-300 text-amber-950 border-amber-400' },
-      { id: 'p_baguette', name: 'Baguette Artisanale Croustillante', cat: 'Alimentation', iconKey: 'bread', tag: 'PAIN FRAIS', color: 'from-amber-100 to-orange-200 text-amber-950 border-amber-300' },
-      { id: 'p_tomate', name: 'Boîte Tomate Concentrée', cat: 'Alimentation', iconKey: 'can', tag: 'TOMATE PURE', color: 'from-rose-100 to-red-200 text-rose-950 border-rose-300' },
-      { id: 'p_sucre', name: 'Paquet de Sucre en Morceaux', cat: 'Alimentation', iconKey: 'sugar', tag: 'SUCRE RAFFINÉ', color: 'from-sky-100 to-blue-200 text-sky-950 border-sky-300' },
-      { id: 'p_lait', name: 'Boîte Lait Poudre 900g', cat: 'Alimentation', iconKey: 'milk', tag: 'LAIT EN POUDRE', color: 'from-blue-100 to-indigo-200 text-blue-950 border-blue-300' },
-      { id: 'p_pates', name: 'Carton Pâtes Spaghetti 500g', cat: 'Alimentation', iconKey: 'pasta', tag: 'PÂTES BLÉ', color: 'from-amber-100 to-yellow-200 text-amber-950 border-amber-300' },
-      { id: 'p_poulet', name: 'Poulet Bicyclette Braisé Frais', cat: 'Restauration', iconKey: 'chicken', tag: 'BRAISÉ MAQUIS', color: 'from-orange-100 to-amber-200 text-orange-950 border-orange-300' },
-      { id: 'p_poisson', name: 'Poisson Capitaine / Carpe Grillée', cat: 'Restauration', iconKey: 'fish', tag: 'POISSON BRAISÉ', color: 'from-cyan-100 to-teal-200 text-cyan-950 border-cyan-300' },
-      { id: 'p_burger', name: 'Hamburger Maison Gourmand', cat: 'Restauration', iconKey: 'burger', tag: 'FAST FOOD', color: 'from-amber-100 to-orange-200 text-amber-950 border-amber-300' },
-      { id: 'p_chawarma', name: 'Chawarma Viande / Poulet', cat: 'Restauration', iconKey: 'sandwich', tag: 'CHAWARMA', color: 'from-orange-100 to-red-200 text-orange-950 border-orange-300' },
-      { id: 'p_coca', name: 'Canette Soda Fraîche 33cl', cat: 'Boissons', iconKey: 'soda', tag: 'SODA CANETTE', color: 'from-red-100 to-rose-200 text-red-950 border-red-300' },
-      { id: 'p_brakina', name: 'Bouteille Bière Brakina / Beaufort', cat: 'Boissons', iconKey: 'beer', tag: 'BRUXELLES / FASO', color: 'from-amber-100 to-yellow-200 text-amber-950 border-amber-300' },
-      { id: 'p_cafe', name: 'Tasse Café Touba Chaud', cat: 'Boissons', iconKey: 'coffee', tag: 'CAFÉ TOUBA', color: 'from-stone-200 to-amber-200 text-stone-900 border-stone-300' },
-      { id: 'p_eau', name: 'Pack Eau Minérale (6x1.5L)', cat: 'Boissons', iconKey: 'bottle', tag: 'EAU PURIFIÉE', color: 'from-cyan-100 to-sky-200 text-cyan-950 border-cyan-300' },
-      { id: 'p_polo', name: 'Polo Coton Piqué Homme', cat: 'Boutique', iconKey: 'shirt', tag: 'PRÊT-À-PORTER', color: 'from-blue-100 to-indigo-200 text-blue-950 border-blue-300' },
-      { id: 'p_danfani', name: 'Pagne Faso Dan Fani Tissé', cat: 'Boutique', iconKey: 'dress', tag: 'TRADITIONNEL', color: 'from-rose-100 to-pink-200 text-rose-950 border-rose-300' },
-      { id: 'p_smartphone', name: 'Smartphone Android / iOS', cat: 'GSM & Tech', iconKey: 'phone', tag: 'SMARTPHONE', color: 'from-slate-200 to-indigo-200 text-slate-900 border-slate-300' },
-      { id: 'p_parfum', name: 'Flacon Parfum / Eau de Toilette', cat: 'Cosmétiques', iconKey: 'perfume', tag: 'PARFUM LUXE', color: 'from-pink-100 to-purple-200 text-pink-950 border-pink-300' },
-      { id: 'p_karite', name: 'Pot de Beurre de Karité Pur 500g', cat: 'Cosmétiques', iconKey: 'soap', tag: 'BIO ARTISANAL', color: 'from-yellow-100 to-amber-200 text-yellow-950 border-yellow-300' },
-      { id: 'p_ampoule', name: 'Ampoule LED Haute Économie', cat: 'Maison', iconKey: 'lightbulb', tag: 'LED 15W', color: 'from-amber-100 to-yellow-200 text-amber-950 border-amber-300' },
-      { id: 'p_moto', name: 'Moto / Tricycle de Livraison', cat: 'Auto & Moto', iconKey: 'moto', tag: 'LIVRAISON EXPRESS', color: 'from-red-100 to-slate-200 text-red-950 border-red-300' }
+      // 1. Alimentation Générale & Épicerie
+      {
+        id: 'p_riz_parfume',
+        name: 'Sac de Riz Blanc Parfumé 25kg / 50kg',
+        cat: 'Alimentation',
+        tag: 'RIZ DE LUXE',
+        photoUrl: 'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-500/20 to-emerald-500/20'
+      },
+      {
+        id: 'p_riz_local',
+        name: 'Sac de Riz Local Brisé 25kg',
+        cat: 'Alimentation',
+        tag: 'RIZ LOCAL',
+        photoUrl: 'https://images.unsplash.com/photo-1536304929831-ee1ca9d44906?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-600/20 to-yellow-500/20'
+      },
+      {
+        id: 'p_huile_dinor',
+        name: 'Bouteille Huile de Table Raffinée 1L',
+        cat: 'Alimentation',
+        tag: 'HUILE RAFFINÉE',
+        photoUrl: 'https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=600&q=80',
+        color: 'from-yellow-500/20 to-amber-500/20'
+      },
+      {
+        id: 'p_huile_5l',
+        name: 'Bidon d\'Huile Végétale 5L',
+        cat: 'Alimentation',
+        tag: 'BIDON 5L',
+        photoUrl: 'https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-500/20 to-orange-500/20'
+      },
+      {
+        id: 'p_baguette',
+        name: 'Baguettes de Pain Frais Croustillantes',
+        cat: 'Alimentation',
+        tag: 'BOULANGERIE',
+        photoUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-600/20 to-yellow-600/20'
+      },
+      {
+        id: 'p_tomate',
+        name: 'Boîte Tomate Concentrée Purée',
+        cat: 'Alimentation',
+        tag: 'CONSERVE',
+        photoUrl: 'https://images.unsplash.com/photo-1534483509719-3feaee7c30da?auto=format&fit=crop&w=600&q=80',
+        color: 'from-rose-500/20 to-red-600/20'
+      },
+      {
+        id: 'p_sucre',
+        name: 'Paquet de Sucre Blanc en Morceaux (1kg)',
+        cat: 'Alimentation',
+        tag: 'SUCRE RAFFINÉ',
+        photoUrl: 'https://images.unsplash.com/photo-1581441363689-1f3c3c414635?auto=format&fit=crop&w=600&q=80',
+        color: 'from-sky-500/20 to-blue-500/20'
+      },
+      {
+        id: 'p_lait',
+        name: 'Boîte de Lait en Poudre 900g',
+        cat: 'Alimentation',
+        tag: 'LAIT DE QUALITÉ',
+        photoUrl: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=600&q=80',
+        color: 'from-blue-500/20 to-indigo-500/20'
+      },
+      {
+        id: 'p_pates',
+        name: 'Carton Pâtes Spaghetti 500g',
+        cat: 'Alimentation',
+        tag: 'PÂTES ALIMENTAIRES',
+        photoUrl: 'https://images.unsplash.com/photo-1551462147-ff29053bfc14?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-500/20 to-yellow-500/20'
+      },
+      {
+        id: 'p_fruits',
+        name: 'Fruits & Légumes Frais du Marché',
+        cat: 'Alimentation',
+        tag: 'MARCHÉ FRAIS',
+        photoUrl: 'https://images.unsplash.com/photo-1610832958506-aa56368176cf?auto=format&fit=crop&w=600&q=80',
+        color: 'from-emerald-500/20 to-teal-500/20'
+      },
+
+      // 2. Boissons & Brasserie
+      {
+        id: 'p_coca',
+        name: 'Canette Soda Fraîche Glacée 33cl',
+        cat: 'Boissons',
+        tag: 'SODA GLACÉ',
+        photoUrl: 'https://images.unsplash.com/photo-1622483767028-3f66f32aef97?auto=format&fit=crop&w=600&q=80',
+        color: 'from-red-600/20 to-rose-600/20'
+      },
+      {
+        id: 'p_brakina',
+        name: 'Bouteille Bière Brakina / Beaufort 65cl',
+        cat: 'Boissons',
+        tag: 'BRASSERIE FASO',
+        photoUrl: 'https://images.unsplash.com/photo-1608270190566-4c9103e5c942?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-500/20 to-yellow-600/20'
+      },
+      {
+        id: 'p_eau',
+        name: 'Pack Eau Minérale Naturelle (6x1.5L)',
+        cat: 'Boissons',
+        tag: 'EAU PURIFIÉE',
+        photoUrl: 'https://images.unsplash.com/photo-1548839140-29a749e1bc4e?auto=format&fit=crop&w=600&q=80',
+        color: 'from-cyan-500/20 to-blue-500/20'
+      },
+      {
+        id: 'p_jus_naturel',
+        name: 'Bouteille Jus Naturel (Bissap / Gingembre)',
+        cat: 'Boissons',
+        tag: 'JUS ARTISANAL',
+        photoUrl: 'https://images.unsplash.com/photo-1613478223719-2ab802602423?auto=format&fit=crop&w=600&q=80',
+        color: 'from-purple-500/20 to-pink-500/20'
+      },
+      {
+        id: 'p_energy',
+        name: 'Canette Boisson Énergisante XXL Energy',
+        cat: 'Boissons',
+        tag: 'ÉNERGISANT',
+        photoUrl: 'https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80',
+        color: 'from-yellow-500/20 to-red-500/20'
+      },
+      {
+        id: 'p_cafe',
+        name: 'Tasse Café Espresso Crémeux / Touba',
+        cat: 'Boissons',
+        tag: 'CAFÉ FRAIS',
+        photoUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80',
+        color: 'from-stone-600/20 to-amber-700/20'
+      },
+      {
+        id: 'p_the',
+        name: 'Verre Thé Vert Menthe Traditionnel',
+        cat: 'Boissons',
+        tag: 'THÉ MENTHE',
+        photoUrl: 'https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80',
+        color: 'from-emerald-600/20 to-teal-600/20'
+      },
+
+      // 3. Quincaillerie, BTP & Matériaux
+      {
+        id: 'p_ciment',
+        name: 'Sac de Ciment Portland CPJ 42.5 (50kg)',
+        cat: 'Quincaillerie',
+        tag: 'CIMENT INDUSTRIEL',
+        photoUrl: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80',
+        color: 'from-stone-500/20 to-zinc-600/20'
+      },
+      {
+        id: 'p_fer',
+        name: 'Fer à Béton Haute Adhérence Ø 10mm / 12mm',
+        cat: 'Quincaillerie',
+        tag: 'MÉTALLURGIE BTP',
+        photoUrl: 'https://images.unsplash.com/photo-1535813547-99c456a41d4a?auto=format&fit=crop&w=600&q=80',
+        color: 'from-slate-600/20 to-zinc-700/20'
+      },
+      {
+        id: 'p_peinture',
+        name: 'Seau de Peinture Blanche Mate 15L Pro',
+        cat: 'Quincaillerie',
+        tag: 'PEINTURE BÂTIMENT',
+        photoUrl: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?auto=format&fit=crop&w=600&q=80',
+        color: 'from-cyan-500/20 to-sky-600/20'
+      },
+      {
+        id: 'p_ampoule',
+        name: 'Ampoule LED Haute Économie 15W',
+        cat: 'Quincaillerie',
+        tag: 'ÉCLAIRAGE LED',
+        photoUrl: 'https://images.unsplash.com/photo-1507668077129-56e32842fceb?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-400/20 to-yellow-500/20'
+      },
+      {
+        id: 'p_cable',
+        name: 'Câble Électrique Cuivre 1.5mm² (Rouleau 100m)',
+        cat: 'Quincaillerie',
+        tag: 'ÉLECTRICITÉ',
+        photoUrl: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=600&q=80',
+        color: 'from-blue-600/20 to-indigo-600/20'
+      },
+      {
+        id: 'p_cadenas',
+        name: 'Cadenas Blindé Haute Sécurité Laiton',
+        cat: 'Quincaillerie',
+        tag: 'SÉCURITÉ',
+        photoUrl: 'https://images.unsplash.com/photo-1584433144859-1fc3ab64a957?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-500/20 to-yellow-600/20'
+      },
+      {
+        id: 'p_outils',
+        name: 'Coffret d\'Outillage Professionnel Chantier',
+        cat: 'Quincaillerie',
+        tag: 'OUTILLAGE',
+        photoUrl: 'https://images.unsplash.com/photo-1581783898377-1c85bf937427?auto=format&fit=crop&w=600&q=80',
+        color: 'from-slate-600/20 to-amber-600/20'
+      },
+
+      // 4. GSM, Informatique & Multimédia
+      {
+        id: 'p_smartphone',
+        name: 'Smartphone Android / iOS Écran Sans Bord',
+        cat: 'GSM & Tech',
+        tag: 'SMARTPHONE',
+        photoUrl: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80',
+        color: 'from-slate-700/20 to-indigo-600/20'
+      },
+      {
+        id: 'p_laptop',
+        name: 'Ordinateur Portable Aluminium Haute Performance',
+        cat: 'GSM & Tech',
+        tag: 'PC PORTABLE',
+        photoUrl: 'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?auto=format&fit=crop&w=600&q=80',
+        color: 'from-slate-500/20 to-sky-600/20'
+      },
+      {
+        id: 'p_ecouteurs',
+        name: 'Écouteurs Sans-Fil Bluetooth TWS Stéréo',
+        cat: 'GSM & Tech',
+        tag: 'AUDIO SANS FIL',
+        photoUrl: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?auto=format&fit=crop&w=600&q=80',
+        color: 'from-zinc-700/20 to-stone-800/20'
+      },
+      {
+        id: 'p_chargeur',
+        name: 'Chargeur Rapide Mural USB-C 33W / 65W',
+        cat: 'GSM & Tech',
+        tag: 'CHARGEUR RAPIDE',
+        photoUrl: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?auto=format&fit=crop&w=600&q=80',
+        color: 'from-teal-500/20 to-cyan-600/20'
+      },
+      {
+        id: 'p_cle_usb',
+        name: 'Clé USB 64 Go Métallique Chromée',
+        cat: 'GSM & Tech',
+        tag: 'STOCKAGE USB',
+        photoUrl: 'https://images.unsplash.com/photo-1624823183493-5f65ff14187e?auto=format&fit=crop&w=600&q=80',
+        color: 'from-slate-400/20 to-slate-600/20'
+      },
+
+      // 5. Cosmétiques, Parfumerie & Beauté
+      {
+        id: 'p_parfum',
+        name: 'Flacon de Parfum de Luxe Ambré 100ml',
+        cat: 'Cosmétiques',
+        tag: 'PARFUM DE LUXE',
+        photoUrl: 'https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?auto=format&fit=crop&w=600&q=80',
+        color: 'from-pink-500/20 to-purple-600/20'
+      },
+      {
+        id: 'p_karite',
+        name: 'Pot de Beurre de Karité Bio Artisanal 500g',
+        cat: 'Cosmétiques',
+        tag: 'KARITÉ PUR',
+        photoUrl: 'https://images.unsplash.com/photo-1608248597359-2b0285a2f8b5?auto=format&fit=crop&w=600&q=80',
+        color: 'from-yellow-600/20 to-amber-700/20'
+      },
+      {
+        id: 'p_savon',
+        name: 'Pain de Savon Artisanal Soin Douceur',
+        cat: 'Cosmétiques',
+        tag: 'SOIN & TOILETTE',
+        photoUrl: 'https://images.unsplash.com/photo-1607006314605-618d80e42042?auto=format&fit=crop&w=600&q=80',
+        color: 'from-teal-500/20 to-emerald-600/20'
+      },
+      {
+        id: 'p_pharmacie',
+        name: 'Produits Parapharmacie & Soins Santé',
+        cat: 'Cosmétiques',
+        tag: 'SANTÉ & SOINS',
+        photoUrl: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80',
+        color: 'from-rose-500/20 to-teal-500/20'
+      },
+
+      // 6. Restauration, Maquis & Fast-Food
+      {
+        id: 'p_poulet',
+        name: 'Plat de Poulet Bicyclette Braisé Frais',
+        cat: 'Restauration',
+        tag: 'BRAISÉ MAQUIS',
+        photoUrl: 'https://images.unsplash.com/photo-1598103442097-8b74394b95c6?auto=format&fit=crop&w=600&q=80',
+        color: 'from-orange-600/20 to-amber-600/20'
+      },
+      {
+        id: 'p_poisson',
+        name: 'Poisson Braisé Carpe / Capitaine Grillé',
+        cat: 'Restauration',
+        tag: 'POISSON BRAISÉ',
+        photoUrl: 'https://images.unsplash.com/photo-1534422298391-e4f8c172dddb?auto=format&fit=crop&w=600&q=80',
+        color: 'from-cyan-600/20 to-teal-600/20'
+      },
+      {
+        id: 'p_burger',
+        name: 'Hamburger Maison Gourmand & Frites',
+        cat: 'Restauration',
+        tag: 'FAST FOOD',
+        photoUrl: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-500/20 to-orange-600/20'
+      },
+      {
+        id: 'p_chawarma',
+        name: 'Chawarma Viande / Poulet Épicé',
+        cat: 'Restauration',
+        tag: 'CHAWARMA',
+        photoUrl: 'https://images.unsplash.com/photo-1529006557810-274b9b2fc783?auto=format&fit=crop&w=600&q=80',
+        color: 'from-orange-500/20 to-red-600/20'
+      },
+      {
+        id: 'p_riz_gras',
+        name: 'Plat de Riz au Gras / Tchêp Poulet',
+        cat: 'Restauration',
+        tag: 'PLAT LOCAL',
+        photoUrl: 'https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-600/20 to-yellow-600/20'
+      },
+
+      // 7. Boutique, Mode & Prêt-à-Porter
+      {
+        id: 'p_danfani',
+        name: 'Pagne Faso Dan Fani Tissé Traditionnel',
+        cat: 'Boutique',
+        tag: 'TISSAGE ARTISANAL',
+        photoUrl: 'https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?auto=format&fit=crop&w=600&q=80',
+        color: 'from-rose-500/20 to-purple-600/20'
+      },
+      {
+        id: 'p_polo',
+        name: 'Polo Coton Piqué Homme Élégant',
+        cat: 'Boutique',
+        tag: 'PRÊT-À-PORTER',
+        photoUrl: 'https://images.unsplash.com/photo-1586363104862-3a5e2ab60d99?auto=format&fit=crop&w=600&q=80',
+        color: 'from-blue-600/20 to-indigo-600/20'
+      },
+      {
+        id: 'p_jeans',
+        name: 'Pantalon Jeans Regular Denim Brut',
+        cat: 'Boutique',
+        tag: 'DENIM',
+        photoUrl: 'https://images.unsplash.com/photo-1542272604-780c96856592?auto=format&fit=crop&w=600&q=80',
+        color: 'from-indigo-600/20 to-blue-700/20'
+      },
+      {
+        id: 'p_chaussures',
+        name: 'Chaussures en Cuir Habillées / Mocassins',
+        cat: 'Boutique',
+        tag: 'CHAUSSURES',
+        photoUrl: 'https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-700/20 to-stone-800/20'
+      },
+
+      // 8. Auto, Moto & Logistique
+      {
+        id: 'p_huile_moteur',
+        name: 'Bidon Huile Moteur 4T Synthétique 1L',
+        cat: 'Auto & Moto',
+        tag: 'ENTRETIEN MOTEUR',
+        photoUrl: 'https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=600&q=80',
+        color: 'from-zinc-700/20 to-neutral-800/20'
+      },
+      {
+        id: 'p_casque',
+        name: 'Casque Moto Intégral Homologué Noir Mat',
+        cat: 'Auto & Moto',
+        tag: 'SÉCURITÉ MOTO',
+        photoUrl: 'https://images.unsplash.com/photo-1558981403-c5f9899a28bc?auto=format&fit=crop&w=600&q=80',
+        color: 'from-stone-700/20 to-neutral-900/20'
+      },
+      {
+        id: 'p_moto',
+        name: 'Moto / Tricycle de Livraison Rapide',
+        cat: 'Auto & Moto',
+        tag: 'LIVRAISON EXPRESS',
+        photoUrl: 'https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=600&q=80',
+        color: 'from-red-600/20 to-amber-600/20'
+      },
+      {
+        id: 'p_camion',
+        name: 'Transport Chantier & Camion Benne 10T',
+        cat: 'Auto & Moto',
+        tag: 'LOGISTIQUE LOURDE',
+        photoUrl: 'https://images.unsplash.com/photo-1519003722824-194d4455a60c?auto=format&fit=crop&w=600&q=80',
+        color: 'from-amber-600/20 to-stone-700/20'
+      }
     ];
 
-    function renderRealPhotosCatalog() {
+    let currentRealPhotoCat = 'all';
+    let currentRealPhotoSearch = '';
+
+    function renderRealPhotosCatalog(cat = 'all', query = '') {
       const grid = document.getElementById('real-photos-grid');
       if (!grid) return;
-      grid.innerHTML = REAL_PRODUCTS_PHOTOS.map(item => {
-        const svgIllustration = SVG_ICONS[item.iconKey] || SVG_ICONS.package;
+
+      currentRealPhotoCat = cat || 'all';
+      currentRealPhotoSearch = (query || '').toLowerCase().trim();
+
+      let list = REAL_PRODUCTS_PHOTOS;
+      if (currentRealPhotoCat !== 'all') {
+        list = list.filter(item => item.cat === currentRealPhotoCat);
+      }
+      if (currentRealPhotoSearch) {
+        list = list.filter(item => 
+          item.name.toLowerCase().includes(currentRealPhotoSearch) ||
+          item.cat.toLowerCase().includes(currentRealPhotoSearch) ||
+          item.tag.toLowerCase().includes(currentRealPhotoSearch)
+        );
+      }
+
+      const webSearchBox = document.getElementById('real-photos-web-search-box');
+      if (webSearchBox) {
+        webSearchBox.classList.toggle('hidden', list.length > 0 && !currentRealPhotoSearch);
+      }
+
+      if (list.length === 0) {
+        grid.innerHTML = `
+          <div class="col-span-full py-10 flex flex-col items-center justify-center text-center p-6 rounded-2xl border-2 border-dashed border-[var(--border)] bg-[var(--bg-card-subtle)]">
+            <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-2xl mb-2">📸</div>
+            <div class="font-bold text-xs text-[var(--text-main)] mb-1">Aucune photo dans la photothèque pour "${currentRealPhotoSearch}"</div>
+            <p class="text-[11px] text-[var(--text-muted)] max-w-xs mb-3">Générez instantanément une photo packshot HD sur le web pour ce mot-clé :</p>
+            <button type="button" onclick="searchOnlinePackshot()" class="px-4 py-2 rounded-xl bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs shadow-md transition-all">
+              🌐 Trouver un packshot pour "${currentRealPhotoSearch}"
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      grid.innerHTML = list.map(item => {
         return `
-          <button type="button" onclick="selectRealPhotoItem('${item.id}')" class="p-3 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-emerald-500 hover:shadow-lg flex flex-col items-center text-center gap-2 transition-all group press-effect">
-            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br ${item.color} border flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform overflow-hidden relative">
-              ${svgIllustration}
-              <span class="absolute bottom-1 right-1 text-[7px] font-black font-mono px-1 py-0.2 rounded bg-black/60 text-white leading-none">HD</span>
+          <button type="button" onclick="selectRealPhotoItem('${item.id}')" class="group relative flex flex-col rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-teal-400 hover:shadow-xl hover:shadow-teal-500/10 p-2.5 transition-all duration-200 text-left overflow-hidden select-none">
+            <div class="relative w-full h-32 rounded-xl overflow-hidden bg-slate-900 border border-white/5 mb-2 shadow-inner">
+              <img src="${item.photoUrl}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80'">
+              <span class="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-black/75 backdrop-blur-md text-[8px] font-mono font-black text-teal-300 border border-teal-500/30 shadow-xs">4K STUDIO</span>
+              <span class="absolute bottom-2 left-2 px-1.5 py-0.5 rounded-md bg-teal-950/80 backdrop-blur-md text-[8px] font-mono font-bold text-teal-300 border border-teal-500/30">${item.tag}</span>
             </div>
             <div class="w-full overflow-hidden">
-              <span class="text-[8px] font-black uppercase text-emerald-600 font-mono tracking-wider">${item.tag}</span>
-              <div class="font-bold text-xs text-[var(--text-main)] truncate mt-0.5">${item.name}</div>
-              <div class="text-[10px] text-[var(--text-muted)] truncate mt-0.5">${item.cat}</div>
+              <div class="font-bold text-xs text-[var(--text-main)] truncate group-hover:text-teal-300 transition-colors">${item.name}</div>
+              <div class="flex items-center justify-between text-[10px] text-[var(--text-muted)] mt-1">
+                <span class="truncate">${item.cat}</span>
+                <span class="text-teal-400 font-bold group-hover:translate-x-0.5 transition-transform shrink-0">Choisir →</span>
+              </div>
             </div>
           </button>
         `;
@@ -11368,23 +12061,57 @@
     }
     window.renderRealPhotosCatalog = renderRealPhotosCatalog;
 
+    function filterRealPhotosCatalog(query) {
+      renderRealPhotosCatalog(currentRealPhotoCat, query);
+    }
+    window.filterRealPhotosCatalog = filterRealPhotosCatalog;
+
+    function filterRealPhotosByCat(cat) {
+      const q = document.getElementById('real-photo-search-input')?.value || '';
+      renderRealPhotosCatalog(cat, q);
+    }
+    window.filterRealPhotosByCat = filterRealPhotosByCat;
+
+    function searchOnlinePackshot() {
+      const q = (document.getElementById('real-photo-search-input')?.value || currentRealPhotoSearch || 'produit').trim();
+      const cleanKeyword = encodeURIComponent(q.toLowerCase());
+      const packshotUrl = 'https://images.unsplash.com/featured/?' + cleanKeyword + ',commercial,product,studio&auto=format&fit=crop&w=600&q=80';
+      
+      const customItem = {
+        id: 'p_custom_' + Date.now(),
+        name: q.charAt(0).toUpperCase() + q.slice(1) + ' (Packshot Web)',
+        cat: 'Recherche Web',
+        tag: 'WEB STUDIO',
+        photoUrl: packshotUrl,
+        color: 'from-indigo-500/20 to-teal-500/20'
+      };
+
+      REAL_PRODUCTS_PHOTOS.unshift(customItem);
+      renderRealPhotosCatalog('all', '');
+      showToast('Nouveau packshot Web généré pour "' + q + '" !', 'success');
+      selectRealPhotoItem(customItem.id);
+    }
+    window.searchOnlinePackshot = searchOnlinePackshot;
+
     function selectRealPhotoItem(itemId) {
       const item = REAL_PRODUCTS_PHOTOS.find(x => x.id === itemId);
       if (!item) return;
+
       selectedProductVisual = {
-        type: 'svg',
-        svgKey: item.iconKey,
-        badgeColor: 'bg-gradient-to-br ' + item.color,
-        name: item.name
+        type: 'photo',
+        photoUrl: item.photoUrl,
+        name: item.name,
+        badgeColor: 'bg-teal-500/10 text-teal-400 border-teal-500/20'
       };
+
       const preview = document.getElementById('new-prod-icon-preview');
       if (preview) {
-        const svgCode = SVG_ICONS[item.iconKey] || SVG_ICONS.package;
-        preview.className = 'w-12 h-12 rounded-xl bg-gradient-to-br ' + item.color + ' border flex items-center justify-center shadow-sm overflow-hidden';
-        preview.innerHTML = svgCode;
+        preview.className = 'w-12 h-12 rounded-xl border border-teal-400/50 shadow-md overflow-hidden p-0 relative';
+        preview.innerHTML = '<img src="' + item.photoUrl + '" alt="' + item.name + '" class="w-full h-full object-cover">';
       }
+
       closeIconPickerModal();
-      showToast('Visuel réaliste "' + item.name + '" appliqué à l\'article !', 'success');
+      showToast('Photo Studio "' + item.name + '" appliquée à l\'article !', 'success');
     }
     window.selectRealPhotoItem = selectRealPhotoItem;
 
@@ -11554,8 +12281,9 @@
 
         /* Helper Universel pour afficher le visuel d'un produit (Vectoriel SVG, Monogramme ou Photo) */
     function getProductVisualHtml(p, sizeClass = 'w-8 h-8') {
-      if (p.visualType === 'image' && (p.icon || p.image)) {
-        return '<img src="' + (p.icon || p.image) + '" class="' + sizeClass + ' rounded-lg object-cover shrink-0 border border-[var(--border)]">';
+      const photoSrc = p.photoUrl || p.image || ((p.visualType === 'image' || p.visualType === 'photo') ? (p.icon || p.value) : null);
+      if (photoSrc) {
+        return '<img src="' + photoSrc + '" alt="' + (p.name || '') + '" class="' + sizeClass + ' rounded-xl object-cover shrink-0 border border-white/10 shadow-xs" loading="lazy" onerror="this.onerror=null; this.src=\'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&w=400&q=80\'">';
       }
       if (p.visualType === 'monogram' && p.letters) {
         const colorCls = p.badgeColor || 'bg-indigo-500/15 text-indigo-600 border-indigo-500/30';
