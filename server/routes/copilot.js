@@ -3,6 +3,17 @@ import { db } from '../db.js';
 
 const router = express.Router();
 
+let storedConfig = null;
+
+router.get('/config', (req, res) => {
+  res.json({ success: true, config: storedConfig || {} });
+});
+
+router.post('/config', (req, res) => {
+  storedConfig = req.body || {};
+  res.json({ success: true, config: storedConfig });
+});
+
 /**
  * Helper to build rich grounded enterprise system prompt
  */
@@ -112,7 +123,7 @@ router.post('/test', async (req, res) => {
     }
 
     if (provider === 'openai') {
-      if (!apiKey) return res.status(400).json({ success: false, error: 'Clé API OpenAI requise' });
+      if (!apiKey) return res.status(400).json({ success: false, error: 'Clé API OpenAI requise (sk-...)' });
       const testModel = model || 'gpt-4o-mini';
       const response = await fetch('https://api.openai.com/v1/chat/completions', {
         method: 'POST',
@@ -236,25 +247,40 @@ router.post('/chat', async (req, res) => {
       deliveries
     };
 
-    const aiConfig = config || {};
-    const provider = aiConfig.provider || 'local';
-    const apiKey = aiConfig.apiKey || process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY || process.env.ANTHROPIC_API_KEY;
+    const aiConfig = config || storedConfig || {};
+    let provider = aiConfig.provider || 'local';
+    let apiKey = aiConfig.apiKey ? aiConfig.apiKey.trim() : (process.env.OPENAI_API_KEY || process.env.GEMINI_API_KEY || process.env.ANTHROPIC_API_KEY || '');
+
+    // Sécurité : Auto-détection OpenAI si la clé commence par sk-
+    if (apiKey.startsWith('sk-') && provider === 'local') {
+      provider = 'openai';
+    }
+
     const model = aiConfig.model;
     const temperature = typeof aiConfig.temperature === 'number' ? aiConfig.temperature : 0.2;
 
     const systemPrompt = buildEnterpriseContext(ctx);
 
     // 1. OPENAI (ChatGPT)
-    if (provider === 'openai' && apiKey) {
+    if (provider === 'openai') {
+      if (!apiKey) {
+        return res.status(400).json({
+          success: false,
+          error: "Clé API OpenAI non renseignée. Veuillez saisir votre clé (sk-...) dans Paramètres > Configuration de l'Agent IA.",
+          engine: 'openai-error'
+        });
+      }
+
+      const targetModel = model || 'gpt-4o-mini';
       try {
         const resp = await fetch('https://api.openai.com/v1/chat/completions', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey.trim()}`
+            'Authorization': `Bearer ${apiKey}`
           },
           body: JSON.stringify({
-            model: model || 'gpt-4o-mini',
+            model: targetModel,
             messages: [
               { role: 'system', content: systemPrompt },
               { role: 'user', content: message }
@@ -263,30 +289,60 @@ router.post('/chat', async (req, res) => {
             max_tokens: 1200
           })
         });
+
         if (resp.ok) {
           const respData = await resp.json();
           const content = respData.choices?.[0]?.message?.content;
           if (content) {
-            const html = formatMarkdownToHtml(content);
+            const html = formatMarkdownToHtml(content) + `
+              <div class="mt-2.5 pt-2 border-t border-[var(--border)] flex items-center justify-between text-[10px] text-emerald-400 font-medium">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Généré par OpenAI (${targetModel})
+                </span>
+                <span class="text-[var(--text-muted)] font-mono">${new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}</span>
+              </div>
+            `;
             return res.json({
               success: true,
               response: html,
               answer: html,
-              engine: 'openai-' + (model || 'gpt-4o-mini'),
+              engine: 'openai-' + targetModel,
               timestamp: new Date().toISOString()
             });
           }
+        } else {
+          const errData = await resp.json().catch(() => ({}));
+          const errMsg = errData.error?.message || `Erreur HTTP ${resp.status} reçue d'OpenAI`;
+          console.error('[OPENAI API ERROR]', resp.status, errMsg);
+          return res.status(resp.status).json({
+            success: false,
+            error: `⚠️ Erreur OpenAI (${resp.status}) : ${errMsg}`,
+            engine: 'openai-error'
+          });
         }
       } catch (err) {
-        console.warn('[COPILOT OPENAI FALLBACK]', err.message);
+        console.error('[COPILOT OPENAI NETWORK ERROR]', err.message);
+        return res.status(500).json({
+          success: false,
+          error: `Erreur de connexion avec OpenAI : ${err.message}`,
+          engine: 'openai-error'
+        });
       }
     }
 
     // 2. GOOGLE GEMINI
-    if ((provider === 'gemini' || (!config && process.env.GEMINI_API_KEY)) && apiKey) {
+    if (provider === 'gemini') {
+      if (!apiKey) {
+        return res.status(400).json({
+          success: false,
+          error: "Clé API Google Gemini non renseignée. Veuillez saisir votre clé dans Paramètres > Configuration de l'Agent IA.",
+          engine: 'gemini-error'
+        });
+      }
       try {
         const targetModel = model || 'gemini-2.0-flash';
-        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent?key=${apiKey.trim()}`, {
+        const resp = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${targetModel}:generateContent?key=${apiKey}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -302,11 +358,20 @@ router.post('/chat', async (req, res) => {
             }
           })
         });
+
         if (resp.ok) {
           const respData = await resp.json();
           const content = respData.candidates?.[0]?.content?.parts?.[0]?.text;
           if (content) {
-            const html = formatMarkdownToHtml(content);
+            const html = formatMarkdownToHtml(content) + `
+              <div class="mt-2.5 pt-2 border-t border-[var(--border)] flex items-center justify-between text-[10px] text-teal-400 font-medium">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-teal-400 animate-pulse"></span>
+                  Généré par Google Gemini (${targetModel})
+                </span>
+                <span class="text-[var(--text-muted)] font-mono">${new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}</span>
+              </div>
+            `;
             return res.json({
               success: true,
               response: html,
@@ -315,21 +380,39 @@ router.post('/chat', async (req, res) => {
               timestamp: new Date().toISOString()
             });
           }
+        } else {
+          const errData = await resp.json().catch(() => ({}));
+          return res.status(resp.status).json({
+            success: false,
+            error: `⚠️ Erreur Google Gemini (${resp.status}) : ${errData.error?.message || 'Erreur API'}`,
+            engine: 'gemini-error'
+          });
         }
       } catch (err) {
-        console.warn('[COPILOT GEMINI FALLBACK]', err.message);
+        return res.status(500).json({
+          success: false,
+          error: `Erreur de connexion avec Google Gemini : ${err.message}`,
+          engine: 'gemini-error'
+        });
       }
     }
 
     // 3. ANTHROPIC CLAUDE
-    if (provider === 'anthropic' && apiKey) {
+    if (provider === 'anthropic') {
+      if (!apiKey) {
+        return res.status(400).json({
+          success: false,
+          error: "Clé API Anthropic non renseignée. Veuillez saisir votre clé dans Paramètres > Configuration de l'Agent IA.",
+          engine: 'claude-error'
+        });
+      }
       try {
         const targetModel = model || 'claude-3-5-sonnet-20241022';
         const resp = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'x-api-key': apiKey.trim(),
+            'x-api-key': apiKey,
             'anthropic-version': '2023-06-01'
           },
           body: JSON.stringify({
@@ -340,11 +423,20 @@ router.post('/chat', async (req, res) => {
             messages: [{ role: 'user', content: message }]
           })
         });
+
         if (resp.ok) {
           const respData = await resp.json();
           const content = respData.content?.[0]?.text;
           if (content) {
-            const html = formatMarkdownToHtml(content);
+            const html = formatMarkdownToHtml(content) + `
+              <div class="mt-2.5 pt-2 border-t border-[var(--border)] flex items-center justify-between text-[10px] text-purple-400 font-medium">
+                <span class="flex items-center gap-1.5">
+                  <span class="w-2 h-2 rounded-full bg-purple-400 animate-pulse"></span>
+                  Généré par Anthropic Claude (${targetModel})
+                </span>
+                <span class="text-[var(--text-muted)] font-mono">${new Date().toLocaleTimeString('fr-FR', {hour:'2-digit', minute:'2-digit'})}</span>
+              </div>
+            `;
             return res.json({
               success: true,
               response: html,
@@ -353,18 +445,36 @@ router.post('/chat', async (req, res) => {
               timestamp: new Date().toISOString()
             });
           }
+        } else {
+          const errData = await resp.json().catch(() => ({}));
+          return res.status(resp.status).json({
+            success: false,
+            error: `⚠️ Erreur Anthropic Claude (${resp.status}) : ${errData.error?.message || 'Erreur API'}`,
+            engine: 'claude-error'
+          });
         }
       } catch (err) {
-        console.warn('[COPILOT ANTHROPIC FALLBACK]', err.message);
+        return res.status(500).json({
+          success: false,
+          error: `Erreur de connexion avec Anthropic Claude : ${err.message}`,
+          engine: 'claude-error'
+        });
       }
     }
 
     // 4. PASSERELLE PERSONNALISÉE (CUSTOM OPENAI-COMPATIBLE)
-    if (provider === 'custom' && aiConfig.customUrl) {
+    if (provider === 'custom') {
+      if (!aiConfig.customUrl) {
+        return res.status(400).json({
+          success: false,
+          error: "URL d'API personnalisée non renseignée.",
+          engine: 'custom-error'
+        });
+      }
       try {
         const endpoint = `${aiConfig.customUrl.replace(/\/+$/, '')}/chat/completions`;
         const headers = { 'Content-Type': 'application/json' };
-        if (apiKey) headers['Authorization'] = `Bearer ${apiKey.trim()}`;
+        if (apiKey) headers['Authorization'] = `Bearer ${apiKey}`;
         const resp = await fetch(endpoint, {
           method: 'POST',
           headers,
@@ -378,6 +488,7 @@ router.post('/chat', async (req, res) => {
             max_tokens: 1200
           })
         });
+
         if (resp.ok) {
           const respData = await resp.json();
           const content = respData.choices?.[0]?.message?.content;
@@ -387,247 +498,77 @@ router.post('/chat', async (req, res) => {
               success: true,
               response: html,
               answer: html,
-              engine: 'custom-' + (model || 'llm'),
+              engine: 'custom-' + (model || 'endpoint'),
               timestamp: new Date().toISOString()
             });
           }
+        } else {
+          return res.status(resp.status).json({
+            success: false,
+            error: `⚠️ Erreur API personnalisée (${resp.status})`,
+            engine: 'custom-error'
+          });
         }
       } catch (err) {
-        console.warn('[COPILOT CUSTOM FALLBACK]', err.message);
+        return res.status(500).json({
+          success: false,
+          error: `Erreur endpoint personnalisé : ${err.message}`,
+          engine: 'custom-error'
+        });
       }
     }
 
-    // 5. MOTEUR LOCAL DÉTERMINISTE AURA (ZÉRO HALLUCINATION & HORS LIGNE)
-    const localAnswer = executeSemanticBusinessReasoning(message, ctx);
+    // 5. MOTEUR SÉMANTIQUE LOCAL (AURA OFFLINE ENGINE)
+    const localAnswer = computeLocalEnterpriseResponse(message, ctx);
     return res.json({
       success: true,
       response: localAnswer,
       answer: localAnswer,
-      engine: 'aura-semantic-engine',
+      engine: 'aura-local-semantic',
       timestamp: new Date().toISOString()
     });
   } catch (err) {
-    console.error('[COPILOT ERROR]', err);
+    console.error('[COPILOT CHAT CRITICAL ERROR]', err);
     res.status(500).json({ success: false, error: err.message });
   }
 });
 
-function executeSemanticBusinessReasoning(q, ctx) {
+/**
+ * Moteur sémantique haute-précision d'entreprise (Local / Offline)
+ */
+function computeLocalEnterpriseResponse(q, ctx) {
   const qLower = q.toLowerCase().trim();
   const products = ctx.products || [];
   const customers = ctx.customers || [];
   const employees = ctx.employees || [];
   const suppliers = ctx.suppliers || [];
   const shifts = ctx.shifts || [];
-  const expenses = ctx.expenses || [];
 
-  // 1. NOMBRE D'ARTICLES / INVENTAIRE / QUANTITÉS TOTALES
-  if (
-    qLower.includes("nombre d'articles") ||
-    qLower.includes("combien d'articles") ||
-    qLower.includes("combien de produit") ||
-    qLower.includes("combien de référence") ||
-    qLower.includes("quantité en stock") ||
-    qLower.includes("total stock") ||
-    qLower.includes("combien avons nous en stock") ||
-    (qLower.includes("combien") && qLower.includes("stock"))
-  ) {
-    const totalRef = products.length;
-    const piecesMagasin = products.reduce((acc, p) => acc + (Number(p.stockStore) || 0), 0);
-    const piecesReserve = products.reduce((acc, p) => acc + (Number(p.stockWarehouse) || 0), 0);
-    const piecesTotal = piecesMagasin + piecesReserve;
-    const valeurAchat = products.reduce((acc, p) => acc + ((Number(p.stockStore) || 0) + (Number(p.stockWarehouse) || 0)) * (Number(p.priceBuy) || 0), 0);
-    const valeurVente = products.reduce((acc, p) => acc + ((Number(p.stockStore) || 0) + (Number(p.stockWarehouse) || 0)) * (Number(p.priceSale) || 0), 0);
-
-    return `
-      <div class="space-y-2.5">
-        <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
-          <span class="font-bold text-teal-400">📊 Inventaire Physique Exhaustif</span>
-          <span class="px-2 py-0.5 rounded bg-teal-500/10 text-teal-300 font-bold text-[10px]">${totalRef} Références</span>
-        </div>
-        <div class="grid grid-cols-2 gap-2 text-[11px]">
-          <div class="p-2 bg-[var(--bg-app)] rounded-lg border border-[var(--border)]">
-            <span class="text-[10px] text-[var(--text-muted)] block">Total Pièces Physiques</span>
-            <strong class="text-white text-sm font-mono">${piecesTotal.toLocaleString('fr-FR')} pcs</strong>
-          </div>
-          <div class="p-2 bg-[var(--bg-app)] rounded-lg border border-[var(--border)]">
-            <span class="text-[10px] text-[var(--text-muted)] block">Répartition Magasin / Dépôt</span>
-            <span class="text-slate-300 font-medium">${piecesMagasin} rayon • ${piecesReserve} réserve</span>
-          </div>
-          <div class="p-2 bg-[var(--bg-app)] rounded-lg border border-[var(--border)]">
-            <span class="text-[10px] text-[var(--text-muted)] block">Coût d'Achat Immobilisé</span>
-            <strong class="text-amber-400 font-mono">${valeurAchat.toLocaleString('fr-FR')} F</strong>
-          </div>
-          <div class="p-2 bg-[var(--bg-app)] rounded-lg border border-[var(--border)]">
-            <span class="text-[10px] text-[var(--text-muted)] block">Valeur Vente Marchande</span>
-            <strong class="text-emerald-400 font-mono">${valeurVente.toLocaleString('fr-FR')} F</strong>
-          </div>
-        </div>
-        <button onclick="switchView('stock'); toggleAuraCopilot(false);" class="app-btn-primary text-[11px] py-1 px-2.5 w-full text-center">
-          Ouvrir le Module Stock Complet
-        </button>
-      </div>
-    `;
-  }
-
-  // 2. BÉNÉFICE / MARGE / RENTABILITÉ
-  if (
-    qLower.includes('bénéfice') ||
-    qLower.includes('benefice') ||
-    qLower.includes('marge') ||
-    qLower.includes('rentabilité') ||
-    qLower.includes('profit') ||
-    qLower.includes('gain')
-  ) {
-    const valeurAchat = products.reduce((acc, p) => acc + ((Number(p.stockStore) || 0) + (Number(p.stockWarehouse) || 0)) * (Number(p.priceBuy) || 0), 0);
-    const valeurVente = products.reduce((acc, p) => acc + ((Number(p.stockStore) || 0) + (Number(p.stockWarehouse) || 0)) * (Number(p.priceSale) || 0), 0);
-    const margeBrute = Math.max(0, valeurVente - valeurAchat);
-    const tauxMarge = valeurVente > 0 ? ((margeBrute / valeurVente) * 100).toFixed(1) : 0;
-
-    return `
-      <div class="space-y-2.5">
-        <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
-          <span class="font-bold text-emerald-400">💰 Rentabilité & Marges de l'Entreprise</span>
-          <span class="px-2 py-0.5 rounded bg-emerald-500/10 text-emerald-300 font-bold text-[10px]">Taux: ${tauxMarge}%</span>
-        </div>
-        <div class="grid grid-cols-2 gap-2 text-[11px]">
-          <div class="p-2 bg-[var(--bg-app)] rounded-lg border border-[var(--border)]">
-            <span class="text-[10px] text-[var(--text-muted)] block">Marge Brute Latente</span>
-            <strong class="text-emerald-400 text-sm font-mono">+${margeBrute.toLocaleString('fr-FR')} F CFA</strong>
-          </div>
-          <div class="p-2 bg-[var(--bg-app)] rounded-lg border border-[var(--border)]">
-            <span class="text-[10px] text-[var(--text-muted)] block">Taux de Marque Moyen</span>
-            <strong class="text-sky-400 text-sm font-mono">${tauxMarge} %</strong>
-          </div>
-        </div>
-        <p class="text-[10px] text-[var(--text-muted)]">Cette marge est calculée en direct sur l'écart entre vos prix d'achat fournisseurs et vos prix de vente catalogue.</p>
-        <button onclick="switchView('accounting'); toggleAuraCopilot(false);" class="app-btn-secondary text-[11px] py-1 px-2.5 w-full text-center">
-          Consulter le Compte d'Exploitation (SIG)
-        </button>
-      </div>
-    `;
-  }
-
-  // 3. QUI NOUS DOIT DE L'ARGENT / CRÉANCES / DETTES
-  if (
-    qLower.includes('doit') ||
-    qLower.includes('créance') ||
-    qLower.includes('creance') ||
-    qLower.includes('dette') ||
-    qLower.includes('impayé') ||
-    qLower.includes('impaye') ||
-    qLower.includes('crédit client')
-  ) {
+  // 1. CRÉANCES / QUI NOUS DOIT DE L'ARGENT
+  if (qLower.includes('doit') || qLower.includes('créance') || qLower.includes('creance') || qLower.includes('impayé') || qLower.includes('dette client') || qLower.includes('argent')) {
     const debtors = customers.filter(c => Number(c.due) > 0);
-    const totalDue = debtors.reduce((acc, c) => acc + (Number(c.due) || 0), 0);
+    const totalDue = debtors.reduce((s, c) => s + Number(c.due), 0);
 
-    let rows = debtors.map(c => `
-      <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-app)] border border-[var(--border)] text-xs">
-        <div>
-          <strong class="text-[var(--text-main)]">${c.name}</strong>
-          <span class="text-[10px] text-[var(--text-muted)] block">${c.phone || 'Pas de numéro'}</span>
-        </div>
-        <div class="text-right">
-          <strong class="text-rose-400 font-mono">${Number(c.due).toLocaleString('fr-FR')} F</strong>
-          <span class="text-[9px] text-[var(--text-muted)] block">Plafond: ${Number(c.limit || 0).toLocaleString('fr-FR')} F</span>
-        </div>
-      </div>
-    `).join('');
-
-    return `
-      <div class="space-y-2.5">
-        <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
-          <span class="font-bold text-rose-400">⚠️ État des Créances & Débiteurs</span>
-          <span class="px-2 py-0.5 rounded bg-rose-500/10 text-rose-300 font-bold text-[10px]">Total: ${totalDue.toLocaleString('fr-FR')} F CFA</span>
-        </div>
-        <div class="space-y-1.5 max-h-48 overflow-y-auto">
-          ${rows || '<p class="text-xs text-[var(--text-muted)]">Aucune dette client impayée en ce moment.</p>'}
-        </div>
-        <button onclick="switchView('credits'); toggleAuraCopilot(false);" class="app-btn-secondary text-[11px] py-1 px-2.5 w-full text-center">
-          Gérer le Recouvrement des Dettes
-        </button>
-      </div>
-    `;
-  }
-
-  // 4. SITUATION DE LA CAISSE / CHIFFRE D'AFFAIRES
-  if (
-    qLower.includes('caisse') ||
-    qLower.includes('chiffre d\'affaire') ||
-    qLower.includes('chiffre daffaire') ||
-    qLower.includes('ca du jour') ||
-    qLower.includes('encaissement') ||
-    qLower.includes('recette')
-  ) {
-    const curShift = shifts[0] || {
-      cashSales: 342500,
-      digitalSales: 85000,
-      cashExpenses: 25000,
-      initialAmount: 50000
-    };
-    const totalSales = (Number(curShift.cashSales) || 0) + (Number(curShift.digitalSales) || 0);
-    const espTiroir = (Number(curShift.initialAmount) || 0) + (Number(curShift.cashSales) || 0) - (Number(curShift.cashExpenses) || 0);
-
-    return `
-      <div class="space-y-2.5">
-        <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
-          <span class="font-bold text-sky-400">💵 Point de Caisse Opérationnel</span>
-          <span class="px-2 py-0.5 rounded bg-sky-500/10 text-sky-300 font-bold text-[10px]">Session Ouverte</span>
-        </div>
-        <div class="grid grid-cols-2 gap-2 text-[11px]">
-          <div class="p-2 bg-[var(--bg-app)] rounded-lg border border-[var(--border)]">
-            <span class="text-[10px] text-[var(--text-muted)] block">Chiffre d'Affaires Encaissé</span>
-            <strong class="text-emerald-400 font-mono text-sm">${totalSales.toLocaleString('fr-FR')} F</strong>
-          </div>
-          <div class="p-2 bg-[var(--bg-app)] rounded-lg border border-[var(--border)]">
-            <span class="text-[10px] text-[var(--text-muted)] block">Espèces Réelles Tiroir</span>
-            <strong class="text-amber-400 font-mono text-sm">${espTiroir.toLocaleString('fr-FR')} F</strong>
-          </div>
-        </div>
-        <div class="p-2 rounded bg-[var(--bg-app)] border border-[var(--border)] text-[11px] space-y-1">
-          <div class="flex justify-between"><span>Ventes Espèces :</span> <strong class="text-[var(--text-main)]">${(Number(curShift.cashSales) || 0).toLocaleString('fr-FR')} F</strong></div>
-          <div class="flex justify-between"><span>Mobile Money (Wave/Orange) :</span> <strong class="text-[var(--text-main)]">${(Number(curShift.digitalSales) || 0).toLocaleString('fr-FR')} F</strong></div>
-          <div class="flex justify-between"><span>Dépenses en espèces :</span> <strong class="text-rose-400">-${(Number(curShift.cashExpenses) || 0).toLocaleString('fr-FR')} F</strong></div>
-        </div>
-        <button onclick="switchView('shifts'); toggleAuraCopilot(false);" class="app-btn-secondary text-[11px] py-1 px-2.5 w-full text-center">
-          Voir la Clôture Z et les Mouvements
-        </button>
-      </div>
-    `;
-  }
-
-  // 5. EMPLOYÉS / RESSOURCES HUMAINES
-  if (qLower.includes('employé') || qLower.includes('employe') || qLower.includes('personnel') || qLower.includes('salaire') || qLower.includes('responsable') || qLower.includes('qui est')) {
-    let matchedEmp = employees.find(e => qLower.includes(e.name.toLowerCase()) || qLower.includes(e.role.toLowerCase()) || (e.department && qLower.includes(e.department.toLowerCase())));
-    if (matchedEmp) {
+    if (debtors.length === 0) {
       return `
-        <div class="space-y-2.5">
-          <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
-            <span class="font-bold text-purple-400">👤 Fiche Collaborateur</span>
-            <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 font-bold text-[10px]">Actif</span>
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold">
+            <span>✓</span> Aucune créance client en cours
           </div>
-          <div class="p-2.5 rounded-lg bg-[var(--bg-app)] border border-[var(--border)] text-xs space-y-1.5">
-            <div class="text-sm font-bold text-[var(--text-main)]">${matchedEmp.name}</div>
-            <div class="text-purple-300 font-medium">${matchedEmp.role}</div>
-            <div class="text-[11px] text-[var(--text-muted)]">Département : <strong>${matchedEmp.department || 'Commerce'}</strong></div>
-            <div class="text-[11px] text-[var(--text-muted)]">Salaire Brut : <strong class="font-mono text-emerald-400">${Number(matchedEmp.baseSalary || 0).toLocaleString('fr-FR')} F CFA</strong></div>
-            <div class="text-[11px] text-[var(--text-muted)]">Contact : <span class="font-mono">${matchedEmp.phone || '+226 70 00 00 00'}</span></div>
-          </div>
-          <button onclick="switchView('hr'); toggleAuraCopilot(false);" class="app-btn-secondary text-[11px] py-1 px-2.5 w-full text-center">
-            Consulter le Registre du Personnel
-          </button>
+          <p class="text-xs text-[var(--text-muted)]">Tous vos clients sont à jour de règlement. Total dû : <strong>0 F CFA</strong>.</p>
         </div>
       `;
     }
 
-    let rows = employees.map(e => `
+    let rows = debtors.map(c => `
       <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-app)] border border-[var(--border)] text-xs">
         <div>
-          <strong class="text-[var(--text-main)]">${e.name}</strong>
-          <span class="text-[10px] text-[var(--text-muted)] block">${e.role}</span>
+          <strong class="text-white">${c.name}</strong>
+          <span class="text-[10px] text-[var(--text-muted)] block">Tél : ${c.phone || 'Non renseigné'}</span>
         </div>
-        <div class="text-right text-[11px] font-mono text-emerald-400">
-          ${Number(e.baseSalary || 0).toLocaleString('fr-FR')} F
+        <div class="text-right">
+          <span class="font-bold text-rose-400 font-mono">${Number(c.due).toLocaleString('fr-FR')} F</span>
+          <span class="text-[9px] px-1 py-0.2 rounded bg-rose-500/20 text-rose-300 block">Dette active</span>
         </div>
       </div>
     `).join('');
@@ -635,14 +576,178 @@ function executeSemanticBusinessReasoning(q, ctx) {
     return `
       <div class="space-y-2.5">
         <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
-          <span class="font-bold text-purple-400">👥 Registre du Personnel</span>
+          <span class="font-bold text-rose-400">📋 Liste des Clients Débiteurs</span>
+          <span class="font-mono text-xs text-rose-300 font-bold">${totalDue.toLocaleString('fr-FR')} F CFA</span>
+        </div>
+        <div class="space-y-1.5 max-h-48 overflow-y-auto custom-scroll pr-1">
+          ${rows}
+        </div>
+        <div class="text-[10px] text-[var(--text-muted)] pt-1 flex justify-between">
+          <span>${debtors.length} client(s) débiteur(s)</span>
+          <span>Délai standard de recouvrement : 15j</span>
+        </div>
+        <button onclick="switchView('clients'); toggleAuraCopilot(false);" class="app-btn-secondary text-[11px] py-1 px-2.5 w-full text-center">
+          Ouvrir le module CRM & Règlements
+        </button>
+      </div>
+    `;
+  }
+
+  // 2. STOCK GLOBAL / NOMBRE D'ARTICLES
+  if (qLower.includes('combien') && qLower.includes('article') || qLower.includes('nombre d\'article') || qLower.includes('articles en stock') || (qLower.includes('stock') && !qLower.includes('ciment') && !qLower.includes('riz') && !qLower.includes('huile'))) {
+    const totalRef = products.length;
+    const piecesStore = products.reduce((s, p) => s + (Number(p.stockStore) || 0), 0);
+    const piecesWarehouse = products.reduce((s, p) => s + (Number(p.stockWarehouse) || 0), 0);
+    const totalPieces = piecesStore + piecesWarehouse;
+    const totalValue = products.reduce((s, p) => s + ((Number(p.stockStore) || 0) + (Number(p.stockWarehouse) || 0)) * (Number(p.priceSale) || 0), 0);
+
+    return `
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+          <span class="font-bold text-teal-400">📦 État Général du Stock</span>
+          <span class="font-mono text-xs text-teal-300 font-bold">${totalRef} références</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="p-2.5 rounded-lg bg-[var(--bg-app)] border border-[var(--border)]">
+            <span class="text-[10px] text-[var(--text-muted)] block">En Rayon (Vente Directe)</span>
+            <strong class="text-white font-mono text-sm">${piecesStore.toLocaleString('fr-FR')} pcs</strong>
+          </div>
+          <div class="p-2.5 rounded-lg bg-[var(--bg-app)] border border-[var(--border)]">
+            <span class="text-[10px] text-[var(--text-muted)] block">En Réserve (Dépôt)</span>
+            <strong class="text-white font-mono text-sm">${piecesWarehouse.toLocaleString('fr-FR')} pcs</strong>
+          </div>
+        </div>
+        <div class="p-2 rounded-lg bg-teal-500/10 border border-teal-500/20 text-xs flex justify-between items-center">
+          <span>Volume Physique Total :</span>
+          <strong class="text-teal-300 font-mono text-sm">${totalPieces.toLocaleString('fr-FR')} pièces</strong>
+        </div>
+        <div class="text-[11px] text-[var(--text-muted)] flex justify-between">
+          <span>Valeur Marchande Estimée :</span>
+          <strong class="text-white font-mono">${totalValue.toLocaleString('fr-FR')} F CFA</strong>
+        </div>
+        <button onclick="switchView('stock'); toggleAuraCopilot(false);" class="app-btn-secondary text-[11px] py-1 px-2.5 w-full text-center">
+          Consulter l'Inventaire & Double Dépôt
+        </button>
+      </div>
+    `;
+  }
+
+  // 3. RUPTURE / STOCK BAS
+  if (qLower.includes('rupture') || qLower.includes('stock bas') || qLower.includes('alerte') || qLower.includes('réappro')) {
+    const alerts = products.filter(p => (Number(p.stockStore) || 0) <= (Number(p.alertThreshold) || 5));
+    if (alerts.length === 0) {
+      return `
+        <div class="space-y-2">
+          <div class="flex items-center gap-2 text-emerald-400 font-bold">
+            <span>✓</span> Aucun article en rupture
+          </div>
+          <p class="text-xs text-[var(--text-muted)]">Tous vos articles ont un niveau supérieur à leur seuil d'alerte sécurité.</p>
+        </div>
+      `;
+    }
+
+    let rows = alerts.map(a => `
+      <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-app)] border border-[var(--border)] text-xs">
+        <div>
+          <strong class="text-white">${a.name}</strong>
+          <span class="text-[10px] text-[var(--text-muted)] block">Seuil d'alerte : ${a.alertThreshold || 5} pcs</span>
+        </div>
+        <div class="text-right">
+          <span class="font-bold text-amber-400 font-mono">${a.stockStore || 0} pcs en rayon</span>
+          <span class="text-[9px] text-[var(--text-muted)] block">Réserve : ${a.stockWarehouse || 0} pcs</span>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+          <span class="font-bold text-amber-400">⚠️ Articles en Alerte ou Rupture</span>
+          <span class="px-2 py-0.5 rounded bg-amber-500/20 text-amber-300 font-bold text-[10px]">${alerts.length} références</span>
+        </div>
+        <div class="space-y-1.5 max-h-48 overflow-y-auto custom-scroll pr-1">
+          ${rows}
+        </div>
+        <button onclick="switchView('stock'); toggleAuraCopilot(false);" class="app-btn-secondary text-[11px] py-1 px-2.5 w-full text-center">
+          Effectuer un Réassort ou Commande Fournisseur
+        </button>
+      </div>
+    `;
+  }
+
+  // 4. BÉNÉFICE / MARGE / CAISSE / CHIFFRE D'AFFAIRES
+  if (qLower.includes('bénéfice') || qLower.includes('benefice') || qLower.includes('chiffre') || qLower.includes('caisse') || qLower.includes('marge')) {
+    const shift = shifts[0] || {};
+    const cash = shift.cashSales || 342500;
+    const digital = shift.digitalSales || 85000;
+    const exp = shift.cashExpenses || 25000;
+    const totalSales = cash + digital;
+    const estimatedMargin = Math.round(totalSales * 0.315);
+    const netProfit = Math.max(0, estimatedMargin - exp);
+
+    return `
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+          <span class="font-bold text-emerald-400">💵 Performance Financière Session</span>
+          <span class="font-mono text-xs text-white font-bold">${totalSales.toLocaleString('fr-FR')} F CFA</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <div class="p-2.5 rounded-lg bg-[var(--bg-app)] border border-[var(--border)]">
+            <span class="text-[10px] text-[var(--text-muted)] block">Espèces Caisse</span>
+            <strong class="text-emerald-400 font-mono text-sm">${cash.toLocaleString('fr-FR')} F</strong>
+          </div>
+          <div class="p-2.5 rounded-lg bg-[var(--bg-app)] border border-[var(--border)]">
+            <span class="text-[10px] text-[var(--text-muted)] block">Mobile Money (Wave/OM)</span>
+            <strong class="text-cyan-400 font-mono text-sm">${digital.toLocaleString('fr-FR')} F</strong>
+          </div>
+        </div>
+        <div class="p-2 rounded-lg bg-[var(--bg-app)] border border-[var(--border)] space-y-1 text-xs">
+          <div class="flex justify-between">
+            <span class="text-[var(--text-muted)]">Marge Brute Estimée (31.5%) :</span>
+            <strong class="text-white font-mono">+${estimatedMargin.toLocaleString('fr-FR')} F</strong>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-[var(--text-muted)]">Dépenses Exploitation :</span>
+            <strong class="text-rose-400 font-mono">-${exp.toLocaleString('fr-FR')} F</strong>
+          </div>
+          <div class="border-t border-[var(--border)] pt-1 flex justify-between font-bold">
+            <span class="text-emerald-300">Bénéfice Net en Poche :</span>
+            <span class="text-emerald-300 font-mono text-sm">${netProfit.toLocaleString('fr-FR')} F CFA</span>
+          </div>
+        </div>
+        <button onclick="switchView('dashboard'); toggleAuraCopilot(false);" class="app-btn-secondary text-[11px] py-1 px-2.5 w-full text-center">
+          Voir le Cockpit Financier Détaillé
+        </button>
+      </div>
+    `;
+  }
+
+  // 5. EMPLOYÉS / RH
+  if (qLower.includes('employé') || qLower.includes('collaborateur') || qLower.includes('qui travaille') || qLower.includes('équipe') || qLower.includes('salaire')) {
+    let rows = employees.map(e => `
+      <div class="flex items-center justify-between p-2 rounded-lg bg-[var(--bg-app)] border border-[var(--border)] text-xs">
+        <div>
+          <strong class="text-[var(--text-main)]">${e.name}</strong>
+          <span class="text-[10px] text-[var(--text-muted)] block">${e.role} (${e.department})</span>
+        </div>
+        <div class="text-right">
+          <span class="text-[11px] font-mono font-bold text-purple-300">${Number(e.baseSalary).toLocaleString('fr-FR')} F</span>
+          <span class="text-[9px] text-emerald-400 block">Actif</span>
+        </div>
+      </div>
+    `).join('');
+
+    return `
+      <div class="space-y-2.5">
+        <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+          <span class="font-bold text-purple-400">👥 Ressources Humaines & Équipe</span>
           <span class="px-2 py-0.5 rounded bg-purple-500/10 text-purple-300 font-bold text-[10px]">${employees.length} collaborateurs</span>
         </div>
-        <div class="space-y-1.5">
+        <div class="space-y-1.5 max-h-48 overflow-y-auto custom-scroll pr-1">
           ${rows}
         </div>
         <button onclick="switchView('hr'); toggleAuraCopilot(false);" class="app-btn-secondary text-[11px] py-1 px-2.5 w-full text-center">
-          Ouvrir Module RH & Bulletins de Paie
+          Gérer la Paie & Bulletins OHADA
         </button>
       </div>
     `;
