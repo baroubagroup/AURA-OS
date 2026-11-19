@@ -1,5 +1,5 @@
 // run_all_tests.cjs
-// Master test orchestrator for AURA ERP & POS suite (All 14 Modules)
+// Master test orchestrator for AURA ERP & POS suite (All 14 Modules + Dual Interface + OS Customization + Author)
 const { execSync } = require('child_process');
 const path = require('path');
 
@@ -18,6 +18,8 @@ const suites = [
   { name: 'Module 13: Comptabilité & TVA 18%', script: 'test_accounting_module.cjs' },
   { name: 'Module 14: Paramètres & Configuration', script: 'test_settings_module.cjs' },
   { name: 'Dual Interface System: Formel vs Cartes Visuelles', script: 'test_dual_interface.cjs' },
+  { name: 'Bureau OS & Personnalisations', script: 'test_appearance_settings.cjs' },
+  { name: 'Auteurs & Éditeur : BAROUBA GROUP', script: 'test_barouba_author.cjs' },
   { name: 'End-to-End: Master Integration & UX', script: 'test_master_integration.cjs' }
 ];
 
@@ -32,9 +34,9 @@ let totalAssertions = 0;
 for (const suite of suites) {
   process.stdout.write(`Executing ${suite.name} (${suite.script})... `);
   try {
-    const output = execSync(`node ${path.join(__dirname, suite.script)}`, { encoding: 'utf8' });
-    const match = output.match(/RESULTS:?\s*(\d+)\/(\d+)\s*TESTS?\s*PASSED/i) ||
-                  output.match(/RESULTS:?\s*(\d+)\/(\d+)\s*PASSED/i) ||
+    const output = execSync(`node ${path.join(__dirname, suite.script)}`, { encoding: 'utf8', timeout: 35000 });
+    const match = output.match(/(\d+)\/(\d+)\s*(?:TESTS?\s*)?PASSED/i) ||
+                  output.match(/ALL (\d+)\/(\d+)\s*(?:TESTS?\s*)?PASSED/i) ||
                   output.match(/(\d+)\/(\d+)\s*tests?\s*réussis/i);
     if (match) {
       const p = parseInt(match[1]);
