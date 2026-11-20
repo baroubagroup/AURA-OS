@@ -2110,6 +2110,13 @@
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-[var(--primary-light)] text-[var(--primary)] font-num">Admin</span>
           </button>
+          <button onclick="switchView('about')" id="nav-about" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] cursor-pointer transition-all">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
+              <span class="truncate">À Propos (Éditeur)</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-500 dark:text-amber-400 font-num shrink-0">BAROUBA</span>
+          </button>
         </div>
       </div>
 
@@ -2131,38 +2138,40 @@
     </div>
 
     <!-- Pied de page Sidebar : Profil Utilisateur, Bascule Thème & Verrouillage PIN -->
-    <div class="p-3 border-t border-[var(--border)] bg-[var(--bg-card-subtle)] flex items-center justify-between" id="sidebar-footer-container">
-      <div class="flex items-center gap-2.5 min-w-0" id="sidebar-user-container">
-        <div class="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center font-bold text-xs text-white shadow-sm">
-          AC
+    <div class="p-3 border-t border-[var(--border)] bg-[var(--bg-card-subtle)] flex flex-col gap-2" id="sidebar-footer-container">
+      <div class="flex items-center justify-between w-full">
+        <div class="flex items-center gap-2.5 min-w-0" id="sidebar-user-container">
+          <div class="w-8 h-8 rounded-full bg-[var(--primary)] flex items-center justify-center font-bold text-xs text-white shadow-sm shrink-0">
+            AC
+          </div>
+          <div class="text-left leading-tight sidebar-user-details">
+            <div class="text-xs font-bold text-[var(--text-main)]">Abdoul C.</div>
+            <div class="text-[10px] text-[var(--primary)] font-medium">Gérant / Super Admin</div>
+          </div>
         </div>
-        <div class="text-left leading-tight sidebar-user-details">
-          <div class="text-xs font-bold text-[var(--text-main)]">Abdoul C.</div>
-          <div class="text-[10px] text-[var(--primary)] font-medium">Gérant / Super Admin</div>
+
+        <div class="flex items-center gap-1 shrink-0" id="sidebar-footer-actions">
+          <button onclick="toggleNavInterfaceMode()" id="sidebar-toggle-nav-interface" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-indigo-400 hover:bg-[var(--border)] press-effect" title="Basculer Mode Standard / Mode Cartes Visuelles">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+          </button>
+          <button onclick="toggleTheme()" id="theme-btn" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border)] press-effect" title="Basculer Mode Clair / Sombre">
+            <svg id="theme-icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <svg id="theme-icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+          </button>
+          <button onclick="lockScreen()" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-rose-500 hover:bg-[var(--border)] press-effect" title="Verrouiller la station de caisse">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          </button>
         </div>
       </div>
       
-      <!-- Badge Éditeur BAROUBA GROUP -->
-      <button type="button" onclick="openAboutBaroubaModal()" class="sidebar-brand-text w-full mt-2 pt-2 border-t border-[var(--border)]/50 flex items-center justify-between text-[10px] text-[var(--text-muted)] hover:text-amber-300 transition-colors group cursor-pointer" title="À Propos de l'Éditeur BAROUBA GROUP (Burkina Faso)">
+      <!-- Badge Éditeur BAROUBA GROUP (Ligne séparée, pleine largeur, cliquable -> switchView('about')) -->
+      <button type="button" onclick="switchView('about')" class="sidebar-brand-text w-full pt-1.5 border-t border-[var(--border)]/50 flex items-center justify-between text-[10px] text-[var(--text-muted)] hover:text-amber-500 dark:hover:text-amber-300 transition-colors group cursor-pointer" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP (Burkina Faso)">
         <div class="flex items-center gap-1.5 min-w-0">
-          <img src="/barouba-group-logo.png" alt="BAROUBA GROUP" class="w-4 h-4 object-contain rounded-full border border-amber-500/40 shrink-0" onerror="this.src='barouba-group-logo.png'">
-          <span class="truncate font-medium">Édité par <strong class="text-amber-400 group-hover:underline">BAROUBA GROUP</strong></span>
+          <img src="/barouba-group-logo.png" alt="BAROUBA GROUP" class="w-4 h-4 object-contain rounded-full border border-amber-500/40 shrink-0 shadow-sm" onerror="this.src='barouba-group-logo.png'">
+          <span class="truncate font-medium">Édité par <strong class="text-amber-600 dark:text-amber-400 group-hover:underline">BAROUBA GROUP</strong></span>
         </div>
         <span class="text-[9px] font-mono font-bold opacity-75 group-hover:opacity-100 shrink-0">🇧🇫</span>
       </button>
-
-      <div class="flex items-center gap-1 shrink-0" id="sidebar-footer-actions">
-        <button onclick="toggleNavInterfaceMode()" id="sidebar-toggle-nav-interface" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-indigo-400 hover:bg-[var(--border)] press-effect" title="Basculer Mode Standard / Mode Cartes Visuelles">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-        </button>
-        <button onclick="toggleTheme()" id="theme-btn" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border)] press-effect" title="Basculer Mode Clair / Sombre">
-          <svg id="theme-icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 9h-1m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-          <svg id="theme-icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
-        </button>
-        <button onclick="lockScreen()" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-rose-500 hover:bg-[var(--border)] press-effect" title="Verrouiller la station de caisse">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-        </button>
-      </div>
     </div>
   </aside>
 
@@ -4982,13 +4991,7 @@
             <span>8. Bureau & Dock OS</span>
           </button>
           
-          <button onclick="switchSettingsTab('about')" id="settings-tab-about" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-amber-400 flex items-center gap-1.5 whitespace-nowrap group transition-colors cursor-pointer">
-            <div class="w-4 h-4 rounded-full bg-amber-500/20 border border-amber-500/40 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform">
-              <img src="/barouba-group-logo.png" alt="BAROUBA" class="w-3 h-3 object-contain rounded-full" onerror="this.src='barouba-group-logo.png'">
-            </div>
-            <span class="font-bold text-amber-300">10. Auteurs & Éditeur</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-300 border border-amber-500/30 font-black">BAROUBA GROUP</span>
-          </button>
+          
           <button onclick="switchSettingsTab('ai')" id="settings-tab-ai" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
             <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
             <span>9. Agent IA & Copilot</span>
@@ -6333,144 +6336,84 @@
 
 
         <!-- SOUS-ONGLET 10 : CONCEPTEUR & ÉDITEUR (BAROUBA GROUP) -->
-        <div id="subview-settings-about" class="hidden space-y-6">
-          
-          <!-- Carte d'Honneur & Identité Principale BAROUBA GROUP -->
-          <div class="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-br from-zinc-950 via-[#130E1F] to-black p-6 sm:p-10 shadow-2xl">
-            <!-- Halo lumineux décoratif doré -->
-            <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
-            <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-purple-600/10 blur-3xl pointer-events-none"></div>
-
-            <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8">
-              <!-- Logo Officiel BAROUBA GROUP de Prestige -->
-              <div class="relative shrink-0 group">
-                <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-full p-2 bg-gradient-to-tr from-amber-600/30 via-yellow-500/20 to-black/80 border-2 border-amber-400/60 shadow-[0_0_35px_rgba(217,119,6,0.3)] ring-4 ring-amber-500/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-                  <img src="/barouba-group-logo.png" alt="BAROUBA GROUP Logo Officiel" class="w-full h-full object-contain rounded-full drop-shadow-md" onerror="this.src='barouba-group-logo.png'">
-                </div>
-                <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 px-2.5 py-0.5 rounded-full bg-amber-500 text-black text-[10px] font-black tracking-wider uppercase shadow-md border border-amber-300 whitespace-nowrap">
-                  🇧🇫 Éditeur Certifié
-                </div>
-              </div>
-
-              <!-- Bloc Texte Officiel & Présentation -->
-              <div class="flex-1 text-center md:text-left space-y-4">
-                <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
-                  <h2 class="text-2xl sm:text-3xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 font-heading">
-                    BAROUBA GROUP
-                  </h2>
-                  <span class="px-2 py-0.5 rounded-lg bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-bold font-mono">
-                    Concepteur & Éditeur Logiciel
-                  </span>
-                </div>
-
-                <p class="text-sm sm:text-base leading-relaxed text-slate-200 font-medium max-w-3xl">
-                  Cette solution est fièrement conçue et éditée au Burkina Faso par <strong class="text-amber-300 font-bold">BAROUBA GROUP</strong>. Au service de la performance des entreprises, nous bâtissons des architectures numériques robustes, conformes aux standards internationaux de sécurité et de scalabilité.
-                </p>
-
-                <!-- Coordonnées & Contact Direct -->
-                <div class="pt-2 flex flex-col sm:flex-row flex-wrap items-center justify-center md:justify-start gap-3">
-                  <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-amber-500/30 text-amber-200 text-xs sm:text-sm font-semibold shadow-inner">
-                    <span class="text-base">📩</span>
-                    <span>Service client & Contact :</span>
-                    <a href="mailto:contact@baroubagroup.com" class="text-white hover:text-amber-300 font-bold underline transition-colors font-mono">contact@baroubagroup.com</a>
-                  </div>
-
-                  <button type="button" onclick="copyBaroubaEmail()" class="px-3.5 py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer shadow-sm" title="Copier l'email dans le presse-papier">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
-                    <span>Copier l'adresse</span>
-                  </button>
-
-                  <a href="mailto:contact@baroubagroup.com?subject=Demande%20Support%20AURA%20OS%20BAROUBA%20GROUP" class="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-black text-xs font-black transition-all flex items-center gap-2 active:scale-95 cursor-pointer shadow-md">
-                    <span>✉️ Écrire au Support</span>
-                  </a>
-                </div>
-
-                <div class="text-xs text-slate-400 font-medium pt-1">
-                  © BAROUBA GROUP. Tous droits réservés.
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Piliers d'Architecture & Standards Internationaux (4 Cartes Modernes) -->
-          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            <div class="app-card p-4 space-y-2 border-l-4 border-l-amber-500 bg-[var(--bg-card)]">
-              <div class="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-base">
-                🛡️
-              </div>
-              <h4 class="font-bold text-xs text-[var(--text-main)]">Sécurité & Souveraineté</h4>
-              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
-                Contrôle d'accès RBAC granulaire, journal d'audit cryptographique et stockage local souverain sans fuite de données.
-              </p>
-            </div>
-
-            <div class="app-card p-4 space-y-2 border-l-4 border-l-emerald-500 bg-[var(--bg-card)]">
-              <div class="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-base">
-                ⚡
-              </div>
-              <h4 class="font-bold text-xs text-[var(--text-main)]">Scalabilité & Offline-First</h4>
-              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
-                Moteur haute disponibilité assurant l'encaissement ininterrompu même en cas de coupure réseau complète.
-              </p>
-            </div>
-
-            <div class="app-card p-4 space-y-2 border-l-4 border-l-blue-500 bg-[var(--bg-card)]">
-              <div class="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-400 flex items-center justify-center font-bold text-base">
-                ⚖️
-              </div>
-              <h4 class="font-bold text-xs text-[var(--text-main)]">Conformité DGI & OHADA</h4>
-              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
-                Factures normalisées e-MECeF avec NIM et QR code, Grand Livre et Balance à 6 chiffres équilibrée.
-              </p>
-            </div>
-
-            <div class="app-card p-4 space-y-2 border-l-4 border-l-purple-500 bg-[var(--bg-card)]">
-              <div class="w-8 h-8 rounded-lg bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-base">
-                🇧🇫
-              </div>
-              <h4 class="font-bold text-xs text-[var(--text-main)]">Fierté & Génie Burkinabè</h4>
-              <p class="text-[11px] text-[var(--text-muted)] leading-relaxed">
-                Édité par BAROUBA GROUP à Ouagadougou pour propulser les leaders et entreprises d'Afrique de l'Ouest vers l'excellence.
-              </p>
-            </div>
-
-          </div>
-
-          <!-- Fiche Technique & Spécifications du Système -->
-          <div class="app-card p-5 space-y-4">
-            <h3 class="font-bold text-xs text-[var(--text-main)] border-b border-[var(--border)] pb-2 flex items-center justify-between">
-              <span class="flex items-center gap-2">
-                <span>⚙️</span>
-                <span>Spécifications de la Plateforme AURA OS</span>
-              </span>
-              <span class="text-[10px] font-mono text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Édition Entreprise 2026</span>
-            </h3>
-
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs">
-              <div class="p-3 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] space-y-1">
-                <div class="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-semibold">Éditeur Principal</div>
-                <div class="font-bold text-amber-300">BAROUBA GROUP</div>
-              </div>
-              <div class="p-3 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] space-y-1">
-                <div class="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-semibold">Origine / Siège</div>
-                <div class="font-bold text-[var(--text-main)]">Burkina Faso 🇧🇫</div>
-              </div>
-              <div class="p-3 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] space-y-1">
-                <div class="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-semibold">Architecture</div>
-                <div class="font-bold text-[var(--text-main)]">Dual OS • Offline-First</div>
-              </div>
-              <div class="p-3 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] space-y-1">
-                <div class="text-[10px] text-[var(--text-muted)] uppercase tracking-wider font-semibold">Contact Officiel</div>
-                <div class="font-bold text-amber-400 font-mono truncate">contact@baroubagroup.com</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
+        
 
 
 </section>
+
+    <!-- ========================================================
+         VUE INDÉPENDANTE : À PROPOS DE L'ÉDITEUR (BAROUBA GROUP)
+         ======================================================== -->
+    <section id="view-about" class="page-view h-full w-full p-6 md:p-10 overflow-y-auto custom-scroll hidden space-y-8 max-w-4xl mx-auto">
+      
+      <!-- Carte d'Honneur & Identité Principale BAROUBA GROUP -->
+      <div class="relative overflow-hidden rounded-3xl border border-amber-500/30 bg-gradient-to-br from-zinc-950 via-[#130E1F] to-black p-8 sm:p-12 shadow-2xl text-center md:text-left">
+        <!-- Halos lumineux décoratifs dorés -->
+        <div class="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 -bottom-20 w-80 h-80 rounded-full bg-purple-600/10 blur-3xl pointer-events-none"></div>
+
+        <div class="relative z-10 flex flex-col md:flex-row items-center md:items-start gap-8">
+          <!-- Logo Officiel BAROUBA GROUP de Prestige -->
+          <div class="relative shrink-0 group">
+            <div class="w-36 h-36 sm:w-44 sm:h-44 rounded-full p-2 bg-gradient-to-tr from-amber-600/30 via-yellow-500/20 to-black/80 border-2 border-amber-400/60 shadow-[0_0_35px_rgba(217,119,6,0.3)] ring-4 ring-amber-500/10 flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
+              <img src="/barouba-group-logo.png" alt="BAROUBA GROUP Logo Officiel" class="w-full h-full object-contain rounded-full drop-shadow-md" onerror="this.src='barouba-group-logo.png'">
+            </div>
+            <div class="absolute -bottom-2.5 left-1/2 -translate-x-1/2 px-3 py-1 rounded-full bg-amber-500 text-black text-[11px] font-black tracking-wider uppercase shadow-md border border-amber-300 whitespace-nowrap">
+              🇧🇫 Conçu & Édité au Burkina Faso
+            </div>
+          </div>
+
+          <!-- Bloc Texte Officiel & Présentation -->
+          <div class="flex-1 space-y-5">
+            <div class="space-y-1.5">
+              <div class="flex flex-wrap items-center justify-center md:justify-start gap-2.5">
+                <h1 class="text-3xl sm:text-4xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-500 font-heading">
+                  BAROUBA GROUP
+                </h1>
+                <span class="px-2.5 py-1 rounded-lg bg-amber-500/15 border border-amber-400/30 text-amber-300 text-xs font-bold font-mono">
+                  Éditeur & Concepteur Logiciel
+                </span>
+              </div>
+              <p class="text-xs sm:text-sm font-semibold text-amber-400/80 uppercase tracking-widest font-mono">
+                Architectures Numériques & Solutions Logicielles d'Entreprise
+              </p>
+            </div>
+
+            <!-- Texte Officiel Exclusif Verbatim -->
+            <div class="p-5 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-sm shadow-inner text-left">
+              <p class="text-sm sm:text-base leading-relaxed text-slate-100 font-medium">
+                Cette solution est fièrement conçue et éditée au Burkina Faso par <strong class="text-amber-300 font-bold">BAROUBA GROUP</strong>. Au service de la performance des entreprises, nous bâtissons des architectures numériques robustes, conformes aux standards internationaux de sécurité et de scalabilité.
+              </p>
+            </div>
+
+            <!-- Coordonnées & Contact Direct -->
+            <div class="pt-2 flex flex-col sm:flex-row flex-wrap items-center justify-center md:justify-start gap-3">
+              <div class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/5 border border-amber-500/30 text-amber-200 text-xs sm:text-sm font-semibold shadow-inner">
+                <span class="text-base">📩</span>
+                <span>Service client & Contact :</span>
+                <a href="mailto:contact@baroubagroup.com" class="text-white hover:text-amber-300 font-bold underline transition-colors font-mono">contact@baroubagroup.com</a>
+              </div>
+
+              <button type="button" onclick="copyBaroubaEmail()" class="px-3.5 py-2.5 rounded-xl bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-400/40 text-xs font-bold transition-all flex items-center gap-2 active:scale-95 cursor-pointer shadow-sm" title="Copier l'email dans le presse-papier">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                <span>Copier l'adresse</span>
+              </button>
+
+              <a href="mailto:contact@baroubagroup.com?subject=Demande%20Support%20AURA%20OS%20BAROUBA%20GROUP" class="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-600 hover:from-amber-400 hover:to-yellow-500 text-black text-xs font-extrabold transition-all flex items-center gap-2 shadow-lg shadow-amber-500/20 active:scale-95 cursor-pointer">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <span>Écrire au support</span>
+              </a>
+            </div>
+
+            <!-- Copyright Officiel Barouba Group -->
+            <div class="pt-3 text-xs text-slate-400 font-medium">
+              © BAROUBA GROUP. Tous droits réservés.
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </section>
 
     </div><!-- Fin Conteneur des vues -->
   </main>
@@ -17061,7 +17004,8 @@ function renderA4DocumentView() {
         shifts: 'Shifts & Clôture de Caisse',
         stats: 'Statistiques & Marges Réelles',
         accounting: 'Comptabilité Fiscale (TVA 18%)',
-        settings: 'Paramètres & Configuration Système'
+        settings: 'Paramètres & Configuration Système',
+        about: 'À Propos — BAROUBA GROUP (Burkina Faso)'
       };
       const titleEl = document.getElementById('page-title');
       if (titleEl) titleEl.innerText = titles[viewKey] || 'Plateforme';
@@ -18011,7 +17955,7 @@ function getLiveMetricForPole(countKey) {
        SOUS-ONGLETS DU MODULE PARAMÈTRES (7 SOUS-ONGLETS)
        ======================================================== */
     function switchSettingsTab(tabKey) {
-      ['general', 'rbac', 'printers', 'tickets', 'zones', 'backups', 'payroll', 'appearance', 'ai', 'about'].forEach(k => {
+      ['general', 'rbac', 'printers', 'tickets', 'zones', 'backups', 'payroll', 'appearance', 'ai'].forEach(k => {
         const el = document.getElementById('subview-settings-' + k);
         const btn = document.getElementById('settings-tab-' + k);
         if (el) el.classList.add('hidden');
@@ -24796,6 +24740,7 @@ function getLiveMetricForPole(countKey) {
     }
 
     function canUserAccessView(viewId) {
+      if (viewId === 'about') return true;
       const op = window.CURRENT_OPERATOR;
       if (!op) return true;
       if (op.role.includes('Admin') || op.role.includes('Gérant')) return true;
@@ -24809,7 +24754,7 @@ function getLiveMetricForPole(countKey) {
       const op = window.CURRENT_OPERATOR;
       const isSuper = op.role.includes('Admin') || op.role.includes('Gérant');
 
-      const allViews = ['dashboard', 'pos', 'documents', 'stock', 'clients', 'suppliers', 'deliveries', 'hr', 'expenses', 'shifts', 'accounting', 'stats', 'marketing', 'audit', 'settings'];
+      const allViews = ['dashboard', 'pos', 'documents', 'stock', 'clients', 'suppliers', 'deliveries', 'hr', 'expenses', 'shifts', 'accounting', 'stats', 'marketing', 'audit', 'settings', 'about'];
 
       allViews.forEach(v => {
         const navBtn = document.getElementById('nav-' + v);
@@ -26418,7 +26363,7 @@ function getLiveMetricForPole(countKey) {
 
         
         <!-- App Éditeur : BAROUBA GROUP (Auteurs & Éditeur) -->
-        <div onclick="openAboutBaroubaModal()" class="os-app-tile group" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP">
+        <div onclick="switchView('about')" class="os-app-tile group" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP">
           <div class="os-app-icon-squircle bg-gradient-to-tr from-amber-950 via-black to-zinc-900 border border-amber-500/40 shadow-lg shadow-amber-500/10 group-hover:border-amber-400 group-hover:scale-105 transition-all relative">
             <img src="/barouba-group-logo.png" alt="BAROUBA GROUP" class="w-12 h-12 object-contain filter drop-shadow-md rounded-full" onerror="this.src='barouba-group-logo.png'">
             <span class="absolute top-1.5 right-1.5 text-[8px] font-mono font-black px-1 py-0.2 rounded bg-amber-500 text-black border border-amber-300">BF</span>
