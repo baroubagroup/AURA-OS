@@ -2108,14 +2108,14 @@
         </div>
 
         <!-- Titre du module à pleine largeur (ne déborde jamais sur la recherche) -->
-        <div class="min-w-0 pr-3">
-          <h1 id="page-title" class="text-sm sm:text-base font-extrabold tracking-tight text-[var(--text-main)] truncate max-w-[180px] xl:max-w-[320px] font-heading">Tableau de Bord Exécutif 360°</h1>
-          <div id="page-breadcrumbs" class="text-[11px] text-[var(--text-muted)] flex items-center gap-1.5">
-            <span>AURA OS</span>
-            <span>/</span>
-            <span class="text-[var(--primary)] font-medium">Boutique</span>
-            <span>/</span>
-            <span id="breadcrumb-active">Cockpit Stratégique</span>
+        <div class="min-w-0 pr-3 max-w-[200px] sm:max-w-[260px] md:max-w-[320px]">
+          <h1 id="page-title" class="text-sm sm:text-base font-extrabold tracking-tight text-[var(--text-main)] truncate font-heading">Tableau de Bord Exécutif 360°</h1>
+          <div id="page-breadcrumbs" class="text-[11px] text-[var(--text-muted)] flex items-center gap-1.5 truncate">
+            <span class="shrink-0">AURA OS</span>
+            <span class="shrink-0">/</span>
+            <span class="text-[var(--primary)] font-medium shrink-0">Boutique</span>
+            <span class="shrink-0">/</span>
+            <span id="breadcrumb-active" class="truncate font-medium">Cockpit Stratégique</span>
           </div>
         </div>
       </div>
@@ -3190,9 +3190,9 @@
           <div>
             <h2 class="text-xl font-bold text-[var(--text-main)] flex items-center gap-2">
               <span>Gestion des Ressources Humaines & Paie</span>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-600 border border-teal-500/20 font-medium">Contrats & Pointages</span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-600 border border-teal-500/20 font-medium">Contrats & Paie OHADA</span>
             </h2>
-            <p class="text-xs text-[var(--text-muted)]">Registre du personnel, suivi des présences, acomptes sur salaire et génération des bulletins de paie.</p>
+            <p class="text-xs text-[var(--text-muted)]">Registre du personnel, acomptes sur salaire et génération des bulletins de paie conformes OHADA.</p>
           </div>
           
           <div class="flex items-center gap-2 flex-wrap">
@@ -3205,8 +3205,8 @@
           </div>
         </div>
 
-        <!-- 4 KPIs RH -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- 3 KPIs RH & Paie -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="app-card p-4 space-y-1">
             <div class="text-[11px] font-medium text-[var(--text-muted)] uppercase">Effectif Salarié</div>
             <div class="text-lg font-black font-num text-[var(--text-main)]" id="kpi-hr-headcount">4 employés</div>
@@ -3218,30 +3218,25 @@
             <div class="text-[10px] text-[var(--text-muted)]">Salaires de base bruts</div>
           </div>
           <div class="app-card p-4 space-y-1">
-            <div class="text-[11px] font-medium text-[var(--text-muted)] uppercase">Avances Versées ce Mois</div>
+            <div class="text-[11px] font-medium text-[var(--text-muted)] uppercase">Avances Déductibles ce Mois</div>
             <div class="text-lg font-black font-num text-amber-500" id="kpi-hr-advances">60 000 F CFA</div>
             <div class="text-[10px] text-amber-500">À déduire de la paie fin de mois</div>
           </div>
-          <div class="app-card p-4 space-y-1">
-            <div class="text-[11px] font-medium text-[var(--text-muted)] uppercase">Taux de Présence Moyen</div>
-            <div class="text-lg font-black font-num text-emerald-500" id="kpi-hr-attendance">98.5%</div>
-            <div class="text-[10px] text-emerald-500" id="kpi-hr-attendance-sub">Assiduité exemplaire</div>
-          </div>
+          <!-- Elements masques pour compatibilite sans affichage -->
+          <span id="kpi-hr-attendance" class="hidden"></span>
+          <span id="kpi-hr-attendance-sub" class="hidden"></span>
         </div>
 
         <!-- Système de Sous-Onglets RH -->
         <div class="border-b border-[var(--border)] flex items-center gap-4 text-xs font-semibold overflow-x-auto custom-scroll">
-          <button onclick="switchHRTab('employees')" id="hr-tab-employees" class="hr-subtab-btn pb-3 border-b-2 border-[var(--primary)] text-[var(--primary)] flex items-center gap-1.5 whitespace-nowrap">
+          <button onclick="switchHRTab('employees')" id="hr-tab-employees" class="hr-subtab-btn pb-3 border-b-2 border-[var(--primary)] text-[var(--primary)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
             <span>1. Registre du Personnel</span>
           </button>
-          <button onclick="switchHRTab('attendance')" id="hr-tab-attendance" class="hr-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <span>2. Pointage & Présences</span>
+          <button onclick="switchHRTab('advances')" id="hr-tab-advances" class="hr-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+            <span>2. Avances sur Salaire & Primes</span>
           </button>
-          <button onclick="switchHRTab('advances')" id="hr-tab-advances" class="hr-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <span>3. Avances sur Salaire & Primes</span>
-          </button>
-          <button onclick="switchHRTab('payslips')" id="hr-tab-payslips" class="hr-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <span>4. Bulletins de Salaire A4</span>
+          <button onclick="switchHRTab('payslips')" id="hr-tab-payslips" class="hr-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+            <span>3. Bulletins de Salaire A4</span>
           </button>
         </div>
 
@@ -3270,31 +3265,8 @@
           </div>
         </div>
 
-        <!-- 2. SOUS-ONGLET : POINTAGE & PRÉSENCES -->
-        <div id="subview-hr-attendance" class="hidden space-y-4">
-          <div class="app-card p-5 space-y-4">
-            <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
-              <span class="font-bold text-xs text-[var(--text-main)]">Feuille d'Émargement Journalière</span>
-              <span class="text-xs font-num font-bold text-teal-600">Date : Aujourd'hui (03/11/2026)</span>
-            </div>
-            <div class="overflow-x-auto custom-scroll">
-              <table class="w-full text-left text-xs">
-                <thead class="bg-[var(--bg-card-subtle)] text-[var(--text-muted)] uppercase text-[10px] font-bold border-b border-[var(--border)]">
-                  <tr>
-                    <th class="p-2.5">Employé</th>
-                    <th class="p-2.5 text-center">Heure Arrivée</th>
-                    <th class="p-2.5 text-center">Heure Départ</th>
-                    <th class="p-2.5 text-center">Statut Journée</th>
-                    <th class="p-2.5 text-center">Validation</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-[var(--border)]" id="hr-attendance-body">
-                  <!-- Rempli en JS -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <!-- 2. Pointage retire (non necessaire) -->
+        <div id="subview-hr-attendance" class="hidden"><tbody id="hr-attendance-body" class="hidden"></tbody></div>
 
         <!-- 3. SOUS-ONGLET : AVANCES SUR SALAIRES -->
         <div id="subview-hr-advances" class="hidden space-y-4">

@@ -168,7 +168,7 @@ assert(html.includes('id="kpi-hr-attendance"'), 'KPI #kpi-hr-attendance exists')
 assert(html.includes('id="kpi-hr-attendance-sub"'), 'KPI #kpi-hr-attendance-sub exists');
 
 assert(html.includes('id="hr-tab-employees"'), 'Subtab button #hr-tab-employees exists');
-assert(html.includes('id="hr-tab-attendance"'), 'Subtab button #hr-tab-attendance exists');
+assert(!html.includes('id="hr-tab-attendance"'), 'Subtab button #hr-tab-attendance is cleanly removed (non nécessaire)');
 assert(html.includes('id="hr-tab-advances"'), 'Subtab button #hr-tab-advances exists');
 assert(html.includes('id="hr-tab-payslips"'), 'Subtab button #hr-tab-payslips exists');
 
