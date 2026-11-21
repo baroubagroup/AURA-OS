@@ -88,7 +88,7 @@ console.log('  [PASS] #11: canUserAccessView("about") grants public visibility')
 
 assert(typeof sandbox.switchView === 'function', 'switchView is defined');
 sandbox.switchView('about');
-assert(elements['page-title'].innerText.includes('BAROUBA GROUP'), 'Page title updated for about view');
+assert(elements['page-title'].innerText.includes('À Propos'), 'Page title updated for about view');
 console.log('  [PASS] #12: switchView("about") executes cleanly and sets page title');
 
 assert(typeof sandbox.openAboutBaroubaModal === 'function', 'openAboutBaroubaModal is defined');
