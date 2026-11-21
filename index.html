@@ -1601,6 +1601,7 @@
     body.sidebar-collapsed #sidebar-standard-nav #sidebar-quick-actions-container,
     body.sidebar-collapsed #sidebar-standard-nav #sidebar-cards-mode-text,
     body.sidebar-collapsed .sidebar-brand-text,
+    body.sidebar-collapsed .sidebar-section-header,
     body.sidebar-collapsed #store-selector-container,
     body.sidebar-collapsed .sidebar-user-details,
     body.sidebar-collapsed .sidebar-status-dot,
@@ -1838,290 +1839,172 @@
     </div>
 
     <!-- ==================== NAVIGATION EN MODE STANDARD (CLASSIQUE) ==================== -->
-    <div id="sidebar-standard-nav" class="flex-1 flex flex-col min-h-0 overflow-hidden">
+    <nav id="sidebar-standard-nav" class="flex-1 px-2.5 py-3 overflow-y-auto custom-scroll space-y-3.5 select-none">
 
-      <!-- Actions Rapides Prioritaires (Pinned Top) -->
-      <div class="p-3 space-y-2 border-b border-[var(--border)] bg-[var(--bg-card-subtle)]">
-        <!-- Bouton Souverain : Basculer vers le Mode Cartes & Bureau OS -->
-        <button id="sidebar-btn-cards-mode" onclick="applyNavInterfaceMode('cards', true)" class="w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-bold text-white bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 hover:from-emerald-500 hover:to-indigo-500 shadow-md transition-all press-effect cursor-pointer group" title="Ouvrir le Bureau & le Mode Cartes AURA OS (Alt+I)">
-          <div class="flex items-center gap-2.5">
-            <span class="text-base group-hover:scale-110 transition-transform shrink-0">🃏</span>
-            <div class="leading-tight" id="sidebar-cards-mode-text">
-              <span class="text-xs font-black block text-white">Mode Cartes & Bureau</span>
-              <span class="text-[10px] text-teal-100 font-medium">Launchpad Visuel OS</span>
-            </div>
+      <!-- SECTION 1 : VUE PRINCIPALE -->
+      <div class="space-y-1">
+        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70">
+          Vue Principale
+        </div>
+        
+        <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left font-semibold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/20 transition-all cursor-pointer" title="Tableau de Bord Exécutif 360° (F1)">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-[var(--primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            <span class="truncate text-xs">Tableau de Bord 360°</span>
           </div>
-          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-black/30 text-white font-bold sidebar-folder-meta">Activer</span>
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[var(--border)] text-[var(--text-muted)] font-bold shrink-0">F1</span>
         </button>
 
-        <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-bold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/20 press-effect">
-        <div class="flex items-center gap-2.5">
-          <svg class="w-4 h-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-          <span>Tableau de Bord 360°</span>
-        </div>
-        <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[var(--border)] text-[var(--text-muted)] font-bold">F1</span>
-      </button>
-
-      <button onclick="switchView('pos')" id="nav-pos" class="nav-btn w-full flex items-center justify-between px-3 py-2.5 rounded-xl text-left font-semibold text-[var(--text-main)] hover:bg-[var(--bg-card)] press-effect">
-        <div class="flex items-center gap-2.5">
-          <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-          <span>Caisse Comptoir (POS)</span>
-        </div>
-        <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-bold">F2</span>
-      </button>
-
-      <!-- Boutons d'Action Express -->
-      <div class="grid grid-cols-2 gap-1.5 pt-1">
-        <button onclick="openQuickExpenseModal()" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-[var(--bg-card)] hover:bg-rose-500/10 hover:text-rose-500 text-[11px] font-medium text-[var(--text-secondary)] border border-[var(--border)] transition-all">
-          <span class="text-rose-500 font-bold">+</span>
-          <span>Dépense</span>
-        </button>
-        <button onclick="openCreateDocumentModal('invoice')" class="flex items-center justify-center gap-1.5 py-1.5 px-2 rounded-lg bg-[var(--bg-card)] hover:bg-teal-500/10 hover:text-teal-600 text-[11px] font-medium text-[var(--text-secondary)] border border-[var(--border)] transition-all">
-          <span class="text-teal-500 font-bold">+</span>
-          <span>Facture A4</span>
+        <button onclick="switchView('pos')" id="nav-pos" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Caisse Comptoir & Encaissement Direct (F2)">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span class="truncate text-xs">Caisse Comptoir (POS)</span>
+          </div>
+          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-bold shrink-0">F2</span>
         </button>
       </div>
-    </div>
 
-    <!-- Navigation par Accordéons Distincts (Pliables pour éviter toute surcharge) -->
-    <nav class="flex-1 px-3 py-3 overflow-y-auto custom-scroll space-y-2 text-xs">
-
-      <!-- 1. VENTES & FACTURATION -->
-      <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-sales')" title="Ventes & Facturation A4" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-teal-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Ventes & Facturation</span>
-          </div>
-          <div class="flex items-center gap-1.5 sidebar-folder-meta"><span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">2</span>
-            <svg id="chevron-folder-sales" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200 transform rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
-        </button>
-        <div id="folder-sales" class="sidebar-folder-anim folder-opened p-1 space-y-0.5 border-t border-[var(--border)] bg-[var(--bg-card-subtle)]">
-          <button onclick="switchView('documents')" id="nav-documents" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-              <span>Documents & Factures A4</span>
-            </div>
-            <span class="text-[9px] px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-600 font-bold font-num">Devis/BL</span>
-          </button>
-          <button onclick="switchView('credits')" id="nav-credits" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-              <span>Crédits & Recouvrement</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded-full bg-rose-500/20 text-rose-500 font-num">12</span>
-          </button>
+      <!-- SECTION 2 : VENTES & COMMERCE -->
+      <div class="space-y-1">
+        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70 pt-1">
+          Ventes & Commerce
         </div>
+
+        <button onclick="switchView('documents')" id="nav-documents" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Factures A4, Devis & Bons de Livraison">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span class="truncate">Documents & Factures A4</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-600 font-mono shrink-0">Devis/BL</span>
+        </button>
+
+        <button onclick="switchView('credits')" id="nav-credits" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Crédits Clients & Suivi du Recouvrement">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="truncate">Crédits & Recouvrement</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-num shrink-0">Créances</span>
+        </button>
+
+        <button onclick="switchView('clients')" id="nav-clients" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Clients & Portefeuille CRM">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-cyan-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span class="truncate">Clients & CRM</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-600 font-mono shrink-0">B2B/B2C</span>
+        </button>
       </div>
 
-      <!-- 2. CLIENTS & CRM -->
-      <!-- 2a. Clients & Relations B2B/B2C (Top-Level) -->
-      <button onclick="switchView('clients')" id="nav-clients" title="Annuaire Clients B2B/B2C & Soldes Débiteurs" class="nav-btn w-full flex items-center justify-between px-3 py-2 text-left font-medium rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-        <div class="flex items-center gap-2.5">
-          <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-          <span class="nav-label">Clients & CRM</span>
+      <!-- SECTION 3 : STOCKS & ACHATS -->
+      <div class="space-y-1">
+        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70 pt-1">
+          Stocks & Achats
         </div>
-        <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-blue-500/10 text-blue-400 font-mono font-bold" id="sidebar-clients-badge">CRM</span>
-      </button>
 
-      <!-- 2b. Fournisseurs & Commandes d'Achats (Top-Level Dédié mis au premier plan) -->
-      <button onclick="switchView('suppliers')" id="nav-suppliers" title="Fournisseurs, Tarifs d'Achat & Règlements (Compte 401)" class="nav-btn w-full flex items-center justify-between px-3 py-2 text-left font-medium rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-        <div class="flex items-center gap-2.5">
-          <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-          <span class="nav-label">Fournisseurs & Achats</span>
-        </div>
-        <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-amber-500/10 text-amber-400 font-mono font-bold" id="sidebar-suppliers-badge">Achats</span>
-      </button>
-
-      <!-- 3. GESTION DES STOCKS & ARTICLES (Séparé de la logistique) -->
-      <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-stock')" title="Gestion des Stocks & Dépôts" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Gestion des Stocks</span>
+        <button onclick="switchView('stock')" id="nav-stock" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Stock Rayon, Dépôt & Mouvements">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+            <span class="truncate">Stock & Double Dépôt</span>
           </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">Stock</span>
-            <svg id="chevron-folder-stock" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-num shrink-0">Rayon</span>
         </button>
-        <div id="folder-stock" class="sidebar-folder-anim folder-closed p-1 space-y-0.5 border-t border-[var(--border)] bg-[var(--bg-card-subtle)]" style="max-height: 0px; opacity: 0; transform: translateY(-6px);">
-          <button onclick="switchView('stock')" id="nav-stock" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              <span>État des Stocks & Services</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-num">Multi-Dépôts</span>
-          </button>
-          <button onclick="openCategoriesModal()" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
-              <span>Gérer les Catégories</span>
-            </div>
-            <span class="text-[9px] px-1 rounded bg-purple-500/20 text-purple-600 font-bold">100% Perso</span>
-          </button>
-          <button onclick="openBarcodeSheetModal()" class="w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-              <span>Planches de Codes-Barres</span>
-            </div>
-            <span class="text-[9px] px-1 rounded bg-teal-500/20 text-teal-600 font-bold">A4 Print</span>
-          </button>
-        </div>
+
+        <button onclick="switchView('suppliers')" id="nav-suppliers" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Fournisseurs, Commandes d'Achat & Dettes">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            <span class="truncate">Fournisseurs & Achats</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-orange-500/20 text-orange-600 font-mono shrink-0">B2B</span>
+        </button>
+
+        <button onclick="switchView('deliveries')" id="nav-deliveries" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Expéditions, Livraisons & Flotte">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+            <span class="truncate">Livraisons & Flotte</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-mono shrink-0">Courses</span>
+        </button>
       </div>
 
-      <!-- 4. LOGISTIQUE & EXPÉDITIONS (Département Dédié) -->
-      <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-logistics')" title="Logistique & Livraisons" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Logistique & Flotte</span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">Livr.</span>
-            <svg id="chevron-folder-logistics" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
-        </button>
-        <div id="folder-logistics" class="sidebar-folder-anim folder-closed p-1 space-y-0.5 border-t border-[var(--border)] bg-[var(--bg-card-subtle)]" style="max-height: 0px; opacity: 0; transform: translateY(-6px);">
-          <button onclick="switchView('deliveries')" id="nav-deliveries" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-              <span>Bons de Livraison & Courses</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-600 font-num">Kanban</span>
-          </button>
+      <!-- SECTION 4 : CAISSE & FINANCES -->
+      <div class="space-y-1">
+        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70 pt-1">
+          Finances & Trésorerie
         </div>
+
+        <button onclick="switchView('shifts')" id="nav-shifts" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Sessions de caisse, Écarts & Clôture Z">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-yellow-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+            <span class="truncate">Shifts & Clôture Z</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-yellow-500/20 text-yellow-600 font-mono shrink-0">Caisse</span>
+        </button>
+
+        <button onclick="switchView('expenses')" id="nav-expenses" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Charges d'Exploitation & Dépenses Décaissées">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span class="truncate">Dépenses d'Exploitation</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-num shrink-0">Charges</span>
+        </button>
+
+        <button onclick="switchView('accounting')" id="nav-accounting" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Comptabilité Fiscale, TVA 18% & Grand Livre">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            <span class="truncate">Comptabilité & TVA 18%</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-500 font-mono shrink-0">OHADA</span>
+        </button>
+
+        <button onclick="switchView('stats')" id="nav-stats" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Statistiques Avancées, Marges Réelles & Affluence">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            <span class="truncate">Statistiques & Marges</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-500 font-num shrink-0">Analytique</span>
+        </button>
+
+        <button onclick="switchView('hr')" id="nav-hr" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Ressources Humaines, Salaires & Paie OHADA">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <span class="truncate">Équipe & Paie OHADA</span>
+          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-600 font-mono shrink-0">RH</span>
+        </button>
       </div>
 
-      <!-- 5. RESSOURCES HUMAINES & PAIE -->
-      <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-hr')" title="Ressources Humaines & Paie" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Ressources Humaines</span>
-          </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">RH</span>
-            <svg id="chevron-folder-hr" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
-        </button>
-        <div id="folder-hr" class="sidebar-folder-anim folder-closed p-1 space-y-0.5 border-t border-[var(--border)] bg-[var(--bg-card-subtle)]" style="max-height: 0px; opacity: 0; transform: translateY(-6px);">
-          <button onclick="switchView('hr')" id="nav-hr" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
-              <span>Personnel & Paie</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-600 font-num">Bulletins</span>
-          </button>
+      <!-- SECTION 5 : SYSTÈME & ADMINISTRATION -->
+      <div class="space-y-1">
+        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70 pt-1">
+          Système & Configuration
         </div>
-      </div>
 
-      <!-- 6. FINANCES & COMPTABILITÉ OHADA -->
-      <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-finances')" title="Finances, Caisse & Trésorerie" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Finances & OHADA</span>
+        <button onclick="switchView('audit')" id="nav-audit" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Journal d'Audit & Sécurité">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            <span class="truncate">Journal d'Audit & Log</span>
           </div>
-          <div class="flex items-center gap-1.5 sidebar-folder-meta"><span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">4</span>
-            <svg id="chevron-folder-finances" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-num shrink-0">Actif</span>
         </button>
-        <div id="folder-finances" class="sidebar-folder-anim folder-closed p-1 space-y-0.5 border-t border-[var(--border)] bg-[var(--bg-card-subtle)]" style="max-height: 0px; opacity: 0; transform: translateY(-6px);">
-          <button onclick="switchView('expenses')" id="nav-expenses" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
-              <span>Dépenses & Frais Généraux</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-num">Sorties</span>
-          </button>
-          <button onclick="switchView('shifts')" id="nav-shifts" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-              <span>Shifts & Clôture de Caisse</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-num">Z</span>
-          </button>
-          <button onclick="switchView('accounting')" id="nav-accounting" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-              <span>Comptabilité OHADA & TVA</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-600 font-num">SYSCOHADA</span>
-          </button>
-          <button onclick="switchView('stats')" id="nav-stats" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-              <span>Statistiques & Marges Réelles</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-600 font-num">Rentabilité</span>
-          </button>
-        </div>
-      </div>
 
-      <!-- 7. MARKETING & WHATSAPP (Dédié) -->
-      <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-marketing')" title="Marketing & WhatsApp" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Marketing & WhatsApp</span>
+        <button onclick="switchView('settings')" id="nav-settings" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Paramètres Système & Configuration Fiscale">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span class="truncate">Paramètres & Fiscalité</span>
           </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">Promo</span>
-            <svg id="chevron-folder-marketing" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-[var(--primary-light)] text-[var(--primary)] font-num shrink-0">Admin</span>
         </button>
-        <div id="folder-marketing" class="sidebar-folder-anim folder-closed p-1 space-y-0.5 border-t border-[var(--border)] bg-[var(--bg-card-subtle)]" style="max-height: 0px; opacity: 0; transform: translateY(-6px);">
-          <button onclick="switchView('marketing')" id="nav-marketing" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
-              <span>Campagnes WhatsApp & SMS</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-num">Direct</span>
-          </button>
-        </div>
-      </div>
 
-      <!-- 8. SYSTÈME & ADMINISTRATION -->
-      <div class="accordion-group rounded-xl border border-[var(--border)] bg-[var(--bg-card)]/50 overflow-hidden">
-        <button onclick="toggleSidebarFolder('folder-system')" title="Administration & Paramètres" class="w-full flex items-center justify-between px-3 py-2 text-left font-bold text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] transition-all">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            <span class="text-[11px] uppercase tracking-wider sidebar-folder-label">Administration</span>
+        <button onclick="switchView('about')" id="nav-about" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP">
+          <div class="flex items-center gap-2.5 min-w-0">
+            <img src="/barouba-group-logo.png" alt="BAROUBA" class="w-4 h-4 object-contain rounded-full border border-amber-500/40 shrink-0" onerror="this.src='barouba-group-logo.png'">
+            <span class="truncate">À Propos (Éditeur)</span>
           </div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-[9px] px-1.5 py-0.2 rounded-full bg-[var(--bg-card-subtle)] text-[var(--text-muted)] font-mono">Config</span>
-            <svg id="chevron-folder-system" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-          </div>
+          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-500 dark:text-amber-400 font-num shrink-0">BAROUBA</span>
         </button>
-        <div id="folder-system" class="sidebar-folder-anim folder-closed p-1 space-y-0.5 border-t border-[var(--border)] bg-[var(--bg-card-subtle)]" style="max-height: 0px; opacity: 0; transform: translateY(-6px);">
-          <button onclick="switchView('audit')" id="nav-audit" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-slate-500"></span>
-              <span>Journal d'Audit & Log</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-num">Actif</span>
-          </button>
-          <button onclick="switchView('settings')" id="nav-settings" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)]">
-            <div class="flex items-center gap-2">
-              <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-              <span>Paramètres & Fiscalité</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-[var(--primary-light)] text-[var(--primary)] font-num">Admin</span>
-          </button>
-          <button onclick="switchView('about')" id="nav-about" class="nav-btn w-full flex items-center justify-between px-2.5 py-1.5 rounded-lg text-left text-[11px] font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] cursor-pointer transition-all">
-            <div class="flex items-center gap-2 min-w-0">
-              <span class="w-1.5 h-1.5 rounded-full bg-amber-500 shrink-0"></span>
-              <span class="truncate">À Propos (Éditeur)</span>
-            </div>
-            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-500 dark:text-amber-400 font-num shrink-0">BAROUBA</span>
-          </button>
-        </div>
       </div>
 
     </nav>
-    </div>
 
     <!-- ==================== NAVIGATION EN MODE CARTES (COLONNE GAUCHE EXTRÊME) ==================== -->
     <div id="sidebar-cards-nav" class="flex-1 flex flex-col min-h-0 overflow-y-auto p-3 space-y-2.5 custom-scroll hidden select-none">
@@ -4880,64 +4763,7 @@
 
       
       <!-- ==================== 6. VUE MARKETING & WHATSAPP ==================== -->
-      <section id="view-marketing" class="page-view h-full w-full p-6 overflow-y-auto custom-scroll hidden space-y-5">
-        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <h2 class="text-xl font-bold text-[var(--text-main)] flex items-center gap-2">
-              <span>Marketing, Fidélisation & Relances WhatsApp</span>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 border border-emerald-500/20 font-bold">Communication Directe</span>
-            </h2>
-            <p class="text-xs text-[var(--text-muted)]">Diffusez vos arrivages de stocks, promotions et vœux directement sur le WhatsApp de vos clients.</p>
-          </div>
-          <button onclick="openNewCampaignModal()" class="app-btn-primary text-xs">
-            <span>+ Nouvelle Campagne Promotionnelle</span>
-          </button>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="app-card p-5 space-y-3">
-            <h3 class="font-bold text-xs uppercase text-[var(--text-muted)]">Campagnes Prêtes à l'Emploi</h3>
-            <div class="space-y-2 text-xs">
-              <div class="p-3 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] space-y-1 cursor-pointer hover:border-emerald-500 transition-all" onclick="selectCampaignTemplate('arrivage')">
-                <div class="font-bold text-[var(--text-main)]">📦 Nouvel Arrivage de Ciment & Fer</div>
-                <div class="text-[11px] text-[var(--text-muted)]">Cible : Clients Entreprises B2B</div>
-              </div>
-              <div class="p-3 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] space-y-1 cursor-pointer hover:border-emerald-500 transition-all" onclick="selectCampaignTemplate('promo')">
-                <div class="font-bold text-[var(--text-main)]">🏷️ Promotion Week-end Peinture</div>
-                <div class="text-[11px] text-[var(--text-muted)]">Cible : Tous les clients particuliers</div>
-              </div>
-              <div class="p-3 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] space-y-1 cursor-pointer hover:border-emerald-500 transition-all" onclick="selectCampaignTemplate('relance')">
-                <div class="font-bold text-[var(--text-main)]">⏰ Relance Cordiale Fin de Mois</div>
-                <div class="text-[11px] text-[var(--text-muted)]">Cible : Clients avec créances en cours</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="md:col-span-2 app-card p-5 space-y-4">
-            <h3 class="font-bold text-sm text-[var(--text-main)] border-b border-[var(--border)] pb-2">Aperçu du Message WhatsApp</h3>
-            <div class="space-y-3 text-xs">
-              <div>
-                <label class="block text-[var(--text-muted)] mb-1">Destinataires Cibles :</label>
-                <select id="campaign-target" class="app-input text-xs">
-                  <option value="b2b">Clients Professionnels B2B (3 sociétés)</option>
-                  <option value="all">Tous les Clients Enregistrés (5 contacts)</option>
-                  <option value="debtors">Clients Débiteurs Uniquement (3 clients)</option>
-                </select>
-              </div>
-
-              <div>
-                <label class="block text-[var(--text-muted)] mb-1">Texte du Message :</label>
-                <textarea id="campaign-message-text" rows="4" class="app-input text-xs font-sans">Bonjour cher partenaire, AURA Commerce vous informe de la réception d'un arrivage massif de Ciment CPJ 42.5 et Fer à Béton au dépôt central. Prix promotionnels réservés à nos clients fidèles. Contactez-nous au +226 70 00 00 00 pour réserver.</textarea>
-              </div>
-
-              <button onclick="launchWhatsAppCampaign()" class="w-full app-btn-primary py-3 text-xs font-bold flex items-center justify-center gap-2">
-                <span>Diffuser la Campagne sur WhatsApp</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-      </section>
+      
 
       <!-- ==================== 11. VUE PARAMÈTRES & CONFIGURATION COMPLÈTE ==================== -->
       <section id="view-settings" class="page-view h-full w-full p-6 overflow-y-auto custom-scroll hidden space-y-6">
@@ -24696,7 +24522,7 @@ function getLiveMetricForPole(countKey) {
 
     // 2. GESTION DES RÔLES & PERMISSIONS STRICTES (RBAC MULTI-AGENT)
     window.ROLE_PERMISSIONS = {
-      'Super Admin / Gérant': ['dashboard', 'pos', 'documents', 'stock', 'clients', 'suppliers', 'deliveries', 'hr', 'expenses', 'shifts', 'accounting', 'stats', 'marketing', 'audit', 'settings'],
+      'Super Admin / Gérant': ['dashboard', 'pos', 'documents', 'stock', 'clients', 'suppliers', 'deliveries', 'hr', 'expenses', 'shifts', 'accounting', 'stats', 'audit', 'settings'],
       'Responsable Magasin': ['dashboard', 'stock', 'suppliers', 'deliveries', 'shifts'],
       'Caissière Vendeuse': ['pos', 'shifts', 'documents', 'clients'],
       'Livreur / Coursier': ['deliveries', 'clients'],
@@ -24752,7 +24578,7 @@ function getLiveMetricForPole(countKey) {
       const op = window.CURRENT_OPERATOR;
       const isSuper = op.role.includes('Admin') || op.role.includes('Gérant');
 
-      const allViews = ['dashboard', 'pos', 'documents', 'stock', 'clients', 'suppliers', 'deliveries', 'hr', 'expenses', 'shifts', 'accounting', 'stats', 'marketing', 'audit', 'settings', 'about'];
+      const allViews = ['dashboard', 'pos', 'documents', 'stock', 'clients', 'suppliers', 'deliveries', 'hr', 'expenses', 'shifts', 'accounting', 'stats', 'audit', 'settings', 'about'];
 
       allViews.forEach(v => {
         const navBtn = document.getElementById('nav-' + v);
