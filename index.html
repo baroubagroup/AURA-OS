@@ -2432,25 +2432,48 @@
     }
 
     /* ========================================================
-       2. MODE SIDEBAR RÉDUITE / RAIL ICÔNES ÉPURÉ (PIXEL-PERFECT)
+       2. MODE SIDEBAR RÉDUITE (DOCK RAIL VERTICAL AVEC ICÔNES ET NOMS)
+       Style inspiré du Dock macOS / Big Sur avec tuiles squircle et libellés sous l'icône
        ======================================================== */
     body.sidebar-collapsed #sidebar {
-      width: 4.5rem !important; /* 72px */
-      min-width: 4.5rem !important;
-      max-width: 4.5rem !important;
+      width: 5.25rem !important; /* ~84px */
+      min-width: 5.25rem !important;
+      max-width: 5.25rem !important;
       overflow-x: hidden !important;
       transition: width 0.24s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
 
-    
-    /* Rail compact ultra-épuré (Apple / VS Code Style) */
-    body.sidebar-collapsed #sidebar {
-      width: 4.5rem !important;
-      min-width: 4.5rem !important;
-      max-width: 4.5rem !important;
+    /* En-tête centré du rail réduit */
+    body.sidebar-collapsed #sidebar .h-16 {
+      padding: 0 0.25rem !important;
+      justify-content: center !important;
+      gap: 0.25rem !important;
     }
-    body.sidebar-collapsed #sidebar-standard-nav span,
-    body.sidebar-collapsed #sidebar-standard-nav p,
+    body.sidebar-collapsed #sidebar .h-16 > div:first-child {
+      justify-content: center !important;
+      margin: 0 auto !important;
+    }
+    body.sidebar-collapsed #btn-sidebar-collapse-inner,
+    body.sidebar-collapsed button[onclick*="toggleSidebarCompact()"] {
+      display: none !important;
+    }
+    body.sidebar-collapsed #btn-sidebar-expand-rail {
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+    }
+
+    /* Masquer les éléments textuels horizontaux et accordéons en mode rail replié */
+    body.sidebar-collapsed .nav-section-header,
+    body.sidebar-collapsed .sidebar-brand-text,
+    body.sidebar-collapsed #store-selector-container,
+    body.sidebar-collapsed .sidebar-user-details,
+    body.sidebar-collapsed .sidebar-status-dot,
+    body.sidebar-collapsed .nav-label-full,
+    body.sidebar-collapsed .nav-btn > span.font-mono,
+    body.sidebar-collapsed .nav-btn > span.font-num,
+    body.sidebar-collapsed .nav-btn > span.rounded,
+    body.sidebar-collapsed .nav-btn > span.shrink-0:not(.nav-icon-tile):not(.nav-btn-content),
     body.sidebar-collapsed #sidebar-standard-nav .font-mono,
     body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-label,
     body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-meta,
@@ -2458,110 +2481,190 @@
     body.sidebar-collapsed #sidebar-standard-nav .grid,
     body.sidebar-collapsed #sidebar-standard-nav #sidebar-quick-actions-container,
     body.sidebar-collapsed #sidebar-standard-nav #sidebar-cards-mode-text,
-    body.sidebar-collapsed .sidebar-brand-text,
-    body.sidebar-collapsed .sidebar-section-header,
-    body.sidebar-collapsed #store-selector-container,
-    body.sidebar-collapsed .sidebar-user-details,
-    body.sidebar-collapsed .sidebar-status-dot,
     body.sidebar-collapsed [id^="folder-"] {
       display: none !important;
     }
 
-    /* Éradication absolue de toute fuite de texte en mode réduit */
-    body.sidebar-collapsed #sidebar-standard-nav span,
-    body.sidebar-collapsed #sidebar-standard-nav p,
-    body.sidebar-collapsed #sidebar-standard-nav .font-mono,
-    body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-label,
-    body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-meta,
-    body.sidebar-collapsed #sidebar-standard-nav .sidebar-folder-anim,
-    body.sidebar-collapsed #sidebar-standard-nav .grid,
-    body.sidebar-collapsed #sidebar-standard-nav #sidebar-quick-actions-container,
-    body.sidebar-collapsed #sidebar-standard-nav #sidebar-cards-mode-text,
-    body.sidebar-collapsed .sidebar-brand-text,
-    body.sidebar-collapsed #store-selector-container,
-    body.sidebar-collapsed .sidebar-user-details,
-    body.sidebar-collapsed .sidebar-status-dot {
-      display: none !important;
+    /* Le conteneur de navigation vertical compact */
+    body.sidebar-collapsed #sidebar-standard-nav {
+      padding: 0.5rem 0.2rem !important;
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 0.25rem !important;
+      overflow-x: hidden !important;
     }
-
-    /* En-tête centré du rail réduit */
-    body.sidebar-collapsed #sidebar .h-16 {
+    body.sidebar-collapsed .nav-section-wrapper {
+      width: 100% !important;
+      margin: 0 !important;
       padding: 0 !important;
-      justify-content: center !important;
-      gap: 0 !important;
     }
-    body.sidebar-collapsed #sidebar .h-16 > div:first-child {
-      justify-content: center !important;
+    body.sidebar-collapsed .nav-section-group {
+      display: flex !important;
+      flex-direction: column !important;
+      align-items: center !important;
+      gap: 0.25rem !important;
+      width: 100% !important;
       margin: 0 !important;
     }
-    body.sidebar-collapsed #btn-sidebar-collapse-inner {
-      position: absolute;
-      right: -10px;
-      opacity: 0;
-      pointer-events: none;
-    }
 
-    /* Normalisation des boutons en tuiles icônes 44x44 centrées */
-    body.sidebar-collapsed #sidebar-standard-nav .p-3 {
-      padding: 0.5rem 0.25rem !important;
-    }
-    body.sidebar-collapsed #sidebar-standard-nav nav {
-      padding-left: 0.25rem !important;
-      padding-right: 0.25rem !important;
-    }
+    /* Bouton de navigation en tuile verticale dock */
     body.sidebar-collapsed .nav-btn,
-    body.sidebar-collapsed .accordion-group > button,
     body.sidebar-collapsed #sidebar-btn-cards-mode {
-      width: 2.85rem !important; /* 45px */
-      height: 2.85rem !important;
-      margin: 0.35rem auto !important;
-      padding: 0 !important;
+      width: 4.65rem !important;
+      min-height: 4.15rem !important;
+      height: auto !important;
+      margin: 0.15rem auto !important;
+      padding: 0.4rem 0.15rem 0.35rem 0.15rem !important;
       display: flex !important;
+      flex-direction: column !important;
       align-items: center !important;
       justify-content: center !important;
-      border-radius: 0.75rem !important;
+      border-radius: 0.85rem !important;
       border: 1px solid transparent !important;
       background: transparent !important;
+      gap: 0.2rem !important;
+      position: relative !important;
+      cursor: pointer !important;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
     body.sidebar-collapsed .nav-btn:hover,
-    body.sidebar-collapsed .accordion-group > button:hover,
     body.sidebar-collapsed #sidebar-btn-cards-mode:hover {
       background: rgba(255, 255, 255, 0.08) !important;
-      border-color: rgba(255, 255, 255, 0.12) !important;
+      border-color: rgba(255, 255, 255, 0.14) !important;
     }
-    body.sidebar-collapsed .accordion-group {
-      border: none !important;
-      background: transparent !important;
-      margin: 0 !important;
+    body.sidebar-collapsed .nav-btn:hover .nav-icon-tile {
+      transform: translateY(-2px) scale(1.08) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35) !important;
     }
-    body.sidebar-collapsed .accordion-group > button > div:first-child,
-    body.sidebar-collapsed .nav-btn > div:first-child {
+    body.sidebar-collapsed .nav-btn:hover .nav-label-dock {
+      color: #FFFFFF !important;
+    }
+    body.sidebar-collapsed .nav-btn:hover svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+
+    /* Conteneur interne vertical de la tuile */
+    body.sidebar-collapsed .nav-btn > div:first-child,
+    body.sidebar-collapsed .nav-btn-content {
       margin: 0 !important;
       display: flex !important;
+      flex-direction: column !important;
       align-items: center !important;
       justify-content: center !important;
       width: 100% !important;
-      height: 100% !important;
+      gap: 0.2rem !important;
     }
-    body.sidebar-collapsed svg {
-      width: 1.35rem !important;
-      height: 1.35rem !important;
-      margin: 0 !important;
+
+    /* Tuile Squircle d'icône (~38px x 38px) */
+    .nav-icon-tile {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    body.sidebar-collapsed .nav-icon-tile {
+      width: 2.35rem !important; /* ~38px */
+      height: 2.35rem !important;
+      border-radius: 0.75rem !important;
+      background: rgba(255, 255, 255, 0.08) !important;
+      border: 1px solid rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 0 2px 6px -1px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25) !important;
+      position: relative !important;
+    }
+    body.sidebar-collapsed .nav-icon-tile svg,
+    body.sidebar-collapsed .nav-btn svg {
+      width: 1.25rem !important;
+      height: 1.25rem !important;
+      margin: 0 auto !important;
+      display: block !important;
+      transition: all 0.2s ease !important;
+    }
+    body.sidebar-collapsed .nav-icon-tile img,
+    body.sidebar-collapsed .nav-btn img {
+      width: 1.25rem !important;
+      height: 1.25rem !important;
+      margin: 0 auto !important;
       display: block !important;
     }
 
-    /* Style actif haute visibilité pour la tuile sélectionnée */
-    body.sidebar-collapsed #nav-dashboard.bg-\[var\(--primary-light\)\] {
-      background: rgba(24, 119, 242, 0.2) !important;
-      border-color: rgba(24, 119, 242, 0.4) !important;
+    /* Libellé sous l'icône dans le dock rail */
+    .nav-label-dock {
+      display: none;
+    }
+    body.sidebar-collapsed .nav-label-dock {
+      display: block !important;
+      font-size: 9.5px !important;
+      line-height: 1.15 !important;
+      font-weight: 700 !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 4.5rem !important;
+      color: #BFDBFE !important;
+      letter-spacing: -0.01em !important;
+      margin-top: 1px !important;
+      transition: color 0.18s ease !important;
+    }
+    /* Fallback si jamais nav-label-dock n'est pas présent */
+    body.sidebar-collapsed .nav-btn:not(:has(.nav-label-dock)) .nav-label-full {
+      display: block !important;
+      font-size: 9px !important;
+      line-height: 1.15 !important;
+      font-weight: 700 !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      overflow: hidden !important;
+      text-overflow: ellipsis !important;
+      max-width: 4.5rem !important;
+      color: #BFDBFE !important;
+      margin-top: 1px !important;
     }
 
-    /* Pied de page centré */
+    /* Tuile active dans le dock rail (Élévation Royal Blue + Lueur) */
+    body.sidebar-collapsed .nav-btn.bg-\[var\(--primary-light\)\] {
+      background: rgba(24, 119, 242, 0.22) !important;
+      border: 1px solid rgba(24, 119, 242, 0.5) !important;
+      box-shadow: 0 4px 14px -2px rgba(24, 119, 242, 0.35) !important;
+    }
+    body.sidebar-collapsed .nav-btn.bg-\[var\(--primary-light\)\] .nav-icon-tile {
+      background: linear-gradient(135deg, #1877F2 0%, #0D5AC7 100%) !important;
+      border-color: rgba(255, 255, 255, 0.5) !important;
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.65), inset 0 1px 1.5px rgba(255, 255, 255, 0.7) !important;
+      transform: translateY(-1px) scale(1.04) !important;
+    }
+    body.sidebar-collapsed .nav-btn.bg-\[var\(--primary-light\)\] svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+      filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) !important;
+    }
+    body.sidebar-collapsed .nav-btn.bg-\[var\(--primary-light\)\] .nav-label-dock {
+      color: #FFFFFF !important;
+      font-weight: 800 !important;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+    }
+    /* Pastille active sous la tuile comme sur le dock macOS */
+    body.sidebar-collapsed .nav-btn.bg-\[var\(--primary-light\)\]::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      width: 4px;
+      height: 4px;
+      border-radius: 9999px;
+      background: #60A5FA;
+      box-shadow: 0 0 6px 1px #60A5FA;
+    }
+
+    /* Pied de page centré en mode dock rail */
     body.sidebar-collapsed #sidebar-footer-container {
       padding: 0.75rem 0.25rem !important;
       flex-direction: column !important;
       gap: 0.5rem !important;
       justify-content: center !important;
+      align-items: center !important;
     }
     body.sidebar-collapsed #sidebar-user-container {
       justify-content: center !important;
@@ -2569,15 +2672,16 @@
     }
     body.sidebar-collapsed #sidebar-footer-actions {
       flex-direction: column !important;
-      gap: 0.25rem !important;
+      gap: 0.35rem !important;
       margin: 0 auto !important;
+      align-items: center !important;
     }
     body.sidebar-collapsed #btn-toggle-sidebar {
       background: rgba(99, 102, 241, 0.15) !important;
       color: #818CF8 !important;
       border-color: rgba(99, 102, 241, 0.3) !important;
     }
-    body.interface-cards-mode #btn-toggle-sidebar {
+        body.interface-cards-mode #btn-toggle-sidebar {
       display: none !important;
     }
 
@@ -2666,6 +2770,10 @@
         <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-teal-500 to-indigo-600 flex items-center justify-center font-black text-white text-base shadow-lg shadow-teal-500/20 shrink-0 cursor-pointer" onclick="toggleSidebarCollapse()" title="Cliquer pour réduire / agrandir la barre">
           A
         </div>
+        <!-- Bouton Déplier en Rail Icônes (Visible uniquement quand replié) -->
+        <button id="btn-sidebar-expand-rail" type="button" onclick="toggleSidebarCollapse()" class="hidden p-1.5 rounded-lg text-blue-300 hover:text-white hover:bg-white/10 transition-all cursor-pointer" title="Déplier le menu complet (Ctrl+B)">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 5l7 7-7 7M5 5l7 7-7 7"/></svg>
+        </button>
         <div class="sidebar-brand-text truncate">
           <div class="font-extrabold text-sm tracking-tight flex items-center gap-1.5 text-[var(--text-main)]">
             <span>AURA OS</span>
@@ -2711,17 +2819,17 @@
         
         <div id="group-nav-main" class="nav-section-group space-y-1">
           <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left font-semibold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/20 transition-all cursor-pointer" title="Tableau de Bord Exécutif 360° (F1)">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-[var(--primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-              <span class="truncate text-xs">Tableau de Bord 360°</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-[var(--primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg></div>
+              <span class="nav-label-full truncate text-xs">Tableau de Bord 360°</span><span class="nav-label-dock hidden text-[9.5px]">Tableau</span>
             </div>
             <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[var(--border)] text-[var(--text-muted)] font-bold shrink-0">F1</span>
           </button>
 
           <button onclick="switchView('pos')" id="nav-pos" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Caisse Comptoir & Encaissement Direct (F2)">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-              <span class="truncate text-xs">Caisse Comptoir (POS)</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+              <span class="nav-label-full truncate text-xs">Caisse Comptoir (POS)</span><span class="nav-label-dock hidden text-[9.5px]">Caisse</span>
             </div>
             <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-bold shrink-0">F2</span>
           </button>
@@ -2740,25 +2848,25 @@
 
         <div id="group-nav-sales" class="nav-section-group space-y-1">
           <button onclick="switchView('documents')" id="nav-documents" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Factures A4, Devis & Bons de Livraison">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-              <span class="truncate">Documents & Factures A4</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+              <span class="nav-label-full truncate">Documents & Factures A4</span><span class="nav-label-dock hidden text-[9.5px]">Factures</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-600 font-mono shrink-0">Devis/BL</span>
           </button>
 
           <button onclick="switchView('credits')" id="nav-credits" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Crédits Clients & Suivi du Recouvrement">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span class="truncate">Crédits & Recouvrement</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+              <span class="nav-label-full truncate">Crédits & Recouvrement</span><span class="nav-label-dock hidden text-[9.5px]">Crédits</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-num shrink-0">Créances</span>
           </button>
 
           <button onclick="switchView('clients')" id="nav-clients" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Clients & Portefeuille CRM">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-              <span class="truncate">Clients & CRM</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg></div>
+              <span class="nav-label-full truncate">Clients & CRM</span><span class="nav-label-dock hidden text-[9.5px]">Clients</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-500 font-mono shrink-0">B2B/B2C</span>
           </button>
@@ -2777,25 +2885,25 @@
 
         <div id="group-nav-stock" class="nav-section-group space-y-1">
           <button onclick="switchView('stock')" id="nav-stock" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Gestion du Stock, Double Dépôt & Étiquettes">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-              <span class="truncate">Stock & Double Dépôt</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
+              <span class="nav-label-full truncate">Stock & Double Dépôt</span><span class="nav-label-dock hidden text-[9.5px]">Stocks</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-num shrink-0">Rayon</span>
           </button>
 
           <button onclick="switchView('suppliers')" id="nav-suppliers" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Fournisseurs, Commandes d'Achat & Dettes">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-              <span class="truncate">Fournisseurs & Achats</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg></div>
+              <span class="nav-label-full truncate">Fournisseurs & Achats</span><span class="nav-label-dock hidden text-[9.5px]">Fournisseurs</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-orange-500/20 text-orange-500 font-mono shrink-0">B2B</span>
           </button>
 
           <button onclick="switchView('deliveries')" id="nav-deliveries" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Livraisons, Expéditions & Suivi Flotte">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-cyan-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
-              <span class="truncate">Livraisons & Flotte</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-cyan-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg></div>
+              <span class="nav-label-full truncate">Livraisons & Flotte</span><span class="nav-label-dock hidden text-[9.5px]">Livraisons</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-600 font-num shrink-0">Suivi</span>
           </button>
@@ -2814,41 +2922,41 @@
 
         <div id="group-nav-finance" class="nav-section-group space-y-1">
           <button onclick="switchView('shifts')" id="nav-shifts" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Sessions de Caisse, Shifts & Clôtures Journalières Z">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-              <span class="truncate">Shifts & Clôture Z</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg></div>
+              <span class="nav-label-full truncate">Shifts & Clôture Z</span><span class="nav-label-dock hidden text-[9.5px]">Shifts</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-num shrink-0">Session</span>
           </button>
 
           <button onclick="switchView('expenses')" id="nav-expenses" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Dépenses d'Exploitation & Charges">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span class="truncate">Dépenses d'Exploitation</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
+              <span class="nav-label-full truncate">Dépenses d'Exploitation</span><span class="nav-label-dock hidden text-[9.5px]">Dépenses</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-num shrink-0">Charges</span>
           </button>
 
           <button onclick="switchView('accounting')" id="nav-accounting" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Grand Livre Comptable, TVA 18% & Déclaration OHADA">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-              <span class="truncate">Comptabilité & TVA 18%</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg></div>
+              <span class="nav-label-full truncate">Comptabilité & TVA 18%</span><span class="nav-label-dock hidden text-[9.5px]">Comptabilité</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-500 font-mono shrink-0">OHADA</span>
           </button>
 
           <button onclick="switchView('stats')" id="nav-stats" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Rapports Analytiques & Marges Commerciales">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-              <span class="truncate">Statistiques & Marges</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg></div>
+              <span class="nav-label-full truncate">Statistiques & Marges</span><span class="nav-label-dock hidden text-[9.5px]">Statistiques</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-500 font-num shrink-0">Analytique</span>
           </button>
 
           <button onclick="switchView('hr')" id="nav-hr" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Ressources Humaines, Salaires & Paie OHADA">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-              <span class="truncate">Équipe & Paie OHADA</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg></div>
+              <span class="nav-label-full truncate">Équipe & Paie OHADA</span><span class="nav-label-dock hidden text-[9.5px]">Équipe</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-600 font-mono shrink-0">RH</span>
           </button>
@@ -2867,25 +2975,25 @@
 
         <div id="group-nav-system" class="nav-section-group space-y-1">
           <button onclick="switchView('audit')" id="nav-audit" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Journal d'Audit & Sécurité">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-              <span class="truncate">Journal d'Audit & Log</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg></div>
+              <span class="nav-label-full truncate">Journal d'Audit & Log</span><span class="nav-label-dock hidden text-[9.5px]">Audit</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-num shrink-0">Actif</span>
           </button>
 
           <button onclick="switchView('settings')" id="nav-settings" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Paramètres Système & Configuration Fiscale">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-              <span class="truncate">Paramètres & Fiscalité</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg></div>
+              <span class="nav-label-full truncate">Paramètres & Fiscalité</span><span class="nav-label-dock hidden text-[9.5px]">Paramètres</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-[var(--primary-light)] text-[var(--primary)] font-num shrink-0">Admin</span>
           </button>
 
           <button onclick="switchView('about')" id="nav-about" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP">
-            <div class="flex items-center gap-2.5 min-w-0">
-              <img src="/barouba-group-logo.png" alt="BAROUBA" class="w-4 h-4 object-contain rounded-full border border-amber-500/40 shrink-0" onerror="this.src='barouba-group-logo.png'">
-              <span class="truncate">À Propos (Éditeur)</span>
+            <div class="nav-btn-content flex items-center gap-2.5 min-w-0">
+              <div class="nav-icon-tile shrink-0 flex items-center justify-center"><img src="/barouba-group-logo.png" alt="BAROUBA" class="w-4 h-4 object-contain rounded-full border border-amber-500/40 shrink-0" onerror="this.src='barouba-group-logo.png'"></div>
+              <span class="nav-label-full truncate">À Propos (Éditeur)</span><span class="nav-label-dock hidden text-[9.5px]">À Propos</span>
             </div>
             <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-500 dark:text-amber-400 font-num shrink-0">BAROUBA</span>
           </button>
@@ -17680,15 +17788,31 @@ function renderA4DocumentView() {
     }
     window.toggleSidebarCompact = toggleSidebarCompact;
 
-    // Fonction principale toggleSidebarCollapse (utilise le masquage complet par défaut)
+    // Fonction principale toggleSidebarCollapse : bascule entre Menu Déplié et Dock Rail Compact
     function toggleSidebarCollapse(forceState) {
-      // Si la barre est masquée, la réafficher
+      if (typeof document === 'undefined') return;
       if (document.body.classList.contains('sidebar-hidden')) {
-        toggleSidebarHide(false);
+        document.body.classList.remove('sidebar-hidden');
+        document.body.classList.add('sidebar-collapsed');
       } else {
-        // Sinon, la masquer complètement pour libérer 100% de l'écran
-        toggleSidebarHide(true);
+        const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+        const newState = (typeof forceState === 'boolean') ? forceState : !isCollapsed;
+        if (newState) {
+          document.body.classList.add('sidebar-collapsed');
+          if (typeof showToast === 'function') {
+            showToast('Dock vertical compact activé (Icônes & Libellés)', 'info');
+          }
+        } else {
+          document.body.classList.remove('sidebar-collapsed');
+          if (typeof showToast === 'function') {
+            showToast('Barre de navigation développée', 'info');
+          }
+        }
       }
+      try {
+        localStorage.setItem('aura_sidebar_state', document.body.classList.contains('sidebar-collapsed') ? 'collapsed' : 'visible');
+      } catch (e) {}
+      updateSidebarToggleButtons();
     }
     window.toggleSidebarCollapse = toggleSidebarCollapse;
 

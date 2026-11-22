@@ -104,4 +104,30 @@ assert(html.includes('html.light #pos-products-grid .text-teal-400'), 'POS produ
 assert(html.includes('html.light #pos-products-grid .bg-teal-500\\/15'), 'POS stock badges have high contrast dark green on pale green in light mode');
 console.log('  [PASS] 11: POS product cards, titles, prices, and stock badges clearly visible in light mode.');
 
-console.log('All Facebook Royal Blue, Subtab Badges, POS Contrast & Dark Nav tests PASSED! (49/49 assertions)');
+
+// 12. Vertical Icon + Label Dock Rail in Collapsed Sidebar (macOS Big Sur Dock Style)
+assert(html.includes('MODE SIDEBAR RÉDUITE (DOCK RAIL VERTICAL AVEC ICÔNES ET NOMS)'), 'Collapsed sidebar dock rail CSS block present');
+assert(html.includes('body.sidebar-collapsed #sidebar') && html.includes('width: 5.25rem !important;'), 'Collapsed sidebar has 5.25rem width for comfortable vertical tiles');
+assert(html.includes('.nav-icon-tile {'), '.nav-icon-tile squircle class present');
+assert(html.includes('.nav-label-dock {'), '.nav-label-dock text label class present');
+assert(html.includes('body.sidebar-collapsed .nav-label-dock {'), 'nav-label-dock displayed as block under icon in collapsed mode');
+assert(html.includes('id="btn-sidebar-expand-rail"'), '#btn-sidebar-expand-rail expand button present in header');
+
+const expectedButtons = [
+  'nav-dashboard', 'nav-pos', 'nav-documents', 'nav-credits', 'nav-clients',
+  'nav-stock', 'nav-suppliers', 'nav-deliveries', 'nav-shifts', 'nav-expenses',
+  'nav-accounting', 'nav-stats', 'nav-hr', 'nav-audit', 'nav-settings', 'nav-about'
+];
+
+for (const btnId of expectedButtons) {
+  assert(html.includes(`id="${btnId}"`), `Button ${btnId} present in HTML`);
+}
+assert(html.includes('nav-label-dock hidden text-[9.5px]">Tableau</span>'), 'Tableau dock label present for dashboard');
+assert(html.includes('nav-label-dock hidden text-[9.5px]">Caisse</span>'), 'Caisse dock label present for pos');
+assert(html.includes('nav-label-dock hidden text-[9.5px]">Factures</span>'), 'Factures dock label present for documents');
+assert(html.includes('nav-label-dock hidden text-[9.5px]">Stocks</span>'), 'Stocks dock label present for stock');
+assert(html.includes('nav-label-dock hidden text-[9.5px]">Clients</span>'), 'Clients dock label present for clients');
+assert(html.includes('nav-label-dock hidden text-[9.5px]">Équipe</span>'), 'Équipe dock label present for hr');
+console.log('  [PASS] 12: Vertical Icon + Label Dock Rail validated with 16 squircle tiles and visible labels.');
+
+console.log('All Facebook Royal Blue, Subtab Badges, POS Contrast, Dark Nav & Dock Rail tests PASSED! (60/60 assertions)');
