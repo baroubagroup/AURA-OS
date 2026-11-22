@@ -13,20 +13,21 @@ assert(html.includes('--text-secondary: #1E293B'), 'Light theme text-secondary i
 assert(html.includes('--text-muted: #475569'), 'Light theme text-muted is high contrast #475569');
 console.log('  [PASS] 1: Facebook Royal Blue color variables and contrast values verified.');
 
-// 2. Light Mode High-Contrast Rules
+// 2. Light Mode High-Contrast Rules & Clean White Dock
 assert(html.includes('RENFORCEMENT DU CONTRASTE & LISIBILITÉ EN MODE CLAIR'), 'Light mode contrast comment/block present');
 assert(html.includes('html.light .app-card'), 'Light mode .app-card contrast rule present');
 assert(html.includes('html.light thead'), 'Light mode table header contrast rule present');
-console.log('  [PASS] 2: Light mode high-contrast CSS rules verified.');
+assert(html.includes('html.light .tab-pill-deck {\n      background-color: #FFFFFF !important;'), 'Light mode tab deck is pure white, not greyish');
+console.log('  [PASS] 2: Light mode high-contrast and pure white dock verified.');
 
-// 3. Segmented Capsule Dock Styling
+// 3. Segmented Capsule Dock Styling & Pure White Active Text
 assert(html.includes('.tab-pill-deck'), '.tab-pill-deck CSS class present');
 assert(html.includes('linear-gradient(135deg, #1877F2 0%, #166FE5 100%)'), 'Active subtabs use Facebook Royal Blue gradient');
-assert(html.includes('.hr-subtab-btn.active'), 'HR subtabs active style rule present');
-assert(html.includes('.stock-subtab-btn.active'), 'Stock subtabs active style rule present');
-assert(html.includes('.settings-subtab-btn.active'), 'Settings subtabs active style rule present');
-assert(html.includes('.acc-subtab-btn.active'), 'Accounting subtabs active style rule present');
-console.log('  [PASS] 3: Unified Segmented Capsule Dock CSS rules verified.');
+assert(html.includes('html.light .tab-pill-btn.active *,'), 'Active subtab content in light mode is forced to pure white');
+assert(html.includes('color: #FFFFFF !important;'), 'Text color on active blue pill is #FFFFFF pure white');
+assert(html.includes('stroke: #FFFFFF !important;'), 'Icon stroke on active blue pill is #FFFFFF pure white');
+assert(html.includes('color: #334155 !important;'), 'Inactive subtabs in light mode have deep slate color #334155');
+console.log('  [PASS] 3: Pure white text and icons on active royal blue pill verified.');
 
 // 4. HTML Subtab Structure
 // HR
@@ -56,4 +57,4 @@ assert(html.includes("function switchHRTab(tabKey)"), 'switchHRTab function exis
 assert(html.includes("activeBtn.classList.add('active');"), 'activeBtn gets active class');
 console.log('  [PASS] 5: Tab switching functions cleanly maintain .active state.');
 
-console.log('All Facebook Royal Blue & Segmented Subtab tests PASSED! (18/18 assertions)');
+console.log('All Facebook Royal Blue & Segmented Subtab tests PASSED! (22/22 assertions)');

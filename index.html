@@ -473,8 +473,9 @@
     /* ========================================================
        SEGMENTED CAPSULE DOCK : NAVIGATION SOUS-ONGLETS UNIFIÉE & TACTILE
        - Inspiration Royale Facebook Blue (#1877F2)
-       - Zéro soulignement plat basique : pilules ergonomiques en conteneur dock
-       - Contraste maximal en mode clair (#475569 inactif, blanc pur actif)
+       - Mode Clair : Dock blanc pur (#FFFFFF) avec bordure douce (#E2E8F0)
+       - Onglet Actif : Pilule Bleu Royal (#1877F2) avec texte et icônes BLANC PUR (#FFFFFF)
+       - Onglets Inactifs : Typographie ardoise haute lisibilité (#334155), zéro grisâtre délavé
        ======================================================== */
     .tab-pill-deck {
       display: inline-flex;
@@ -489,9 +490,9 @@
       user-select: none;
     }
     html.light .tab-pill-deck {
-      background-color: #EEF2F6;
-      border-color: #CBD5E1;
-      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
+      background-color: #FFFFFF !important;
+      border: 1px solid #E2E8F0 !important;
+      box-shadow: 0 1px 4px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.03) !important;
     }
 
     .tab-pill-btn,
@@ -508,7 +509,7 @@
       border-radius: 0.875rem !important;
       font-size: 0.8rem !important;
       font-weight: 600 !important;
-      color: var(--text-muted) !important;
+      color: var(--text-muted);
       background: transparent !important;
       border: 1px solid transparent !important;
       transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
@@ -518,37 +519,66 @@
       text-decoration: none !important;
     }
 
-    html.light .tab-pill-btn,
-    html.light .hr-subtab-btn,
-    html.light .stock-subtab-btn,
-    html.light .settings-subtab-btn,
-    html.light .acc-subtab-btn,
-    html.light .doc-subtab-btn,
-    html.light .crm-subtab-btn {
+    /* Onglets Inactifs en Mode Clair : texte ardoise nette (#334155), icône (#475569) */
+    html.light .tab-pill-btn:not(.active):not(.text-\[var\(--primary\)\]),
+    html.light .hr-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]),
+    html.light .stock-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]),
+    html.light .settings-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]),
+    html.light .acc-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]),
+    html.light .doc-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]),
+    html.light .crm-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]) {
+      color: #334155 !important;
+      background: transparent !important;
+    }
+    html.light .tab-pill-btn:not(.active):not(.text-\[var\(--primary\)\]) svg,
+    html.light .hr-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]) svg,
+    html.light .stock-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]) svg,
+    html.light .settings-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]) svg,
+    html.light .acc-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]) svg,
+    html.light .doc-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]) svg,
+    html.light .crm-subtab-btn:not(.active):not(.text-\[var\(--primary\)\]) svg {
       color: #475569 !important;
+      stroke: #475569 !important;
     }
 
-    .tab-pill-btn:hover,
-    .hr-subtab-btn:hover,
-    .stock-subtab-btn:hover,
-    .settings-subtab-btn:hover,
-    .acc-subtab-btn:hover,
-    .doc-subtab-btn:hover,
-    .crm-subtab-btn:hover {
-      color: var(--text-main) !important;
-      background-color: rgba(255, 255, 255, 0.85) !important;
+    /* Survol des onglets inactifs en Mode Clair : doux bleuté (#EFF6FF) avec accent (#1877F2) */
+    html.light .tab-pill-btn:not(.active):hover,
+    html.light .hr-subtab-btn:not(.active):hover,
+    html.light .stock-subtab-btn:not(.active):hover,
+    html.light .settings-subtab-btn:not(.active):hover,
+    html.light .acc-subtab-btn:not(.active):hover,
+    html.light .doc-subtab-btn:not(.active):hover,
+    html.light .crm-subtab-btn:not(.active):hover {
+      color: #1877F2 !important;
+      background-color: #EFF6FF !important;
     }
-    html.dark .tab-pill-btn:hover,
-    html.dark .hr-subtab-btn:hover,
-    html.dark .stock-subtab-btn:hover,
-    html.dark .settings-subtab-btn:hover,
-    html.dark .acc-subtab-btn:hover,
-    html.dark .doc-subtab-btn:hover,
-    html.dark .crm-subtab-btn:hover {
+    html.light .tab-pill-btn:not(.active):hover svg,
+    html.light .hr-subtab-btn:not(.active):hover svg,
+    html.light .stock-subtab-btn:not(.active):hover svg,
+    html.light .settings-subtab-btn:not(.active):hover svg,
+    html.light .acc-subtab-btn:not(.active):hover svg,
+    html.light .doc-subtab-btn:not(.active):hover svg,
+    html.light .crm-subtab-btn:not(.active):hover svg {
+      color: #1877F2 !important;
+      stroke: #1877F2 !important;
+    }
+
+    /* Survol en Mode Sombre */
+    html.dark .tab-pill-btn:not(.active):hover,
+    html.dark .hr-subtab-btn:not(.active):hover,
+    html.dark .stock-subtab-btn:not(.active):hover,
+    html.dark .settings-subtab-btn:not(.active):hover,
+    html.dark .acc-subtab-btn:not(.active):hover,
+    html.dark .doc-subtab-btn:not(.active):hover,
+    html.dark .crm-subtab-btn:not(.active):hover {
+      color: #F8FAFC !important;
       background-color: rgba(255, 255, 255, 0.08) !important;
     }
 
-    /* Pilule Active Facebook Royal Blue (#1877F2) avec Élévation Tactile */
+    /* ========================================================
+       PILULE ACTIVE : BLEU ROYAL FACEBOOK (#1877F2) + BLANC PUR ÉCLATANT (#FFFFFF)
+       Règles à haute spécificité pour garantir un texte blanc pur sans exception
+       ======================================================== */
     .tab-pill-btn.active,
     .tab-pill-btn.border-\[var\(--primary\)\],
     .tab-pill-btn.text-\[var\(--primary\)\],
@@ -565,32 +595,57 @@
     .acc-subtab-btn.border-\[var\(--primary\)\],
     .acc-subtab-btn.text-\[var\(--primary\)\],
     .doc-subtab-btn.active,
-    .crm-subtab-btn.active {
+    .crm-subtab-btn.active,
+    html.light .tab-pill-btn.active,
+    html.light .tab-pill-btn.border-\[var\(--primary\)\],
+    html.light .tab-pill-btn.text-\[var\(--primary\)\],
+    html.light .hr-subtab-btn.active,
+    html.light .hr-subtab-btn.border-\[var\(--primary\)\],
+    html.light .hr-subtab-btn.text-\[var\(--primary\)\],
+    html.light .stock-subtab-btn.active,
+    html.light .stock-subtab-btn.border-\[var\(--primary\)\],
+    html.light .stock-subtab-btn.text-\[var\(--primary\)\],
+    html.light .settings-subtab-btn.active,
+    html.light .settings-subtab-btn.border-\[var\(--primary\)\],
+    html.light .settings-subtab-btn.text-\[var\(--primary\)\],
+    html.light .acc-subtab-btn.active,
+    html.light .acc-subtab-btn.border-\[var\(--primary\)\],
+    html.light .acc-subtab-btn.text-\[var\(--primary\)\],
+    html.light .doc-subtab-btn.active,
+    html.light .crm-subtab-btn.active {
       color: #FFFFFF !important;
       background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%) !important;
       border: 1px solid #1877F2 !important;
-      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
       font-weight: 700 !important;
       transform: translateY(-1px) !important;
     }
 
-    .tab-pill-btn.active svg,
-    .tab-pill-btn.border-\[var\(--primary\)\] svg,
-    .tab-pill-btn.text-\[var\(--primary\)\] svg,
-    .hr-subtab-btn.active svg,
-    .hr-subtab-btn.border-\[var\(--primary\)\] svg,
-    .hr-subtab-btn.text-\[var\(--primary\)\] svg,
-    .stock-subtab-btn.active svg,
-    .stock-subtab-btn.border-\[var\(--primary\)\] svg,
-    .stock-subtab-btn.text-\[var\(--primary\)\] svg,
-    .settings-subtab-btn.active svg,
-    .settings-subtab-btn.border-\[var\(--primary\)\] svg,
-    .settings-subtab-btn.text-\[var\(--primary\)\] svg,
-    .acc-subtab-btn.active svg,
-    .acc-subtab-btn.border-\[var\(--primary\)\] svg,
-    .acc-subtab-btn.text-\[var\(--primary\)\] svg,
-    .doc-subtab-btn.active svg,
-    .crm-subtab-btn.active svg {
+    /* Garantie absolue du blanc pur pour le texte, spans et icônes SVG de l'onglet actif */
+    .tab-pill-btn.active *,
+    .hr-subtab-btn.active *,
+    .stock-subtab-btn.active *,
+    .settings-subtab-btn.active *,
+    .acc-subtab-btn.active *,
+    .doc-subtab-btn.active *,
+    .crm-subtab-btn.active *,
+    .tab-pill-btn.text-\[var\(--primary\)\] *,
+    .hr-subtab-btn.text-\[var\(--primary\)\] *,
+    .stock-subtab-btn.text-\[var\(--primary\)\] *,
+    .settings-subtab-btn.text-\[var\(--primary\)\] *,
+    .acc-subtab-btn.text-\[var\(--primary\)\] *,
+    html.light .tab-pill-btn.active *,
+    html.light .hr-subtab-btn.active *,
+    html.light .stock-subtab-btn.active *,
+    html.light .settings-subtab-btn.active *,
+    html.light .acc-subtab-btn.active *,
+    html.light .doc-subtab-btn.active *,
+    html.light .crm-subtab-btn.active *,
+    html.light .tab-pill-btn.text-\[var\(--primary\)\] *,
+    html.light .hr-subtab-btn.text-\[var\(--primary\)\] *,
+    html.light .stock-subtab-btn.text-\[var\(--primary\)\] *,
+    html.light .settings-subtab-btn.text-\[var\(--primary\)\] *,
+    html.light .acc-subtab-btn.text-\[var\(--primary\)\] * {
       color: #FFFFFF !important;
       stroke: #FFFFFF !important;
     }
