@@ -663,6 +663,174 @@
        - Typographie & icônes haute lisibilité (#FFFFFF / #E2E8F0 / #93C5FD)
        - Onglet actif en Pilule Facebook Royal Blue (#1877F2) en relief
        ======================================================== */
+    /* ========================================================
+       Cockpit Barre Latérale Mode Sombre : Bleu Royal Saphir
+       Distingue nettement la Navigation de l'Interface Sombre
+       ======================================================== */
+    html.dark #sidebar,
+    :root:not(.light) #sidebar {
+      background: linear-gradient(180deg, #0D2659 0%, #081738 100%) !important;
+      border-right: 1.5px solid rgba(24, 119, 242, 0.35) !important;
+      box-shadow: 4px 0 28px rgba(0, 0, 0, 0.6) !important;
+    }
+    html.dark #sidebar .h-16,
+    :root:not(.light) #sidebar .h-16 {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    html.dark #sidebar .sidebar-brand-text .font-extrabold,
+    :root:not(.light) #sidebar .sidebar-brand-text .font-extrabold {
+      color: #FFFFFF !important;
+    }
+    html.dark #sidebar #store-selector,
+    :root:not(.light) #sidebar #store-selector {
+      color: #BFDBFE !important;
+    }
+    html.dark #sidebar #store-selector option,
+    :root:not(.light) #sidebar #store-selector option {
+      background-color: #0D2659 !important;
+      color: #FFFFFF !important;
+    }
+    html.dark #sidebar button[onclick*="toggleSidebar"],
+    html.dark #sidebar #btn-sidebar-collapse-inner,
+    :root:not(.light) #sidebar button[onclick*="toggleSidebar"],
+    :root:not(.light) #sidebar #btn-sidebar-collapse-inner {
+      color: #93C5FD !important;
+    }
+    html.dark #sidebar button[onclick*="toggleSidebar"]:hover,
+    html.dark #sidebar #btn-sidebar-collapse-inner:hover,
+    :root:not(.light) #sidebar button[onclick*="toggleSidebar"]:hover,
+    :root:not(.light) #sidebar #btn-sidebar-collapse-inner:hover {
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.12) !important;
+    }
+
+    /* En-têtes de sections accordéons en Mode Sombre */
+    html.dark #sidebar .nav-section-header,
+    :root:not(.light) #sidebar .nav-section-header {
+      color: #93C5FD !important;
+      opacity: 0.92 !important;
+    }
+    html.dark #sidebar .nav-section-header:hover,
+    :root:not(.light) #sidebar .nav-section-header:hover {
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      opacity: 1 !important;
+    }
+    html.dark #sidebar .nav-section-header svg,
+    :root:not(.light) #sidebar .nav-section-header svg {
+      color: #93C5FD !important;
+      stroke: #93C5FD !important;
+    }
+    html.dark #sidebar .nav-section-header:hover svg,
+    :root:not(.light) #sidebar .nav-section-header:hover svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+
+    /* Boutons de navigation inactifs en Mode Sombre */
+    html.dark #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]),
+    :root:not(.light) #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) {
+      color: #E2E8F0 !important;
+      background-color: transparent !important;
+      border-color: transparent !important;
+    }
+    html.dark #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) svg,
+    :root:not(.light) #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) svg {
+      color: #93C5FD !important;
+      stroke: #93C5FD !important;
+    }
+    html.dark #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]):hover,
+    :root:not(.light) #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]):hover {
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    html.dark #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]):hover svg,
+    :root:not(.light) #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]):hover svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+
+    /* Badges & Raccourcis clavier dans la barre latérale en Mode Sombre */
+    html.dark #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) span[class*="rounded"],
+    :root:not(.light) #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) span[class*="rounded"] {
+      background-color: rgba(255, 255, 255, 0.12) !important;
+      color: #BFDBFE !important;
+      border: 1px solid rgba(255, 255, 255, 0.18) !important;
+    }
+
+    /* Pied de barre latérale (profil utilisateur) en Mode Sombre */
+    html.dark #sidebar > div:last-child,
+    :root:not(.light) #sidebar > div:last-child {
+      border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+      background: rgba(8, 23, 56, 0.55) !important;
+    }
+    html.dark #sidebar > div:last-child span,
+    :root:not(.light) #sidebar > div:last-child span {
+      color: #E2E8F0 !important;
+    }
+    html.dark #sidebar > div:last-child p,
+    :root:not(.light) #sidebar > div:last-child p {
+      color: #93C5FD !important;
+    }
+    html.dark #sidebar > div:last-child button,
+    :root:not(.light) #sidebar > div:last-child button {
+      color: #93C5FD !important;
+    }
+    html.dark #sidebar > div:last-child button:hover,
+    :root:not(.light) #sidebar > div:last-child button:hover {
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    /* Mode réduit (icônes seules) en Mode Sombre */
+    html.dark body.sidebar-collapsed #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) svg,
+    :root:not(.light) body.sidebar-collapsed #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) svg {
+      color: #93C5FD !important;
+      stroke: #93C5FD !important;
+    }
+    html.dark body.sidebar-collapsed #sidebar .nav-btn:hover,
+    :root:not(.light) body.sidebar-collapsed #sidebar .nav-btn:hover {
+      background-color: rgba(255, 255, 255, 0.12) !important;
+    }
+    html.dark body.sidebar-collapsed #sidebar .nav-btn:hover svg,
+    :root:not(.light) body.sidebar-collapsed #sidebar .nav-btn:hover svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+
+    /* En-tête Topbar en Mode Sombre : démarcation élégante avec l'interface */
+    html.dark header:not(#aura-os-desktop > header),
+    :root:not(.light) header:not(#aura-os-desktop > header) {
+      background: rgba(10, 16, 32, 0.94) !important;
+      border-bottom: 1px solid rgba(24, 119, 242, 0.22) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.35) !important;
+    }
+    html.dark #btn-toggle-sidebar,
+    :root:not(.light) #btn-toggle-sidebar {
+      color: #93C5FD !important;
+      border-color: rgba(24, 119, 242, 0.3) !important;
+      background: rgba(24, 119, 242, 0.1) !important;
+    }
+    html.dark #btn-toggle-sidebar:hover,
+    :root:not(.light) #btn-toggle-sidebar:hover {
+      color: #FFFFFF !important;
+      background: rgba(24, 119, 242, 0.25) !important;
+    }
+
+    /* Cartes de l'interface en Mode Sombre : relief et netteté */
+    html.dark .app-card,
+    :root:not(.light) .app-card {
+      background-color: #0F172A !important;
+      border: 1px solid rgba(255, 255, 255, 0.09) !important;
+      box-shadow: 0 4px 16px -2px rgba(0, 0, 0, 0.45) !important;
+    }
+    html.dark .app-card:hover,
+    :root:not(.light) .app-card:hover {
+      border-color: rgba(24, 119, 242, 0.3) !important;
+    }
+
     html.light #sidebar {
       background: linear-gradient(180deg, #0E2554 0%, #091734 100%) !important;
       border-right: 1px solid rgba(255, 255, 255, 0.12) !important;

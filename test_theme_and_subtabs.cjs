@@ -80,4 +80,13 @@ assert(html.includes('html.light [id^="modal-"] label'), 'Modal labels are high 
 assert(!html.includes('paie et pointage'), 'Pointage mention successfully removed from modal subtitle');
 console.log('  [PASS] 8: Modal form inputs have high contrast and clear visibility.');
 
-console.log('All Facebook Royal Blue, Sidebar, Segmented Subtab & Shifts Harmony tests PASSED! (35/35 assertions)');
+// 9. Dark Mode Navigation System Distinction (Sidebar & Topbar vs Interface Canvas)
+assert(html.includes('html.dark #sidebar,\n    :root:not(.light) #sidebar'), 'Dark mode sidebar has dedicated Royal Blue Sapphire styling');
+assert(html.includes('linear-gradient(180deg, #0D2659 0%, #081738 100%)'), 'Dark mode sidebar uses vibrant Deep Royal Blue gradient');
+assert(html.includes('border-right: 1.5px solid rgba(24, 119, 242, 0.35)'), 'Dark mode sidebar has luminous boundary divider');
+assert(html.includes('html.dark #sidebar .nav-section-header'), 'Dark mode accordion headers styled in soft sky blue #93C5FD');
+assert(html.includes('html.dark header:not(#aura-os-desktop > header)'), 'Dark mode top header has distinct border and elevation');
+assert(html.includes('html.dark .app-card'), 'Dark mode cards have distinct dark slate elevation #0F172A');
+console.log('  [PASS] 9: Dark mode navigation system clearly distinguished from interface canvas.');
+
+console.log('All Facebook Royal Blue, Sidebar, Segmented Subtabs, Shifts Harmony & Dark Nav Distinction tests PASSED! (41/41 assertions)');
