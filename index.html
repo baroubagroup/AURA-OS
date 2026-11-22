@@ -983,25 +983,151 @@
     }
 
 
+    /* ========================================================
+       Badges de Comptage Numérique (.tab-pill-badge)
+       Visibilité & Contraste 100% en Modes Clair et Sombre
+       ======================================================== */
     .tab-pill-badge {
       font-size: 0.65rem;
       font-family: 'JetBrains Mono', monospace;
       padding: 0.125rem 0.5rem;
+      min-width: 1.25rem;
+      height: 1.25rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 9999px;
-      background-color: var(--bg-app);
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-      font-weight: 700;
-      transition: all 0.15s ease;
+      font-weight: 800;
+      line-height: 1;
+      transition: all 0.18s ease;
+      user-select: none;
     }
 
+    /* 1. Sur l'onglet ACTIF : Capsule Blanche Pure + Texte Bleu Royal (#1877F2) */
     .tab-pill-btn.active .tab-pill-badge,
     .tab-pill-btn.border-\[var\(--primary\)\] .tab-pill-badge,
-    .tab-pill-btn.text-\[var\(--primary\)\] .tab-pill-badge {
-      background-color: var(--primary-light) !important;
-      color: var(--primary) !important;
-      border-color: rgba(13, 148, 136, 0.3) !important;
+    .tab-pill-btn.text-\[var\(--primary\)\] .tab-pill-badge,
+    .hr-subtab-btn.active .tab-pill-badge,
+    .stock-subtab-btn.active .tab-pill-badge,
+    .settings-subtab-btn.active .tab-pill-badge,
+    .acc-subtab-btn.active .tab-pill-badge,
+    .doc-subtab-btn.active .tab-pill-badge,
+    .crm-subtab-btn.active .tab-pill-badge,
+    html.light .tab-pill-btn.active .tab-pill-badge,
+    html.dark .tab-pill-btn.active .tab-pill-badge,
+    html.light .doc-subtab-btn.active .tab-pill-badge,
+    html.dark .doc-subtab-btn.active .tab-pill-badge,
+    html.light .crm-subtab-btn.active .tab-pill-badge,
+    html.dark .crm-subtab-btn.active .tab-pill-badge {
+      background-color: #FFFFFF !important;
+      color: #1877F2 !important;
+      border: 1px solid rgba(255, 255, 255, 0.8) !important;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.22) !important;
+      font-weight: 900 !important;
+      opacity: 1 !important;
     }
+
+    /* 2. Sur les onglets INACTIFS en Mode Clair : Conteneur ardoise (#E2E8F0) + Chiffre sombre (#0F172A) */
+    html.light .tab-pill-btn:not(.active) .tab-pill-badge,
+    html.light .doc-subtab-btn:not(.active) .tab-pill-badge,
+    html.light .crm-subtab-btn:not(.active) .tab-pill-badge {
+      background-color: #E2E8F0 !important;
+      color: #0F172A !important;
+      border: 1px solid #CBD5E1 !important;
+      font-weight: 800 !important;
+    }
+    html.light .tab-pill-btn:not(.active):hover .tab-pill-badge,
+    html.light .doc-subtab-btn:not(.active):hover .tab-pill-badge,
+    html.light .crm-subtab-btn:not(.active):hover .tab-pill-badge {
+      background-color: #DBEAFE !important;
+      color: #1877F2 !important;
+      border-color: #93C5FD !important;
+    }
+
+    /* 3. Sur les onglets INACTIFS en Mode Sombre : Conteneur fumé + Chiffre blanc pur (#FFFFFF) */
+    html.dark .tab-pill-btn:not(.active) .tab-pill-badge,
+    :root:not(.light) .tab-pill-btn:not(.active) .tab-pill-badge,
+    html.dark .doc-subtab-btn:not(.active) .tab-pill-badge,
+    :root:not(.light) .doc-subtab-btn:not(.active) .tab-pill-badge,
+    html.dark .crm-subtab-btn:not(.active) .tab-pill-badge,
+    :root:not(.light) .crm-subtab-btn:not(.active) .tab-pill-badge {
+      background-color: rgba(255, 255, 255, 0.16) !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      font-weight: 800 !important;
+    }
+    html.dark .tab-pill-btn:not(.active):hover .tab-pill-badge,
+    :root:not(.light) .tab-pill-btn:not(.active):hover .tab-pill-badge,
+    html.dark .doc-subtab-btn:not(.active):hover .tab-pill-badge,
+    :root:not(.light) .doc-subtab-btn:not(.active):hover .tab-pill-badge,
+    html.dark .crm-subtab-btn:not(.active):hover .tab-pill-badge,
+    :root:not(.light) .crm-subtab-btn:not(.active):hover .tab-pill-badge {
+      background-color: rgba(24, 119, 242, 0.35) !important;
+      color: #FFFFFF !important;
+      border-color: rgba(24, 119, 242, 0.7) !important;
+    }
+
+    /* ========================================================
+       Contraste Grille Produits Caisse Tactile (POS) en Mode Clair
+       ======================================================== */
+    html.light #pos-products-grid > div {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+    }
+    html.light #pos-products-grid > div:hover {
+      border-color: #1877F2 !important;
+      box-shadow: 0 10px 25px -4px rgba(24, 119, 242, 0.2) !important;
+      transform: translateY(-2px) !important;
+    }
+    html.light #pos-products-grid h4 {
+      color: #0F172A !important;
+      font-weight: 800 !important;
+    }
+    html.light #pos-products-grid > div:hover h4 {
+      color: #1877F2 !important;
+    }
+    html.light #pos-products-grid .font-mono {
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }
+    html.light #pos-products-grid .text-white\/70,
+    html.light #pos-products-grid .text-white\/50 {
+      color: #475569 !important;
+    }
+    html.light #pos-products-grid .text-white\/40 {
+      color: #64748B !important;
+    }
+    html.light #pos-products-grid .border-white\/10 {
+      border-color: #E2E8F0 !important;
+    }
+    html.light #pos-products-grid .bg-white\/5 {
+      background: #F8FAFC !important;
+      border-color: #E2E8F0 !important;
+    }
+    html.light #pos-products-grid .text-teal-400 {
+      color: #0F766E !important;
+      font-weight: 900 !important;
+    }
+    html.light #pos-products-grid .bg-teal-500\/15 {
+      background-color: #ECFDF5 !important;
+      border-color: #A7F3D0 !important;
+      color: #065F46 !important;
+      font-weight: 800 !important;
+    }
+    html.light #pos-products-grid .bg-rose-500\/15 {
+      background-color: #FFF1F2 !important;
+      border-color: #FECDD3 !important;
+      color: #9F1239 !important;
+      font-weight: 800 !important;
+    }
+    html.light #pos-products-grid .bg-indigo-500\/15 {
+      background-color: #EEF2FF !important;
+      border-color: #C7D2FE !important;
+      color: #4338CA !important;
+      font-weight: 800 !important;
+    }
+
 
     /* Cockpit KPI Metric Cards */
     .cockpit-kpi-card {

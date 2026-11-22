@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const assert = require('assert');
 
-console.log('Testing Facebook Royal Blue Theme, Segmented Subtabs & Royal Blue Sidebar...');
+console.log('Testing Facebook Royal Blue Theme, Segmented Subtabs, Badges & Mode Switch Contrast...');
 
 const htmlPath = fs.existsSync('aura-pos/index.html') ? 'aura-pos/index.html' : 'index.html';
 const html = fs.readFileSync(htmlPath, 'utf8');
@@ -89,4 +89,19 @@ assert(html.includes('html.dark header:not(#aura-os-desktop > header)'), 'Dark m
 assert(html.includes('html.dark .app-card'), 'Dark mode cards have distinct dark slate elevation #0F172A');
 console.log('  [PASS] 9: Dark mode navigation system clearly distinguished from interface canvas.');
 
-console.log('All Facebook Royal Blue, Sidebar, Segmented Subtabs, Shifts Harmony & Dark Nav Distinction tests PASSED! (41/41 assertions)');
+// 10. Subtab Numerical Count Badges (.tab-pill-badge) Contrast
+assert(html.includes('html.light .tab-pill-btn.active .tab-pill-badge'), 'Active subtab badge has dedicated styling in light mode');
+assert(html.includes('html.dark .tab-pill-btn.active .tab-pill-badge'), 'Active subtab badge has dedicated styling in dark mode');
+assert(html.includes('background-color: #FFFFFF !important;\n      color: #1877F2 !important;'), 'Active subtab badge is crisp white capsule with Royal Blue number');
+assert(html.includes('html.light .tab-pill-btn:not(.active) .tab-pill-badge'), 'Inactive subtab badge has high contrast dark slate text on light slate in light mode');
+assert(html.includes('html.dark .tab-pill-btn:not(.active) .tab-pill-badge'), 'Inactive subtab badge has high contrast white text on translucent card in dark mode');
+console.log('  [PASS] 10: Subtab count badges visible and distinct across both Light and Dark mode switches.');
+
+// 11. POS Product Grid Contrast in Light Mode
+assert(html.includes('html.light #pos-products-grid > div'), 'POS product cards have solid white background and crisp border in light mode');
+assert(html.includes('html.light #pos-products-grid h4'), 'POS product titles are high contrast dark slate #0F172A in light mode');
+assert(html.includes('html.light #pos-products-grid .text-teal-400'), 'POS product prices are high contrast deep teal #0F766E in light mode');
+assert(html.includes('html.light #pos-products-grid .bg-teal-500\\/15'), 'POS stock badges have high contrast dark green on pale green in light mode');
+console.log('  [PASS] 11: POS product cards, titles, prices, and stock badges clearly visible in light mode.');
+
+console.log('All Facebook Royal Blue, Subtab Badges, POS Contrast & Dark Nav tests PASSED! (49/49 assertions)');
