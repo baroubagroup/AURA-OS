@@ -20,6 +20,7 @@ const suites = [
   { name: 'Dual Interface System: Formel vs Cartes Visuelles', script: 'test_dual_interface.cjs' },
   { name: 'Bureau OS & Personnalisations', script: 'test_appearance_settings.cjs' },
   { name: 'Auteurs & Éditeur : BAROUBA GROUP', script: 'test_barouba_author.cjs' },
+  { name: 'Ergonomie Sidebar, Accordéons, Usage Interne & Symbologie Code128/QR', script: 'test_user_requirements.cjs' },
   { name: 'End-to-End: Master Integration & UX', script: 'test_master_integration.cjs' }
 ];
 

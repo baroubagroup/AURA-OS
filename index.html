@@ -1304,7 +1304,6 @@
       transform: translateY(-50%) translateX(0) scale(1) !important;
     }
     /* La fenêtre <main> démarre impérativement APRÈS le dock */
-    body.dock-pos-left main,
     body.interface-cards-mode.dock-pos-left main {
       position: fixed !important;
       left: 5.75rem !important;
@@ -1355,7 +1354,6 @@
       transform: translateY(-50%) translateX(0) scale(1) !important;
     }
     /* La fenêtre <main> s'arrête impérativement AVANT le dock à droite */
-    body.dock-pos-right main,
     body.interface-cards-mode.dock-pos-right main {
       position: fixed !important;
       right: 5.75rem !important;
@@ -1402,7 +1400,6 @@
       transform: translateX(-50%) translateY(0) scale(1) !important;
     }
     /* La fenêtre <main> démarre impérativement EN DESSOUS du dock */
-    body.dock-pos-top main,
     body.interface-cards-mode.dock-pos-top main {
       position: fixed !important;
       top: 5rem !important;
@@ -1440,8 +1437,6 @@
       gap: 0.65rem !important;
     }
     /* La fenêtre <main> s'arrête impérativement AU DESSUS du dock */
-    body.dock-pos-bottom main,
-    body:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) main,
     body.interface-cards-mode.dock-pos-bottom main,
     body.interface-cards-mode:not(.dock-pos-left):not(.dock-pos-right):not(.dock-pos-top) main {
       position: fixed !important;
@@ -1453,6 +1448,31 @@
       max-width: 1560px !important;
       width: calc(100vw - 2.5rem) !important;
       height: calc(100vh - 6.5rem) !important;
+    }
+
+    /* MODE STANDARD : <main> est un conteneur flex fluide occupant strictement l'espace disponible à côté de la barre latérale (#sidebar) */
+    body:not(.interface-cards-mode) main {
+      position: relative !important;
+      flex: 1 1 0% !important;
+      min-width: 0 !important;
+      width: auto !important;
+      height: 100vh !important;
+      max-width: none !important;
+      left: auto !important;
+      right: auto !important;
+      top: auto !important;
+      bottom: auto !important;
+      margin: 0 !important;
+      z-index: 1 !important;
+    }
+
+    /* Dans le rail replié (sidebar-collapsed), masquer les en-têtes d'accordéon et afficher tous les boutons icônes */
+    body.sidebar-collapsed .nav-section-header {
+      display: none !important;
+    }
+    body.sidebar-collapsed .nav-section-group {
+      display: flex !important;
+      flex-direction: column !important;
     }
     body.dock-pos-bottom #aura-os-desktop .launchpad-scroll-area,
     body.dock-pos-bottom #desktop-grid-container,
@@ -1839,169 +1859,199 @@
     </div>
 
     <!-- ==================== NAVIGATION EN MODE STANDARD (CLASSIQUE) ==================== -->
-    <nav id="sidebar-standard-nav" class="flex-1 px-2.5 py-3 overflow-y-auto custom-scroll space-y-3.5 select-none">
+    <nav id="sidebar-standard-nav" class="flex-1 px-2.5 py-3 overflow-y-auto custom-scroll space-y-3 select-none">
 
       <!-- SECTION 1 : VUE PRINCIPALE -->
-      <div class="space-y-1">
-        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70">
-          Vue Principale
-        </div>
+      <div class="nav-section-wrapper space-y-1" id="section-nav-main">
+        <button type="button" onclick="toggleNavSection('main')" class="nav-section-header w-full flex items-center justify-between px-2 py-1 rounded-lg hover:bg-[var(--bg-card)] text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-80 hover:opacity-100 transition-all cursor-pointer group">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="truncate">Vue Principale</span>
+            <span class="text-[9px] px-1 py-0.2 rounded bg-[var(--border)] font-mono text-[var(--text-muted)] group-hover:text-[var(--text-main)] font-normal">2</span>
+          </div>
+          <svg id="chevron-nav-main" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200 transform rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
         
-        <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left font-semibold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/20 transition-all cursor-pointer" title="Tableau de Bord Exécutif 360° (F1)">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-[var(--primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-            <span class="truncate text-xs">Tableau de Bord 360°</span>
-          </div>
-          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[var(--border)] text-[var(--text-muted)] font-bold shrink-0">F1</span>
-        </button>
+        <div id="group-nav-main" class="nav-section-group space-y-1">
+          <button onclick="switchView('dashboard')" id="nav-dashboard" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left font-semibold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/20 transition-all cursor-pointer" title="Tableau de Bord Exécutif 360° (F1)">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-[var(--primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+              <span class="truncate text-xs">Tableau de Bord 360°</span>
+            </div>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-[var(--border)] text-[var(--text-muted)] font-bold shrink-0">F1</span>
+          </button>
 
-        <button onclick="switchView('pos')" id="nav-pos" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Caisse Comptoir & Encaissement Direct (F2)">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            <span class="truncate text-xs">Caisse Comptoir (POS)</span>
-          </div>
-          <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-bold shrink-0">F2</span>
-        </button>
+          <button onclick="switchView('pos')" id="nav-pos" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Caisse Comptoir & Encaissement Direct (F2)">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+              <span class="truncate text-xs">Caisse Comptoir (POS)</span>
+            </div>
+            <span class="text-[9px] font-mono px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-bold shrink-0">F2</span>
+          </button>
+        </div>
       </div>
 
       <!-- SECTION 2 : VENTES & COMMERCE -->
-      <div class="space-y-1">
-        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70 pt-1">
-          Ventes & Commerce
+      <div class="nav-section-wrapper space-y-1" id="section-nav-sales">
+        <button type="button" onclick="toggleNavSection('sales')" class="nav-section-header w-full flex items-center justify-between px-2 py-1 rounded-lg hover:bg-[var(--bg-card)] text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-80 hover:opacity-100 transition-all cursor-pointer group">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="truncate">Ventes & Commerce</span>
+            <span class="text-[9px] px-1 py-0.2 rounded bg-[var(--border)] font-mono text-[var(--text-muted)] group-hover:text-[var(--text-main)] font-normal">3</span>
+          </div>
+          <svg id="chevron-nav-sales" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200 transform rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+
+        <div id="group-nav-sales" class="nav-section-group space-y-1">
+          <button onclick="switchView('documents')" id="nav-documents" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Factures A4, Devis & Bons de Livraison">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span class="truncate">Documents & Factures A4</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-600 font-mono shrink-0">Devis/BL</span>
+          </button>
+
+          <button onclick="switchView('credits')" id="nav-credits" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Crédits Clients & Suivi du Recouvrement">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span class="truncate">Crédits & Recouvrement</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-num shrink-0">Créances</span>
+          </button>
+
+          <button onclick="switchView('clients')" id="nav-clients" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Clients & Portefeuille CRM">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+              <span class="truncate">Clients & CRM</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-500 font-mono shrink-0">B2B/B2C</span>
+          </button>
         </div>
-
-        <button onclick="switchView('documents')" id="nav-documents" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Factures A4, Devis & Bons de Livraison">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            <span class="truncate">Documents & Factures A4</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-600 font-mono shrink-0">Devis/BL</span>
-        </button>
-
-        <button onclick="switchView('credits')" id="nav-credits" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Crédits Clients & Suivi du Recouvrement">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span class="truncate">Crédits & Recouvrement</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-num shrink-0">Créances</span>
-        </button>
-
-        <button onclick="switchView('clients')" id="nav-clients" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Clients & Portefeuille CRM">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-cyan-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            <span class="truncate">Clients & CRM</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-600 font-mono shrink-0">B2B/B2C</span>
-        </button>
       </div>
 
       <!-- SECTION 3 : STOCKS & ACHATS -->
-      <div class="space-y-1">
-        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70 pt-1">
-          Stocks & Achats
+      <div class="nav-section-wrapper space-y-1" id="section-nav-stock">
+        <button type="button" onclick="toggleNavSection('stock')" class="nav-section-header w-full flex items-center justify-between px-2 py-1 rounded-lg hover:bg-[var(--bg-card)] text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-80 hover:opacity-100 transition-all cursor-pointer group">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="truncate">Stocks & Achats</span>
+            <span class="text-[9px] px-1 py-0.2 rounded bg-[var(--border)] font-mono text-[var(--text-muted)] group-hover:text-[var(--text-main)] font-normal">3</span>
+          </div>
+          <svg id="chevron-nav-stock" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200 transform rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+
+        <div id="group-nav-stock" class="nav-section-group space-y-1">
+          <button onclick="switchView('stock')" id="nav-stock" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Gestion du Stock, Double Dépôt & Étiquettes">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+              <span class="truncate">Stock & Double Dépôt</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-num shrink-0">Rayon</span>
+          </button>
+
+          <button onclick="switchView('suppliers')" id="nav-suppliers" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Fournisseurs, Commandes d'Achat & Dettes">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+              <span class="truncate">Fournisseurs & Achats</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-orange-500/20 text-orange-500 font-mono shrink-0">B2B</span>
+          </button>
+
+          <button onclick="switchView('deliveries')" id="nav-deliveries" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Livraisons, Expéditions & Suivi Flotte">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-cyan-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+              <span class="truncate">Livraisons & Flotte</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-cyan-500/20 text-cyan-600 font-num shrink-0">Suivi</span>
+          </button>
         </div>
-
-        <button onclick="switchView('stock')" id="nav-stock" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Stock Rayon, Dépôt & Mouvements">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-            <span class="truncate">Stock & Double Dépôt</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/20 text-amber-600 font-num shrink-0">Rayon</span>
-        </button>
-
-        <button onclick="switchView('suppliers')" id="nav-suppliers" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Fournisseurs, Commandes d'Achat & Dettes">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-            <span class="truncate">Fournisseurs & Achats</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-orange-500/20 text-orange-600 font-mono shrink-0">B2B</span>
-        </button>
-
-        <button onclick="switchView('deliveries')" id="nav-deliveries" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Expéditions, Livraisons & Flotte">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
-            <span class="truncate">Livraisons & Flotte</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-mono shrink-0">Courses</span>
-        </button>
       </div>
 
-      <!-- SECTION 4 : CAISSE & FINANCES -->
-      <div class="space-y-1">
-        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70 pt-1">
-          Finances & Trésorerie
+      <!-- SECTION 4 : FINANCES & TRÉSORERIE -->
+      <div class="nav-section-wrapper space-y-1" id="section-nav-finance">
+        <button type="button" onclick="toggleNavSection('finance')" class="nav-section-header w-full flex items-center justify-between px-2 py-1 rounded-lg hover:bg-[var(--bg-card)] text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-80 hover:opacity-100 transition-all cursor-pointer group">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="truncate">Finances & Trésorerie</span>
+            <span class="text-[9px] px-1 py-0.2 rounded bg-[var(--border)] font-mono text-[var(--text-muted)] group-hover:text-[var(--text-main)] font-normal">5</span>
+          </div>
+          <svg id="chevron-nav-finance" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200 transform rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+
+        <div id="group-nav-finance" class="nav-section-group space-y-1">
+          <button onclick="switchView('shifts')" id="nav-shifts" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Sessions de Caisse, Shifts & Clôtures Journalières Z">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+              <span class="truncate">Shifts & Clôture Z</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-num shrink-0">Session</span>
+          </button>
+
+          <button onclick="switchView('expenses')" id="nav-expenses" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Dépenses d'Exploitation & Charges">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span class="truncate">Dépenses d'Exploitation</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-num shrink-0">Charges</span>
+          </button>
+
+          <button onclick="switchView('accounting')" id="nav-accounting" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Grand Livre Comptable, TVA 18% & Déclaration OHADA">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span class="truncate">Comptabilité & TVA 18%</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-500 font-mono shrink-0">OHADA</span>
+          </button>
+
+          <button onclick="switchView('stats')" id="nav-stats" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Rapports Analytiques & Marges Commerciales">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+              <span class="truncate">Statistiques & Marges</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-500 font-num shrink-0">Analytique</span>
+          </button>
+
+          <button onclick="switchView('hr')" id="nav-hr" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Ressources Humaines, Salaires & Paie OHADA">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              <span class="truncate">Équipe & Paie OHADA</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-600 font-mono shrink-0">RH</span>
+          </button>
         </div>
-
-        <button onclick="switchView('shifts')" id="nav-shifts" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Sessions de caisse, Écarts & Clôture Z">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-yellow-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-            <span class="truncate">Shifts & Clôture Z</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-yellow-500/20 text-yellow-600 font-mono shrink-0">Caisse</span>
-        </button>
-
-        <button onclick="switchView('expenses')" id="nav-expenses" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Charges d'Exploitation & Dépenses Décaissées">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            <span class="truncate">Dépenses d'Exploitation</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-rose-500/20 text-rose-500 font-num shrink-0">Charges</span>
-        </button>
-
-        <button onclick="switchView('accounting')" id="nav-accounting" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Comptabilité Fiscale, TVA 18% & Grand Livre">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-            <span class="truncate">Comptabilité & TVA 18%</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-indigo-500/20 text-indigo-500 font-mono shrink-0">OHADA</span>
-        </button>
-
-        <button onclick="switchView('stats')" id="nav-stats" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Statistiques Avancées, Marges Réelles & Affluence">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-            <span class="truncate">Statistiques & Marges</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-500 font-num shrink-0">Analytique</span>
-        </button>
-
-        <button onclick="switchView('hr')" id="nav-hr" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Ressources Humaines, Salaires & Paie OHADA">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-            <span class="truncate">Équipe & Paie OHADA</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-600 font-mono shrink-0">RH</span>
-        </button>
       </div>
 
-      <!-- SECTION 5 : SYSTÈME & ADMINISTRATION -->
-      <div class="space-y-1">
-        <div class="sidebar-section-header px-2 text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-70 pt-1">
-          Système & Configuration
+      <!-- SECTION 5 : SYSTÈME & CONFIGURATION -->
+      <div class="nav-section-wrapper space-y-1" id="section-nav-system">
+        <button type="button" onclick="toggleNavSection('system')" class="nav-section-header w-full flex items-center justify-between px-2 py-1 rounded-lg hover:bg-[var(--bg-card)] text-[10px] font-black uppercase tracking-wider text-[var(--text-muted)] opacity-80 hover:opacity-100 transition-all cursor-pointer group">
+          <div class="flex items-center gap-1.5 min-w-0">
+            <span class="truncate">Système & Configuration</span>
+            <span class="text-[9px] px-1 py-0.2 rounded bg-[var(--border)] font-mono text-[var(--text-muted)] group-hover:text-[var(--text-main)] font-normal">3</span>
+          </div>
+          <svg id="chevron-nav-system" class="w-3.5 h-3.5 text-[var(--text-muted)] transition-transform duration-200 transform rotate-180 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+
+        <div id="group-nav-system" class="nav-section-group space-y-1">
+          <button onclick="switchView('audit')" id="nav-audit" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Journal d'Audit & Sécurité">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <span class="truncate">Journal d'Audit & Log</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-num shrink-0">Actif</span>
+          </button>
+
+          <button onclick="switchView('settings')" id="nav-settings" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Paramètres Système & Configuration Fiscale">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span class="truncate">Paramètres & Fiscalité</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-[var(--primary-light)] text-[var(--primary)] font-num shrink-0">Admin</span>
+          </button>
+
+          <button onclick="switchView('about')" id="nav-about" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <img src="/barouba-group-logo.png" alt="BAROUBA" class="w-4 h-4 object-contain rounded-full border border-amber-500/40 shrink-0" onerror="this.src='barouba-group-logo.png'">
+              <span class="truncate">À Propos (Éditeur)</span>
+            </div>
+            <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-500 dark:text-amber-400 font-num shrink-0">BAROUBA</span>
+          </button>
         </div>
-
-        <button onclick="switchView('audit')" id="nav-audit" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Journal d'Audit & Sécurité">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-            <span class="truncate">Journal d'Audit & Log</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-600 font-num shrink-0">Actif</span>
-        </button>
-
-        <button onclick="switchView('settings')" id="nav-settings" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="Paramètres Système & Configuration Fiscale">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            <span class="truncate">Paramètres & Fiscalité</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-[var(--primary-light)] text-[var(--primary)] font-num shrink-0">Admin</span>
-        </button>
-
-        <button onclick="switchView('about')" id="nav-about" class="nav-btn w-full flex items-center justify-between px-3 py-2 rounded-xl text-left text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP">
-          <div class="flex items-center gap-2.5 min-w-0">
-            <img src="/barouba-group-logo.png" alt="BAROUBA" class="w-4 h-4 object-contain rounded-full border border-amber-500/40 shrink-0" onerror="this.src='barouba-group-logo.png'">
-            <span class="truncate">À Propos (Éditeur)</span>
-          </div>
-          <span class="text-[9px] font-bold px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-500 dark:text-amber-400 font-num shrink-0">BAROUBA</span>
-        </button>
       </div>
 
     </nav>
@@ -2865,6 +2915,10 @@
             <button onclick="exportStockCSV()" class="app-btn-secondary text-xs">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
               <span>Export CSV</span>
+            </button>
+            <button onclick="openInternalUseModal()" class="app-btn-secondary text-xs flex items-center gap-1.5 border-amber-500/30 text-amber-500 hover:bg-amber-500/10 cursor-pointer" title="Sortie d'articles pour consommation interne magasin / besoins de roulement">
+              <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+              <span>+ Sortie Usage Interne</span>
             </button>
             <button onclick="openInventoryAdjustmentModal()" class="app-btn-secondary text-xs">
               <span>Inventaire Physique</span>
@@ -7140,6 +7194,89 @@
     </div>
   </div>
 
+  <!-- ==================== MODAL SORTIE USAGE INTERNE / CONSOMMATION MAGASIN ==================== -->
+  <div id="modal-stock-internal-use" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
+    <div class="app-card w-full max-w-lg p-6 space-y-4 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
+      <div class="flex items-center justify-between border-b border-[var(--border)] pb-3">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center font-bold text-base">
+            📦
+          </div>
+          <div>
+            <h3 class="font-bold text-base text-[var(--text-main)]">Sortie Usage Interne & Roulement</h3>
+            <p class="text-xs text-[var(--text-muted)]">Consommation interne d'articles pour l'activité et le fonctionnement du magasin</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeInternalUseModal()" class="p-1 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] font-bold text-base cursor-pointer">✕</button>
+      </div>
+
+      <form onsubmit="handleInternalUseSubmit(event)" class="space-y-3.5">
+        <!-- Sélection de l'article -->
+        <div>
+          <label class="block text-xs font-semibold text-[var(--text-main)] mb-1">Article prélevé dans le stock *</label>
+          <select id="internal-use-product-id" onchange="updateInternalUseAvailable()" class="app-input text-xs w-full py-2 px-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]" required>
+            <!-- Options injectées dynamiquement -->
+          </select>
+        </div>
+
+        <!-- Emplacement source & Disponibilité -->
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-[var(--text-main)] mb-1">Emplacement source *</label>
+            <select id="internal-use-source" onchange="updateInternalUseAvailable()" class="app-input text-xs w-full py-2 px-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+              <option value="shelf">Rayon (Magasin / Vente directe)</option>
+              <option value="reserve">Réserve (Entrepôt / Dépôt)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-[var(--text-main)] mb-1">Quantité à prélever *</label>
+            <input type="number" id="internal-use-qty" min="1" step="1" value="1" oninput="updateInternalUseAvailable()" class="app-input text-xs w-full py-2 px-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] font-num font-bold" required>
+          </div>
+        </div>
+
+        <!-- Badge Stock Disponible -->
+        <div id="internal-use-stock-badge" class="p-2.5 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] flex items-center justify-between text-xs">
+          <span class="text-[var(--text-muted)]">Disponibilité sur cet emplacement :</span>
+          <span id="internal-use-avail-text" class="font-bold text-teal-500 font-num">0 pcs</span>
+        </div>
+
+        <!-- Motif d'usage interne -->
+        <div>
+          <label class="block text-xs font-semibold text-[var(--text-main)] mb-1">Motif / Destination de l'usage *</label>
+          <select id="internal-use-motive" class="app-input text-xs w-full py-2 px-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]" required>
+            <option value="Fournitures de bureau & Secrétariat">Fournitures de bureau & Secrétariat (ramettes de feuilles, stylos, agrafes...)</option>
+            <option value="Consommation & Entretien magasin">Consommation & Entretien magasin (ampoules, piles, produits d'entretien...)</option>
+            <option value="Emballage & Matériel caisse">Emballage & Matériel caisse (ruban adhésif, sachets, rouleaux thermiques...)</option>
+            <option value="Dégustation & Démonstration client">Dégustation & Démonstration client (échantillons d'essai...)</option>
+            <option value="Maintenance & Réparation interne">Maintenance & Réparation interne (outillage, pièces de rechange...)</option>
+            <option value="Autre besoin de roulement d'exploitation">Autre besoin de roulement d'exploitation</option>
+          </select>
+        </div>
+
+        <!-- Bénéficiaire / Service demandeur -->
+        <div>
+          <label class="block text-xs font-semibold text-[var(--text-main)] mb-1">Demandeur / Service bénéficiaire</label>
+          <input type="text" id="internal-use-beneficiary" placeholder="Ex: Secrétariat, Caisse 1, Gérance, Équipe dépôt..." class="app-input text-xs w-full py-2 px-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+        </div>
+
+        <!-- Notes / Justification -->
+        <div>
+          <label class="block text-xs font-semibold text-[var(--text-main)] mb-1">Justification / Observation interne</label>
+          <input type="text" id="internal-use-notes" placeholder="Précisez le contexte du prélèvement..." class="app-input text-xs w-full py-2 px-3 rounded-xl bg-[var(--bg-card)] border border-[var(--border)]">
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="flex items-center justify-end gap-2.5 pt-3 border-t border-[var(--border)]">
+          <button type="button" onclick="closeInternalUseModal()" class="app-btn-secondary text-xs px-4 py-2 cursor-pointer">Annuler</button>
+          <button type="submit" id="btn-submit-internal-use" class="app-btn-primary text-xs px-4 py-2 bg-gradient-to-r from-amber-600 to-amber-500 hover:from-amber-500 hover:to-amber-400 text-white shadow-md cursor-pointer flex items-center gap-1.5 font-bold">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+            <span>Valider la Sortie</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- ==================== MODAL AJUSTEMENT D'INVENTAIRE ==================== -->
   <div id="modal-inventory-adjustment" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 flex items-center justify-center hidden p-4">
     <div class="app-card w-full max-w-md p-6 space-y-4 shadow-2xl relative animate-in fade-in zoom-in-95 duration-150">
@@ -7843,11 +7980,21 @@
           <!-- Format de Planche Standard Avery -->
           <div class="flex items-center gap-1.5">
             <label class="text-xs font-semibold text-[var(--text-muted)] whitespace-nowrap">Format :</label>
-            <select id="barcode-format" onchange="renderBarcodeSheetPreview()" class="app-input text-xs font-bold text-[var(--primary)]">
-              <option value="40" selected>Planche A4 — 40 Étiquettes (4 × 10 / 48.5 × 25.4 mm)</option>
-              <option value="24">Planche A4 — 24 Étiquettes (3 × 8 / 70 × 36 mm)</option>
-              <option value="14">Grandes Étiquettes Rayon — 14 Étiquettes (2 × 7 / 105 × 42 mm)</option>
-              <option value="roll">Étiquette Unitaire — Rouleau Thermique (58 mm)</option>
+            <select id="barcode-format" onchange="renderBarcodeSheetPreview()" class="app-input text-xs font-bold text-teal-600">
+              <option value="40">Planche 40 étiquettes (4x10 - 48.5x25.4mm)</option>
+              <option value="24">Planche 24 étiquettes (3x8 - 70x37mm)</option>
+              <option value="14">Planche 14 étiquettes (2x7 - 105x42.4mm)</option>
+              <option value="roll">Rouleau Thermique Continu (70x50mm)</option>
+            </select>
+          </div>
+
+          <!-- Type de Code Scannable (1D Code 128 / 2D QR Code / Combiné) -->
+          <div class="flex items-center gap-1.5">
+            <label class="text-xs font-semibold text-[var(--text-muted)] whitespace-nowrap">Symbologie :</label>
+            <select id="barcode-type" onchange="renderBarcodeSheetPreview()" class="app-input text-xs font-bold text-indigo-600">
+              <option value="dual" selected>Combiné Dual (Code 128 + QR Code)</option>
+              <option value="code128">Code-barres 1D (Code 128 Scannable)</option>
+              <option value="qr">Code QR 2D (Mobile & Flash Direct)</option>
             </select>
           </div>
 
@@ -16765,6 +16912,13 @@ function renderA4DocumentView() {
       const target = document.getElementById('view-' + viewKey);
       if (target) target.classList.remove('hidden');
 
+      // Déplier automatiquement la section contenant le module actif
+      const currentKey = typeof viewKey !== 'undefined' ? viewKey : (typeof viewId !== 'undefined' ? viewId : null);
+      const targetSec = currentKey && window.VIEW_TO_SECTION ? window.VIEW_TO_SECTION[currentKey] : null;
+      if (targetSec && typeof expandNavSection === 'function') {
+        expandNavSection(targetSec);
+      }
+
       document.querySelectorAll('.nav-btn').forEach(btn => {
         btn.classList.remove('bg-[var(--primary-light)]', 'text-[var(--primary)]', 'font-bold');
         btn.classList.add('text-[var(--text-secondary)]');
@@ -16929,6 +17083,509 @@ function renderA4DocumentView() {
     }
     window.printBarcodeSheetNow = printBarcodeSheetNow;
 
+    
+    // =========================================================================
+    // NAVIGATION ACCORDÉON SECTIONS PLIABLES / DÉPLIABLES
+    // =========================================================================
+    window.NAV_SECTIONS_STATE = {
+      main: true,
+      sales: true,
+      stock: true,
+      finance: true,
+      system: false
+    };
+
+    window.VIEW_TO_SECTION = {
+      dashboard: 'main',
+      pos: 'main',
+      documents: 'sales',
+      credits: 'sales',
+      clients: 'sales',
+      stock: 'stock',
+      suppliers: 'stock',
+      deliveries: 'stock',
+      shifts: 'finance',
+      expenses: 'finance',
+      accounting: 'finance',
+      stats: 'finance',
+      hr: 'finance',
+      audit: 'system',
+      settings: 'system',
+      about: 'system'
+    };
+
+    function toggleNavSection(secKey) {
+      const group = document.getElementById('group-nav-' + secKey);
+      const chevron = document.getElementById('chevron-nav-' + secKey);
+      if (!group) return;
+      const isHidden = group.classList.contains('hidden');
+      if (isHidden) {
+        group.classList.remove('hidden');
+        if (chevron) {
+          chevron.classList.add('rotate-180');
+          chevron.classList.remove('-rotate-90');
+        }
+        window.NAV_SECTIONS_STATE[secKey] = true;
+      } else {
+        group.classList.add('hidden');
+        if (chevron) {
+          chevron.classList.remove('rotate-180');
+          chevron.classList.add('-rotate-90');
+        }
+        window.NAV_SECTIONS_STATE[secKey] = false;
+      }
+    }
+
+    function expandNavSection(secKey) {
+      const group = document.getElementById('group-nav-' + secKey);
+      const chevron = document.getElementById('chevron-nav-' + secKey);
+      if (!group) return;
+      group.classList.remove('hidden');
+      if (chevron) {
+        chevron.classList.add('rotate-180');
+        chevron.classList.remove('-rotate-90');
+      }
+      window.NAV_SECTIONS_STATE[secKey] = true;
+    }
+
+    // =========================================================================
+    // SORTIE DE STOCK USAGE INTERNE / CONSOMMATION MAGASIN
+    // =========================================================================
+    function openInternalUseModal(defaultProdId) {
+      const modal = document.getElementById('modal-stock-internal-use');
+      const prodSel = document.getElementById('internal-use-product-id');
+      const qtyInput = document.getElementById('internal-use-qty');
+      const sourceSel = document.getElementById('internal-use-source');
+      const beneficiary = document.getElementById('internal-use-beneficiary');
+      const notes = document.getElementById('internal-use-notes');
+      if (!modal || !prodSel) return;
+
+      const physicalProds = (window.PRODUCTS || []).filter(p => p.type !== 'service');
+      prodSel.innerHTML = physicalProds.map(p => {
+        const total = (p.shelf || 0) + (p.reserve || 0);
+        return '<option value="' + p.id + '">' + p.name + ' (Dispo: ' + total + ' pcs - Rayon: ' + (p.shelf || 0) + ', Réserve: ' + (p.reserve || 0) + ')</option>';
+      }).join('');
+
+      if (defaultProdId) {
+        prodSel.value = defaultProdId;
+      } else if (physicalProds.length > 0) {
+        prodSel.value = physicalProds[0].id;
+      }
+
+      if (qtyInput) qtyInput.value = 1;
+      if (sourceSel) sourceSel.value = 'shelf';
+      if (beneficiary) beneficiary.value = '';
+      if (notes) notes.value = '';
+
+      updateInternalUseAvailable();
+      modal.classList.remove('hidden');
+    }
+
+    function closeInternalUseModal() {
+      const modal = document.getElementById('modal-stock-internal-use');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function updateInternalUseAvailable() {
+      const prodSel = document.getElementById('internal-use-product-id');
+      const sourceSel = document.getElementById('internal-use-source');
+      const availText = document.getElementById('internal-use-avail-text');
+      const qtyInput = document.getElementById('internal-use-qty');
+      const submitBtn = document.getElementById('btn-submit-internal-use');
+      if (!prodSel || !availText) return;
+
+      const prodId = prodSel.value;
+      const source = sourceSel ? sourceSel.value : 'shelf';
+      const prod = (window.PRODUCTS || []).find(p => String(p.id) === String(prodId));
+
+      if (!prod) {
+        availText.innerText = '0 pcs';
+        availText.className = 'font-bold text-rose-500 font-num';
+        if (submitBtn) submitBtn.disabled = true;
+        return;
+      }
+
+      const available = source === 'shelf' ? (prod.shelf || 0) : (prod.reserve || 0);
+      const reqQty = parseInt(qtyInput ? qtyInput.value : 1, 10) || 1;
+
+      availText.innerText = available + ' pcs (en ' + (source === 'shelf' ? 'Rayon' : 'Réserve') + ')';
+      if (available <= 0 || reqQty > available) {
+        availText.className = 'font-bold text-rose-500 font-num';
+        if (submitBtn) submitBtn.disabled = true;
+      } else {
+        availText.className = 'font-bold text-teal-500 font-num';
+        if (submitBtn) submitBtn.disabled = false;
+      }
+    }
+
+    function handleInternalUseSubmit(e) {
+      if (e) e.preventDefault();
+      const prodSel = document.getElementById('internal-use-product-id');
+      const sourceSel = document.getElementById('internal-use-source');
+      const qtyInput = document.getElementById('internal-use-qty');
+      const motiveSel = document.getElementById('internal-use-motive');
+      const beneficiaryInput = document.getElementById('internal-use-beneficiary');
+      const notesInput = document.getElementById('internal-use-notes');
+      if (!prodSel || !qtyInput) return;
+
+      const prodId = prodSel.value;
+      const source = sourceSel ? sourceSel.value : 'shelf';
+      const qty = parseInt(qtyInput.value, 10);
+      const motive = motiveSel ? motiveSel.value : 'Usage Interne';
+      const beneficiary = beneficiaryInput ? beneficiaryInput.value.trim() : '';
+      const notes = notesInput ? notesInput.value.trim() : '';
+
+      const prod = (window.PRODUCTS || []).find(p => String(p.id) === String(prodId));
+      if (!prod) {
+        showToast('Erreur : Article introuvable.', 'error');
+        return;
+      }
+
+      const currentAvail = source === 'shelf' ? (prod.shelf || 0) : (prod.reserve || 0);
+      if (qty <= 0) {
+        showToast('Veuillez saisir une quantité supérieure à 0.', 'warning');
+        return;
+      }
+      if (qty > currentAvail) {
+        showToast('Quantité demandée (' + qty + ') supérieure au stock disponible (' + currentAvail + ').', 'error');
+        return;
+      }
+
+      // Déduction du stock
+      if (source === 'shelf') {
+        prod.shelf -= qty;
+      } else {
+        prod.reserve -= qty;
+      }
+      prod.stock = (prod.shelf || 0) + (prod.reserve || 0);
+
+      // Enregistrement dans l'historique des mouvements
+      if (!window.STOCK_MOVEMENTS) window.STOCK_MOVEMENTS = [];
+      const mvtRef = 'INT-' + Math.floor(1000 + Math.random() * 9000);
+      const nowStr = new Date().toLocaleDateString('fr-FR') + ' ' + new Date().toLocaleTimeString('fr-FR', {hour: '2-digit', minute: '2-digit'});
+      const sourceLabel = source === 'shelf' ? 'Rayon' : 'Réserve';
+      const operatorName = (window.CURRENT_OPERATOR && window.CURRENT_OPERATOR.name) || 'Admin';
+
+      window.STOCK_MOVEMENTS.unshift({
+        id: Date.now(),
+        date: nowStr,
+        product: prod.name,
+        type: 'Usage Interne',
+        delta: '-' + qty + ' pcs (' + sourceLabel + ')',
+        finalStock: prod.stock + ' pcs',
+        ref: mvtRef,
+        motive: motive,
+        beneficiary: beneficiary || 'Service interne',
+        notes: notes,
+        user: operatorName
+      });
+
+      // Synchronisation API / Stockage persistant
+      if (typeof apiFetch === 'function') {
+        apiFetch('/api/stock/movement', {
+          method: 'POST',
+          body: JSON.stringify({
+            productId: prod.id,
+            productName: prod.name,
+            source: source,
+            qty: qty,
+            type: 'Usage Interne',
+            motive: motive,
+            beneficiary: beneficiary,
+            notes: notes,
+            user: operatorName
+          })
+        }).catch(err => console.warn('Sync stock movement backend:', err));
+      }
+
+      if (typeof saveProducts === 'function') saveProducts();
+      if (typeof renderStockTable === 'function') renderStockTable();
+      if (typeof renderStockMovements === 'function') renderStockMovements();
+      if (typeof updateDashboardKPIs === 'function') updateDashboardKPIs();
+      if (typeof addAuditLog === 'function') {
+        addAuditLog('STOCK_INTERNAL_USE', 'Sortie usage interne de ' + qty + 'x ' + prod.name + ' (' + motive + ')');
+      }
+
+      closeInternalUseModal();
+      showToast('Sortie usage interne enregistrée avec succès : ' + qty + ' pcs de "' + prod.name + '".', 'success');
+    }
+
+    // =========================================================================
+    // MOTEURS STANDARD CODE-BARRES 1D (CODE 128) & CODE QR 2D SCANNABLES
+    // =========================================================================
+    const CODE128_PATTERNS = [
+      "212222","222122","222221","121223","121322","131222","122213","122312","132212","221213",
+      "221312","231212","112232","122132","122231","113222","123122","123221","223211","221132",
+      "221231","213212","223112","312131","311222","321122","321221","312212","322112","322211",
+      "212123","212321","232121","111323","131123","131321","112313","132113","132311","211313",
+      "231113","231311","112133","112331","132131","113123","113321","133121","313121","211331",
+      "231131","213113","213311","213131","311123","311321","331121","312113","312311","332111",
+      "314111","221411","431111","111224","111422","121124","121421","141122","141221","112214",
+      "112412","122114","122411","142112","142211","241211","221114","413111","241112","134111",
+      "111242","121142","121241","114212","124112","124211","411212","421112","421211","212141",
+      "214121","412121","111143","111341","131141","114113","114311","411113","411311","113141",
+      "114131","311141","411131","211412","211214","211232","2331112"
+    ];
+
+    function generateCode128SVG(text, options) {
+      options = options || {};
+      const height = options.height || 32;
+      const showText = options.showText !== false;
+      const barColor = options.barColor || '#000000';
+      const cleanText = String(text || '').trim();
+      if (!cleanText) return '';
+
+      const codes = [104];
+      let checkSum = 104;
+
+      for (let i = 0; i < cleanText.length; i++) {
+        const charCode = cleanText.charCodeAt(i);
+        const val = charCode >= 32 && charCode <= 126 ? charCode - 32 : 0;
+        codes.push(val);
+        checkSum += val * (i + 1);
+      }
+
+      codes.push(checkSum % 103);
+      codes.push(106);
+
+      let patternStr = '';
+      for (let code of codes) {
+        patternStr += CODE128_PATTERNS[code] || '';
+      }
+
+      let totalModules = 0;
+      for (let c of patternStr) totalModules += parseInt(c, 10);
+
+      let x = 0;
+      let isBar = true;
+      let rects = '';
+      for (let c of patternStr) {
+        const width = parseInt(c, 10);
+        if (isBar) {
+          rects += '<rect x="' + x + '" y="0" width="' + width + '" height="' + height + '" fill="' + barColor + '"/>';
+        }
+        x += width;
+        isBar = !isBar;
+      }
+
+      const quietZone = 8;
+      const totalWidth = totalModules + quietZone * 2;
+      const totalHeight = showText ? height + 12 : height;
+      const textSvg = showText ? '<text x="' + (totalWidth / 2) + '" y="' + (height + 10) + '" text-anchor="middle" font-family="monospace" font-size="8.5" font-weight="bold" fill="' + barColor + '">' + cleanText + '</text>' : '';
+
+      return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + totalWidth + ' ' + totalHeight + '" class="mx-auto w-full h-full max-h-11" preserveAspectRatio="xMidYMid meet"><g transform="translate(' + quietZone + ', 0)">' + rects + '</g>' + textSvg + '</svg>';
+    }
+
+    function generateQRCodeMatrix(text) {
+      const QRMath = {
+        glog: function(n) { return QRMath.LOG_TABLE[n]; },
+        gexp: function(n) {
+          while (n < 0) n += 255;
+          while (n >= 255) n -= 255;
+          return QRMath.EXP_TABLE[n];
+        },
+        EXP_TABLE: new Array(256),
+        LOG_TABLE: new Array(256)
+      };
+      for (let i = 0; i < 8; i++) QRMath.EXP_TABLE[i] = 1 << i;
+      for (let i = 8; i < 256; i++) QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];
+      for (let i = 0; i < 255; i++) QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;
+
+      function QRPolynomial(num, shift) {
+        let offset = 0;
+        while (offset < num.length && num[offset] == 0) offset++;
+        this.num = new Array(num.length - offset + shift);
+        for (let i = 0; i < num.length - offset; i++) this.num[i] = num[i + offset];
+        for (let i = 0; i < shift; i++) this.num[num.length - offset + i] = 0;
+      }
+      QRPolynomial.prototype = {
+        get: function(index) { return this.num[index]; },
+        getLength: function() { return this.num.length; },
+        multiply: function(e) {
+          const num = new Array(this.getLength() + e.getLength() - 1);
+          for (let i = 0; i < this.getLength(); i++) {
+            for (let j = 0; j < e.getLength(); j++) {
+              num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i)) + QRMath.glog(e.get(j)));
+            }
+          }
+          return new QRPolynomial(num, 0);
+        },
+        mod: function(e) {
+          if (this.getLength() - e.getLength() < 0) return this;
+          const ratio = QRMath.glog(this.get(0)) - QRMath.glog(e.get(0));
+          const num = new Array(this.getLength());
+          for (let i = 0; i < this.getLength(); i++) num[i] = this.get(i);
+          for (let i = 0; i < e.getLength(); i++) num[i] ^= QRMath.gexp(QRMath.glog(e.get(i)) + ratio);
+          return new QRPolynomial(num, 0).mod(e);
+        }
+      };
+
+      const RS_BLOCK_TABLE = [[1, 26, 16], [1, 44, 28], [1, 70, 44], [2, 50, 32], [2, 67, 43]];
+      const utf8Bytes = [];
+      for (let i = 0; i < text.length; i++) {
+        let c = text.charCodeAt(i);
+        if (c < 128) utf8Bytes.push(c);
+        else if (c < 2048) {
+          utf8Bytes.push(192 | (c >> 6));
+          utf8Bytes.push(128 | (c & 63));
+        } else {
+          utf8Bytes.push(224 | (c >> 12));
+          utf8Bytes.push(128 | ((c >> 6) & 63));
+          utf8Bytes.push(128 | (c & 63));
+        }
+      }
+
+      let typeNumber = 1;
+      if (utf8Bytes.length > 14) typeNumber = 2;
+      if (utf8Bytes.length > 26) typeNumber = 3;
+      if (utf8Bytes.length > 42) typeNumber = 4;
+      if (utf8Bytes.length > 62) typeNumber = 5;
+
+      const moduleCount = typeNumber * 4 + 17;
+      const modules = Array.from({ length: moduleCount }, () => new Array(moduleCount).fill(null));
+
+      function setupPositionProbe(row, col) {
+        for (let r = -1; r <= 7; r++) {
+          if (row + r <= -1 || moduleCount <= row + r) continue;
+          for (let c = -1; c <= 7; c++) {
+            if (col + c <= -1 || moduleCount <= col + c) continue;
+            if ((0 <= r && r <= 6 && (c == 0 || c == 6)) || (0 <= c && c <= 6 && (r == 0 || r == 6)) || (2 <= r && r <= 4 && 2 <= c && c <= 4)) {
+              modules[row + r][col + c] = true;
+            } else {
+              modules[row + r][col + c] = false;
+            }
+          }
+        }
+      }
+
+      setupPositionProbe(0, 0);
+      setupPositionProbe(moduleCount - 7, 0);
+      setupPositionProbe(0, moduleCount - 7);
+
+      for (let r = 8; r < moduleCount - 8; r++) {
+        if (modules[r][6] === null) modules[r][6] = (r % 2 === 0);
+      }
+      for (let c = 8; c < moduleCount - 8; c++) {
+        if (modules[6][c] === null) modules[6][c] = (c % 2 === 0);
+      }
+
+      if (typeNumber >= 2) {
+        const alignPos = typeNumber === 2 ? 18 : typeNumber === 3 ? 22 : typeNumber === 4 ? 26 : 30;
+        const r = alignPos, c = alignPos;
+        for (let dr = -2; dr <= 2; dr++) {
+          for (let dc = -2; dc <= 2; dc++) {
+            if (Math.abs(dr) === 2 || Math.abs(dc) === 2 || (dr === 0 && dc === 0)) modules[r + dr][c + dc] = true;
+            else modules[r + dr][c + dc] = false;
+          }
+        }
+      }
+
+      const buffer = [];
+      function putBits(num, length) {
+        for (let i = 0; i < length; i++) buffer.push(((num >>> (length - i - 1)) & 1) === 1);
+      }
+
+      putBits(4, 4);
+      putBits(utf8Bytes.length, 8);
+      for (let b of utf8Bytes) putBits(b, 8);
+
+      const rsRow = RS_BLOCK_TABLE[typeNumber - 1] || RS_BLOCK_TABLE[0];
+      const totalDataCount = rsRow[2];
+      if (buffer.length + 4 <= totalDataCount * 8) putBits(0, 4);
+      while (buffer.length % 8 !== 0) buffer.push(false);
+      while (buffer.length < totalDataCount * 8) {
+        putBits(0xec, 8);
+        if (buffer.length < totalDataCount * 8) putBits(0x11, 8);
+      }
+
+      const dataBytes = [];
+      for (let i = 0; i < buffer.length; i += 8) {
+        let b = 0;
+        for (let j = 0; j < 8; j++) if (buffer[i + j]) b |= (1 << (7 - j));
+        dataBytes.push(b);
+      }
+
+      const ecCount = rsRow[1] - rsRow[2];
+      let ecPoly = new QRPolynomial([1], 0);
+      for (let i = 0; i < ecCount; i++) ecPoly = ecPoly.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0));
+      const rawPoly = new QRPolynomial(dataBytes, ecPoly.getLength() - 1);
+      const modPoly = rawPoly.mod(ecPoly);
+      const ecBytes = [];
+      for (let i = 0; i < ecPoly.getLength() - 1; i++) {
+        const modIndex = i + modPoly.getLength() - (ecPoly.getLength() - 1);
+        ecBytes.push((modIndex >= 0) ? modPoly.get(modIndex) : 0);
+      }
+
+      const finalBytes = dataBytes.concat(ecBytes);
+      const finalBits = [];
+      for (let b of finalBytes) {
+        for (let i = 7; i >= 0; i--) finalBits.push(((b >>> i) & 1) === 1);
+      }
+
+      let bitIdx = 0;
+      let inc = -1;
+      let row = moduleCount - 1;
+      for (let col = moduleCount - 1; col > 0; col -= 2) {
+        if (col === 6) col--;
+        while (true) {
+          for (let c = 0; c < 2; c++) {
+            if (modules[row][col - c] === null) {
+              let dark = false;
+              if (bitIdx < finalBits.length) dark = finalBits[bitIdx++];
+              const mask = ((row + (col - c)) % 2 === 0);
+              modules[row][col - c] = mask ? !dark : dark;
+            }
+          }
+          row += inc;
+          if (row < 0 || moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+
+      const formatBits = [true, false, true, false, true, false, false, false, false, false, true, false, false, true, false];
+      for (let i = 0; i < 15; i++) {
+        const mod = formatBits[i];
+        if (i < 6) modules[i][8] = mod;
+        else if (i < 8) modules[i + 1][8] = mod;
+        else modules[moduleCount - 15 + i][8] = mod;
+
+        if (i < 8) modules[8][moduleCount - i - 1] = mod;
+        else if (i < 9) modules[8][15 - i - 1 + 1] = mod;
+        else modules[8][15 - i - 1] = mod;
+      }
+      modules[moduleCount - 8][8] = true;
+
+      return modules;
+    }
+
+    function generateQRCodeSVG(text, options) {
+      options = options || {};
+      const size = options.size || 56;
+      const color = options.color || '#000000';
+      const bgColor = options.bgColor || '#ffffff';
+      try {
+        const matrix = generateQRCodeMatrix(String(text || 'AURA'));
+        const n = matrix.length;
+        const quietZone = 2;
+        const totalN = n + quietZone * 2;
+        let paths = '';
+        for (let r = 0; r < n; r++) {
+          for (let c = 0; c < n; c++) {
+            if (matrix[r][c]) {
+              paths += 'M' + (c + quietZone) + ',' + (r + quietZone) + 'h1v1h-1z ';
+            }
+          }
+        }
+        return '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ' + totalN + ' ' + totalN + '" width="' + size + '" height="' + size + '" class="shrink-0" shape-rendering="crispEdges"><rect width="' + totalN + '" height="' + totalN + '" fill="' + bgColor + '"/><path d="' + paths + '" fill="' + color + '"/></svg>';
+      } catch (err) {
+        console.error('QR Code generation error:', err);
+        return '<div class="w-' + size + ' h-' + size + ' bg-slate-100 flex items-center justify-center text-[9px] text-slate-400">QR</div>';
+      }
+    }
+
     function renderBarcodeSheetPreview() {
       const grid = document.getElementById('barcode-labels-grid');
       const printArea = document.getElementById('barcode-print-area');
@@ -17006,52 +17663,59 @@ function renderA4DocumentView() {
         }
       }
 
+      const codeTypeSel = document.getElementById('barcode-type');
+      const codeType = codeTypeSel ? codeTypeSel.value : 'dual';
+
       grid.innerHTML = itemsToPrint.map((p, idx) => {
-        const barcodeNum = p.barcode || (p.ref ? p.ref.replace(/[^0-9]/g, '').padEnd(12, '0').slice(0, 12) : ('6181100' + String(idx).padStart(5, '0')));
+        const barcodeNum = p.barcode || (p.ref ? p.ref.trim() : ('ART-' + String(idx + 1).padStart(5, '0')));
         const priceFmt = (p.priceSell || 0).toLocaleString('fr-FR');
+        const qrPayload = (p.ref || barcodeNum) + '|' + p.name + '|' + (p.priceSell || 0) + 'FCFA';
+
+        let codeVisualHtml = '';
+        if (codeType === 'dual') {
+          // Combiné côte à côte : Code 128 (1D) + QR Code (2D)
+          codeVisualHtml = `
+            <div class="flex items-center justify-between gap-1.5 py-1">
+              <div class="flex-1 min-w-0">
+                ${generateCode128SVG(barcodeNum, { height: format === '40' ? 22 : 28, showText: true })}
+              </div>
+              <div class="shrink-0 p-0.5 bg-white rounded border border-slate-200">
+                ${generateQRCodeSVG(qrPayload, { size: format === '40' ? 36 : 44 })}
+              </div>
+            </div>
+          `;
+        } else if (codeType === 'qr') {
+          // Code QR 2D grand format centré
+          codeVisualHtml = `
+            <div class="py-1 flex flex-col items-center justify-center gap-1">
+              <div class="p-1 bg-white rounded-lg border border-slate-200 shadow-xs">
+                ${generateQRCodeSVG(qrPayload, { size: format === '40' ? 42 : 54 })}
+              </div>
+              <div class="font-mono text-[8px] font-bold text-slate-600 truncate max-w-full">${barcodeNum}</div>
+            </div>
+          `;
+        } else {
+          // Code-barres 1D Code 128 scannable pleine largeur
+          codeVisualHtml = `
+            <div class="py-1">
+              ${generateCode128SVG(barcodeNum, { height: format === '40' ? 24 : 32, showText: true })}
+            </div>
+          `;
+        }
         
         return `
-          <div class="border border-dashed border-slate-300 p-2 rounded bg-white text-center flex flex-col justify-between box-border hover:border-indigo-400 transition-colors" style="min-height: ${format === '40' ? '24mm' : format === '24' ? '32mm' : format === '14' ? '38mm' : '45mm'};">
+          <div class="border border-dashed border-slate-300 p-2 rounded bg-white text-center flex flex-col justify-between box-border hover:border-indigo-400 transition-colors shadow-xs" style="min-height: ${format === '40' ? '25mm' : format === '24' ? '34mm' : format === '14' ? '40mm' : '48mm'};">
             <div>
               <div class="text-[8px] font-black uppercase text-slate-500 tracking-wider truncate">${storeName}</div>
               <div class="text-[10px] font-extrabold text-slate-900 leading-tight truncate mt-0.5" title="${p.name}">${p.name}</div>
             </div>
 
-            <!-- Code-barres EAN13 vectoriel net -->
-            <div class="py-0.5">
-              <svg class="mx-auto w-full ${format === '40' ? 'h-6' : 'h-8'}" viewBox="0 0 110 30" preserveAspectRatio="none">
-                <rect x="0" y="0" width="2" height="30" fill="#000"/>
-                <rect x="4" y="0" width="2" height="30" fill="#000"/>
-                <rect x="8" y="0" width="3" height="26" fill="#000"/>
-                <rect x="13" y="0" width="1" height="26" fill="#000"/>
-                <rect x="16" y="0" width="4" height="26" fill="#000"/>
-                <rect x="22" y="0" width="2" height="26" fill="#000"/>
-                <rect x="26" y="0" width="3" height="26" fill="#000"/>
-                <rect x="31" y="0" width="1" height="26" fill="#000"/>
-                <rect x="35" y="0" width="4" height="26" fill="#000"/>
-                <rect x="41" y="0" width="2" height="26" fill="#000"/>
-                <rect x="45" y="0" width="3" height="26" fill="#000"/>
-                <rect x="52" y="0" width="2" height="30" fill="#000"/>
-                <rect x="56" y="0" width="2" height="30" fill="#000"/>
-                <rect x="60" y="0" width="3" height="26" fill="#000"/>
-                <rect x="65" y="0" width="1" height="26" fill="#000"/>
-                <rect x="68" y="0" width="4" height="26" fill="#000"/>
-                <rect x="74" y="0" width="2" height="26" fill="#000"/>
-                <rect x="78" y="0" width="3" height="26" fill="#000"/>
-                <rect x="83" y="0" width="1" height="26" fill="#000"/>
-                <rect x="87" y="0" width="4" height="26" fill="#000"/>
-                <rect x="93" y="0" width="2" height="26" fill="#000"/>
-                <rect x="98" y="0" width="3" height="26" fill="#000"/>
-                <rect x="104" y="0" width="2" height="30" fill="#000"/>
-                <rect x="108" y="0" width="2" height="30" fill="#000"/>
-              </svg>
-              <div class="font-mono text-[8px] text-slate-600 font-bold tracking-widest leading-none mt-0.5">${barcodeNum}</div>
-            </div>
+            <!-- Code Visuel Scannable Réel (1D Code 128 / 2D QR / Dual) -->
+            ${codeVisualHtml}
 
-            <!-- Prix TTC en Francs CFA -->
-            <div class="flex items-center justify-between border-t border-slate-200 pt-0.5">
-              <span class="text-[8px] font-mono text-slate-500 font-bold">${p.ref || 'ART'}</span>
-              <span class="${format === '40' ? 'text-xs' : 'text-sm'} font-black font-mono text-emerald-800 leading-none">${priceFmt} F</span>
+            <!-- Prix en Gros & Devise CFA -->
+            <div class="text-[12px] font-black text-slate-900 font-num leading-tight pt-0.5 border-t border-slate-100">
+              ${priceFmt} <span class="text-[9px] font-bold text-teal-700">F CFA</span>
             </div>
           </div>
         `;
@@ -19298,15 +19962,22 @@ function getLiveMetricForPole(countKey) {
       }
       tbody.innerHTML = list.map(m => {
         const isPositive = String(m.delta).startsWith('+');
-        const badgeColor = isPositive 
-          ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' 
-          : 'bg-rose-500/10 text-rose-500 border border-rose-500/20';
+        const isInternalUse = m.type === 'Usage Interne' || m.type === 'Consommation Interne';
+        const badgeColor = isInternalUse
+          ? 'bg-amber-500/10 text-amber-500 border border-amber-500/25'
+          : (isPositive ? 'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20' : 'bg-rose-500/10 text-rose-500 border border-rose-500/20');
+        const typeBadge = isInternalUse
+          ? 'bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30'
+          : 'bg-[var(--bg-card-subtle)] text-[var(--text-secondary)] border border-[var(--border)]';
 
         return `
           <tr class="hover:bg-[var(--bg-card-subtle)] transition-colors">
             <td class="p-3 font-num text-[var(--text-muted)]">${m.date}</td>
             <td class="p-3 font-medium text-[var(--text-main)]">${m.product}</td>
-            <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold bg-[var(--bg-card-subtle)] text-[var(--text-secondary)] border border-[var(--border)]">${m.type}</span></td>
+            <td class="p-3">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${typeBadge}">${m.type}</span>
+              ${m.motive ? '<div class="text-[9px] text-[var(--text-muted)] truncate max-w-xs mt-0.5">' + m.motive + (m.beneficiary ? ' • ' + m.beneficiary : '') + '</div>' : ''}
+            </td>
             <td class="p-3 text-center"><span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${badgeColor}">${m.delta}</span></td>
             <td class="p-3 text-center font-num font-bold text-[var(--text-main)]">${m.finalStock}</td>
             <td class="p-3 font-num font-mono text-[var(--text-muted)]">${m.ref}</td>
