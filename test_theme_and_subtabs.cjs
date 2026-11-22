@@ -1,7 +1,7 @@
 const fs = require('fs');
 const assert = require('assert');
 
-console.log('Testing Facebook Royal Blue Theme & Segmented Capsule Subtab Docks...');
+console.log('Testing Facebook Royal Blue Theme, Segmented Subtabs & Royal Blue Sidebar...');
 
 const html = fs.readFileSync('aura-pos/index.html', 'utf8');
 
@@ -29,7 +29,14 @@ assert(html.includes('stroke: #FFFFFF !important;'), 'Icon stroke on active blue
 assert(html.includes('color: #334155 !important;'), 'Inactive subtabs in light mode have deep slate color #334155');
 console.log('  [PASS] 3: Pure white text and icons on active royal blue pill verified.');
 
-// 4. HTML Subtab Structure
+// 4. Royal Blue Sidebar in Light Mode (Distinct navigation cockpit)
+assert(html.includes('html.light #sidebar {'), 'Light mode sidebar has dedicated royal blue styling');
+assert(html.includes('linear-gradient(180deg, #0E2554 0%, #091734 100%)'), 'Sidebar uses deep Royal Blue gradient in light mode');
+assert(html.includes('html.light #sidebar .nav-btn.bg-\\[var\\(--primary-light\\)\\]'), 'Active nav item in royal blue sidebar has elevated pill');
+assert(html.includes('html.light #sidebar .nav-section-header'), 'Accordion headers in sidebar are styled with light blue contrast');
+console.log('  [PASS] 4: Royal Blue Sidebar in Light Mode verified.');
+
+// 5. HTML Subtab Structure
 // HR
 assert(html.includes('id="hr-tab-employees" class="tab-pill-btn active hr-subtab-btn'), 'HR employees tab uses tab-pill-btn and active');
 assert(html.includes('id="hr-tab-advances" class="tab-pill-btn hr-subtab-btn'), 'HR advances tab uses tab-pill-btn');
@@ -50,11 +57,11 @@ assert(html.includes('id="settings-tab-rbac" class="tab-pill-btn settings-subtab
 assert(html.includes('id="acc-tab-pnl" class="tab-pill-btn active acc-subtab-btn'), 'Accounting pnl tab uses tab-pill-btn and active');
 assert(html.includes('id="acc-tab-balance" class="tab-pill-btn acc-subtab-btn'), 'Accounting balance tab uses tab-pill-btn');
 assert(html.includes('id="acc-tab-tva" class="tab-pill-btn acc-subtab-btn'), 'Accounting tva tab uses tab-pill-btn');
-console.log('  [PASS] 4: HTML markup for all subtabs conforms to segmented dock standards.');
+console.log('  [PASS] 5: HTML markup for all subtabs conforms to segmented dock standards.');
 
-// 5. JS Function active class toggling
+// 6. JS Function active class toggling
 assert(html.includes("function switchHRTab(tabKey)"), 'switchHRTab function exists');
 assert(html.includes("activeBtn.classList.add('active');"), 'activeBtn gets active class');
-console.log('  [PASS] 5: Tab switching functions cleanly maintain .active state.');
+console.log('  [PASS] 6: Tab switching functions cleanly maintain .active state.');
 
-console.log('All Facebook Royal Blue & Segmented Subtab tests PASSED! (22/22 assertions)');
+console.log('All Facebook Royal Blue, Sidebar & Segmented Subtab tests PASSED! (26/26 assertions)');

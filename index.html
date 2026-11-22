@@ -656,6 +656,155 @@
       padding-bottom: 0.5rem !important;
     }
 
+    /* ========================================================
+       BARRE DE NAVIGATION LATÉRALE : BLEU ROYAL NOBLE (MODE CLAIR)
+       - Différenciation nette entre la navigation et le canevas de travail blanc
+       - Fond Bleu Royal Nuit (#0D224A à #091734)
+       - Typographie & icônes haute lisibilité (#FFFFFF / #E2E8F0 / #93C5FD)
+       - Onglet actif en Pilule Facebook Royal Blue (#1877F2) en relief
+       ======================================================== */
+    html.light #sidebar {
+      background: linear-gradient(180deg, #0E2554 0%, #091734 100%) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+      box-shadow: 4px 0 24px -2px rgba(9, 23, 52, 0.25) !important;
+    }
+
+    /* En-tête de la barre latérale */
+    html.light #sidebar .h-16 {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    html.light #sidebar .sidebar-brand-text .font-extrabold {
+      color: #FFFFFF !important;
+    }
+    html.light #sidebar #store-selector {
+      color: #BFDBFE !important;
+    }
+    html.light #sidebar #store-selector option {
+      background-color: #0E2554 !important;
+      color: #FFFFFF !important;
+    }
+    html.light #sidebar button[onclick*="toggleSidebar"],
+    html.light #sidebar #btn-sidebar-collapse-inner {
+      color: #93C5FD !important;
+    }
+    html.light #sidebar button[onclick*="toggleSidebar"]:hover,
+    html.light #sidebar #btn-sidebar-collapse-inner:hover {
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.12) !important;
+    }
+
+    /* En-têtes de sections accordéons */
+    html.light #sidebar .nav-section-header {
+      color: #93C5FD !important;
+      opacity: 0.9 !important;
+    }
+    html.light #sidebar .nav-section-header:hover {
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.08) !important;
+      opacity: 1 !important;
+    }
+    html.light #sidebar .nav-section-header svg {
+      color: #93C5FD !important;
+      stroke: #93C5FD !important;
+    }
+    html.light #sidebar .nav-section-header:hover svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+
+    /* Boutons de navigation inactifs */
+    html.light #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) {
+      color: #E2E8F0 !important;
+      background-color: transparent !important;
+      border-color: transparent !important;
+    }
+    html.light #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) svg {
+      color: #93C5FD !important;
+      stroke: #93C5FD !important;
+    }
+    html.light #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]):hover {
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    html.light #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]):hover svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+
+    /* Bouton de navigation actif (Vue courante) : Facebook Royal Blue Pill */
+    html.light #sidebar .nav-btn.bg-\[var\(--primary-light\)\] {
+      background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%) !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.25) !important;
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.5) !important;
+      font-weight: 700 !important;
+    }
+    html.light #sidebar .nav-btn.bg-\[var\(--primary-light\)\] * {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+
+    /* Badges & Raccourcis claviers (F1, F2, Devis, Rayon...) */
+    html.light #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) span[class*="rounded"] {
+      background-color: rgba(255, 255, 255, 0.12) !important;
+      color: #BFDBFE !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    }
+    html.light #sidebar .nav-btn.bg-\[var\(--primary-light\)\] span[class*="rounded"] {
+      background-color: rgba(255, 255, 255, 0.25) !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    }
+
+    /* Bouton Mode Cartes & Bureau en haut de la barre */
+    html.light #sidebar #sidebar-btn-cards-mode {
+      border-color: rgba(255, 255, 255, 0.15) !important;
+    }
+
+    /* Pied de page de la barre latérale */
+    html.light #sidebar #sidebar-footer-container {
+      background-color: rgba(5, 14, 32, 0.7) !important;
+      border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+    html.light #sidebar .sidebar-user-details .text-\[var\(--text-main\)\] {
+      color: #FFFFFF !important;
+    }
+    html.light #sidebar .sidebar-user-details .text-\[var\(--primary\)\] {
+      color: #93C5FD !important;
+    }
+    html.light #sidebar #sidebar-footer-actions button {
+      color: #BFDBFE !important;
+    }
+    html.light #sidebar #sidebar-footer-actions button:hover {
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.12) !important;
+    }
+    html.light #sidebar button[onclick*="switchView('about')"] {
+      color: #BFDBFE !important;
+      border-top-color: rgba(255, 255, 255, 0.1) !important;
+    }
+    html.light #sidebar button[onclick*="switchView('about')"]:hover {
+      color: #FCD34D !important;
+    }
+
+    /* En mode réduit (rail d'icônes compact) */
+    html.light body.sidebar-collapsed #sidebar {
+      background: linear-gradient(180deg, #0E2554 0%, #091734 100%) !important;
+      border-right: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+    html.light body.sidebar-collapsed #sidebar .nav-btn:not(.bg-\[var\(--primary-light\)\]) svg {
+      color: #93C5FD !important;
+      stroke: #93C5FD !important;
+    }
+    html.light body.sidebar-collapsed #sidebar .nav-btn:hover {
+      background-color: rgba(255, 255, 255, 0.12) !important;
+    }
+    html.light body.sidebar-collapsed #sidebar .nav-btn:hover svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+
+
     .tab-pill-badge {
       font-size: 0.65rem;
       font-family: 'JetBrains Mono', monospace;
