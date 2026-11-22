@@ -13,6 +13,54 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     
+    
+    /* ========================================================
+       RENFORCEMENT DU CONTRASTE & LISIBILITÉ EN MODE CLAIR
+       - Texte d'une netteté absolue (#0F172A / #1E293B / #475569)
+       - Cartes blanches détourées (#CBD5E1) avec relief doux
+       - Tableaux et formulaires parfaitement lisibles
+       ======================================================== */
+    html.light {
+      color-scheme: light;
+    }
+    html.light .app-card {
+      background: #FFFFFF !important;
+      border: 1px solid #CBD5E1 !important;
+      box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.06), 0 1px 2px 0 rgba(15, 23, 42, 0.04) !important;
+    }
+    html.light .app-input,
+    html.light select.app-input,
+    html.light textarea.app-input {
+      background: #FFFFFF !important;
+      border-color: #CBD5E1 !important;
+      color: #0F172A !important;
+      font-weight: 500 !important;
+    }
+    html.light .app-input::placeholder {
+      color: #64748B !important;
+    }
+    html.light thead {
+      background-color: #F1F5F9 !important;
+      color: #1E293B !important;
+      border-bottom: 1px solid #CBD5E1 !important;
+    }
+    html.light thead th {
+      color: #334155 !important;
+      font-weight: 700 !important;
+    }
+    html.light .text-slate-400,
+    html.light .text-gray-400,
+    html.light .text-zinc-400 {
+      color: #475569 !important;
+    }
+    html.light .text-slate-500,
+    html.light .text-gray-500 {
+      color: #334155 !important;
+    }
+    html.light tr:hover {
+      background-color: #F8FAFC !important;
+    }
+
     /* Protection anti-chevauchement Launchpad & Dock OS */
     body.dock-pos-left #aura-os-desktop,
     body.dock-pos-left #aura-os-desktop .launchpad-scroll-area {
@@ -52,9 +100,9 @@
       --text-main: #F8FAFC;
       --text-secondary: #CBD5E1;
       --text-muted: #94A3B8;
-      --primary: #10B981;
-      --primary-hover: #059669;
-      --primary-light: rgba(16, 185, 129, 0.15);
+      --primary: #1877F2;
+      --primary-hover: #166FE5;
+      --primary-light: rgba(24, 119, 242, 0.16);
       --accent: #6366F1;
       --accent-light: rgba(99, 102, 241, 0.15);
       --warning: #F59E0B;
@@ -75,11 +123,11 @@
       --border: #CBD5E1;
       --border-subtle: #E2E8F0;
       --text-main: #0F172A;
-      --text-secondary: #334155;
-      --text-muted: #64748B;
-      --primary: #0D9488;
-      --primary-hover: #0F766E;
-      --primary-light: #CCFBF1;
+      --text-secondary: #1E293B;
+      --text-muted: #475569;
+      --primary: #1877F2;
+      --primary-hover: #166FE5;
+      --primary-light: #E7F3FF;
       --accent: #4F46E5;
       --accent-light: #EEF2FF;
       --warning: #D97706;
@@ -422,7 +470,12 @@
       opacity: 1;
     }
 
-    /* Modern Capsule Segmented Deck (Sub-Tab Navigation) */
+    /* ========================================================
+       SEGMENTED CAPSULE DOCK : NAVIGATION SOUS-ONGLETS UNIFIÉE & TACTILE
+       - Inspiration Royale Facebook Blue (#1877F2)
+       - Zéro soulignement plat basique : pilules ergonomiques en conteneur dock
+       - Contraste maximal en mode clair (#475569 inactif, blanc pur actif)
+       ======================================================== */
     .tab-pill-deck {
       display: inline-flex;
       align-items: center;
@@ -431,44 +484,121 @@
       border-radius: 1.125rem;
       background-color: var(--bg-card-subtle);
       border: 1px solid var(--border);
-      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.04);
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
       max-width: 100%;
-    }
-
-    .tab-pill-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 1rem;
-      border-radius: 0.875rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      color: var(--text-muted);
-      background: transparent;
-      border: 1px solid transparent;
-      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-      white-space: nowrap;
       user-select: none;
     }
-
-    .tab-pill-btn:hover {
-      color: var(--text-main);
-      background-color: rgba(255, 255, 255, 0.7);
-    }
-    html.dark .tab-pill-btn:hover {
-      background-color: rgba(255, 255, 255, 0.08);
+    html.light .tab-pill-deck {
+      background-color: #EEF2F6;
+      border-color: #CBD5E1;
+      box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.04);
     }
 
+    .tab-pill-btn,
+    .hr-subtab-btn,
+    .stock-subtab-btn,
+    .settings-subtab-btn,
+    .acc-subtab-btn,
+    .doc-subtab-btn,
+    .crm-subtab-btn {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.5rem !important;
+      padding: 0.5rem 1.125rem !important;
+      border-radius: 0.875rem !important;
+      font-size: 0.8rem !important;
+      font-weight: 600 !important;
+      color: var(--text-muted) !important;
+      background: transparent !important;
+      border: 1px solid transparent !important;
+      transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1) !important;
+      cursor: pointer !important;
+      white-space: nowrap !important;
+      user-select: none !important;
+      text-decoration: none !important;
+    }
+
+    html.light .tab-pill-btn,
+    html.light .hr-subtab-btn,
+    html.light .stock-subtab-btn,
+    html.light .settings-subtab-btn,
+    html.light .acc-subtab-btn,
+    html.light .doc-subtab-btn,
+    html.light .crm-subtab-btn {
+      color: #475569 !important;
+    }
+
+    .tab-pill-btn:hover,
+    .hr-subtab-btn:hover,
+    .stock-subtab-btn:hover,
+    .settings-subtab-btn:hover,
+    .acc-subtab-btn:hover,
+    .doc-subtab-btn:hover,
+    .crm-subtab-btn:hover {
+      color: var(--text-main) !important;
+      background-color: rgba(255, 255, 255, 0.85) !important;
+    }
+    html.dark .tab-pill-btn:hover,
+    html.dark .hr-subtab-btn:hover,
+    html.dark .stock-subtab-btn:hover,
+    html.dark .settings-subtab-btn:hover,
+    html.dark .acc-subtab-btn:hover,
+    html.dark .doc-subtab-btn:hover,
+    html.dark .crm-subtab-btn:hover {
+      background-color: rgba(255, 255, 255, 0.08) !important;
+    }
+
+    /* Pilule Active Facebook Royal Blue (#1877F2) avec Élévation Tactile */
     .tab-pill-btn.active,
     .tab-pill-btn.border-\[var\(--primary\)\],
-    .tab-pill-btn.text-\[var\(--primary\)\] {
-      color: var(--primary) !important;
-      background-color: var(--bg-card) !important;
-      font-weight: 800 !important;
-      border-color: var(--border) !important;
-      box-shadow: 0 2px 8px -1px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04) !important;
-      transform: translateY(-0.5px);
+    .tab-pill-btn.text-\[var\(--primary\)\],
+    .hr-subtab-btn.active,
+    .hr-subtab-btn.border-\[var\(--primary\)\],
+    .hr-subtab-btn.text-\[var\(--primary\)\],
+    .stock-subtab-btn.active,
+    .stock-subtab-btn.border-\[var\(--primary\)\],
+    .stock-subtab-btn.text-\[var\(--primary\)\],
+    .settings-subtab-btn.active,
+    .settings-subtab-btn.border-\[var\(--primary\)\],
+    .settings-subtab-btn.text-\[var\(--primary\)\],
+    .acc-subtab-btn.active,
+    .acc-subtab-btn.border-\[var\(--primary\)\],
+    .acc-subtab-btn.text-\[var\(--primary\)\],
+    .doc-subtab-btn.active,
+    .crm-subtab-btn.active {
+      color: #FFFFFF !important;
+      background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%) !important;
+      border: 1px solid #1877F2 !important;
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.25) !important;
+      font-weight: 700 !important;
+      transform: translateY(-1px) !important;
+    }
+
+    .tab-pill-btn.active svg,
+    .tab-pill-btn.border-\[var\(--primary\)\] svg,
+    .tab-pill-btn.text-\[var\(--primary\)\] svg,
+    .hr-subtab-btn.active svg,
+    .hr-subtab-btn.border-\[var\(--primary\)\] svg,
+    .hr-subtab-btn.text-\[var\(--primary\)\] svg,
+    .stock-subtab-btn.active svg,
+    .stock-subtab-btn.border-\[var\(--primary\)\] svg,
+    .stock-subtab-btn.text-\[var\(--primary\)\] svg,
+    .settings-subtab-btn.active svg,
+    .settings-subtab-btn.border-\[var\(--primary\)\] svg,
+    .settings-subtab-btn.text-\[var\(--primary\)\] svg,
+    .acc-subtab-btn.active svg,
+    .acc-subtab-btn.border-\[var\(--primary\)\] svg,
+    .acc-subtab-btn.text-\[var\(--primary\)\] svg,
+    .doc-subtab-btn.active svg,
+    .crm-subtab-btn.active svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+
+    /* Annulation absolue de toute bordure basse soulignée basique */
+    .hr-subtab-btn, .stock-subtab-btn, .settings-subtab-btn, .acc-subtab-btn {
+      border-bottom-width: 1px !important;
+      padding-bottom: 0.5rem !important;
     }
 
     .tab-pill-badge {
@@ -1142,7 +1272,7 @@
     body.interface-cards-mode select.app-input:focus,
     body.interface-cards-mode textarea.app-input:focus {
       border-color: rgba(20, 184, 166, 0.8) !important;
-      box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.2) !important;
+      box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.2) !important;
     }
 
     /* Mode Clair Spécifique pour les Cartes et Contrôles en Mode Cartes */
@@ -1714,8 +1844,8 @@
 
     /* Style actif haute visibilité pour la tuile sélectionnée */
     body.sidebar-collapsed #nav-dashboard.bg-\[var\(--primary-light\)\] {
-      background: rgba(20, 184, 166, 0.2) !important;
-      border-color: rgba(20, 184, 166, 0.4) !important;
+      background: rgba(24, 119, 242, 0.2) !important;
+      border-color: rgba(24, 119, 242, 0.4) !important;
     }
 
     /* Pied de page centré */
@@ -2254,7 +2384,7 @@
           <div>
             <h2 class="text-xl font-black text-[var(--text-main)] flex items-center gap-2">
               <span>Tableau de Bord Exécutif & Cockpit Financier</span>
-              <span class="text-xs px-2.5 py-0.5 rounded-full bg-teal-500/10 text-teal-600 border border-teal-500/20 font-bold">Vue 360° Entreprise (Norme OHADA)</span>
+              <span class="text-xs px-2.5 py-0.5 rounded-full bg-[#1877F2]/10 text-[#1877F2] border border-[#1877F2]/25 font-bold">Vue 360° Entreprise (Norme OHADA)</span>
             </h2>
             <p class="text-xs text-[var(--text-muted)]">Indicateurs consolidés en temps réel : ventes, marges réelles, créances, dettes fournisseurs et trésorerie.</p>
           </div>
@@ -2309,7 +2439,7 @@
                 <span class="text-[10px] group-hover:translate-x-0.5 transition-transform">➔</span>
               </span>
             </div>
-            <div class="text-xl font-black font-num text-teal-600" id="dash-ca-ttc">14 850 000 F</div>
+            <div class="text-xl font-black font-num text-[#1877F2]" id="dash-ca-ttc">14 850 000 F</div>
             <div class="text-[10px] text-[var(--text-muted)]">Dont HT : <b class="font-num text-[var(--text-main)]" id="dash-ca-ht">12 584 746 F</b></div>
           </div>
 
@@ -2395,25 +2525,25 @@
                 <h3 class="font-bold text-sm text-[var(--text-main)]">Évolution des Ventes & Affluence Caisse</h3>
                 <p class="text-xs text-[var(--text-muted)]">Distribution des encaissements par jour (cliquez sur une barre pour voir le détail).</p>
               </div>
-              <span class="text-xs font-bold text-teal-600 font-num">Moyenne : 495 000 F / jour</span>
+              <span class="text-xs font-bold text-[#1877F2] font-num">Moyenne : 495 000 F / jour</span>
             </div>
 
             <!-- Barres d'Activité Proportionnelles Interactives -->
             <div class="h-44 flex items-end gap-2 pt-6 px-2 justify-between" id="dash-weekly-chart">
               <div onclick="showDaySalesInfo('Lundi', 420000, 22)" class="flex-1 flex flex-col items-center gap-1 cursor-pointer group" title="Lundi : 420 000 F CFA (22 tickets)">
-                <div class="w-full bg-teal-500/30 group-hover:bg-teal-500/60 rounded-t h-16 transition-all"></div>
+                <div class="w-full bg-[#1877F2]/30 group-hover:bg-[#1877F2]/60 rounded-t h-16 transition-all"></div>
                 <span class="text-[9px] font-num text-[var(--text-muted)] group-hover:text-[var(--text-main)]">Lun</span>
               </div>
               <div onclick="showDaySalesInfo('Mardi', 580000, 29)" class="flex-1 flex flex-col items-center gap-1 cursor-pointer group" title="Mardi : 580 000 F CFA (29 tickets)">
-                <div class="w-full bg-teal-500/40 group-hover:bg-teal-500/70 rounded-t h-24 transition-all"></div>
+                <div class="w-full bg-[#1877F2]/40 group-hover:bg-[#1877F2]/70 rounded-t h-24 transition-all"></div>
                 <span class="text-[9px] font-num text-[var(--text-muted)] group-hover:text-[var(--text-main)]">Mar</span>
               </div>
               <div onclick="showDaySalesInfo('Mercredi', 690000, 31)" class="flex-1 flex flex-col items-center gap-1 cursor-pointer group" title="Mercredi : 690 000 F CFA (31 tickets)">
-                <div class="w-full bg-teal-500/60 group-hover:bg-teal-500/80 rounded-t h-32 transition-all"></div>
+                <div class="w-full bg-teal-500/60 group-hover:bg-[#1877F2]/80 rounded-t h-32 transition-all"></div>
                 <span class="text-[9px] font-num text-[var(--text-muted)] group-hover:text-[var(--text-main)]">Mer</span>
               </div>
               <div onclick="showDaySalesInfo('Jeudi', 640000, 28)" class="flex-1 flex flex-col items-center gap-1 cursor-pointer group" title="Jeudi : 640 000 F CFA (28 tickets)">
-                <div class="w-full bg-teal-500/50 group-hover:bg-teal-500/75 rounded-t h-28 transition-all"></div>
+                <div class="w-full bg-[#1877F2]/50 group-hover:bg-teal-500/75 rounded-t h-28 transition-all"></div>
                 <span class="text-[9px] font-num text-[var(--text-muted)] group-hover:text-[var(--text-main)]">Jeu</span>
               </div>
               <div onclick="showDaySalesInfo('Vendredi', 885000, 42)" class="flex-1 flex flex-col items-center gap-1 cursor-pointer group relative" title="Vendredi : 885 000 F CFA (42 tickets)">
@@ -2423,13 +2553,13 @@
                 <span class="text-[9px] font-num font-bold text-[var(--primary)]">Ven</span>
               </div>
               <div onclick="showDaySalesInfo('Samedi', 960000, 48)" class="flex-1 flex flex-col items-center gap-1 cursor-pointer group relative" title="Samedi : 960 000 F CFA (48 tickets - Pic)">
-                <div class="w-full bg-teal-500/90 group-hover:brightness-110 rounded-t h-44 transition-all">
+                <div class="w-full bg-[#1877F2]/90 group-hover:brightness-110 rounded-t h-44 transition-all">
                   <span class="hidden group-hover:block absolute -top-7 left-1/2 -translate-x-1/2 bg-slate-900 border border-[var(--border)] text-white text-[9px] px-1.5 py-0.5 rounded font-num whitespace-nowrap shadow-lg z-10">960 000 F</span>
                 </div>
                 <span class="text-[9px] font-num font-bold text-[var(--primary)]">Sam</span>
               </div>
               <div onclick="showDaySalesInfo('Dimanche', 310000, 15)" class="flex-1 flex flex-col items-center gap-1 cursor-pointer group" title="Dimanche : 310 000 F CFA (15 tickets)">
-                <div class="w-full bg-teal-500/30 group-hover:bg-teal-500/60 rounded-t h-14 transition-all"></div>
+                <div class="w-full bg-[#1877F2]/30 group-hover:bg-[#1877F2]/60 rounded-t h-14 transition-all"></div>
                 <span class="text-[9px] font-num text-[var(--text-muted)] group-hover:text-[var(--text-main)]">Dim</span>
               </div>
             </div>
@@ -2951,27 +3081,30 @@
         </div>
 
         <!-- Système de Sous-Onglets Stock -->
-        <div class="border-b border-[var(--border)] flex items-center gap-4 text-xs font-semibold">
-          <button onclick="switchStockTab('catalog')" id="stock-tab-catalog" class="stock-subtab-btn pb-3 border-b-2 border-[var(--primary)] text-[var(--primary)] flex items-center gap-1.5">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
-            <span>Catalogue & Double Stock</span>
-          </button>
-          <button onclick="switchStockTab('transfers')" id="stock-tab-transfers" class="stock-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
-            <span>Transferts Réserve ➔ Rayon</span>
-          </button>
-          <button onclick="switchStockTab('history')" id="stock-tab-history" class="stock-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span>Journal des Mouvements</span>
-          </button>
-          <button onclick="switchStockTab('loss')" id="stock-tab-loss" class="stock-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
-            <span>Pertes & Avaries</span>
-          </button>
-          <button onclick="switchStockTab('barcodes')" id="stock-tab-barcodes" class="stock-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
-            <span>Étiquettes Codes-barres</span>
-          </button>
+        <!-- Sous-onglets Navigation Stock - Segmented Capsule Dock -->
+        <div class="overflow-x-auto custom-scroll pb-1">
+          <div class="tab-pill-deck">
+            <button type="button" onclick="switchStockTab('catalog')" id="stock-tab-catalog" class="tab-pill-btn active stock-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
+              <span>Catalogue & Double Stock</span>
+            </button>
+            <button type="button" onclick="switchStockTab('transfers')" id="stock-tab-transfers" class="tab-pill-btn stock-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"></path></svg>
+              <span>Transferts Réserve ➔ Rayon</span>
+            </button>
+            <button type="button" onclick="switchStockTab('history')" id="stock-tab-history" class="tab-pill-btn stock-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span>Journal des Mouvements</span>
+            </button>
+            <button type="button" onclick="switchStockTab('loss')" id="stock-tab-loss" class="tab-pill-btn stock-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+              <span>Pertes & Avaries</span>
+            </button>
+            <button type="button" onclick="switchStockTab('barcodes')" id="stock-tab-barcodes" class="tab-pill-btn stock-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z"></path></svg>
+              <span>Étiquettes Codes-barres & QR</span>
+            </button>
+          </div>
         </div>
 
         <!-- SOUS-ONGLET 1 : CATALOGUE PRODUITS & DOUBLE STOCK -->
@@ -3282,16 +3415,22 @@
         </div>
 
         <!-- Système de Sous-Onglets RH -->
-        <div class="border-b border-[var(--border)] flex items-center gap-4 text-xs font-semibold overflow-x-auto custom-scroll">
-          <button onclick="switchHRTab('employees')" id="hr-tab-employees" class="hr-subtab-btn pb-3 border-b-2 border-[var(--primary)] text-[var(--primary)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
-            <span>1. Registre du Personnel</span>
-          </button>
-          <button onclick="switchHRTab('advances')" id="hr-tab-advances" class="hr-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
-            <span>2. Avances sur Salaire & Primes</span>
-          </button>
-          <button onclick="switchHRTab('payslips')" id="hr-tab-payslips" class="hr-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
-            <span>3. Bulletins de Salaire A4</span>
-          </button>
+        <!-- Sous-onglets Navigation RH - Segmented Capsule Dock -->
+        <div class="overflow-x-auto custom-scroll pb-1">
+          <div class="tab-pill-deck">
+            <button type="button" onclick="switchHRTab('employees')" id="hr-tab-employees" class="tab-pill-btn active hr-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+              <span>1. Registre du Personnel</span>
+            </button>
+            <button type="button" onclick="switchHRTab('advances')" id="hr-tab-advances" class="tab-pill-btn hr-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span>2. Avances sur Salaire & Primes</span>
+            </button>
+            <button type="button" onclick="switchHRTab('payslips')" id="hr-tab-payslips" class="tab-pill-btn hr-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span>3. Bulletins de Salaire A4</span>
+            </button>
+          </div>
         </div>
 
         <!-- 1. SOUS-ONGLET : REGISTRE DU PERSONNEL -->
@@ -4356,22 +4495,30 @@
         </div>
 
         <!-- Sous-Onglets Comptabilité OHADA -->
-        <div class="border-b border-[var(--border)] flex items-center gap-4 text-xs font-semibold overflow-x-auto custom-scroll">
-          <button onclick="switchAccountingTab('pnl')" id="acc-tab-pnl" class="acc-subtab-btn pb-3 border-b-2 border-[var(--primary)] text-[var(--primary)] flex items-center gap-1.5 whitespace-nowrap">
-            <span>1. Compte de Résultat (P&L OHADA)</span>
-          </button>
-          <button onclick="switchAccountingTab('balance')" id="acc-tab-balance" class="acc-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <span>2. Bilan & Situation Trésorerie</span>
-          </button>
-          <button onclick="switchAccountingTab('tva')" id="acc-tab-tva" class="acc-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <span>3. Déclaration Fiscale TVA 18% (DGI)</span>
-          </button>
-          <button onclick="switchAccountingTab('ledger')" id="acc-tab-ledger" class="acc-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <span>4. Grand Livre & Journal Écritures</span>
-          </button>
-          <button onclick="switchAccountingTab('six-digits-balance')" id="acc-tab-six-digits-balance" class="acc-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <span>5. Balance Générale à 6 Chiffres (SYSCOHADA)</span>
-          </button>
+        <!-- Sous-onglets Navigation Comptabilité - Segmented Capsule Dock -->
+        <div class="overflow-x-auto custom-scroll pb-1">
+          <div class="tab-pill-deck">
+            <button type="button" onclick="switchAccountingTab('pnl')" id="acc-tab-pnl" class="tab-pill-btn active acc-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+              <span>1. Compte de Résultat (P&L OHADA)</span>
+            </button>
+            <button type="button" onclick="switchAccountingTab('balance')" id="acc-tab-balance" class="tab-pill-btn acc-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+              <span>2. Bilan & Situation Trésorerie</span>
+            </button>
+            <button type="button" onclick="switchAccountingTab('tva')" id="acc-tab-tva" class="tab-pill-btn acc-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 14l6-6m-5.5.5h.01m4.99 5h.01M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16l3.5-2 3.5 2 3.5-2 3.5 2z"></path></svg>
+              <span>3. Déclaration Fiscale TVA 18% (DGI)</span>
+            </button>
+            <button type="button" onclick="switchAccountingTab('ledger')" id="acc-tab-ledger" class="tab-pill-btn acc-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg>
+              <span>4. Grand Livre & Journal Écritures</span>
+            </button>
+            <button type="button" onclick="switchAccountingTab('six-digits-balance')" id="acc-tab-six-digits-balance" class="tab-pill-btn acc-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2 1.5 3 3.5 3h9c2 0 3.5-1 3.5-3V7c0-2-1.5-3-3.5-3h-9C5.5 4 4 5 4 7zm0 4h16M8 4v4m8-4v4"></path></svg>
+              <span>5. Balance Générale à 6 Chiffres (SYSCOHADA)</span>
+            </button>
+          </div>
         </div>
 
         <!-- SOUS-ONGLET 1 : COMPTE DE RÉSULTAT (P&L OHADA) -->
@@ -4808,46 +4955,46 @@
           </button>
         </div>
 
-        <!-- Système de Sous-Onglets Paramètres -->
-        <div class="border-b border-[var(--border)] flex items-center gap-4 text-xs font-semibold overflow-x-auto custom-scroll">
-          <button onclick="switchSettingsTab('general')" id="settings-tab-general" class="settings-subtab-btn pb-3 border-b-2 border-[var(--primary)] text-[var(--primary)] flex items-center gap-1.5 whitespace-nowrap">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-            <span>1. Général & Boutique</span>
-          </button>
-          <button onclick="switchSettingsTab('rbac')" id="settings-tab-rbac" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-            <span>2. Utilisateurs & Droits RBAC</span>
-          </button>
-          <button onclick="switchSettingsTab('printers')" id="settings-tab-printers" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-            <span>3. Imprimantes & Matériel</span>
-          </button>
-          <button onclick="switchSettingsTab('tickets')" id="settings-tab-tickets" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            <span>4. Logo, Cachet & Documents A4</span>
-          </button>
-          <button onclick="switchSettingsTab('zones')" id="settings-tab-zones" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            <span>5. Zones de Livraison</span>
-          </button>
-          <button onclick="switchSettingsTab('backups')" id="settings-tab-backups" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
-            <span>6. Sauvegardes & Licence</span>
-          </button>
-          <button onclick="switchSettingsTab('payroll')" id="settings-tab-payroll" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            <span>7. Paie, Cotisations & RH</span>
-          </button>
-          <button onclick="switchSettingsTab('appearance')" id="settings-tab-appearance" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-            <span>8. Bureau & Dock OS</span>
-          </button>
-          
-          
-          <button onclick="switchSettingsTab('ai')" id="settings-tab-ai" class="settings-subtab-btn pb-3 border-b-2 border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] flex items-center gap-1.5 whitespace-nowrap">
-            <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            <span>9. Agent IA & Copilot</span>
-          </button>
+        <!-- Système de Sous-Onglets Paramètres - Segmented Capsule Dock -->
+        <div class="overflow-x-auto custom-scroll pb-1">
+          <div class="tab-pill-deck">
+            <button type="button" onclick="switchSettingsTab('general')" id="settings-tab-general" class="tab-pill-btn active settings-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+              <span>1. Général & Boutique</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('rbac')" id="settings-tab-rbac" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              <span>2. Utilisateurs & Droits RBAC</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('printers')" id="settings-tab-printers" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+              <span>3. Imprimantes & Matériel</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('tickets')" id="settings-tab-tickets" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span>4. Logo, Cachet & Documents A4</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('zones')" id="settings-tab-zones" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span>5. Zones de Livraison</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('backups')" id="settings-tab-backups" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4"></path></svg>
+              <span>6. Sauvegardes & Licence</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('payroll')" id="settings-tab-payroll" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+              <span>7. Paie, Cotisations & RH</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('appearance')" id="settings-tab-appearance" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+              <span>8. Bureau & Dock OS</span>
+            </button>
+            <button type="button" onclick="switchSettingsTab('ai')" id="settings-tab-ai" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
+              <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <span>9. Agent IA & Copilot</span>
+            </button>
+          </div>
         </div>
 
         <!-- SOUS-ONGLET 1 : GÉNÉRAL & BOUTIQUE -->
@@ -11242,6 +11389,7 @@ function printZReportPreview(customShift = null) {
         if (el) el.classList.add('hidden');
         if (btn) {
           btn.classList.remove('border-[var(--primary)]', 'text-[var(--primary)]');
+          btn.classList.remove('active');
           btn.classList.add('border-transparent', 'text-[var(--text-muted)]');
         }
       });
@@ -11250,6 +11398,8 @@ function printZReportPreview(customShift = null) {
       if (activeEl) activeEl.classList.remove('hidden');
       if (activeBtn) {
         activeBtn.classList.add('border-[var(--primary)]', 'text-[var(--primary)]');
+        activeBtn.classList.add('active');
+        activeBtn.classList.add('active');
         activeBtn.classList.remove('border-transparent', 'text-[var(--text-muted)]');
       }
 
@@ -14554,6 +14704,7 @@ const DAILY_PRODUCTS_CATALOG = [
         if (el) el.classList.add('hidden');
         if (btn) {
           btn.classList.remove('border-[var(--primary)]', 'text-[var(--primary)]');
+          btn.classList.remove('active');
           btn.classList.add('border-transparent', 'text-[var(--text-muted)]');
         }
       });
@@ -14562,6 +14713,7 @@ const DAILY_PRODUCTS_CATALOG = [
       if (activeEl) activeEl.classList.remove('hidden');
       if (activeBtn) {
         activeBtn.classList.add('border-[var(--primary)]', 'text-[var(--primary)]');
+        activeBtn.classList.add('active');
         activeBtn.classList.remove('border-transparent', 'text-[var(--text-muted)]');
       }
       if (tabKey === 'ledger') {
@@ -18379,6 +18531,7 @@ function getLiveMetricForPole(countKey) {
         if (el) el.classList.add('hidden');
         if (btn) {
           btn.classList.remove('border-[var(--primary)]', 'text-[var(--primary)]');
+          btn.classList.remove('active');
           btn.classList.add('border-transparent', 'text-[var(--text-muted)]');
         }
       });
@@ -18421,6 +18574,7 @@ function getLiveMetricForPole(countKey) {
         if (el) el.classList.add('hidden');
         if (btn) {
           btn.classList.remove('border-[var(--primary)]', 'text-[var(--primary)]');
+          btn.classList.remove('active');
           btn.classList.add('border-transparent', 'text-[var(--text-muted)]');
         }
       });
@@ -18429,6 +18583,7 @@ function getLiveMetricForPole(countKey) {
       if (activeEl) activeEl.classList.remove('hidden');
       if (activeBtn) {
         activeBtn.classList.add('border-[var(--primary)]', 'text-[var(--primary)]');
+        activeBtn.classList.add('active');
         activeBtn.classList.remove('border-transparent', 'text-[var(--text-muted)]');
       }
 
@@ -22042,7 +22197,7 @@ function getLiveMetricForPole(countKey) {
 
       container.innerHTML = hourlyData.map(item => `
         <div class="flex-1 flex flex-col items-center gap-1 group">
-          <div class="w-full ${item.isPeak ? 'bg-teal-500 hover:bg-teal-400' : 'bg-teal-500/40 hover:bg-teal-500/60'} rounded-t ${item.h} relative transition-all">
+          <div class="w-full ${item.isPeak ? 'bg-teal-500 hover:bg-teal-400' : 'bg-[#1877F2]/40 hover:bg-teal-500/60'} rounded-t ${item.h} relative transition-all">
             <span class="hidden group-hover:block absolute -top-7 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[9px] px-1.5 py-0.5 rounded font-num whitespace-nowrap shadow-md z-10">
               ${item.val.toLocaleString('fr-FR')} F
             </span>
