@@ -47,7 +47,23 @@
   "products": [],
   "customers": [],
   "suppliers": [],
-  "employees": [],
+  "employees": [
+    {
+      "id": "1795377477860",
+      "name": "HHH",
+      "role": "UU",
+      "contract": "Stage",
+      "phone": "+226 70 00 00 00",
+      "cnss": "CNSS-751769-BF",
+      "salaryBase": 150000,
+      "hired": "2026-11-22",
+      "status": "Actif",
+      "attendance": "Présent",
+      "arrivalTime": "08:00",
+      "advances": 0,
+      "createdAt": "2026-11-22T19:57:57.861Z"
+    }
+  ],
   "sales": [],
   "shifts": [],
   "expenses": [],
@@ -62,6 +78,14 @@
       "action": "DÉPLOIEMENT_PRODUCTION",
       "user": "Administrateur",
       "details": "Base de données initialisée en mode production vierge. Toutes les données fictives ont été purgées."
+    },
+    {
+      "id": 1795377477893,
+      "timestamp": "2026-11-22T19:57:57.893Z",
+      "action": "RECRUTEMENT_RH",
+      "user": "RH",
+      "module": "Ressources Humaines",
+      "details": "Nouveau salarié enregistré: HHH (UU)"
     }
   ]
 }
