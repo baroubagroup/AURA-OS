@@ -731,17 +731,27 @@
       stroke: #FFFFFF !important;
     }
 
-    /* Bouton de navigation actif (Vue courante) : Facebook Royal Blue Pill */
-    html.light #sidebar .nav-btn.bg-\[var\(--primary-light\)\] {
+    /* Bouton de navigation actif (Vue courante) : Facebook Royal Blue Pill (Harmonisé Modes Clair & Sombre) */
+    #sidebar .nav-btn.bg-\[var\(--primary-light\)\],
+    html.light #sidebar .nav-btn.bg-\[var\(--primary-light\)\],
+    html.dark #sidebar .nav-btn.bg-\[var\(--primary-light\)\] {
       background: linear-gradient(135deg, #1877F2 0%, #166FE5 100%) !important;
       color: #FFFFFF !important;
-      border: 1px solid rgba(255, 255, 255, 0.25) !important;
-      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.5) !important;
+      border: 1px solid rgba(255, 255, 255, 0.28) !important;
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.45) !important;
       font-weight: 700 !important;
     }
-    html.light #sidebar .nav-btn.bg-\[var\(--primary-light\)\] * {
+    #sidebar .nav-btn.bg-\[var\(--primary-light\)\] *,
+    html.light #sidebar .nav-btn.bg-\[var\(--primary-light\)\] *,
+    html.dark #sidebar .nav-btn.bg-\[var\(--primary-light\)\] * {
       color: #FFFFFF !important;
       stroke: #FFFFFF !important;
+    }
+    #sidebar .nav-btn.bg-\[var\(--primary-light\)\] span[class*="rounded"],
+    html.light #sidebar .nav-btn.bg-\[var\(--primary-light\)\] span[class*="rounded"] {
+      background-color: rgba(255, 255, 255, 0.25) !important;
+      color: #FFFFFF !important;
+      border: 1px solid rgba(255, 255, 255, 0.35) !important;
     }
 
     /* Badges & Raccourcis claviers (F1, F2, Devis, Rayon...) */
@@ -1542,6 +1552,206 @@
     html.light body.interface-cards-mode .divide-white\/10 > * {
       border-color: #E2E8F0 !important;
     }
+    /* ==========================================================================
+       Harmonisation Mode Clair : Vue Shifts & Clôture de Caisse (Standard & Cartes)
+       ========================================================================== */
+    html.light #view-shifts .from-slate-900\/80,
+    html.light #view-shifts .bg-slate-900\/60 {
+      background: #FFFFFF !important;
+      border: 1px solid #CBD5E1 !important;
+      box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+    }
+    html.light #view-shifts .from-slate-900\/80 h2,
+    html.light #view-shifts h3 {
+      color: #0F172A !important;
+    }
+    html.light #view-shifts p.text-white\/60 {
+      color: #475569 !important;
+    }
+    html.light #view-shifts .border-white\/5,
+    html.light #view-shifts .border-white\/10,
+    html.light #view-shifts .border-white\/15,
+    html.light #view-shifts .border-white\/20 {
+      border-color: #E2E8F0 !important;
+    }
+    html.light #view-shifts .text-white {
+      color: #0F172A !important;
+    }
+    html.light #view-shifts .text-white\/90 {
+      color: #1E293B !important;
+    }
+    html.light #view-shifts .text-white\/80 {
+      color: #334155 !important;
+    }
+    html.light #view-shifts .text-white\/70,
+    html.light #view-shifts .text-white\/60 {
+      color: #475569 !important;
+    }
+    html.light #view-shifts .text-white\/50,
+    html.light #view-shifts .text-white\/40 {
+      color: #94A3B8 !important;
+    }
+    html.light #view-shifts button[onclick="printZReportPreview()"] {
+      background: #F1F5F9 !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #0F172A !important;
+    }
+    html.light #view-shifts button[onclick="printZReportPreview()"]:hover {
+      background: #E2E8F0 !important;
+    }
+    html.light #shift-cashier-name {
+      background: #F8FAFC !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #0F172A !important;
+    }
+    html.light #shift-initial-cash {
+      background: #EEF2FF !important;
+      border-color: #C7D2FE !important;
+      color: #4338CA !important;
+    }
+    html.light #shift-cash-sales {
+      background: #ECFDF5 !important;
+      border-color: #A7F3D0 !important;
+      color: #065F46 !important;
+    }
+    html.light #shift-cash-expenses {
+      background: #FFF1F2 !important;
+      border-color: #FECDD3 !important;
+      color: #9F1239 !important;
+    }
+    html.light #shift-digital-sales {
+      background: #F0F9FF !important;
+      border-color: #BAE6FD !important;
+      color: #0369A1 !important;
+    }
+    html.light #view-shifts .from-teal-500\/20 {
+      background: #F0FDFA !important;
+      border: 1.5px solid #99F6E4 !important;
+    }
+    html.light #view-shifts .from-teal-500\/20 span.text-teal-200\/80 {
+      color: #0F766E !important;
+    }
+    html.light #shift-theoretical-total {
+      color: #0F766E !important;
+    }
+    html.light #view-shifts .bg-black\/40 {
+      background: #F8FAFC !important;
+      border: 1px solid #CBD5E1 !important;
+    }
+    html.light #shift-counted-total {
+      color: #0F172A !important;
+    }
+    html.light #shift-variance-badge {
+      background: #ECFDF5 !important;
+      border-color: #A7F3D0 !important;
+      color: #065F46 !important;
+    }
+    html.light #view-shifts thead.bg-black\/30 {
+      background: #F8FAFC !important;
+      border-bottom: 1.5px solid #CBD5E1 !important;
+    }
+    html.light #view-shifts thead th {
+      color: #475569 !important;
+      font-weight: 700 !important;
+    }
+    html.light #denominations-body {
+      border-color: #CBD5E1 !important;
+    }
+    html.light #denominations-body tr {
+      border-bottom-color: #F1F5F9 !important;
+    }
+    html.light #denominations-body tr:hover {
+      background-color: #F8FAFC !important;
+    }
+    html.light #denominations-body td {
+      color: #0F172A !important;
+    }
+    html.light #denominations-body .bg-black\/40 {
+      background: #F1F5F9 !important;
+      border: 1px solid #CBD5E1 !important;
+      box-shadow: none !important;
+    }
+    html.light #denominations-body .bg-white\/10 {
+      background: #FFFFFF !important;
+      border: 1px solid #CBD5E1 !important;
+      color: #0F172A !important;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    }
+    html.light #denominations-body .bg-white\/10:hover {
+      background: #E2E8F0 !important;
+    }
+    html.light #denominations-body input[type="number"] {
+      color: #0F172A !important;
+      background: transparent !important;
+      border: 0 !important;
+      box-shadow: none !important;
+    }
+    html.light #view-shifts button[onclick="resetDenominations()"] {
+      background: #FFF1F2 !important;
+      border: 1px solid #FECDD3 !important;
+      color: #E11D48 !important;
+    }
+    html.light #view-shifts button[onclick="resetDenominations()"]:hover {
+      background: #FFE4E6 !important;
+    }
+    html.light #denominations-body .text-purple-200 { color: #6B21A8 !important; }
+    html.light #denominations-body .border-purple-400\/40 { border-color: #D8B4FE !important; }
+    html.light #denominations-body .text-emerald-200 { color: #065F46 !important; }
+    html.light #denominations-body .border-emerald-400\/40 { border-color: #A7F3D0 !important; }
+    html.light #denominations-body .text-sky-200 { color: #0369A1 !important; }
+    html.light #denominations-body .border-sky-400\/40 { border-color: #BAE6FD !important; }
+    html.light #denominations-body .text-amber-200 { color: #92400E !important; }
+    html.light #denominations-body .border-amber-400\/40,
+    html.light #denominations-body .border-amber-300\/40 { border-color: #FDE68A !important; }
+    html.light #denominations-body .text-teal-200 { color: #0F766E !important; }
+    html.light #denominations-body .border-teal-400\/40 { border-color: #99F6E4 !important; }
+    html.light #denominations-body .text-slate-200,
+    html.light #denominations-body .text-zinc-200 { color: #334155 !important; }
+    html.light #denominations-body .border-slate-300\/40,
+    html.light #denominations-body .border-zinc-300\/40 { border-color: #CBD5E1 !important; }
+    html.light #denominations-body .text-orange-200 { color: #C2410C !important; }
+    html.light #denominations-body .border-orange-300\/40 { border-color: #FED7AA !important; }
+
+    /* ==========================================================================
+       Netteté & Contraste Modales et Formulaires en Mode Clair
+       ========================================================================== */
+    html.light [id^="modal-"] .app-input,
+    html.light [id*="modal"] .app-input,
+    html.light [id^="modal-"] select.app-input,
+    html.light [id*="modal"] select.app-input,
+    html.light [id^="modal-"] textarea.app-input,
+    html.light [id*="modal"] textarea.app-input {
+      background: #FFFFFF !important;
+      border: 1.5px solid #CBD5E1 !important;
+      color: #0F172A !important;
+      font-weight: 500 !important;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04) !important;
+    }
+    html.light [id^="modal-"] .app-input:focus,
+    html.light [id*="modal"] .app-input:focus,
+    html.light [id^="modal-"] select.app-input:focus,
+    html.light [id*="modal"] select.app-input:focus,
+    html.light [id^="modal-"] textarea.app-input:focus,
+    html.light [id*="modal"] textarea.app-input:focus {
+      border-color: #1877F2 !important;
+      box-shadow: 0 0 0 3px rgba(24, 119, 242, 0.25) !important;
+      outline: none !important;
+    }
+    html.light [id^="modal-"] label,
+    html.light [id*="modal"] label {
+      color: #1E293B !important;
+      font-weight: 700 !important;
+    }
+    html.light [id^="modal-"] .app-input::placeholder,
+    html.light [id*="modal"] .app-input::placeholder {
+      color: #94A3B8 !important;
+    }
+    html.light [id^="modal-"] .app-card,
+    html.light [id*="modal"] .app-card {
+      border: 1px solid #CBD5E1 !important;
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.22), 0 0 0 1px rgba(15, 23, 42, 0.05) !important;
+    }
+
     html.light #aura-os-desktop > header {
       background: rgba(255, 255, 255, 0.75) !important;
       border-bottom: 1px solid rgba(226, 232, 240, 0.85) !important;
@@ -8837,7 +9047,7 @@
           </div>
           <div>
             <h3 class="font-bold text-base text-[var(--text-main)]" id="modal-emp-title">Nouvel Employé / Salarié</h3>
-            <p class="text-xs text-[var(--text-muted)]" id="modal-emp-subtitle">Création de la fiche contractuelle, paie et pointage</p>
+            <p class="text-xs text-[var(--text-muted)]" id="modal-emp-subtitle">Création de la fiche contractuelle et gestion de la paie</p>
           </div>
         </div>
         <button onclick="closeNewEmployeeModal()" class="p-1 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] font-bold text-base">✕</button>
@@ -14017,7 +14227,7 @@ const DAILY_PRODUCTS_CATALOG = [
       const subEl = document.getElementById('modal-emp-subtitle');
       const submitBtn = document.getElementById('btn-submit-emp');
       if (titleEl) titleEl.innerText = 'Nouvel Employé / Salarié';
-      if (subEl) subEl.innerText = 'Création de la fiche contractuelle, paie et pointage';
+      if (subEl) subEl.innerText = 'Création de la fiche contractuelle et gestion de la paie';
       if (submitBtn) submitBtn.innerHTML = '<span>Enregistrer le Salarié dans le Registre RH</span>';
 
       modal.classList.remove('hidden');
@@ -18252,12 +18462,12 @@ window.addEventListener('DOMContentLoaded', () => {
         icon: SVG_NAV_ICONS.hr,
         colorClasses: 'from-rose-500/20 to-pink-500/20 text-rose-400 border-rose-500/30',
         badge: 'OHADA & CNSS',
-        description: 'Salariés, Pointage & Bulletins A4',
+        description: 'Salariés, Acomptes & Bulletins A4',
         views: ['hr'],
         defaultView: 'hr',
         subCards: [
           { id: 'employees', title: 'Registre Salariés', icon: SVG_NAV_ICONS.users, countKey: 'employees', action: () => { switchView('hr'); if (typeof switchHRTab === 'function') switchHRTab('employees'); } },
-          { id: 'attendance', title: 'Pointage & Présences', icon: SVG_NAV_ICONS.attendance, badge: 'Biométrie', action: () => { switchView('hr'); if (typeof switchHRTab === 'function') switchHRTab('attendance'); } },
+          // Pointage retiré
           { id: 'advances', title: 'Avances sur Salaire', icon: SVG_NAV_ICONS.advance, badge: 'Acomptes', action: () => { switchView('hr'); if (typeof switchHRTab === 'function') switchHRTab('advances'); } },
           { id: 'payslips', title: 'Bulletins de Paie', icon: SVG_NAV_ICONS.payslip, badge: 'OHADA Personnalisable', action: () => { switchView('hr'); if (typeof switchHRTab === 'function') switchHRTab('payslips'); } }
         ]
@@ -24971,11 +25181,11 @@ function getLiveMetricForPole(countKey) {
       },
       hr: {
         title: 'Équipe & Paie OHADA',
-        desc: 'Salariés, pointage et bulletins de paie A4',
+        desc: 'Salariés, acomptes et bulletins de paie A4',
         icon: '👤',
         items: [
           { title: 'Registre des Salariés', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>', bg: 'from-purple-600 to-purple-500', action: () => { switchView('hr'); if (typeof switchHRTab === 'function') switchHRTab('employees'); } },
-          { title: 'Pointage & Présences', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>', bg: 'from-indigo-600 to-indigo-500', action: () => { switchView('hr'); if (typeof switchHRTab === 'function') switchHRTab('attendance'); } },
+          { title: 'Avances sur Salaire', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>', bg: 'from-amber-600 to-amber-500', action: () => { switchView('hr'); if (typeof switchHRTab === 'function') switchHRTab('advances'); } },
           { title: 'Bulletins de Paie A4', iconSvg: '<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><line x1="6" y1="12" x2="18" y2="12"/></svg>', bg: 'from-pink-600 to-rose-500', action: () => { switchView('hr'); if (typeof switchHRTab === 'function') switchHRTab('payslips'); } }
         ]
       },
