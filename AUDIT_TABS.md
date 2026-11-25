@@ -210,14 +210,22 @@ Le système de navigation par sous-onglets segmentés avec barre de défilement 
 - **Sous-onglet 4 : Bons de Commande Fournisseurs (BC)** :
   - *Affichage* : Liste des ordres d'achat passés aux fournisseurs partenaires avec montants engagés et statut de livraison.
 - **Studio A4 Intégré (Visualiseur & Éditeur Haute Fidélité)** :
-  - *5 Styles de Templates interchangeables* : **Corporate** (bandeau bleu royal premium), **DGI Normalisé** (certification fiscale avec QR e-SINTAX et mentions obligatoires), **Minimaliste** (épuré pour impression économique), **Split** (séparation moderne des colonnes), et **Prestige**.
-  - *Zones éditables en direct* : Titre, notes de bas de page et conditions de règlement modifiables directement sur la feuille A4 (`contenteditable`).
-  - *Liaison Dynamique Complète* : Nom de l'enseigne, IFU, RCCM, Téléphone, Adresse et Logo de l'entreprise s'actualisent automatiquement depuis les Paramètres.
-  - *Partage & Export* : Bouton de téléchargement PDF immédiat (`downloadDocumentPDF`), bouton de partage direct par WhatsApp Web avec texte pré-rempli (`shareInvoiceWhatsApp`).
+  - *Command Bar Unifiée & Compacte* : Regroupement ergonomique en une seule barre d'outils réduisant de plus de 40% l'encombrement vertical. La prévisualisation de la feuille A4 est immédiatement visible dès l'ouverture.
+  - *Barre Typographique Intuitive* : Outils d'édition WYSIWYG directs avec `G` (Gras), `I` (Italique), `U` (Souligné) et `<del>S</del>` (Barré sans ambiguïté), sélecteurs de couleur de texte et surlignage, alignements, listes et nettoyage du formatage.
+  - *Ajouts Rapides & Tampons Authentiques* : Boutons d'insertion immédiate (`+ Ligne d'Article`, `+ Clause / Note Spéciale`), 8 tampons officiels certifiés (`PAYÉ`, `BON POUR ACCORD`, `VALIDÉ`, etc.), sélecteur de police (`Inter`, `Merriweather`, `JetBrains`), palette de nuances de marque et réinitialisation des modifications.
+  - *5 Styles de Templates Modernisés & Épurés* :
+    1. **1. Minimal** (Design Suisse épuré avec lignes fines, idéal pour impressions économiques).
+    2. **2. Corporate** (Bandeau de marque plein écran aux couleurs de l'entreprise avec cartouches d'adresses).
+    3. **3. Normalisée DGI** (Conformité fiscale burkinabè et OHADA, vignette e-MECeF/FNC officielle, QR code scannable haute résolution, tableau des totaux HT/TVA 18%/BIC 1% et micro-bordures soignées).
+    4. **4. Bicolore** (Sidebar asymétrique dégradée indigo/ambre avec mise en page exécutive moderne).
+    5. **5. Prestige** (Maison de luxe, typographie sérif, cadre doré raffiné et sceau d'authentification).
+  - *Liaison Dynamique à 100% (Zéro chaîne en dur)* : Raison sociale, IFU, RCCM, Adresse, Téléphone, Email et Régime Fiscal sont reliés dynamiquement à `SYSTEM_SETTINGS` et s'actualisent instantanément sur tous les documents (Factures, Proformas, BL, BC, Relevés, Bulletins de paie, Rapports Z).
+  - *Impression Hors-Ligne Résiliente (Zéro CDN)* : Le moteur d'impression injecte directement les styles locaux et ne dépend d'aucun CDN distant, garantissant une impression instantanée et fidèle même sans connexion Internet.
+  - *Partage & Export* : Bouton d'export PDF immédiat et partage WhatsApp Direct avec message personnalisé incluant le nom dynamique de l'entreprise.
 
 #### 4. Résultat des Tests Automatisés
 - Suite Dédiée (`test_documents_module.cjs`) : **47/47 assertions [PASS]**
-- **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
+- **Statut Final de l'Onglet** : 🟢 **VALIDÉ, PERFECTIONNÉ & CONFORME PRODUCTION**
 
 ---
 

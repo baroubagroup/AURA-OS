@@ -7452,70 +7452,70 @@
     
     <div class="w-full max-w-5xl space-y-4 my-auto">
       
-      <!-- Barre d'outils supérieure (Masquée à l'impression) -->
-      <div class="no-print app-card p-4 space-y-3 shadow-2xl">
+      <!-- STUDIO COMMAND BAR UNIFIÉ & COMPACT (Élimination de l'encombrement vertical) -->
+      <div id="a4-studio-command-bar" class="no-print app-card p-3 space-y-2.5 shadow-2xl border border-[var(--border)] bg-[var(--bg-card)] rounded-2xl">
         
-        <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
-          <!-- Sélecteur de type de document -->
-          <div class="flex items-center gap-1.5 bg-[var(--bg-card-subtle)] p-1 rounded-xl border border-[var(--border)] text-xs font-bold overflow-x-auto custom-scroll subtab-scroll-deck">
-            <button onclick="switchA4DocType('invoice')" id="a4-tab-invoice" class="px-3 py-1.5 rounded-lg bg-[var(--primary)] text-white shadow-sm whitespace-nowrap transition-all">
+        <!-- Étage 1 : Types de Documents & Actions Principales -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[var(--border)] pb-2.5">
+          <!-- Sélecteur de type de document (Royal Blue Scrollbar) -->
+          <div class="flex items-center gap-1.5 bg-[var(--bg-card-subtle)] p-1 rounded-xl border border-[var(--border)] text-xs font-bold overflow-x-auto custom-scroll subtab-scroll-deck flex-1 mr-2">
+            <button onclick="switchA4DocType('invoice')" id="a4-tab-invoice" class="px-3 py-1 rounded-lg bg-[var(--primary)] text-white shadow-xs whitespace-nowrap transition-all">
               📄 Facture A4
             </button>
-            <button onclick="switchA4DocType('proforma')" id="a4-tab-proforma" class="px-3 py-1.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
+            <button onclick="switchA4DocType('proforma')" id="a4-tab-proforma" class="px-3 py-1 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
               📑 Devis Proforma
             </button>
-            <button onclick="switchA4DocType('delivery')" id="a4-tab-delivery" class="px-3 py-1.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
+            <button onclick="switchA4DocType('delivery')" id="a4-tab-delivery" class="px-3 py-1 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
               🚚 Bon de Livraison
             </button>
-            <button onclick="switchA4DocType('order')" id="a4-tab-order" class="px-3 py-1.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
+            <button onclick="switchA4DocType('order')" id="a4-tab-order" class="px-3 py-1 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
               📦 Bon Commande
             </button>
-            <button onclick="switchA4DocType('statement')" id="a4-tab-statement" class="px-3 py-1.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
+            <button onclick="switchA4DocType('statement')" id="a4-tab-statement" class="px-3 py-1 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
               📊 Relevé Client
             </button>
-            <button onclick="switchA4DocType('payslip')" id="a4-tab-payslip" class="px-3 py-1.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
+            <button onclick="switchA4DocType('payslip')" id="a4-tab-payslip" class="px-3 py-1 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
               💵 Fiche de Paie
             </button>
-            <button onclick="switchA4DocType('zreport')" id="a4-tab-zreport" class="px-3 py-1.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
+            <button onclick="switchA4DocType('zreport')" id="a4-tab-zreport" class="px-3 py-1 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-main)] whitespace-nowrap transition-all">
               🔒 Clôture Caisse Z
             </button>
           </div>
 
           <!-- Actions Directes Document -->
-          <div class="flex items-center gap-2">
-            <button onclick="printA4Document()" class="app-btn-primary py-2 px-3 text-xs flex items-center gap-1.5 shadow-md">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
-              <span>Imprimer A4 / Exporter PDF</span>
+          <div class="flex items-center gap-2 shrink-0">
+            <button onclick="printA4Document()" class="app-btn-primary py-1.5 px-3 text-xs flex items-center gap-1.5 shadow-md">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+              <span>Imprimer A4 / PDF</span>
             </button>
-            <button onclick="shareA4WhatsApp()" class="app-btn-secondary py-2 px-3 text-xs text-emerald-600 flex items-center gap-1.5">
+            <button onclick="shareA4WhatsApp()" class="app-btn-secondary py-1.5 px-2.5 text-xs text-emerald-600 flex items-center gap-1.5">
               <span>WhatsApp Direct</span>
             </button>
-            <button onclick="closeDocumentStudio()" class="p-2 text-[var(--text-muted)] hover:text-[var(--text-main)] font-bold text-sm">
+            <button onclick="closeDocumentStudio()" class="w-7 h-7 flex items-center justify-center rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card-subtle)] font-bold text-sm transition-all" title="Fermer le Studio A4">
               ✕
             </button>
           </div>
         </div>
 
-        <!-- SÉLECTEUR VISUEL DES 5 MODÈLES DE FACTURES (Avec Aperçus Miniatures) -->
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pt-1">
-          <div class="flex items-center gap-2 text-xs font-bold text-[var(--text-main)] shrink-0">
-            <svg class="w-4 h-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
-            <span>Modèle Graphique :</span>
+        <!-- Étage 2 : Sélecteur Visuel des 5 Modèles Graphiques (Cartes Épurées) -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+          <div class="flex items-center gap-1.5 text-[11px] font-bold text-[var(--text-muted)] uppercase tracking-wider shrink-0">
+            <svg class="w-3.5 h-3.5 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
+            <span>Modèle :</span>
           </div>
 
-          <div class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs flex-1">
+          <div class="grid grid-cols-2 sm:grid-cols-5 gap-1.5 text-xs flex-1">
             <!-- Modèle 1 -->
-            <button type="button" onclick="switchInvoiceTemplate('minimal')" id="btn-tpl-minimal" class="tpl-card-btn p-2 rounded-xl border-2 border-[var(--primary)] bg-[var(--primary-light)] text-left flex flex-col gap-1 transition-all">
+            <button type="button" onclick="switchInvoiceTemplate('minimal')" id="btn-tpl-minimal" class="tpl-card-btn p-2 rounded-xl border-2 border-[var(--primary)] bg-[var(--primary-light)] text-left flex flex-col gap-1 transition-all shadow-sm">
               <div class="flex items-center justify-between">
                 <span class="font-extrabold text-[11px] text-[var(--text-main)]">1. Minimal</span>
                 <span class="w-2 h-2 rounded-full bg-[var(--primary)]"></span>
               </div>
-              <div class="h-6 rounded bg-white border border-slate-300 p-1 flex flex-col justify-between overflow-hidden">
-                <div class="w-1/3 h-1 bg-slate-700 rounded-xs"></div>
+              <div class="h-3 rounded bg-white border border-slate-300 p-0.5 flex flex-col justify-between overflow-hidden">
+                <div class="w-1/3 h-0.5 bg-slate-700 rounded-xs"></div>
                 <div class="w-full h-0.5 bg-slate-300"></div>
-                <div class="w-2/3 h-0.5 bg-slate-400"></div>
               </div>
-              <span class="text-[9px] text-[var(--text-muted)] leading-tight">Design Suisse Épuré</span>
+              <span class="text-[9px] text-[var(--text-muted)] leading-tight truncate">Suisse Épuré</span>
             </button>
 
             <!-- Modèle 2 -->
@@ -7524,14 +7524,11 @@
                 <span class="font-bold text-[11px] text-[var(--text-main)]">2. Corporate</span>
                 <span class="w-2 h-2 rounded-full bg-teal-500"></span>
               </div>
-              <div class="h-6 rounded bg-white border border-slate-300 flex flex-col overflow-hidden">
-                <div class="w-full h-2.5 bg-teal-600"></div>
-                <div class="p-1 space-y-0.5">
-                  <div class="w-full h-0.5 bg-slate-300"></div>
-                  <div class="w-1/2 h-0.5 bg-teal-500"></div>
-                </div>
+              <div class="h-3 rounded bg-white border border-slate-300 flex flex-col overflow-hidden">
+                <div class="w-full h-1.5 bg-teal-600"></div>
+                <div class="w-2/3 h-0.5 bg-teal-500"></div>
               </div>
-              <span class="text-[9px] text-[var(--text-muted)] leading-tight">Bandeau Marque</span>
+              <span class="text-[9px] text-[var(--text-muted)] leading-tight truncate">Bandeau Marque</span>
             </button>
 
             <!-- Modèle 3 -->
@@ -7540,12 +7537,10 @@
                 <span class="font-bold text-[11px] text-[var(--text-main)]">3. Normalisée</span>
                 <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
               </div>
-              <div class="h-6 rounded bg-white border-2 border-slate-800 p-0.5 flex flex-col justify-between overflow-hidden">
-                <div class="flex justify-between items-center"><div class="w-1/3 h-1 bg-slate-800"></div><div class="w-2 h-2 bg-emerald-600 rounded-xs"></div></div>
-                <div class="w-full h-0.5 bg-slate-600"></div>
-                <div class="w-full h-0.5 bg-slate-400"></div>
+              <div class="h-3 rounded bg-white border border-slate-800 p-0.5 flex flex-col justify-between overflow-hidden">
+                <div class="flex justify-between items-center"><div class="w-1/3 h-0.5 bg-slate-800"></div><div class="w-1.5 h-1.5 bg-emerald-600 rounded-xs"></div></div>
               </div>
-              <span class="text-[9px] text-[var(--text-muted)] leading-tight">Officiel DGI / OHADA</span>
+              <span class="text-[9px] text-[var(--text-muted)] leading-tight truncate">DGI / OHADA</span>
             </button>
 
             <!-- Modèle 4 -->
@@ -7554,14 +7549,11 @@
                 <span class="font-bold text-[11px] text-[var(--text-main)]">4. Bicolore</span>
                 <span class="w-2 h-2 rounded-full bg-indigo-600"></span>
               </div>
-              <div class="h-6 rounded bg-white border border-slate-300 flex overflow-hidden">
+              <div class="h-3 rounded bg-white border border-slate-300 flex overflow-hidden">
                 <div class="w-1/3 h-full bg-slate-900"></div>
-                <div class="w-2/3 p-1 space-y-0.5">
-                  <div class="w-3/4 h-1 bg-indigo-500 rounded-xs"></div>
-                  <div class="w-full h-0.5 bg-slate-300"></div>
-                </div>
+                <div class="w-2/3 p-0.5"><div class="w-3/4 h-0.5 bg-indigo-500"></div></div>
               </div>
-              <span class="text-[9px] text-[var(--text-muted)] leading-tight">Sidebar Asymétrique</span>
+              <span class="text-[9px] text-[var(--text-muted)] leading-tight truncate">Asymétrique</span>
             </button>
 
             <!-- Modèle 5 -->
@@ -7570,118 +7562,94 @@
                 <span class="font-bold text-[11px] text-[var(--text-main)]">5. Prestige</span>
                 <span class="w-2 h-2 rounded-full bg-amber-600"></span>
               </div>
-              <div class="h-6 rounded bg-white border border-amber-600/40 p-1 flex flex-col justify-between items-center overflow-hidden">
-                <div class="w-1/2 h-1 bg-amber-700 rounded-xs"></div>
+              <div class="h-3 rounded bg-white border border-amber-600/40 p-0.5 flex flex-col justify-between items-center overflow-hidden">
+                <div class="w-1/2 h-0.5 bg-amber-700"></div>
                 <div class="w-3/4 h-0.5 bg-amber-600"></div>
-                <div class="w-1/4 h-0.5 bg-slate-400"></div>
               </div>
-              <span class="text-[9px] text-[var(--text-muted)] leading-tight">Luxe & Sérif Doré</span>
+              <span class="text-[9px] text-[var(--text-muted)] leading-tight truncate">Luxe & Sérif</span>
             </button>
           </div>
         </div>
 
-      </div>
-
-      <!-- ========================================================
-           BARRE D'OUTILS ÉDITEUR WORD WYSIWYG & PERSONNALISATION PRO
-           ======================================================== -->
-      <div id="a4-word-toolbar" class="no-print app-card p-3 space-y-3 shadow-xl border border-[var(--border)] bg-[var(--bg-card)]">
-        
-        <!-- Ligne 1 : Barre d'édition Typographique Avancée -->
-        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-[var(--border)] pb-2.5">
+        <!-- Étage 3 : Boîte à Outils Typo & Personnalisation Word WYSIWYG (Compacte) -->
+        <div id="a4-word-toolbar" class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-[var(--border)] text-xs">
           
-          <div class="flex items-center gap-2">
-            <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-blue-500/10 text-blue-600 font-extrabold text-[11px]">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-              <span>Éditeur Document Actif</span>
-            </span>
-            <span class="text-[11px] text-[var(--text-muted)] hidden sm:inline">Cliquez n'importe où sur le document pour modifier ou taper directement du texte.</span>
-          </div>
-
-          <!-- Outils de Formatage Typographique Pro -->
+          <!-- Outils Typographiques -->
           <div class="flex flex-wrap items-center gap-1">
-            <button type="button" onclick="formatDocText('bold')" class="word-tool-btn font-black" title="Gras (Ctrl+B)">
+            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-lg bg-blue-500/10 text-blue-600 font-extrabold text-[10px] mr-1">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+              <span>Éditeur Actif</span>
+            </span>
+
+            <button type="button" onclick="formatDocText('bold')" class="word-tool-btn font-black px-2 py-1" title="Gras (Ctrl+B)">
               <strong>G</strong>
             </button>
-            <button type="button" onclick="formatDocText('italic')" class="word-tool-btn italic" title="Italique (Ctrl+I)">
+            <button type="button" onclick="formatDocText('italic')" class="word-tool-btn italic px-2 py-1" title="Italique (Ctrl+I)">
               <em>I</em>
             </button>
-            <button type="button" onclick="formatDocText('underline')" class="word-tool-btn underline" title="Souligné (Ctrl+U)">
+            <button type="button" onclick="formatDocText('underline')" class="word-tool-btn underline px-2 py-1" title="Souligné (Ctrl+U)">
               <u>S</u>
             </button>
-            <button type="button" onclick="formatDocText('strikeThrough')" class="word-tool-btn line-through" title="Barré">
-              <s>B</s>
+            <button type="button" onclick="formatDocText('strikeThrough')" class="word-tool-btn px-2 py-1" title="Barré">
+              <del class="font-bold">S</del>
             </button>
 
             <span class="w-[1px] h-4 bg-[var(--border)] mx-1"></span>
 
             <!-- Couleurs de Texte -->
-            <div class="flex items-center gap-1 bg-[var(--bg-card-subtle)] p-1 rounded-lg border border-[var(--border)]" title="Couleur de texte">
-              <span class="text-[10px] font-bold text-[var(--text-muted)] px-1">Texte:</span>
+            <div class="flex items-center gap-1 bg-[var(--bg-card-subtle)] px-1.5 py-0.5 rounded-lg border border-[var(--border)]" title="Couleur de texte">
+              <span class="text-[9px] font-bold text-[var(--text-muted)]">Txt:</span>
               <button type="button" onclick="formatDocTextColor('#0f172a')" class="color-swatch-btn bg-slate-900" title="Noir"></button>
               <button type="button" onclick="formatDocTextColor('#2563eb')" class="color-swatch-btn bg-blue-600" title="Bleu"></button>
               <button type="button" onclick="formatDocTextColor('#059669')" class="color-swatch-btn bg-emerald-600" title="Vert"></button>
               <button type="button" onclick="formatDocTextColor('#dc2626')" class="color-swatch-btn bg-rose-600" title="Rouge"></button>
-              <input type="color" onchange="formatDocTextColor(this.value)" class="w-5 h-5 rounded cursor-pointer border-0 bg-transparent" title="Couleur personnalisée">
+              <input type="color" onchange="formatDocTextColor(this.value)" class="w-4 h-4 rounded cursor-pointer border-0 bg-transparent" title="Couleur personnalisée">
             </div>
 
             <!-- Surlignage -->
-            <div class="flex items-center gap-1 bg-[var(--bg-card-subtle)] p-1 rounded-lg border border-[var(--border)]" title="Surlignage">
-              <span class="text-[10px] font-bold text-[var(--text-muted)] px-1">Surligner:</span>
+            <div class="flex items-center gap-1 bg-[var(--bg-card-subtle)] px-1.5 py-0.5 rounded-lg border border-[var(--border)]" title="Surlignage">
+              <span class="text-[9px] font-bold text-[var(--text-muted)]">Surl:</span>
               <button type="button" onclick="formatDocHighlight('#fef08a')" class="color-swatch-btn bg-yellow-200" title="Jaune"></button>
               <button type="button" onclick="formatDocHighlight('#bbf7d0')" class="color-swatch-btn bg-emerald-200" title="Vert"></button>
               <button type="button" onclick="formatDocHighlight('#fed7aa')" class="color-swatch-btn bg-orange-200" title="Orange"></button>
-              <button type="button" onclick="formatDocHighlight('transparent')" class="word-tool-btn text-[10px] py-0 px-1" title="Effacer surlignage">✕</button>
+              <button type="button" onclick="formatDocHighlight('transparent')" class="word-tool-btn text-[9px] py-0 px-1" title="Effacer surlignage">✕</button>
             </div>
 
             <span class="w-[1px] h-4 bg-[var(--border)] mx-1"></span>
 
             <!-- Alignements -->
-            <button type="button" onclick="formatDocText('justifyLeft')" class="word-tool-btn" title="Aligner à gauche">
+            <button type="button" onclick="formatDocText('justifyLeft')" class="word-tool-btn p-1" title="Aligner à gauche">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h10M4 18h14"></path></svg>
             </button>
-            <button type="button" onclick="formatDocText('justifyCenter')" class="word-tool-btn" title="Centrer">
+            <button type="button" onclick="formatDocText('justifyCenter')" class="word-tool-btn p-1" title="Centrer">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M7 12h10M5 18h14"></path></svg>
             </button>
-            <button type="button" onclick="formatDocText('justifyRight')" class="word-tool-btn" title="Aligner à droite">
+            <button type="button" onclick="formatDocText('justifyRight')" class="word-tool-btn p-1" title="Aligner à droite">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M10 12h10M6 18h14"></path></svg>
             </button>
-            <button type="button" onclick="formatDocText('insertUnorderedList')" class="word-tool-btn" title="Liste à puces">
+            <button type="button" onclick="formatDocText('insertUnorderedList')" class="word-tool-btn p-1" title="Liste à puces">
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h.01M8 6h12M4 12h.01M8 12h12M4 18h.01M8 18h12"></path></svg>
             </button>
-            <button type="button" onclick="formatDocText('insertOrderedList')" class="word-tool-btn" title="Liste numérotée">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 6h13M7 12h13M7 18h13M3 6h.01M3 12h.01M3 18h.01"></path></svg>
-            </button>
-            <button type="button" onclick="formatDocText('removeFormat')" class="word-tool-btn text-rose-500" title="Effacer tout formatage">
-              <span class="text-[10px]">Nettoyer</span>
+            <button type="button" onclick="formatDocText('removeFormat')" class="word-tool-btn text-rose-500 py-0.5 px-1.5" title="Effacer tout formatage">
+              <span class="text-[9px]">Nettoyer</span>
             </button>
           </div>
 
-        </div>
-
-        <!-- Ligne 2 : Insertions Rapides, Tampons Officiels & Personnalisation du Modèle -->
-        <div class="flex flex-wrap items-center justify-between gap-3 text-xs">
-          
-          <!-- Insertions d'éléments dans le document -->
+          <!-- Insertions Rapides, Police & Nuance -->
           <div class="flex flex-wrap items-center gap-1.5">
-            <span class="font-bold text-[var(--text-main)] text-[11px] flex items-center gap-1">
-              <svg class="w-3.5 h-3.5 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
-              <span>Ajouts Rapides :</span>
-            </span>
-
-            <button type="button" onclick="addCustomLineToDocTable()" class="word-tool-btn text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border-emerald-300">
-              <span>+ Ligne d'Article</span>
+            <button type="button" onclick="addCustomLineToDocTable()" class="word-tool-btn text-emerald-700 bg-emerald-50 hover:bg-emerald-100 border-emerald-300 py-1 px-2">
+              <span>+ Ligne</span>
             </button>
 
-            <button type="button" onclick="insertCustomClauseToDoc()" class="word-tool-btn text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border-indigo-300">
-              <span>+ Clause / Note Spéciale</span>
+            <button type="button" onclick="insertCustomClauseToDoc()" class="word-tool-btn text-indigo-700 bg-indigo-50 hover:bg-indigo-100 border-indigo-300 py-1 px-2">
+              <span>+ Clause</span>
             </button>
 
-            <!-- Tampons & Cachets Officiels Authentiques -->
-            <div class="flex items-center gap-1 bg-[var(--bg-card-subtle)] p-1 rounded-lg border border-[var(--border)]">
-              <span class="text-[10px] font-bold text-[var(--text-muted)]">Tampon :</span>
-              <select onchange="if(this.value){ insertQuickStamp(this.value); this.value=''; }" class="app-input text-[11px] py-1 px-2 font-bold cursor-pointer">
-                <option value="">Sélectionner un tampon officiel...</option>
+            <!-- Tampons Officiels -->
+            <div class="flex items-center gap-1 bg-[var(--bg-card-subtle)] px-1.5 py-0.5 rounded-lg border border-[var(--border)]">
+              <span class="text-[9px] font-bold text-[var(--text-muted)]">Tampon:</span>
+              <select onchange="if(this.value){ insertQuickStamp(this.value); this.value=''; }" class="app-input text-[10px] py-0.5 px-1.5 font-bold cursor-pointer">
+                <option value="">Sélectionner...</option>
                 <option value="PAYÉ">★ PAYÉ / RÉGLÉ (Vert)</option>
                 <option value="BON POUR ACCORD">★ BON POUR ACCORD (Bleu)</option>
                 <option value="VALIDÉ">★ VALIDÉ / CONFORME (Émeraude)</option>
@@ -7692,39 +7660,28 @@
                 <option value="CONFIDENTIEL">★ USAGE INTERNE (Ardoise)</option>
               </select>
             </div>
-          </div>
 
-          <!-- Personnalisation directe de Couleur Accent & Police -->
-          <div class="flex flex-wrap items-center gap-2">
-            
             <!-- Choix de Police -->
-            <div class="flex items-center gap-1">
-              <span class="text-[10px] font-bold text-[var(--text-muted)]">Police :</span>
-              <select onchange="changeA4FontFamily(this.value)" id="a4-font-select" class="app-input text-[11px] py-1 px-2 font-semibold">
-                <option value="font-sans">Inter / Moderne Sans</option>
-                <option value="font-serif">Merriweather / Sérif Prestige</option>
-                <option value="font-mono">JetBrains / Monospace Tech</option>
-              </select>
-            </div>
+            <select onchange="changeA4FontFamily(this.value)" id="a4-font-select" class="app-input text-[10px] py-0.5 px-1.5 font-semibold">
+              <option value="font-sans">Inter / Moderne Sans</option>
+              <option value="font-serif">Merriweather / Sérif Prestige</option>
+              <option value="font-mono">JetBrains / Monospace Tech</option>
+            </select>
 
             <!-- Choix de Nuance Brand -->
-            <div class="flex items-center gap-1 bg-[var(--bg-card-subtle)] p-1 rounded-lg border border-[var(--border)]" title="Couleur de marque du document">
-              <span class="text-[10px] font-bold text-[var(--text-muted)] px-1">Nuance :</span>
+            <div class="flex items-center gap-1 bg-[var(--bg-card-subtle)] px-1.5 py-0.5 rounded-lg border border-[var(--border)]" title="Nuance de marque">
               <button type="button" onclick="changeA4BrandColor('#0D9488')" class="color-swatch-btn bg-teal-600" title="Émeraude"></button>
               <button type="button" onclick="changeA4BrandColor('#2563EB')" class="color-swatch-btn bg-blue-600" title="Cobalt"></button>
               <button type="button" onclick="changeA4BrandColor('#4F46E5')" class="color-swatch-btn bg-indigo-600" title="Indigo"></button>
               <button type="button" onclick="changeA4BrandColor('#7C3AED')" class="color-swatch-btn bg-purple-600" title="Pourpre"></button>
               <button type="button" onclick="changeA4BrandColor('#BE123C')" class="color-swatch-btn bg-rose-700" title="Bordeaux"></button>
               <button type="button" onclick="changeA4BrandColor('#B45309')" class="color-swatch-btn bg-amber-600" title="Or"></button>
-              <button type="button" onclick="changeA4BrandColor('#334155')" class="color-swatch-btn bg-slate-700" title="Graphite"></button>
             </div>
 
-            <!-- Bouton Réinitialisation Données Initiales -->
-            <button type="button" onclick="resetA4DocEdits()" class="word-tool-btn text-slate-600 hover:text-slate-900" title="Restaurer les données originales de la base">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-              <span>Restaurer Données</span>
+            <!-- Bouton Réinitialisation Données -->
+            <button type="button" onclick="resetA4DocEdits()" class="word-tool-btn text-slate-600 hover:text-slate-900 py-1 px-1.5" title="Restaurer les données originales">
+              <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
             </button>
-
           </div>
 
         </div>
@@ -11116,11 +11073,33 @@ function printZReportPreview(customShift = null) {
       const printWin = window.open('', '_blank', 'width=950,height=800');
       if (printWin) {
         const ref = (window.currentActiveDocument && window.currentActiveDocument.ref) ? window.currentActiveDocument.ref : 'Document-A4';
-        const scriptPart = '<' + 'script src="https://cdn.tailwindcss.com"><' + '/script><' + 'script>window.onload = function() { setTimeout(function() { window.print(); window.close(); }, 400); };<' + '/script>';
+        
+        // Collecter tous les styles existants dans le document pour une impression 100% hors-ligne (zéro dépendance CDN externe)
+        let localStyles = '';
+        try {
+          const styleNodes = document.querySelectorAll('style');
+          styleNodes.forEach(node => {
+            localStyles += node.outerHTML + '\n';
+          });
+        } catch (e) {
+          console.warn('Erreur lecture styles locaux pour impression:', e);
+        }
+
+        const printCSS = `
+          <style>
+            @page { size: A4 portrait; margin: 8mm; }
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+            body { font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #ffffff !important; color: #0f172a !important; margin: 0; padding: 4mm; }
+            .no-print { display: none !important; }
+            table { border-collapse: collapse; width: 100%; }
+            .a4-sheet-canvas { box-shadow: none !important; border: none !important; min-height: auto !important; }
+          </style>
+        `;
+
+        const scriptPart = '<' + 'script>window.addEventListener("DOMContentLoaded", function() { setTimeout(function() { window.print(); window.close(); }, 350); });<' + '/script>';
         printWin.document.write(
-          '<!DOCTYPE html><html><head><title>' + ref + ' - Impression A4 Officielle</title>' +
-          '<style>@page { size: A4; margin: 8mm; } body { font-family: system-ui, -apple-system, sans-serif; background: #fff; color: #000; margin: 0; padding: 12px; } table { border-collapse: collapse; } </style>' +
-          '</head><body>' + sheet.innerHTML + scriptPart + '</body></html>'
+          '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + ref + ' - Impression A4 Officielle</title>' +
+          localStyles + printCSS + '</head><body>' + sheet.innerHTML + scriptPart + '</body></html>'
         );
         printWin.document.close();
       } else {
@@ -11134,6 +11113,7 @@ function printZReportPreview(customShift = null) {
       const clientName = inv ? inv.client : 'Client AURA';
       const total = inv ? inv.totalTTC.toLocaleString('fr-FR') : '0';
       const ref = inv ? inv.id : 'FACT-2026';
+      const company = (window.SYSTEM_SETTINGS && window.SYSTEM_SETTINGS.storeName && window.SYSTEM_SETTINGS.storeName.trim()) ? window.SYSTEM_SETTINGS.storeName.trim() : 'AURA Commerce SARL';
       
       let phone = '+22670000000';
       if (window.CRM_CLIENTS_DATA && inv) {
@@ -11141,7 +11121,7 @@ function printZReportPreview(customShift = null) {
         if (c && c.phone) phone = c.phone;
       }
       const cleanPhone = phone.replace(/[^0-9]/g, '');
-      const msg = encodeURIComponent(`Bonjour ${clientName}, voici votre Facture Définitive N° ${ref} d'un montant de ${total} F CFA émise par AURA Commerce SARL. Merci pour votre confiance !`);
+      const msg = encodeURIComponent(`Bonjour ${clientName}, voici votre Facture Définitive N° ${ref} d'un montant de ${total} F CFA émise par ${company}. Merci pour votre confiance !`);
       window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
       if (typeof showToast === 'function') showToast(`Lien WhatsApp ouvert pour ${ref} (${clientName})`, 'success');
     }
@@ -11153,10 +11133,12 @@ function printZReportPreview(customShift = null) {
       const ref = doc.ref || 'DOC-A4';
       const typeLabels = { invoice: 'Facture Définitive', proforma: 'Facture Proforma', delivery: 'Bon de Livraison', order: 'Bon de Commande' };
       const typeLabel = typeLabels[currentA4DocType] || 'Document Commercial';
+      const company = (window.SYSTEM_SETTINGS && window.SYSTEM_SETTINGS.storeName && window.SYSTEM_SETTINGS.storeName.trim()) ? window.SYSTEM_SETTINGS.storeName.trim() : 'AURA Commerce SARL';
+      const city = (window.SYSTEM_SETTINGS && window.SYSTEM_SETTINGS.address && window.SYSTEM_SETTINGS.address.includes(',')) ? window.SYSTEM_SETTINGS.address.split(',').pop().trim() : 'Ouagadougou';
       
       let phone = (doc.client && doc.client.phone) ? doc.client.phone : '+22670000000';
       const cleanPhone = phone.replace(/[^0-9]/g, '');
-      const msg = encodeURIComponent(`Bonjour ${clientName}, veuillez trouver ci-joint votre ${typeLabel} N° ${ref} émise par AURA Commerce SARL (Ouagadougou).`);
+      const msg = encodeURIComponent(`Bonjour ${clientName}, veuillez trouver ci-joint votre ${typeLabel} N° ${ref} émise par ${company} (${city}).`);
       window.open(`https://wa.me/${cleanPhone}?text=${msg}`, '_blank');
       if (typeof showToast === 'function') showToast(`Lien WhatsApp ouvert pour le document ${ref}`, 'success');
     }
@@ -15732,6 +15714,8 @@ function renderA4DocumentView() {
   const companyAddress = (cfg.address && cfg.address.trim()) ? cfg.address.trim() : "Avenue Kwame N'Krumah, Ouagadougou, Burkina Faso";
   const companyPhone = (cfg.phone && cfg.phone.trim()) ? cfg.phone.trim() : '+226 25 30 00 00';
   const companyWhatsapp = (cfg.whatsapp && cfg.whatsapp.trim()) ? cfg.whatsapp.trim() : '+226 70 00 00 00';
+  const companyEmail = (cfg.email && cfg.email.trim()) ? cfg.email.trim() : 'contact@auragroup.bf';
+  const companyRegime = (cfg.taxRegime && cfg.taxRegime.trim()) ? cfg.taxRegime.trim() : "Réel Normal d'Imposition (RNI)";
   const companyCurrency = (cfg.currency && cfg.currency.trim()) ? cfg.currency.trim() : 'XOF';
 
   const rawTpl = currentInvoiceTemplate || (window.SYSTEM_SETTINGS && window.SYSTEM_SETTINGS.invoiceTemplate) || 'minimal';
@@ -15917,7 +15901,7 @@ function renderA4DocumentView() {
           <div class="text-right text-xs text-slate-500 font-mono space-y-0.5">
             <span class="inline-block px-2.5 py-1 rounded ${docMeta.badgeColor} font-black text-[10px] uppercase tracking-wider">${docMeta.badge}</span>
             <div>Service Comptabilité Clients & Recouvrement</div>
-            <div>Ouagadougou, Burkina Faso</div>
+            <div>${companyAddress}</div>
           </div>
         </div>
 
@@ -15928,7 +15912,7 @@ function renderA4DocumentView() {
             <div class="font-black text-slate-900 text-sm a4-editable-zone" contenteditable="true">${cl.name}</div>
             <div class="text-slate-600 a4-editable-zone" contenteditable="true">Attn : ${cl.attn || 'Direction Financière & Comptabilité'}</div>
             <div class="text-slate-600 a4-editable-zone" contenteditable="true">Tél : ${cl.phone} | Ville : ${cl.address || 'Ouagadougou'}</div>
-            <div class="text-slate-500 font-mono text-[10px]">IFU : ${cl.ifu || '00124856019M'} | RCCM : ${cl.rccm || 'BF-OUA-2022-B-412'}</div>
+            <div class="text-slate-500 font-mono text-[10px]">IFU : ${cl.ifu || '00045812934K'} | RCCM : ${cl.rccm || 'BF-OUA-2022-B-412'}</div>
           </div>
 
           <div class="p-4 bg-blue-50/60 rounded-xl border border-blue-200 space-y-2">
@@ -16038,9 +16022,9 @@ function renderA4DocumentView() {
           </div>
           <div class="text-right text-xs font-mono space-y-0.5">
             <span class="inline-block px-2.5 py-1 rounded bg-purple-900 text-white font-black text-[10px] uppercase tracking-wider">OFFICIEL RH</span>
-            <div>IFU : 00124856019M</div>
+            <div>IFU : ${companyIfu}</div>
             <div>N° CNSS Employeur : 104820-A</div>
-            <div>Ouagadougou, Burkina Faso</div>
+            <div>${companyAddress}</div>
           </div>
         </div>
 
@@ -16290,8 +16274,8 @@ function renderA4DocumentView() {
           </div>
           <div class="text-right text-xs text-slate-500 font-mono space-y-0.5">
             <span class="inline-block px-2.5 py-1 rounded ${docMeta.badgeColor} font-black text-[10px] uppercase tracking-wider">${docMeta.badge}</span>
-            <div>IFU : 00124856019M | RCCM : BF-OUA-01-2023-B12</div>
-            <div>Ouagadougou, Burkina Faso</div>
+            <div>IFU : ${companyIfu} | RCCM : ${companyRccm}</div>
+            <div>${companyAddress}</div>
           </div>
         </div>
 
@@ -16299,9 +16283,9 @@ function renderA4DocumentView() {
         <div class="grid grid-cols-2 gap-8 text-xs py-1">
           <div>
             <div class="font-mono text-[10px] uppercase text-slate-400 mb-1">Origine Expédition</div>
-            <div class="font-bold text-slate-800">Dépôt Central AURA — Magasin Principal</div>
-            <div class="text-slate-600">Zone Industrielle Gounghin, Secteur 4</div>
-            <div class="text-slate-600">Contact Magasin : +226 25 30 11 22</div>
+            <div class="font-bold text-slate-800">Dépôt Central ${companyName} — Magasin Principal</div>
+            <div class="text-slate-600">${companyAddress}</div>
+            <div class="text-slate-600">Contact Magasin : ${companyPhone}</div>
           </div>
           <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
             <div class="font-mono text-[10px] uppercase text-slate-400 mb-1">Destinataire / Client Livré</div>
@@ -16425,7 +16409,7 @@ function renderA4DocumentView() {
           <div class="text-right text-xs text-slate-500 font-mono space-y-0.5">
             <span class="inline-block px-2.5 py-1 rounded ${docMeta.badgeColor} font-black text-[10px] uppercase tracking-wider">${docMeta.badge}</span>
             <div>Service Achats & Approvisionnements</div>
-            <div>Ouagadougou, Burkina Faso</div>
+            <div>${companyAddress}</div>
           </div>
         </div>
 
@@ -16433,10 +16417,10 @@ function renderA4DocumentView() {
         <div class="grid grid-cols-2 gap-8 text-xs py-1">
           <div>
             <div class="font-mono text-[10px] uppercase text-slate-400 mb-1">Acheteur Émetteur</div>
-            <div class="font-bold text-slate-800">AURA Commerce & Quincaillerie Centrale</div>
-            <div class="text-slate-600">Avenue de la Nation, Secteur 4</div>
-            <div class="text-slate-600">+226 25 30 11 22 | achats@auragroup.bf</div>
-            <div class="text-slate-500 text-[10px] mt-1 font-mono">IFU : 00124856019M</div>
+            <div class="font-bold text-slate-800">${companyName}</div>
+            <div class="text-slate-600">${companyAddress}</div>
+            <div class="text-slate-600">${companyPhone} | ${companyEmail}</div>
+            <div class="text-slate-500 text-[10px] mt-1 font-mono">IFU : ${companyIfu}</div>
           </div>
           <div class="bg-amber-50/60 p-4 rounded-lg border border-amber-200">
             <div class="font-mono text-[10px] uppercase text-amber-800 font-bold mb-1">FOURNISSEUR DESTINATAIRE</div>
@@ -16451,7 +16435,7 @@ function renderA4DocumentView() {
         <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 grid grid-cols-3 gap-3 text-xs font-mono">
           <div>
             <span class="text-[9px] text-slate-400 block uppercase">Lieu de Livraison :</span>
-            <span class="font-bold text-slate-800 a4-editable-zone" contenteditable="true">Dépôt Central AURA (Gounghin)</span>
+            <span class="font-bold text-slate-800 a4-editable-zone" contenteditable="true">Dépôt Central ${companyName}</span>
           </div>
           <div>
             <span class="text-[9px] text-slate-400 block uppercase">Délai Impératif :</span>
@@ -16564,7 +16548,7 @@ function renderA4DocumentView() {
               ⏱️ OFFRE COMMERCIALE 30 JOURS
             </span>
             <div class="text-indigo-800 font-bold a4-editable-zone" contenteditable="true">Valable jusqu'au ${doc.expiryDate || '30 jours'}</div>
-            <div>Ouagadougou, Burkina Faso</div>
+            <div>${companyAddress}</div>
           </div>
         </div>
 
@@ -16572,10 +16556,10 @@ function renderA4DocumentView() {
         <div class="grid grid-cols-2 gap-8 text-xs py-1">
           <div>
             <div class="font-mono text-[10px] uppercase text-slate-400 mb-1">Fournisseur Soumissionnaire</div>
-            <div class="font-bold text-slate-800">AURA Commerce & Quincaillerie Centrale</div>
-            <div class="text-slate-600">Avenue de la Nation, Secteur 4</div>
-            <div class="text-slate-600">+226 25 30 11 22 | commercial@auragroup.bf</div>
-            <div class="text-slate-500 text-[10px] mt-1 font-mono">IFU : 00124856019M | RCCM : BF-OUA-01-2023-B12</div>
+            <div class="font-bold text-slate-800">${companyName}</div>
+            <div class="text-slate-600">${companyAddress}</div>
+            <div class="text-slate-600">${companyPhone} | ${companyEmail}</div>
+            <div class="text-slate-500 text-[10px] mt-1 font-mono">IFU : ${companyIfu} | RCCM : ${companyRccm}</div>
           </div>
           <div class="bg-indigo-50/50 p-4 rounded-lg border border-indigo-100">
             <div class="font-mono text-[10px] uppercase text-indigo-800 font-bold mb-1">Client Destinataire de l'Offre</div>
@@ -16710,10 +16694,10 @@ function renderA4DocumentView() {
         <div class="grid grid-cols-2 gap-6 text-xs">
           <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
             <span class="text-[10px] font-bold uppercase tracking-wider block" style="color: ${brandColor};">Société Émettrice :</span>
-            <div class="font-black text-slate-900 text-sm">AURA Commerce & Quincaillerie Centrale</div>
-            <div class="text-slate-600">Avenue de la Nation, Secteur 4 — Ouagadougou</div>
-            <div class="text-slate-600">Tél : +226 25 30 11 22 | facturation@auragroup.bf</div>
-            <div class="text-slate-500 font-mono text-[10px] pt-1">IFU : 00124856019M | RCCM : BF-OUA-01-2023-B12</div>
+            <div class="font-black text-slate-900 text-sm">${companyName}</div>
+            <div class="text-slate-600">${companyAddress}</div>
+            <div class="text-slate-600">Tél : ${companyPhone} | ${companyEmail}</div>
+            <div class="text-slate-500 font-mono text-[10px] pt-1">IFU : ${companyIfu} | RCCM : ${companyRccm}</div>
           </div>
 
           <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-1">
@@ -16828,9 +16812,9 @@ function renderA4DocumentView() {
           </div>
         </div>
         <div class="text-right text-xs font-mono space-y-0.5">
-          <div class="font-bold text-emerald-900">IFU : 00124856019M</div>
-          <div>RCCM : BF-OUA-01-2023-B12</div>
-          <div class="text-[10px] text-slate-600">Régime : Réel Normal d'Imposition (RNI)</div>
+          <div class="font-bold text-emerald-900">IFU : ${companyIfu}</div>
+          <div>RCCM : ${companyRccm}</div>
+          <div class="text-[10px] text-slate-600">Régime : ${companyRegime}</div>
         </div>
       </div>
 
@@ -16838,11 +16822,11 @@ function renderA4DocumentView() {
       <div class="grid grid-cols-2 gap-6 text-xs py-1">
         <div class="p-3.5 bg-emerald-50/40 border border-emerald-200 rounded-lg">
           <div class="font-mono text-[10px] uppercase text-emerald-900 font-bold mb-1">Vendeur Prestataire :</div>
-          <div class="font-black text-slate-900 text-sm">AURA COMMERCE SARL</div>
-          <div class="text-slate-700">Avenue de la Nation, Secteur 4 — Ouagadougou</div>
-          <div class="text-slate-600 font-mono text-[11px]">Tél : +226 25 30 11 22</div>
+          <div class="font-black text-slate-900 text-sm">${companyName}</div>
+          <div class="text-slate-700">${companyAddress}</div>
+          <div class="text-slate-600 font-mono text-[11px]">Tél : ${companyPhone}</div>
         </div>
-        <div class="p-3.5 bg-white border-2 border-emerald-800 rounded-lg shadow-xs">
+        <div class="p-3.5 bg-white border border-emerald-800/40 rounded-lg shadow-xs">
           <div class="font-mono text-[10px] uppercase text-emerald-900 font-bold mb-1">Doit / Client Facturé :</div>
           <div class="font-black text-slate-900 text-sm a4-editable-zone" contenteditable="true">${doc.client.name}</div>
           <div class="text-slate-700 a4-editable-zone" contenteditable="true">Attn : ${doc.client.attn || 'Direction Financière'}</div>
@@ -16871,7 +16855,7 @@ function renderA4DocumentView() {
 
       <!-- Totaux DGI -->
       <div class="flex justify-end text-xs">
-        <div class="w-80 space-y-1.5 font-mono bg-white p-4 rounded-xl border-2 border-emerald-800">
+        <div class="w-80 space-y-1.5 font-mono bg-white p-4 rounded-xl border border-emerald-800/40 shadow-xs">
           <div class="flex justify-between text-slate-700">
             <span>Montant Brut Hors Taxes :</span>
             <span class="font-bold">${subtotalHT.toLocaleString('fr-FR')} F</span>
@@ -16886,9 +16870,9 @@ function renderA4DocumentView() {
             <span>Prélèvement BIC/IS (1%) :</span>
             <span>${bic1.toLocaleString('fr-FR')} F</span>
           </div>` : ''}
-          <div class="flex justify-between text-base font-black border-t-2 border-emerald-800 pt-2 text-emerald-950 font-serif">
+          <div class="flex justify-between text-sm font-black border-t-2 border-emerald-800 pt-2 text-emerald-950 font-sans">
             <span>TOTAL NET TTC :</span>
-            <span class="font-bold font-num">${totalTTC.toLocaleString('fr-FR')} F CFA</span>
+            <span class="font-extrabold font-num text-emerald-900">${totalTTC.toLocaleString('fr-FR')} F CFA</span>
           </div>
         </div>
       </div>
@@ -16900,14 +16884,14 @@ function renderA4DocumentView() {
       <div id="doc-stamps-container" class="flex flex-wrap items-center gap-3 my-2 justify-end empty:hidden"></div>
 
       <!-- Vignette Fiscale Officielle e-MECeF & QR Code DGI -->
-      <div class="p-3.5 bg-white border-2 border-emerald-900 rounded-xl flex items-center justify-between gap-4 font-mono text-[10px]">
+      <div class="p-3.5 bg-white border border-emerald-800/50 rounded-xl flex items-center justify-between gap-4 font-mono text-[10px] shadow-xs">
         <div class="space-y-1">
           <div class="flex items-center gap-2">
             <span class="px-2 py-0.5 rounded bg-emerald-900 text-white font-bold tracking-widest uppercase text-[9px]">VIGNETTE FISCALE e-MECeF</span>
             <strong class="text-emerald-950 font-sans text-xs">DIRECTION GÉNÉRALE DES IMPÔTS (BURKINA FASO)</strong>
           </div>
-          <div>NIM (Machine Certifiée) : <strong class="text-slate-900">MC-014285-01</strong></div>
-          <div>Compteur Fiscal Unique : <strong class="text-emerald-900">FISC-2026-00482/MECeF</strong></div>
+          <div>NIM (Machine Certifiée) : <strong class="text-slate-900 font-bold">MC-014285-01</strong></div>
+          <div>Compteur Fiscal Unique : <strong class="text-emerald-900 font-bold">FISC-2026-00482/MECeF</strong></div>
           <div class="text-[9px] text-slate-600 font-sans italic">Facture certifiée conforme aux dispositions de l'article 562 du Code Général des Impôts.</div>
         </div>
         <div class="flex flex-col items-center shrink-0">
@@ -16956,19 +16940,19 @@ function renderA4DocumentView() {
             <rect x="66" y="80" width="6" height="10" fill="black"/>
             <rect x="76" y="84" width="12" height="6" fill="black"/>
           </svg>
-          <span class="text-[8px] text-emerald-900 font-bold uppercase mt-1">Vérification DGI</span>
+          <span class="text-[8px] text-emerald-900 font-bold uppercase mt-1">VÉRIFICATION DGI</span>
         </div>
       </div>
 
       <!-- Signature et Cachet Officiel DGI -->
-      <div class="flex items-center justify-between pt-4 border-t-2 border-emerald-800 text-xs">
+      <div class="flex items-center justify-between pt-4 border-t border-emerald-800/40 text-xs">
         <div>
           <div class="font-bold text-slate-800 uppercase text-[10px]">Pour la Direction Commerciale & Comptable</div>
           <div class="text-[10px] text-slate-500">Visa de conformité fiscale DGI / OHADA</div>
           <div class="font-serif italic text-slate-600 mt-2">I. Sawadogo</div>
         </div>
         <div class="text-right flex flex-col items-end">
-          <div class="font-bold text-slate-800 uppercase text-[10px] mb-1">Cachet Certifié AURA Commerce SARL</div>
+          <div class="font-bold text-slate-800 uppercase text-[10px] mb-1">Cachet Officiel — ${companyName}</div>
           ${stampHtml}
         </div>
       </div>
@@ -16990,7 +16974,7 @@ function renderA4DocumentView() {
           <div class="flex items-center gap-3">
             ${logoHtml}
             <div>
-              <div class="font-mono text-xs uppercase tracking-widest text-indigo-700 font-bold">AURA COMMERCE SARL</div>
+              <div class="font-mono text-xs uppercase tracking-widest text-indigo-700 font-bold">${companyName}</div>
               <h1 class="text-2xl font-black tracking-tight text-slate-900 a4-editable-zone" contenteditable="true">${docMeta.title}</h1>
             </div>
           </div>
@@ -16998,16 +16982,16 @@ function renderA4DocumentView() {
         </div>
         <div class="text-right text-xs text-slate-500 font-mono space-y-0.5">
           <span class="inline-block px-3 py-1 rounded bg-indigo-950 text-white font-black text-[10px] uppercase tracking-wider">BICOLORE PRO</span>
-          <div>Ouagadougou, Burkina Faso</div>
+          <div>${companyAddress}</div>
         </div>
       </div>
 
       <div class="grid grid-cols-2 gap-8 text-xs py-1">
         <div>
           <div class="font-mono text-[10px] uppercase text-slate-400 mb-1">Émetteur Vendeur</div>
-          <div class="font-bold text-slate-800">AURA Commerce & Quincaillerie Centrale</div>
-          <div class="text-slate-600">Avenue de la Nation, Secteur 4</div>
-          <div class="text-slate-600 font-mono text-[11px]">+226 25 30 11 22</div>
+          <div class="font-bold text-slate-800">${companyName}</div>
+          <div class="text-slate-600">${companyAddress}</div>
+          <div class="text-slate-600 font-mono text-[11px]">${companyPhone}</div>
         </div>
         <div class="bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
           <div class="font-mono text-[10px] uppercase text-indigo-800 font-bold mb-1">Client Destinataire</div>
@@ -17073,6 +17057,7 @@ function renderA4DocumentView() {
           <div class="font-serif italic text-slate-600 mt-2">I. Sawadogo</div>
         </div>
         <div class="text-right flex flex-col items-end">
+          <div class="font-bold text-slate-800 uppercase text-[10px] mb-1">Cachet Officiel — ${companyName}</div>
           ${stampHtml}
         </div>
       </div>
@@ -17093,7 +17078,7 @@ function renderA4DocumentView() {
             <div class="flex items-center gap-3">
               ${logoHtml}
               <div>
-                <div class="font-mono text-xs uppercase tracking-widest text-amber-900 font-bold">MAISON AURA COMMERCE</div>
+                <div class="font-mono text-xs uppercase tracking-widest text-amber-900 font-bold">MAISON ${companyName}</div>
                 <h1 class="text-2xl font-black tracking-tight text-amber-950 a4-editable-zone" contenteditable="true">${docMeta.title}</h1>
               </div>
             </div>
@@ -17110,9 +17095,9 @@ function renderA4DocumentView() {
         <div class="grid grid-cols-2 gap-8 text-xs py-1">
           <div>
             <div class="font-mono text-[10px] uppercase text-amber-800 font-bold mb-1">Maison Émettrice</div>
-            <div class="font-bold text-slate-900 text-sm">AURA Commerce & Quincaillerie Centrale</div>
-            <div class="text-slate-700">Avenue de la Nation, Secteur 4 — Ouagadougou</div>
-            <div class="text-slate-700 font-mono text-[11px]">+226 25 30 11 22</div>
+            <div class="font-bold text-slate-900 text-sm">${companyName}</div>
+            <div class="text-slate-700">${companyAddress}</div>
+            <div class="text-slate-700 font-mono text-[11px]">${companyPhone}</div>
           </div>
           <div class="bg-amber-50/50 p-4 rounded-lg border border-amber-200">
             <div class="font-mono text-[10px] uppercase text-amber-800 font-bold mb-1">Client de Prestige</div>
@@ -17177,7 +17162,7 @@ function renderA4DocumentView() {
             ${mobileHtml}
           </div>
           <div class="flex flex-col items-end text-right">
-            <div class="font-bold text-amber-950 uppercase text-[10px] mb-1">Pour la Direction Générale — AURA Commerce</div>
+            <div class="font-bold text-amber-950 uppercase text-[10px] mb-1">Pour la Direction Générale — ${companyName}</div>
             ${stampHtml}
           </div>
         </div>
@@ -17205,9 +17190,9 @@ function renderA4DocumentView() {
       </div>
       <div class="text-right text-xs text-slate-500 font-mono space-y-0.5">
         <span class="inline-block px-2.5 py-1 rounded ${docMeta.badgeColor} font-black text-[10px] uppercase tracking-wider">${docMeta.badge}</span>
-        <div>IFU : 00124856019M</div>
-        <div>RCCM : BF-OUA-01-2023-B12</div>
-        <div>Ouagadougou, Burkina Faso</div>
+        <div>IFU : ${companyIfu}</div>
+        <div>RCCM : ${companyRccm}</div>
+        <div>${companyAddress}</div>
       </div>
     </div>
 
@@ -17215,9 +17200,9 @@ function renderA4DocumentView() {
     <div class="grid grid-cols-2 gap-8 text-xs py-1">
       <div>
         <div class="font-mono text-[10px] uppercase text-slate-400 mb-1">Émetteur Vendeur</div>
-        <div class="font-bold text-slate-800">AURA Commerce & Quincaillerie Centrale</div>
-        <div class="text-slate-600">Avenue de la Nation, Secteur 4</div>
-        <div class="text-slate-600">+226 25 30 11 22 | facturation@auragroup.bf</div>
+        <div class="font-bold text-slate-800">${companyName}</div>
+        <div class="text-slate-600">${companyAddress}</div>
+        <div class="text-slate-600">${companyPhone} | ${companyEmail}</div>
         <div class="text-slate-600 font-mono text-[11px]">Compte Coris : 04589230101 Clé: 45</div>
       </div>
       <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
@@ -17302,7 +17287,7 @@ function renderA4DocumentView() {
         <div class="font-serif italic text-slate-600 mt-2">I. Sawadogo</div>
       </div>
       <div class="text-right flex flex-col items-end">
-        <div class="font-bold text-slate-800 uppercase text-[10px] mb-1">Pour AURA Commerce SARL — La Direction Générale</div>
+        <div class="font-bold text-slate-800 uppercase text-[10px] mb-1">Pour ${companyName} — La Direction Générale</div>
         ${stampHtml}
       </div>
     </div>
