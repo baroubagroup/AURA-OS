@@ -25,21 +25,21 @@ Pour chaque onglet et sous-onglet, l'audit vérifie et documente :
 | N° Audit | Clé Système | Nom du Module | Raccourci | Pôle Métier | Statut Audit |
 |:---:|:---|:---|:---:|:---|:---:|
 | **1** | `settings` | **Paramètres & Fiscalité** | - | Configuration Globale de l'Entreprise | ✅ **AUDITÉ & VALIDÉ** |
-| **2** | `clients` | **Clients & CRM** | - | Ventes & Commerce / Portefeuille | ⏳ *En attente* |
-| **3** | `suppliers` | **Fournisseurs & Achats** | - | Stocks & Achats / Approvisionnement | ⏳ *En attente* |
-| **4** | `stock` | **Stock & Double Dépôt** | - | Stocks & Achats / Dépôt-Rayon | ⏳ *En attente* |
-| **5** | `pos` | **Caisse Comptoir (POS)** | `F2` | Vue Principale / Encaissement Direct | ⏳ *En attente* |
-| **6** | `documents` | **Documents & Facturation A4** | - | Ventes & Commerce B2B/B2C | ⏳ *En attente* |
-| **7** | `credits` | **Crédits & Recouvrement** | - | Ventes & Commerce / Créances | ⏳ *En attente* |
-| **8** | `deliveries` | **Livraisons & Flotte** | - | Logistique & Opérations Externes | ⏳ *En attente* |
-| **9** | `shifts` | **Shifts & Clôture Z** | - | Finances & Trésorerie / Caisse | ⏳ *En attente* |
-| **10** | `expenses` | **Dépenses d'Exploitation** | - | Finances & Trésorerie / Charges SYSCOHADA | ⏳ *En attente* |
-| **11** | `hr` | **Équipe & Paie OHADA** | - | Ressources Humaines & Bulletins A4 | ⏳ *En attente* |
-| **12** | `accounting` | **Comptabilité & TVA 18%** | - | Finances & Trésorerie / Bilan & Fiscalité | ⏳ *En attente* |
-| **13** | `stats` | **Statistiques & Marges** | - | Analytique & Rentabilité Nette | ⏳ *En attente* |
-| **14** | `dashboard` | **Tableau de Bord 360°** | `F1` | Vue Principale / Cockpit Stratégique | ⏳ *En attente* |
-| **15** | `audit` | **Journal d'Audit & Log** | - | Système & Traçabilité Immuable | ⏳ *En attente* |
-| **16** | `about` | **À Propos (Barouba Group)** | - | Licence, Support & Mentions Éditeur | ⏳ *En attente* |
+| **2** | `dashboard` | **Tableau de Bord 360°** | `F1` | Vue Principale / Cockpit Stratégique | ✅ **AUDITÉ & VALIDÉ** |
+| **3** | `pos` | **Caisse Comptoir (POS)** | `F2` | Vue Principale / Encaissement Direct | ✅ **AUDITÉ & VALIDÉ** |
+| **4** | `documents` | **Documents & Facturation A4** | - | Ventes & Commerce B2B/B2C | ✅ **AUDITÉ & VALIDÉ** |
+| **5** | `credits` | **Crédits & Recouvrement** | - | Ventes & Commerce / Créances | ⏳ *En cours / Suivant* |
+| **6** | `clients` | **Clients & CRM** | - | Ventes & Commerce / Portefeuille | ⏳ *À venir* |
+| **7** | `stock` | **Stock & Double Dépôt** | - | Stocks & Achats / Dépôt-Rayon | ⏳ *À venir* |
+| **8** | `suppliers` | **Fournisseurs & Achats** | - | Stocks & Achats / Approvisionnement | ⏳ *À venir* |
+| **9** | `deliveries` | **Livraisons & Flotte** | - | Logistique & Opérations Externes | ⏳ *À venir* |
+| **10** | `shifts` | **Shifts & Clôture Z** | - | Finances & Trésorerie / Caisse | ⏳ *À venir* |
+| **11** | `expenses` | **Dépenses d'Exploitation** | - | Finances & Trésorerie / Charges SYSCOHADA | ⏳ *À venir* |
+| **12** | `hr` | **Équipe & Paie OHADA** | - | Ressources Humaines & Bulletins A4 | ⏳ *À venir* |
+| **13** | `accounting` | **Comptabilité & TVA 18%** | - | Finances & Trésorerie / Bilan & Fiscalité | ⏳ *À venir* |
+| **14** | `stats` | **Statistiques & Marges** | - | Analytique & Rentabilité Nette | ⏳ *À venir* |
+| **15** | `audit` | **Journal d'Audit & Log** | - | Système & Traçabilité Immuable | ⏳ *À venir* |
+| **16** | `about` | **À Propos (Barouba Group)** | - | Licence, Support & Mentions Éditeur | ⏳ *À venir* |
 
 ---
 
@@ -103,7 +103,120 @@ Le système de navigation par sous-onglets segmentés regroupe :
 #### 6. Résultat des Tests Automatisés
 - Suite Paramètres (`test_settings_module.cjs`) : **141/141 assertions [PASS]**
 - Suite Décommissionnement & Primes Dynamiques (`test_appearance_settings.cjs`) : **15/15 assertions [PASS]**
-- Suite Globale Master (`run_all_tests.cjs`) : **19/19 suites [PASS] (287+ assertions, 0 régression)**
+- Suite Globale Master (`run_all_tests.cjs`) : **20/20 suites [PASS] (302+ assertions, 0 régression)**
+- **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
+
+---
+
+### 🟢 FICHE D'AUDIT N°2 — ONGLET 14 : TABLEAU DE BORD 360° (`dashboard` / Raccourci `F1`)
+
+#### 1. Rôle Métier & Description
+Cockpit exécutif et financier central conçu selon les normes comptables OHADA. Il consolide en temps réel les flux d'exploitation du magasin : chiffre d'affaires brut et hors-taxe, rentabilité nette réelle déduite des charges, créances clients à recouvrer, dettes fournisseurs, valorisation du stock au coût d'achat et au prix de vente, trésorerie multi-canaux et alertes de rupture.
+
+#### 2. Ce que l'onglet Affiche & Permet de Faire :
+- **En-tête & Filtres Temporels Riches** :
+  - *Affichage* : Boutons de presets temporels instantanés : `Aujourd'hui`, `7 Jours`, `Ce Mois`, `Année 2026`, complétés par deux champs dateurs libres (`Du [date] au [date]`).
+  - *Actions* : Recalcul instantané et dynamique de l'ensemble des 8 indicateurs et du graphique selon la période choisie (`setDashboardPreset`, `applyCustomDashboardDate`).
+- **8 Cartes Maîtresses du Cockpit (Navigation Contextuelle en 1 clic)** :
+  1. *Chiffre d'Affaires Brut* (TTC et HT) ➔ Clic ouvre la Caisse POS (`switchView('pos')`).
+  2. *Bénéfice Net Réel* (après charges d'exploitation) ➔ Clic ouvre l'analyse des marges (`switchView('stats')`).
+  3. *Crédits Dehors / Créances* (créances échues) ➔ Clic ouvre le recouvrement (`switchView('credits')`).
+  4. *Dettes Fournisseurs* (engagements partenaires) ➔ Clic ouvre les achats (`switchView('suppliers')`).
+  5. *Valeur Stock Achat* (capital immobilisé rayon + réserve) ➔ Clic ouvre l'inventaire (`switchView('stock')`).
+  6. *Valeur Stock Vente* (potentiel de vente magasin + marge estimée) ➔ Clic ouvre la valorisation (`switchView('stock')`).
+  7. *Trésorerie Globale Disponible* (Caisse physique + Wave + Orange Money + Banques) ➔ Clic ouvre les clôtures (`switchView('shifts')`).
+  8. *Alertes & Ruptures* (articles sous seuil de réapprovisionnement) ➔ Clic ouvre immédiatement la liste filtrée (`openStockAlertsView()`).
+- **Section Analytique & Graphiques Stratégiques** :
+  - *Graphique Courbe & Affluence Caisse* : Barres interactives quotidiennes (Lundi au Dimanche) avec infobulle du CA et nombre de tickets ; un clic sur une journée affiche son résumé d'exploitation.
+  - *Ventilation Multi-Canaux de Trésorerie* : Répartition pondérée entre Espèces en tiroir, Wave Marchand, Orange Money, et Comptes bancaires.
+- **Top Produits & Top Clients Connectés** :
+  - *Top 5 Articles les Plus Rentables* : Affichage du visuel produit, nom, quantité vendue, CA réalisé et marge nette générée.
+  - *Top 5 Comptes Clients B2B* : Nom de société, contact, volume d'achats cumulé, solde dû et badge de santé financière (`À jour`, `Alerte`, `Critique >30j`).
+- **Actions Rapides d'En-tête** :
+  - Bouton `Vente Caisse (F2)` pour basculer à la vente immédiate.
+  - Bouton `+ Facture A4` ouvrant le studio de facturation.
+  - Bouton `+ Dépense` pour saisir une charge d'exploitation immédiate.
+  - Bouton `Export CSV` (`exportDashboardReport`) téléchargeant la synthèse chiffrée complète du cockpit.
+
+#### 3. Assainissement & Fiabilisation
+- Zéro dépendance externe pour les graphiques (rendu vectoriel CSS/HTML natif garanti hors-ligne).
+- Cohérence parfaite des contrastes en Mode Sombre et Mode Clair.
+- Tests automatisés complets intégrés au banc d'essai global.
+
+#### 4. Résultat des Tests Automatisés
+- Suite Dédiée (`test_dashboard_module.cjs`) : **15/15 assertions [PASS]**
+- **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
+
+---
+
+### 🟢 FICHE D'AUDIT N°3 — ONGLET 5 : CAISSE COMPTOIR (POS) (`pos` / Raccourci `F2`)
+
+#### 1. Rôle Métier & Description
+Module opérationnel de vente comptoir à haute fréquence. Conçu pour les caissiers et vendeurs magasin, il permet la sélection tactile rapide des produits ou le scan de codes-barres (USB/Bluetooth), la gestion de paniers multiples en attente, le calcul dynamique des remises et taxes, et l'encaissement multi-devises/multi-moyens avec édition instantanée de tickets thermiques ESC/POS 58/80 mm et devis A4.
+
+#### 2. Ce que l'onglet Affiche & Permet de Faire :
+- **Colonne Gauche : Catalogue Produits & Grille Tactile** :
+  - *Barre Scanner & Recherche* : Champ de saisie optimisé pour douchette code-barres avec validation touche `Entrée` (`handleBarcodeScan`), couplé à une recherche textuelle instantanée (`filterPOSProducts`).
+  - *Barre de Catégories Horizontale* : Boutons de filtrage par famille de produits avec défilement fluide (`filterPOSByCat`).
+  - *Grille Produits Tactile* : Vignettes visuelles des articles indiquant le nom, le prix de vente en F CFA, et le stock disponible en rayon en temps réel.
+- **Colonne Droite : Ticket de Caisse & Panier Tactile** :
+  - *Gestion Multi-Paniers Simultanés* : 3 paniers indépendants (`Panier 1`, `Panier 2`, `Panier 3`) permettant d'encaisser un client sans perdre le panier d'un client en cours (`switchCart`).
+  - *Bascule Vente Directe vs Devis Proforma* : Bouton de bascule immédiate vers la création d'un devis comptoir (`setDocumentType`).
+  - *Sélecteur Client & Solde Débiteur en Direct* : Choix du client (Passager ou compte B2B/B2C enregistré) avec affichage immédiat de son arriéré de créance pour bloquer ou autoriser les ventes à crédit.
+  - *Lignes de Panier Dynamiques* : Ajustement rapide des quantités (`+` / `-`), modification de prix unitaire pour les utilisateurs autorisés, remise par ligne (% ou F CFA) via modal dédiée (`openLineDiscountModal`).
+  - *Totaux & Fiscalité* : Sous-total HT, remise globale ticket (`applyGlobalDiscount`), interrupteur TVA 18% (`toggleTax`), et Net à Payer en grand format lisible.
+  - *Actions de Panier* : Bouton `Vider`, bouton `Mise en attente` (`saveAsDraft` / `restoreHeldCart`), et bouton `Devis A4` (`generateProformaA4` transférant le panier vers le studio de facturation).
+- **Modal d'Encaissement & Moyens de Paiement (`modal-payment`)** :
+  - *Moyens supportés* : Espèces, Wave Mobile Money, Orange Money, Carte Bancaire, Virement, Crédit client (si autorisé par le rôle).
+  - *Paiement Fractionné (Split)* : Répartition automatique 50/50 ou personnalisée entre Espèces et Mobile Money (`selectPaymentMode('split')`).
+  - *Calculateur de Rendu Monnaie Intelligent* : Suggestions tactiles de coupures (billets de 10 000, 5 000, 2 000 F CFA) et calcul instantané du montant exact à restituer au client (`calculateChangeReturn`).
+  - *Validation & Déstockage Atomique* : Décrémentation immédiate du stock rayon, enregistrement de la vente dans le journal local, mise à jour du shift de caisse actif, et ouverture du tiroir-caisse RJ11.
+- **Aperçu & Impression du Ticket Thermique (`modal-receipt-preview`)** :
+  - Rendu conforme aux imprimantes thermiques 58 mm et 80 mm avec en-tête dynamique de l'entreprise (Nom, IFU, RCCM, Tél), détail des articles, QR code fiscal e-SINTAX / DGI, et pied de page personnalisable.
+
+#### 3. Résultat des Tests Automatisés
+- Suite Dédiée (`test_pos.cjs`) : **21/21 assertions [PASS]**
+- **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
+
+---
+
+### 🟢 FICHE D'AUDIT N°4 — ONGLET 6 : DOCUMENTS COMMERCIAUX & FACTURATION A4 (`documents`)
+
+#### 1. Rôle Métier & Description
+Module complet d'édition, de suivi et d'émission de l'ensemble des pièces commerciales officielles de l'entreprise (Factures Normalisées A4 conformes DGI, Devis / Factures Proformas, Bons de Livraison, Bons de Commande Fournisseur). Il intègre le puissant **Studio A4** permettant la prévisualisation, l'édition directe sur le document, le changement de design de template et le partage multi-canal.
+
+#### 2. Architecture des Sous-Onglets (4 Sous-Onglets Actifs)
+Le système de navigation par sous-onglets segmentés avec barre de défilement Bleu Royal (`subtab-scroll-deck`) regroupe :
+1. **Factures Définitives A4** (`doc-tab-invoices`)
+2. **Devis & Proformas** (`doc-tab-proformas`)
+3. **Bons de Livraison (BL)** (`doc-tab-deliveries`)
+4. **Bons de Commande (BC)** (`doc-tab-orders`)
+
+#### 3. Ce que chaque sous-onglet Affiche & Permet de Faire :
+- **Indicateurs KPI Synthétiques du Mois** :
+  - *Total Facturé TTC* (avec compteur de factures émises).
+  - *Devis & Proformas en cours* (montant proposé en attente de validation client).
+  - *Créances Factures Impayées* (avec nombre de factures à relancer).
+  - *Bons de Livraison émis* (avec suivi des colis livrés et émargés).
+- **Sous-onglet 1 : Factures Définitives A4** :
+  - *Affichage* : Table complète des factures émises avec N° Chronologique, Client / Raison sociale, Date d'émission, Échéance, Total HT, TVA 18%, Net TTC, Statut de paiement (`Payée`, `Acompte`, `Impayée`).
+  - *Actions* : Filtres par statut (`Toutes`, `Payées`, `Impayées / Acompte`), recherche par nom client ou N° facture, bouton d'ouverture directe dans le Studio A4 (`loadDocumentIntoStudio`), relance WhatsApp.
+- **Sous-onglet 2 : Devis & Proformas** :
+  - *Affichage* : Liste des devis avec durée de validité et statut (`En attente`, `Accepté`, `Converti`).
+  - *Actions* : **« Convertir en Facture Définitive »** en un clic avec génération automatique du numéro de facture normalisée et report dans le journal des ventes ; ouverture dans le Studio A4.
+- **Sous-onglet 3 : Bons de Livraison (BL)** :
+  - *Affichage* : Liste des expéditions avec chauffeur/livreur assigné, zone de livraison, adresse de déchargement et état d'émargement.
+  - *Actions* : Génération du BL au format A4 avec mentions de décharge et signature du réceptionnaire.
+- **Sous-onglet 4 : Bons de Commande Fournisseurs (BC)** :
+  - *Affichage* : Liste des ordres d'achat passés aux fournisseurs partenaires avec montants engagés et statut de livraison.
+- **Studio A4 Intégré (Visualiseur & Éditeur Haute Fidélité)** :
+  - *5 Styles de Templates interchangeables* : **Corporate** (bandeau bleu royal premium), **DGI Normalisé** (certification fiscale avec QR e-SINTAX et mentions obligatoires), **Minimaliste** (épuré pour impression économique), **Split** (séparation moderne des colonnes), et **Prestige**.
+  - *Zones éditables en direct* : Titre, notes de bas de page et conditions de règlement modifiables directement sur la feuille A4 (`contenteditable`).
+  - *Liaison Dynamique Complète* : Nom de l'enseigne, IFU, RCCM, Téléphone, Adresse et Logo de l'entreprise s'actualisent automatiquement depuis les Paramètres.
+  - *Partage & Export* : Bouton de téléchargement PDF immédiat (`downloadDocumentPDF`), bouton de partage direct par WhatsApp Web avec texte pré-rempli (`shareInvoiceWhatsApp`).
+
+#### 4. Résultat des Tests Automatisés
+- Suite Dédiée (`test_documents_module.cjs`) : **47/47 assertions [PASS]**
 - **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
 
 ---

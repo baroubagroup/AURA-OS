@@ -4,6 +4,7 @@ const { execSync } = require('child_process');
 const path = require('path');
 
 const suites = [
+  { name: 'Module 1: Tableau de Bord 360°', script: 'test_dashboard_module.cjs' },
   { name: 'Module 2: POS & Caisse Tactile', script: 'test_pos.cjs' },
   { name: 'Module 3: Documents & Studio A4', script: 'test_documents_module.cjs' },
   { name: 'Module 4: Crédits & Recouvrement', script: 'test_credits_module.cjs' },
