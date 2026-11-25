@@ -477,6 +477,51 @@
        - Onglet Actif : Pilule Bleu Royal (#1877F2) avec texte et icônes BLANC PUR (#FFFFFF)
        - Onglets Inactifs : Typographie ardoise haute lisibilité (#334155), zéro grisâtre délavé
        ======================================================== */
+    
+    /* ========================================================
+       BARRE DE DÉFILEMENT HORIZONTALE BLEU ROYAL (#1877F2) POUR LES SOUS-ONGLETS
+       Indicateur de défilement proéminent, net et élégant aux couleurs de l'OS
+       ======================================================== */
+    .subtab-scroll-deck::-webkit-scrollbar,
+    .tab-pill-scroll::-webkit-scrollbar,
+    .overflow-x-auto.custom-scroll:has(.tab-pill-deck)::-webkit-scrollbar {
+      height: 8px !important;
+    }
+    .subtab-scroll-deck::-webkit-scrollbar-track,
+    .tab-pill-scroll::-webkit-scrollbar-track,
+    .overflow-x-auto.custom-scroll:has(.tab-pill-deck)::-webkit-scrollbar-track {
+      background: rgba(24, 119, 242, 0.08) !important;
+      border-radius: 9999px !important;
+      margin: 0 4px;
+    }
+    .subtab-scroll-deck::-webkit-scrollbar-thumb,
+    .tab-pill-scroll::-webkit-scrollbar-thumb,
+    .overflow-x-auto.custom-scroll:has(.tab-pill-deck)::-webkit-scrollbar-thumb {
+      background-color: #1877F2 !important;
+      border-radius: 9999px !important;
+      border: 1.5px solid #FFFFFF !important;
+      box-shadow: 0 1px 4px rgba(24, 119, 242, 0.45) !important;
+      cursor: grab;
+    }
+    html.dark .subtab-scroll-deck::-webkit-scrollbar-track,
+    html.dark .tab-pill-scroll::-webkit-scrollbar-track,
+    html.dark .overflow-x-auto.custom-scroll:has(.tab-pill-deck)::-webkit-scrollbar-track {
+      background: rgba(24, 119, 242, 0.15) !important;
+    }
+    html.dark .subtab-scroll-deck::-webkit-scrollbar-thumb,
+    html.dark .tab-pill-scroll::-webkit-scrollbar-thumb,
+    html.dark .overflow-x-auto.custom-scroll:has(.tab-pill-deck)::-webkit-scrollbar-thumb {
+      background-color: #1877F2 !important;
+      border: 1.5px solid #0F172A !important;
+      box-shadow: 0 1px 5px rgba(24, 119, 242, 0.7) !important;
+    }
+    .subtab-scroll-deck::-webkit-scrollbar-thumb:hover,
+    .tab-pill-scroll::-webkit-scrollbar-thumb:hover,
+    .overflow-x-auto.custom-scroll:has(.tab-pill-deck)::-webkit-scrollbar-thumb:hover {
+      background-color: #166FE5 !important;
+      box-shadow: 0 2px 6px rgba(24, 119, 242, 0.6) !important;
+    }
+
     .tab-pill-deck {
       display: inline-flex;
       align-items: center;
@@ -3664,7 +3709,7 @@
         </div>
 
         <!-- Système de Sous-Onglets Documents -->
-        <div class="overflow-x-auto custom-scroll pb-1">
+        <div class="overflow-x-auto custom-scroll subtab-scroll-deck pb-1.5">
           <div class="tab-pill-deck">
             <button type="button" onclick="switchDocTab('invoices')" id="doc-tab-invoices" class="tab-pill-btn active doc-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
               <svg class="w-4 h-4 text-[var(--primary)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
@@ -3884,7 +3929,7 @@
 
         <!-- Système de Sous-Onglets Stock -->
         <!-- Sous-onglets Navigation Stock - Segmented Capsule Dock -->
-        <div class="overflow-x-auto custom-scroll pb-1">
+        <div class="overflow-x-auto custom-scroll subtab-scroll-deck pb-1.5">
           <div class="tab-pill-deck">
             <button type="button" onclick="switchStockTab('catalog')" id="stock-tab-catalog" class="tab-pill-btn active stock-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
@@ -4218,7 +4263,7 @@
 
         <!-- Système de Sous-Onglets RH -->
         <!-- Sous-onglets Navigation RH - Segmented Capsule Dock -->
-        <div class="overflow-x-auto custom-scroll pb-1">
+        <div class="overflow-x-auto custom-scroll subtab-scroll-deck pb-1.5">
           <div class="tab-pill-deck">
             <button type="button" onclick="switchHRTab('employees')" id="hr-tab-employees" class="tab-pill-btn active hr-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
@@ -4543,7 +4588,7 @@
         </div>
 
         <!-- Sous-Onglets Segmentation Clients -->
-        <div class="overflow-x-auto custom-scroll pb-1">
+        <div class="overflow-x-auto custom-scroll subtab-scroll-deck pb-1.5">
           <div class="tab-pill-deck">
             <button type="button" onclick="filterCRMBySegment('ALL')" id="crm-tab-ALL" class="tab-pill-btn active crm-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
               <span>Tous les Clients</span>
@@ -5298,7 +5343,7 @@
 
         <!-- Sous-Onglets Comptabilité OHADA -->
         <!-- Sous-onglets Navigation Comptabilité - Segmented Capsule Dock -->
-        <div class="overflow-x-auto custom-scroll pb-1">
+        <div class="overflow-x-auto custom-scroll subtab-scroll-deck pb-1.5">
           <div class="tab-pill-deck">
             <button type="button" onclick="switchAccountingTab('pnl')" id="acc-tab-pnl" class="tab-pill-btn active acc-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
@@ -5758,7 +5803,7 @@
         </div>
 
         <!-- Système de Sous-Onglets Paramètres - Segmented Capsule Dock -->
-        <div class="overflow-x-auto custom-scroll pb-1">
+        <div class="overflow-x-auto custom-scroll subtab-scroll-deck pb-1.5">
           <div class="tab-pill-deck">
             <button type="button" onclick="switchSettingsTab('general')" id="settings-tab-general" class="tab-pill-btn active settings-subtab-btn border-[var(--primary)] text-[var(--primary)] press-effect">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
@@ -9983,74 +10028,7 @@
     }
 
     // 7. UTILISATEURS RBAC & ZONES MULTI-DÉPÔTS
-    function openNewUserModal() {
-      const modal = document.getElementById('modal-new-user');
-      if (modal) modal.classList.remove('hidden');
-    }
-    function closeNewUserModal() {
-      const modal = document.getElementById('modal-new-user');
-      if (modal) modal.classList.add('hidden');
-    }
-    function submitNewUser() {
-      const name = (document.getElementById('new-user-name')?.value || '').trim();
-      const username = (document.getElementById('new-user-username')?.value || '').trim();
-      const role = document.getElementById('new-user-role')?.value || 'cashier';
-      const store = document.getElementById('new-user-store')?.value || 'Siège';
-
-      if (!name || !username) {
-        alert("Veuillez renseigner le nom et l'identifiant.");
-        return;
-      }
-
-      const newUser = {
-        id: 'usr_' + Date.now(),
-        name,
-        role: role.toUpperCase(),
-        pin: '••••',
-        lastLogin: 'Jamais connecté',
-        status: 'Actif',
-        store
-      };
-
-      if (!window.RBAC_USERS) window.RBAC_USERS = [];
-      window.RBAC_USERS.push(newUser);
-      if (typeof renderRBACUsers === 'function') renderRBACUsers();
-      closeNewUserModal();
-      showToast('Collaborateur ' + name + ' créé avec succès.', 'success');
-    }
-
-    function openNewZoneModal() {
-      const modal = document.getElementById('modal-new-zone');
-      if (modal) modal.classList.remove('hidden');
-    }
-    function closeNewZoneModal() {
-      const modal = document.getElementById('modal-new-zone');
-      if (modal) modal.classList.add('hidden');
-    }
-    function submitNewZone() {
-      const name = (document.getElementById('new-zone-name')?.value || '').trim();
-      const type = document.getElementById('new-zone-type')?.value || 'Réserve';
-      const manager = document.getElementById('new-zone-manager')?.value || 'Ousmane Z.';
-
-      if (!name) {
-        alert("Veuillez renseigner le nom de l'emplacement.");
-        return;
-      }
-
-      const newZone = {
-        name,
-        type,
-        items: 0,
-        val: 0,
-        resp: manager
-      };
-
-      if (!window.DEPOTS_ZONES) window.DEPOTS_ZONES = [];
-      window.DEPOTS_ZONES.push(newZone);
-      if (typeof renderZonesTable === 'function') renderZonesTable();
-      closeNewZoneModal();
-      showToast('Emplacement "' + name + '" enregistré avec succès.', 'success');
-    }
+// Fonctions RBAC et Zones complètes et persistantes définies plus bas (Module Paramètres)
 
     // 8. REMISE GLOBALE & MISE EN ATTENTE (DRAFT)
     let globalDiscountType = 'percent';
@@ -15747,6 +15725,15 @@ function renderA4DocumentView() {
   const container = document.getElementById('a4-print-sheet');
   if (!container) return;
 
+  const cfg = window.SYSTEM_SETTINGS || {};
+  const companyName = (cfg.storeName && cfg.storeName.trim()) ? cfg.storeName.trim().toUpperCase() : 'AURA MULTI-COMMERCE & DISTRIBUTION';
+  const companyIfu = (cfg.ifu && cfg.ifu.trim()) ? cfg.ifu.trim() : '00124856019M';
+  const companyRccm = (cfg.rccm && cfg.rccm.trim()) ? cfg.rccm.trim() : 'BF-OUA-2024-B-1402';
+  const companyAddress = (cfg.address && cfg.address.trim()) ? cfg.address.trim() : "Avenue Kwame N'Krumah, Ouagadougou, Burkina Faso";
+  const companyPhone = (cfg.phone && cfg.phone.trim()) ? cfg.phone.trim() : '+226 25 30 00 00';
+  const companyWhatsapp = (cfg.whatsapp && cfg.whatsapp.trim()) ? cfg.whatsapp.trim() : '+226 70 00 00 00';
+  const companyCurrency = (cfg.currency && cfg.currency.trim()) ? cfg.currency.trim() : 'XOF';
+
   const rawTpl = currentInvoiceTemplate || (window.SYSTEM_SETTINGS && window.SYSTEM_SETTINGS.invoiceTemplate) || 'minimal';
   const tpl = (rawTpl === 'formal') ? 'dgi' : rawTpl;
   const brandColor = currentA4BrandColor || (window.SYSTEM_SETTINGS && window.SYSTEM_SETTINGS.brandColor) || '#0D9488';
@@ -15822,10 +15809,10 @@ function renderA4DocumentView() {
     <div class="relative w-44 h-32 flex flex-col items-center justify-center p-2 text-center pointer-events-none select-none">
       <div class="w-28 h-28 rounded-full border-2 border-indigo-700/80 p-1 flex flex-col items-center justify-center rotate-[-12deg] shadow-xs">
         <div class="w-full h-full rounded-full border border-dashed border-indigo-700/80 flex flex-col items-center justify-center text-[7px] font-black uppercase text-indigo-900 leading-tight p-1">
-          <span class="tracking-wider">★ AURA COMMERCE SARL ★</span>
-          <span class="text-[6px] font-bold text-indigo-700 my-0.5">IFU: 00124856019M</span>
+          <span class="tracking-wider truncate max-w-[95%]">★ ${companyName} ★</span>
+          <span class="text-[6px] font-bold text-indigo-700 my-0.5">IFU: ${companyIfu}</span>
           <span class="text-[8px] font-black text-rose-700 tracking-widest uppercase">APPROUVÉ</span>
-          <span class="text-[6px] text-indigo-800">OUAGADOUGOU - BF</span>
+          <span class="text-[6px] text-indigo-800 truncate max-w-[95%]">${companyAddress}</span>
         </div>
       </div>
       <div class="absolute bottom-1 font-serif text-[13px] text-slate-800 italic font-black rotate-[-6deg]">
@@ -15921,7 +15908,7 @@ function renderA4DocumentView() {
             <div class="flex items-center gap-3">
               ${logoHtml}
               <div>
-                <div class="font-mono text-xs uppercase tracking-widest text-slate-500">AURA COMMERCE SARL</div>
+                <div class="font-mono text-xs uppercase tracking-widest text-slate-500">${companyName}</div>
                 <h1 class="text-2xl font-black tracking-tight text-slate-900 a4-editable-zone" contenteditable="true">${docMeta.title}</h1>
               </div>
             </div>
@@ -16044,7 +16031,7 @@ function renderA4DocumentView() {
           <div class="flex items-center gap-3">
             ${logoHtml}
             <div>
-              <div class="font-mono text-xs uppercase tracking-widest text-slate-500">AURA COMMERCE SARL</div>
+              <div class="font-mono text-xs uppercase tracking-widest text-slate-500">${companyName}</div>
               <h1 class="text-2xl font-black tracking-tight text-slate-900 a4-editable-zone" contenteditable="true">${docMeta.title}</h1>
               <div class="font-mono text-xs text-purple-900 font-bold">Période : ${emp.period || 'Mois en cours'}</div>
             </div>
@@ -16171,7 +16158,7 @@ function renderA4DocumentView() {
           <div class="flex items-center gap-3">
             ${logoHtml}
             <div>
-              <div class="font-mono text-xs uppercase tracking-widest text-slate-500">AURA COMMERCE SARL</div>
+              <div class="font-mono text-xs uppercase tracking-widest text-slate-500">${companyName}</div>
               <h1 class="text-2xl font-black tracking-tight text-slate-900 a4-editable-zone" contenteditable="true">${docMeta.title}</h1>
               <div class="font-mono text-xs text-slate-600 font-bold">Réf : ${doc.ref || 'Z-2026-001'} — Date : ${doc.date}</div>
             </div>
@@ -16295,7 +16282,7 @@ function renderA4DocumentView() {
             <div class="flex items-center gap-3">
               ${logoHtml}
               <div>
-                <div class="font-mono text-xs uppercase tracking-widest text-slate-500">AURA COMMERCE SARL</div>
+                <div class="font-mono text-xs uppercase tracking-widest text-slate-500">${companyName}</div>
                 <h1 class="text-2xl font-black tracking-tight text-slate-900 a4-editable-zone" contenteditable="true">${docMeta.title}</h1>
               </div>
             </div>
@@ -16429,7 +16416,7 @@ function renderA4DocumentView() {
             <div class="flex items-center gap-3">
               ${logoHtml}
               <div>
-                <div class="font-mono text-xs uppercase tracking-widest text-slate-500">AURA COMMERCE SARL</div>
+                <div class="font-mono text-xs uppercase tracking-widest text-slate-500">${companyName}</div>
                 <h1 class="text-2xl font-black tracking-tight text-slate-900 a4-editable-zone" contenteditable="true">${docMeta.title}</h1>
               </div>
             </div>
@@ -16566,7 +16553,7 @@ function renderA4DocumentView() {
             <div class="flex items-center gap-3">
               ${logoHtml}
               <div>
-                <div class="font-mono text-xs uppercase tracking-widest text-slate-500">AURA COMMERCE SARL</div>
+                <div class="font-mono text-xs uppercase tracking-widest text-slate-500">${companyName}</div>
                 <h1 class="text-2xl font-black tracking-tight text-slate-900 a4-editable-zone" contenteditable="true">${docMeta.title}</h1>
               </div>
             </div>
@@ -16707,8 +16694,8 @@ function renderA4DocumentView() {
             ${logoHtml}
           </div>
           <div>
-            <h2 class="text-2xl font-black tracking-tight uppercase">AURA COMMERCE SARL</h2>
-            <div class="text-xs text-white/80 font-mono uppercase tracking-wider">Commerce Général, Matériaux & Services BTP</div>
+            <h2 class="text-2xl font-black tracking-tight uppercase">${companyName}</h2>
+            <div class="text-xs text-white/80 font-mono uppercase tracking-wider">${companyAddress} • Tél: ${companyPhone}</div>
           </div>
         </div>
         <div class="text-right">
@@ -17210,7 +17197,7 @@ function renderA4DocumentView() {
         <div class="flex items-center gap-3">
           ${logoHtml}
           <div>
-            <div class="font-mono text-xs uppercase tracking-widest text-slate-500">AURA COMMERCE SARL</div>
+            <div class="font-mono text-xs uppercase tracking-widest text-slate-500">${companyName}</div>
             <h1 class="text-2xl font-black tracking-tight text-slate-900 a4-editable-zone" contenteditable="true">${docMeta.title}</h1>
           </div>
         </div>
@@ -19843,8 +19830,8 @@ function getLiveMetricForPole(countKey) {
         <div class="text-center pb-2 border-b border-dashed border-slate-400">
           <div class="font-black text-xs uppercase">${header}</div>
           <div class="text-[10px] text-slate-600">${sub}</div>
-          <div class="text-[9px] text-slate-500">IFU: 00124856019M | RCCM: BF-OUA-2024-B-1402</div>
-          <div class="text-[9px] text-slate-500">Tél: +226 25 30 00 00 / Ouagadougou</div>
+          <div class="text-[9px] text-slate-500 font-mono">IFU: ${document.getElementById('setting-ifu')?.value || window.SYSTEM_SETTINGS?.ifu || '00124856019M'} | RCCM: ${document.getElementById('setting-rccm')?.value || window.SYSTEM_SETTINGS?.rccm || 'BF-OUA-2024-B-1402'}</div>
+          <div class="text-[9px] text-slate-500 font-mono">Tél: ${document.getElementById('setting-phone')?.value || window.SYSTEM_SETTINGS?.phone || '+226 25 30 00 00'}</div>
         </div>
 
         <div class="text-[10px] space-y-0.5 py-1.5 border-b border-dashed border-slate-400 font-num">
@@ -19923,7 +19910,7 @@ function getLiveMetricForPole(countKey) {
         <div class="text-center pb-2 border-b border-dashed border-slate-400">
           <div class="font-black text-xs uppercase">${header}</div>
           <div class="text-[10px] text-slate-600">${sub}</div>
-          <div class="text-[9px] text-slate-500">IFU: 00124856019M | RCCM: BF-OUA-2024-B-1402</div>
+          <div class="text-[9px] text-slate-500 font-mono">IFU: ${document.getElementById('setting-ifu')?.value || window.SYSTEM_SETTINGS?.ifu || '00124856019M'} | RCCM: ${document.getElementById('setting-rccm')?.value || window.SYSTEM_SETTINGS?.rccm || 'BF-OUA-2024-B-1402'}</div>
         </div>
 
         <div class="text-[10px] space-y-0.5 py-1 border-b border-dashed border-slate-400 font-num">
@@ -24178,6 +24165,8 @@ function getLiveMetricForPole(countKey) {
       renderRBACUsers();
       renderZonesTable();
       if (typeof updateLiveTicketPreview === 'function') updateLiveTicketPreview();
+      if (typeof renderA4DocumentView === 'function') renderA4DocumentView();
+      if (typeof renderReceiptContent === 'function') renderReceiptContent();
     }
     window.renderSettingsView = renderSettingsView;
 
