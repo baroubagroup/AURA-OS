@@ -3003,7 +3003,7 @@
     </nav>
 
     <!-- ==================== NAVIGATION EN MODE CARTES (COLONNE GAUCHE EXTRÊME) ==================== -->
-    <div id="sidebar-cards-nav" class="flex-1 flex flex-col min-h-0 overflow-y-auto p-3 space-y-2.5 custom-scroll hidden select-none">
+    <div id="sidebar-cards-nav" class="flex-1 flex flex-col min-h-0 overflow-y-auto p-3 space-y-2.5 custom-scroll hidden select-none" style="display:none !important;">
       <div class="px-1 py-1 flex items-center justify-between border-b border-[var(--border)] pb-2">
         <span class="text-[10px] font-black uppercase tracking-wider text-[var(--primary)] flex items-center gap-1.5">
           <span class="w-2 h-2 rounded-full bg-[var(--primary)] animate-pulse"></span>
@@ -3030,7 +3030,7 @@
         </div>
 
         <div class="flex items-center gap-1 shrink-0" id="sidebar-footer-actions">
-          <button onclick="toggleNavInterfaceMode()" id="sidebar-toggle-nav-interface" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-indigo-400 hover:bg-[var(--border)] press-effect" title="Basculer Mode Standard / Mode Cartes Visuelles">
+          <button onclick="toggleNavInterfaceMode()" id="sidebar-toggle-nav-interface" class="hidden p-2 rounded-lg text-[var(--text-muted)]" style="display:none !important;" aria-hidden="true" title="Basculer Mode Standard / Mode Cartes Visuelles">
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
           </button>
           <button onclick="toggleTheme()" id="theme-btn" class="p-2 rounded-lg text-[var(--text-muted)] hover:text-[var(--text-main)] hover:bg-[var(--border)] press-effect" title="Basculer Mode Clair / Sombre">
@@ -3141,29 +3141,15 @@
           <span id="window-theme-label" class="hidden sm:inline">Clair</span>
         </button>
 
-        <!-- Bouton Paramètres OS Dédié (Mode Cartes / Bureau) -->
-        <button id="btn-header-os-settings" type="button" onclick="openOsAppearanceModal()" class="px-2.5 py-1.5 rounded-xl bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] border border-[var(--border)] text-xs font-bold text-[var(--text-main)] flex items-center gap-1.5 transition-all press-effect cursor-pointer" title="Réglages du Bureau & Dock AURA OS">
-          <span>⚙️</span>
-          <span class="hidden sm:inline">Réglages OS</span>
-        </button>
-
-        <!-- Basculeur Double Interface Souverain (Standard Formel <-> Mode Cartes Visuelles) -->
-        <div class="flex items-center p-0.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card-subtle)] text-xs font-semibold shadow-sm select-none shrink-0 z-30">
-          <button id="btn-mode-formal" type="button" onclick="applyNavInterfaceMode('formal', true)" class="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-[var(--primary)] bg-[var(--bg-card)] font-bold shadow-xs border border-[var(--primary)]/20 press-effect cursor-pointer" title="Interface standardisée d'entreprise (menu arborescent vertical)">
-            <span>🏢</span>
-            <span class="hidden sm:inline">Standard</span>
-          </button>
-          <button id="btn-mode-cards" type="button" onclick="applyNavInterfaceMode('cards', true)" class="px-2.5 py-1.5 rounded-lg transition-all flex items-center gap-1.5 text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect cursor-pointer" title="Interface par cartes visuelles (pôles à gauche + ruban horizontal)">
-            <span>🃏</span>
-            <span>Cartes</span>
-            <span id="nav-mode-badge" class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-400 font-mono hidden">ACTIF</span>
-          </button>
+        <!-- Éléments du Mode Cartes retirés de l'interface visuelle (conservés masqués pour compatibilité interne) -->
+        <div class="hidden" style="display:none !important;" aria-hidden="true">
+          <button id="btn-header-os-settings" type="button" onclick="openOsAppearanceModal()"></button>
+          <div class="flex items-center">
+            <button id="btn-mode-formal" type="button" onclick="applyNavInterfaceMode('formal', true)"><span>🏢</span><span>Standard</span></button>
+            <button id="btn-mode-cards" type="button" onclick="applyNavInterfaceMode('cards', true)"><span>🃏</span><span>Cartes</span><span id="nav-mode-badge" class="hidden">ACTIF</span></button>
+          </div>
+          <button id="btn-toggle-interface-mode" type="button" onclick="toggleNavInterfaceMode()"><span id="nav-mode-icon">🃏</span><span id="nav-mode-label">Mode Cartes</span></button>
         </div>
-        <!-- Bouton proxy invisible pour compatibilité des tests et raccourcis Alt+I -->
-        <button id="btn-toggle-interface-mode" type="button" onclick="toggleNavInterfaceMode()" class="sr-only" aria-hidden="true">
-          <span id="nav-mode-icon">🃏</span>
-          <span id="nav-mode-label">Mode Cartes</span>
-        </button>
 
         <!-- Bouton Dépense Rapide -->
         <button onclick="openQuickExpenseModal()" class="app-btn-secondary py-1.5 px-3 text-xs hidden sm:flex">
@@ -3173,7 +3159,7 @@
     </header>
 
     <!-- ==================== RUBAN HORIZONTAL DES SOUS-CARTES SPÉCIALISÉES (MODE CARTES VISUELLES) ==================== -->
-    <div id="aura-card-navigation-deck" class="shrink-0 border-b border-[var(--border)] bg-[var(--bg-sidebar)] transition-all">
+    <div id="aura-card-navigation-deck" class="hidden shrink-0 border-b border-[var(--border)] bg-[var(--bg-sidebar)] transition-all" style="display:none !important;">
       <div id="card-subnav-ribbon-wrapper" class="px-6 py-2.5 bg-[var(--bg-card-subtle)]">
         <div class="flex items-center justify-between mb-1.5">
           <div class="flex items-center gap-2">
@@ -18949,29 +18935,21 @@ function getLiveMetricForPole(countKey) {
     }
 
     function initNavInterfaceMode() {
-      let savedMode = 'cards';
+      // Retrait définitif du Mode Cartes : le Mode Standard Formel d'entreprise est l'interface unique
+      const savedMode = 'formal';
       if (typeof localStorage !== 'undefined') {
-        const storedV3 = localStorage.getItem('aura_nav_interface_mode_v3');
-        if (storedV3 === 'formal') {
-          savedMode = 'formal';
-        } else if (storedV3 === 'cards') {
-          savedMode = 'cards';
-        } else {
-          // Premier chargement ou mise à jour v3 : forcer le Mode Cartes par défaut souverain
-          savedMode = 'cards';
-          try {
-            localStorage.setItem('aura_nav_interface_mode_v3', 'cards');
-            localStorage.setItem('aura_nav_interface_mode', 'cards');
-          } catch (e) {}
-        }
+        try {
+          localStorage.setItem('aura_nav_interface_mode_v3', 'formal');
+          localStorage.setItem('aura_nav_interface_mode', 'formal');
+        } catch (e) {}
       }
-      applyNavInterfaceMode(savedMode, false);
+      applyNavInterfaceMode('formal', false);
     }
     window.initNavInterfaceMode = initNavInterfaceMode;
 
     function toggleNavInterfaceMode() {
-      const nextMode = currentNavInterfaceMode === 'formal' ? 'cards' : 'formal';
-      applyNavInterfaceMode(nextMode, true);
+      // Le Mode Cartes a été retiré. L'interface reste en Mode Standard.
+      applyNavInterfaceMode('formal', false);
     }
     window.toggleNavInterfaceMode = toggleNavInterfaceMode;
 
