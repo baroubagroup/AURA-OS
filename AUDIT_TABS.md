@@ -28,11 +28,11 @@ Pour chaque onglet et sous-onglet, l'audit vérifie et documente :
 | **2** | `dashboard` | **Tableau de Bord 360°** | `F1` | Vue Principale / Cockpit Stratégique | ✅ **AUDITÉ & VALIDÉ** |
 | **3** | `pos` | **Caisse Comptoir (POS)** | `F2` | Vue Principale / Encaissement Direct | ✅ **AUDITÉ & VALIDÉ** |
 | **4** | `documents` | **Documents & Facturation A4** | - | Ventes & Commerce B2B/B2C | ✅ **AUDITÉ & VALIDÉ** |
-| **5** | `credits` | **Crédits & Recouvrement** | - | Ventes & Commerce / Créances | ⏳ *En cours / Suivant* |
-| **6** | `clients` | **Clients & CRM** | - | Ventes & Commerce / Portefeuille | ⏳ *À venir* |
-| **7** | `stock` | **Stock & Double Dépôt** | - | Stocks & Achats / Dépôt-Rayon | ⏳ *À venir* |
-| **8** | `suppliers` | **Fournisseurs & Achats** | - | Stocks & Achats / Approvisionnement | ⏳ *À venir* |
-| **9** | `deliveries` | **Livraisons & Flotte** | - | Logistique & Opérations Externes | ⏳ *À venir* |
+| **5** | `credits` | **Crédits & Recouvrement** | - | Ventes & Commerce / Créances | ✅ **AUDITÉ & VALIDÉ** |
+| **6** | `clients` | **Clients & CRM** | - | Ventes & Commerce / Portefeuille | ✅ **AUDITÉ & VALIDÉ** |
+| **7** | `stock` | **Stock & Double Dépôt** | - | Stocks & Achats / Dépôt-Rayon | ✅ **AUDITÉ & VALIDÉ** |
+| **8** | `suppliers` | **Fournisseurs & Achats** | - | Stocks & Achats / Approvisionnement | ✅ **AUDITÉ & VALIDÉ** |
+| **9** | `deliveries` | **Livraisons & Flotte** | - | Logistique & Opérations Externes | ⏳ *En cours / Suivant* |
 | **10** | `shifts` | **Shifts & Clôture Z** | - | Finances & Trésorerie / Caisse | ⏳ *À venir* |
 | **11** | `expenses` | **Dépenses d'Exploitation** | - | Finances & Trésorerie / Charges SYSCOHADA | ⏳ *À venir* |
 | **12** | `hr` | **Équipe & Paie OHADA** | - | Ressources Humaines & Bulletins A4 | ⏳ *À venir* |
@@ -217,6 +217,141 @@ Le système de navigation par sous-onglets segmentés avec barre de défilement 
 
 #### 4. Résultat des Tests Automatisés
 - Suite Dédiée (`test_documents_module.cjs`) : **47/47 assertions [PASS]**
+- **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
+
+---
+
+### 🟢 FICHE D'AUDIT N°5 — ONGLET 4 : CRÉDITS & RECOUVREMENT (`credits`)
+
+#### 1. Rôle Métier & Description
+Module financier de surveillance rigoureuse des créances clients et du risque d'impayé. Destiné au gérant et au service comptabilité, il permet de suivre chaque échéance de paiement, d'alerter sur les créances critiques (>30 jours de retard), d'enregistrer les encaissements d'acomptes ou règlements complets, et d'actionner des relances personnalisées automatiques par WhatsApp Web.
+
+#### 2. Ce que l'onglet Affiche & Permet de Faire :
+- **Indicateurs KPIs Synthétiques** :
+  - *Total Créances Dehors* : Somme consolidée de tous les restes dus clients avec compteur de débiteurs actifs.
+  - *Créances Échues (>30j)* : Montant des dettes ayant dépassé la date limite d'échéance contractuelle (en rouge d'alerte).
+  - *Recouvré ce mois* : Total cumulé des acomptes et règlements encaissés au cours du mois civil.
+  - *Taux de Recouvrement* : Jauge de performance calculée en % par rapport aux objectifs d'encaissement de l'entreprise.
+- **Tableau des Créances Clients en Cours** :
+  - *Colonnes d'affichage* : Client Débiteur (avec téléphone de contact), Facture Vente de référence, Date d'accord de crédit, Date limite d'échéance, Montant initial, Déjà payé, Reste dû (en gras), Badge de statut financier (`À jour`, `Alerte`, `Critique >30j`, `Soldé`).
+  - *Moteur de Recherche Instantané* : Filtrage par nom de client, numéro de téléphone, ou référence de facture.
+- **Actions Métier Immédiates (par ligne)** :
+  - **Encaisser un Acompte / Règlement** (`openRepayModal`) : Modal d'encaissement d'acompte avec choix du moyen (Espèces, Wave, Orange Money, Virement bancaire), déduction immédiate du solde débiteur, mise à jour du statut en « Soldé » si solde à zéro, et génération d'un reçu de versement imprimable (`printCreditReceipt`).
+  - **Relance WhatsApp en 1 Clic** (`sendCreditWhatsAppReminder`) : Ouvre directement WhatsApp avec un message poli, précis et contractuel incluant le nom de la société, le numéro de facture, le montant exact restant dû, et les instructions de paiement.
+- **Actions Globales d'En-tête** :
+  - Bouton `+ Nouveau Crédit Accordé` (`openNewCreditModal`) : Enregistrement manuel d'une dette client avec liaison au CRM.
+  - Bouton `Imprimer État des Dettes` (`printDebtorsReport`) : Génération d'un état récapitulatif officiel A4 imprimable pour les audits et réunions financières.
+
+#### 3. Résultat des Tests Automatisés
+- Suite Dédiée (`test_credits_module.cjs`) : **45/45 assertions [PASS]**
+- **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
+
+---
+
+### 🟢 FICHE D'AUDIT N°6 — ONGLET 9 : CLIENTS & GESTION COMMERCIALE CRM (`clients`)
+
+#### 1. Rôle Métier & Description
+Module de gestion du portefeuille clients de l'entreprise. Il centralise la segmentation des comptes (particuliers comptoir B2C, entreprises B2B avec N° IFU fiscal, revendeurs grossistes), les plafonds de crédit autorisés, les historiques d'achats cumulés, et l'édition des fiches de relevé de compte officiel.
+
+#### 2. Ce que l'onglet Affiche & Permet de Faire :
+- **Indicateurs KPIs Portefeuille** :
+  - *Comptes Clients Actifs* (avec compteur des nouveaux inscrits du mois).
+  - *Clients Entreprises B2B* (sociétés avec identification fiscale IFU/RCCM).
+  - *Total Encours Crédits* (part des plafonds de crédit utilisée).
+  - *Volume d'Affaires CRM* (total cumulé des achats clients à vie).
+- **Système de Sous-Onglets de Segmentation (Barre Bleu Royal `subtab-scroll-deck`)** :
+  1. *Tous les Clients* (`crm-tab-ALL`)
+  2. *Clients Entreprises B2B* (`crm-tab-B2B`)
+  3. *Particuliers Comptoir B2C* (`crm-tab-B2C`)
+  4. *Revendeurs & Grossistes* (`crm-tab-RESELLER`)
+- **Tableau Central CRM** :
+  - *Colonnes d'affichage* : Identité / Société, Segment client, Contact téléphonique & Ville, Total Achats à vie, Encours de crédit actuel, Plafond maximum autorisé, Actions.
+  - *Moteur de Recherche Instantané* : Filtrage temps réel par nom, numéro IFU, ou téléphone (`filterCRMTable`).
+- **Actions Métier Immédiates (par client)** :
+  - **Relevé de Compte A4** (`printClientStatement`) : Génération d'une fiche A4 normalisée avec en-tête dynamique de l'entreprise, historique des factures et solde débiteur.
+  - **Contact WhatsApp Direct** (`sendClientWhatsApp`) : Ouverture de WhatsApp pré-ciblé sur le numéro du client.
+  - **Édition du Profil** (`openEditClientModal`) : Modification des coordonnées, catégorie tarifaire et plafond de crédit sans doublon.
+  - **Suppression Protégée** (`deleteClient`) : Retrait d'un compte avec actualisation des compteurs globaux.
+- **Actions Globales** :
+  - Bouton `+ Nouveau Client` (`openNewCustomerModal`) avec saisie complète : Raison sociale, N° IFU, Téléphone, Adresse, Plafond crédit, Délai de paiement.
+  - Bouton `Exporter CSV` (`exportClientsCSV`) : Export tableur complet de la base clients.
+
+#### 3. Résultat des Tests Automatisés
+- Suite Dédiée (`test_clients_module.cjs`) : **60/60 assertions [PASS]**
+- **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
+
+---
+
+### 🟢 FICHE D'AUDIT N°7 — ONGLET 3 : GESTION DES STOCKS & DOUBLE DÉPÔT (`stock`)
+
+#### 1. Rôle Métier & Description
+Module logistique au cœur de l'ERP. Il implémente l'architecture avancée **Double Dépôt (Rayon de vente au comptoir ⇄ Réserve centrale)**, assurant la traçabilité intégrale des flux physiques, l'alerte sur seuil critique de réapprovisionnement, la gestion des pertes et casses, et la génération de planches d'étiquettes avec codes-barres vectoriels.
+
+#### 2. Architecture des Sous-Onglets (5 Sous-Onglets Actifs - Barre Bleu Royal `subtab-scroll-deck`) :
+1. **Catalogue Général & Articles** (`stock-tab-catalog`)
+2. **Transferts Inter-Dépôts** (`stock-tab-transfers`)
+3. **Journal des Mouvements (Audit Trail)** (`stock-tab-log`)
+4. **Pertes, Casses & Rebuts** (`stock-tab-losses`)
+5. **Planche Étiquettes Codes-barres** (`stock-tab-barcodes`)
+
+#### 3. Ce que chaque sous-onglet Affiche & Permet de Faire :
+- **Indicateurs KPIs de Valorisation Financière** :
+  - *Valeur Stock Achat* : Capital immobilisé en magasin calculé dynamiquement au prix d'achat HT (Rayon + Réserve).
+  - *Valeur Stock Vente* : Potentiel de vente brut en magasin.
+  - *Unités en Rayon* : Nombre total d'unités immédiatement disponibles à la vente comptoir.
+  - *Références en Alerte* : Nombre d'articles dont le stock rayon est inférieur ou égal au seuil de sécurité.
+- **Sous-onglet 1 : Catalogue Général & Articles** :
+  - *Affichage* : Table détaillée avec visuel de l'article, Désignation, Famille/Catégorie, Emplacement, Stock Rayon (avec pastille verte/orange/rouge), Stock Réserve, Prix Achat HT, Prix Vente TTC, Marge unitaire, Boutons d'action.
+  - *Actions par article* : **Réassort rapide Rayon ⬅ Réserve** (`openReplenishModal`), Édition article (`openEditProductModal`), Suppression sécurisée.
+- **Sous-onglet 2 : Transferts Inter-Dépôts** :
+  - *Actions* : Modal de transfert en lot (`openTransferModal`) permettant de déplacer des quantités précises depuis la Réserve vers le Rayon (ou vice-versa) avec enregistrement automatique de l'opérateur et de la date.
+- **Sous-onglet 3 : Journal des Mouvements (Traçabilité Immuable)** :
+  - *Affichage* : Historique horodaté de chaque mouvement : Ventes caisse, Entrées réception fournisseur, Transferts inter-dépôts, Pertes déclarées, Ajustements d'inventaire.
+- **Sous-onglet 4 : Pertes, Casses & Rebuts** :
+  - *Actions* : Déclaration de perte (`openDeclareLossModal`) avec motif (Casse manutention, Péremption, Vol, Évaporation), calcul immédiat de la perte financière en F CFA et déduction du stock.
+- **Sous-onglet 5 : Planche Étiquettes Codes-barres** :
+  - *Fonctionnalité* : Générateur intégré d'étiquettes de prix avec code-barres Code-128 / EAN natif en SVG (zéro dépendance externe), prêt à imprimer sur planches adhésives ou rouleaux thermiques.
+- **Actions Globales d'Inventaire** :
+  - Bouton `+ Nouvel Article` (`openNewProductModal`).
+  - Bouton `Ajustement d'Inventaire Physique` (`openInventoryAdjustModal`) pour aligner le stock théorique sur le comptage réel.
+  - Bouton `Export CSV Stock` (`exportStockCSV`) pour inventaire physique.
+
+#### 4. Résultat des Tests Automatisés
+- Suite Dédiée (`test_stock_module.cjs`) : **53/53 assertions [PASS]**
+- **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
+
+---
+
+### 🟢 FICHE D'AUDIT N°8 — ONGLET 10 : FOURNISSEURS & ACHATS (`suppliers`)
+
+#### 1. Rôle Métier & Description
+Module d'approvisionnement B2B et de gestion des dettes fournisseurs (conforme au Compte 401 du SYSCOHADA). Il encadre les relations avec les fournisseurs partenaires, la passation de bons de commande (BC), la réception physique des marchandises avec entrée en stock, et le suivi rigoureux des règlements échelonnés.
+
+#### 2. Architecture des Sous-Onglets (3 Sous-Onglets Actifs - Barre Bleu Royal `subtab-scroll-deck`) :
+1. **Tous les Partenaires** (`suppliers-tab-ALL`)
+2. **Dettes à Régler** (`suppliers-tab-DUE`)
+3. **Commandes en Cours & Réceptions** (`suppliers-tab-ORDERS`)
+
+#### 3. Ce que chaque sous-onglet Affiche & Permet de Faire :
+- **Indicateurs KPIs Approvisionnement** :
+  - *Partenaires Fournisseurs* (nombre d'entreprises sous contrat actif).
+  - *Commandes en Cours* (bons de commande émis en attente de livraison).
+  - *Total Dettes Fournisseurs* (engagements financiers réels à payer).
+  - *Volume d'Achats Cumulé* (total des commandes livrées et réglées).
+- **Sous-onglet 1 : Tous les Partenaires Fournisseurs** :
+  - *Affichage* : Table des partenaires avec Raison sociale, Ville/Adresse, Contact commercial, Produits livrés, Dettes en cours, Achats totaux, Boutons d'action.
+  - *Actions* : Commander (`prepareSupplierOrder`), Règlement de dette (`openSupplierPaymentModal`), Relevé de compte A4 (`printSupplierStatement`), Édition (`openEditSupplierModal`), Suppression.
+- **Sous-onglet 2 : Dettes Fournisseurs à Régler** :
+  - *Affichage* : Vue filtrée instantanée sur les partenaires auprès desquels l'entreprise a des arriérés à payer.
+- **Sous-onglet 3 : Commandes en Cours & Réceptions Physiques** :
+  - *Affichage* : Liste des bons de commande avec statut (`En attente de réception`, `Livrée`).
+  - *Action Clé* : **« Réceptionner la Marchandise »** (`receivePurchaseOrder`) : En un clic, les quantités commandées entrent directement dans le stock réserve, le journal des mouvements est incrémenté, et la commande passe au statut *Livrée*.
+- **Actions Globales** :
+  - Bouton `+ Nouveau Fournisseur` (`openNewSupplierModal`).
+  - Bouton `Export CSV Fournisseurs` (`exportSuppliersCSV`).
+
+#### 4. Résultat des Tests Automatisés
+- Suite Dédiée (`test_suppliers_module.cjs`) : **63/63 assertions [PASS]**
 - **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
 
 ---
