@@ -5,7 +5,7 @@ const assert = require('assert');
 console.log('Testing Facebook Royal Blue Theme, Segmented Subtabs, Badges & Mode Switch Contrast...');
 
 const htmlPath = fs.existsSync('aura-pos/index.html') ? 'aura-pos/index.html' : 'index.html';
-const html = fs.readFileSync(htmlPath, 'utf8');
+const html = fs.readFileSync(htmlPath, 'utf8').replace(/\r\n/g, '\n');
 
 // 1. Theme Color Variables
 assert(html.includes('--primary: #1877F2'), 'Primary color is set to Facebook Royal Blue #1877F2');
@@ -19,7 +19,7 @@ console.log('  [PASS] 1: Facebook Royal Blue color variables and contrast values
 assert(html.includes('RENFORCEMENT DU CONTRASTE & LISIBILITÉ EN MODE CLAIR'), 'Light mode contrast comment/block present');
 assert(html.includes('html.light .app-card'), 'Light mode .app-card contrast rule present');
 assert(html.includes('html.light thead'), 'Light mode table header contrast rule present');
-assert(html.includes('html.light .tab-pill-deck {\n      background-color: #FFFFFF !important;'), 'Light mode tab deck is pure white, not greyish');
+assert(/html\.light \.tab-pill-deck\s*\{\s*background-color:\s*#FFFFFF\s*!important;/.test(html), 'Light mode tab deck is pure white, not greyish');
 console.log('  [PASS] 2: Light mode high-contrast and pure white dock verified.');
 
 // 3. Segmented Capsule Dock Styling & Pure White Active Text

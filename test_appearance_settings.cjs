@@ -3,36 +3,32 @@ const assert = require('assert');
 const vm = require('vm');
 
 console.log('================================================================');
-console.log('  TEST SUITE: BUREAU & DOCK OS / WALLPAPERS & CUSTOMIZATION     ');
+console.log('  TEST SUITE: PARAMÈTRES ASSAINIS & DÉCOMMISSIONNEMENT BUREAU OS ');
 console.log('================================================================\n');
 
 const htmlPath = fs.existsSync('aura-pos/index.html') ? 'aura-pos/index.html' : 'index.html';
 const html = fs.readFileSync(htmlPath, 'utf8');
 
-// 1. Audit DOM Elements
-console.log('--- 1. DOM Elements & Templates Audit ---');
-assert(html.includes('id="settings-tab-appearance"'), '#settings-tab-appearance exists in tab bar');
-console.log('  [PASS] #1: Tab button #settings-tab-appearance exists');
+// 1. Audit DOM Elements: Decommissioning Verification
+console.log('--- 1. Decommissioning & Cleanup Audit ---');
+assert(!html.includes('id="settings-tab-appearance"'), '#settings-tab-appearance is cleanly decommissioned from tab bar');
+console.log('  [PASS] #1: Tab button #settings-tab-appearance cleanly removed');
 
-assert(html.includes('id="subview-settings-appearance"'), '#subview-settings-appearance exists');
-console.log('  [PASS] #2: Subview #subview-settings-appearance exists');
+assert(!html.includes('id="subview-settings-appearance"'), '#subview-settings-appearance dead DOM container is cleanly removed');
+console.log('  [PASS] #2: Obsolete subview #subview-settings-appearance removed (23KB dead code cleared)');
 
-assert(html.includes('id="dock-opt-bottom"'), '#dock-opt-bottom exists');
-assert(html.includes('id="dock-opt-left"'), '#dock-opt-left exists');
-assert(html.includes('id="dock-opt-right"'), '#dock-opt-right exists');
-assert(html.includes('id="dock-opt-top"'), '#dock-opt-top exists');
-console.log('  [PASS] #3: All 4 dock position options exist in settings');
+assert(!html.includes('8. Bureau & Dock OS'), 'Mention "8. Bureau & Dock OS" is removed');
+console.log('  [PASS] #3: Obsolete "8. Bureau & Dock OS" text removed');
 
-assert(html.includes('id="wallpaper-bigsur-svg"'), '#wallpaper-bigsur-svg exists');
-console.log('  [PASS] #4: macOS Big Sur Chromatic Waves SVG artwork embedded');
+assert(html.includes('id="payroll-primes-list-container"'), '#payroll-primes-list-container exists for dynamic company primes');
+console.log('  [PASS] #4: Dynamic payroll primes container exists in settings');
 
-assert(html.includes('id="dock-pin-caisse"'), '#dock-pin-caisse exists');
-assert(html.includes('id="dock-pin-stock"'), '#dock-pin-stock exists');
-assert(html.includes('id="dock-pin-clients"'), '#dock-pin-clients exists');
-console.log('  [PASS] #5: Dock pinned app toggle checkboxes exist');
+assert(html.includes('id="new-prime-name"'), '#new-prime-name input exists');
+assert(html.includes('id="new-prime-amount"'), '#new-prime-amount input exists');
+console.log('  [PASS] #5: Add new prime/indemnity category inputs exist');
 
-assert(html.includes('id="setting-custom-wp-input"'), '#setting-custom-wp-input exists');
-console.log('  [PASS] #6: Custom wallpaper file input exists');
+assert(html.includes('addCustomPayrollPrimeCategory()'), 'addCustomPayrollPrimeCategory() is wired');
+console.log('  [PASS] #6: addCustomPayrollPrimeCategory() action is wired');
 
 // 2. Functional & Logic Verification in VM
 console.log('\n--- 2. Functional Logic & Persistence Verification ---');
@@ -49,6 +45,9 @@ function createMockEl(id) {
     },
     style: { display: '', background: '' },
     checked: true,
+    value: '',
+    innerHTML: '',
+    innerText: '',
     addEventListener: () => {},
     appendChild: () => {},
     removeChild: () => {},
@@ -114,50 +113,52 @@ if (scriptMatches) {
 vm.createContext(sandbox);
 vm.runInContext(combinedScript, sandbox);
 
-// Test setAuraDockPosition
-assert(typeof sandbox.setAuraDockPosition === 'function', 'setAuraDockPosition is a function');
-console.log('  [PASS] #7: setAuraDockPosition is defined');
+// Test dynamic primes management functions
+assert(typeof sandbox.renderPayrollPrimesSettings === 'function', 'renderPayrollPrimesSettings is defined');
+console.log('  [PASS] #7: renderPayrollPrimesSettings is a defined function');
 
-sandbox.setAuraDockPosition('left');
-assert(sandbox.document.body.classList.contains('dock-pos-left'), 'body has dock-pos-left');
-assert(!sandbox.document.body.classList.contains('dock-pos-bottom'), 'body does not have dock-pos-bottom');
-assert(sandbox.localStorage.getItem('aura_dock_position') === 'left', 'Dock position persisted to localStorage');
-console.log('  [PASS] #8: setAuraDockPosition("left") correctly updates body class & localStorage');
+assert(typeof sandbox.addCustomPayrollPrimeCategory === 'function', 'addCustomPayrollPrimeCategory is defined');
+console.log('  [PASS] #8: addCustomPayrollPrimeCategory is a defined function');
 
-sandbox.setAuraDockPosition('top');
-assert(sandbox.document.body.classList.contains('dock-pos-top'), 'body has dock-pos-top');
-assert(sandbox.localStorage.getItem('aura_dock_position') === 'top', 'Top dock position persisted');
-console.log('  [PASS] #9: setAuraDockPosition("top") correctly updates body class & localStorage');
+assert(typeof sandbox.removeCustomPayrollPrimeCategory === 'function', 'removeCustomPayrollPrimeCategory is defined');
+console.log('  [PASS] #9: removeCustomPayrollPrimeCategory is a defined function');
 
-// Test setDockPinnedApp & applyDockPinnedApps
-assert(typeof sandbox.setDockPinnedApp === 'function', 'setDockPinnedApp is a function');
-console.log('  [PASS] #10: setDockPinnedApp is defined');
+assert(typeof sandbox.updateCustomPayrollPrimeAmount === 'function', 'updateCustomPayrollPrimeAmount is defined');
+console.log('  [PASS] #10: updateCustomPayrollPrimeAmount is a defined function');
 
-sandbox.setDockPinnedApp('stock', false);
-assert(elements['dock-btn-stock'].style.display === 'none', 'Unpinned stock button is hidden');
-const pinnedConfig = JSON.parse(sandbox.localStorage.getItem('aura_dock_pinned_apps'));
-assert(pinnedConfig.stock === false, 'Pinned config persisted to localStorage');
-console.log('  [PASS] #11: setDockPinnedApp("stock", false) hides button & updates storage');
+// Test adding a custom category (e.g. Prime de Santé)
+sandbox.document.getElementById('new-prime-name').value = 'Prime de Santé';
+sandbox.document.getElementById('new-prime-amount').value = '15000';
+sandbox.addCustomPayrollPrimeCategory();
 
-sandbox.setDockPinnedApp('stock', true);
-assert(elements['dock-btn-stock'].style.display === '', 'Re-pinned stock button is displayed');
-console.log('  [PASS] #12: setDockPinnedApp("stock", true) restores button display');
+const currentPrimes = sandbox.SYSTEM_SETTINGS.payrollPrimes;
+const santePrime = currentPrimes.find(p => p.name === 'Prime de Santé');
+assert(santePrime, 'Prime de Santé successfully added to SYSTEM_SETTINGS.payrollPrimes');
+assert(santePrime.amount === 15000, 'Prime de Santé has correct amount 15000');
+console.log('  [PASS] #11: addCustomPayrollPrimeCategory correctly added "Prime de Santé" (15 000 F)');
 
-// Test applyAuraWallpaperKey
-assert(typeof sandbox.applyAuraWallpaperKey === 'function', 'applyAuraWallpaperKey is defined');
-sandbox.applyAuraWallpaperKey('bigsur');
-console.log('  [PASS] #13: applyAuraWallpaperKey("bigsur") executed cleanly');
+// Test updating prime amount
+sandbox.updateCustomPayrollPrimeAmount(santePrime.id, 20000);
+assert(santePrime.amount === 20000, 'Prime amount updated to 20000');
+console.log('  [PASS] #12: updateCustomPayrollPrimeAmount updated amount to 20 000 F');
 
-sandbox.applyAuraWallpaperKey('canyon');
-console.log('  [PASS] #14: applyAuraWallpaperKey("canyon") executed cleanly');
+// Test removing prime
+sandbox.removeCustomPayrollPrimeCategory(santePrime.id);
+const stillExists = sandbox.SYSTEM_SETTINGS.payrollPrimes.some(p => p.id === santePrime.id);
+assert(!stillExists, 'Prime de Santé successfully removed');
+console.log('  [PASS] #13: removeCustomPayrollPrimeCategory successfully removed category');
 
-// Test switchSettingsTab('appearance')
+// Test switchSettingsTab
 assert(typeof sandbox.switchSettingsTab === 'function', 'switchSettingsTab is defined');
-sandbox.switchSettingsTab('appearance');
-assert(!elements['subview-settings-appearance'].classList.contains('hidden'), 'Appearance subview is shown');
+sandbox.switchSettingsTab('payroll');
+assert(!elements['subview-settings-payroll'].classList.contains('hidden'), 'Payroll subview is activated');
 assert(elements['subview-settings-general'].classList.contains('hidden'), 'General subview is hidden');
-console.log('  [PASS] #15: switchSettingsTab("appearance") activates subview 8');
+console.log('  [PASS] #14: switchSettingsTab("payroll") activates payroll settings tab cleanly');
+
+sandbox.switchSettingsTab('general');
+assert(!elements['subview-settings-general'].classList.contains('hidden'), 'General subview is activated');
+console.log('  [PASS] #15: switchSettingsTab("general") activates general settings tab cleanly');
 
 console.log('\n================================================================');
-console.log('  ALL APPEARANCE & DOCK CUSTOMIZATION TESTS PASSED! (15/15)     ');
+console.log('  ALL SETTINGS ASSAINISSEMENT & DYNAMIC PRIMES TESTS PASSED! (15/15)');
 console.log('================================================================');

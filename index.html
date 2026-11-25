@@ -5788,13 +5788,10 @@
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
               <span>7. Paie, Cotisations & RH</span>
             </button>
-            <button type="button" onclick="switchSettingsTab('appearance')" id="settings-tab-appearance" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
-              <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-              <span>8. Bureau & Dock OS</span>
-            </button>
+
             <button type="button" onclick="switchSettingsTab('ai')" id="settings-tab-ai" class="tab-pill-btn settings-subtab-btn border-transparent text-[var(--text-muted)] hover:text-[var(--text-main)] press-effect">
               <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              <span>9. Agent IA & Copilot</span>
+              <span>8. Agent IA & Copilot</span>
             </button>
           </div>
         </div>
@@ -6548,30 +6545,48 @@
               </div>
             </div>
 
-            <!-- Primes & Indemnités Mensuelles par Défaut -->
+            <!-- Primes & Indemnités d'Entreprise Dynamiques & Personnalisables -->
             <div class="app-card p-5 space-y-4">
-              <h3 class="font-bold text-sm text-[var(--text-main)] border-b border-[var(--border)] pb-2 flex items-center justify-between">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-[var(--border)] gap-2">
                 <div class="flex items-center gap-2">
                   <svg class="w-4 h-4 text-emerald-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
-                  <span>Primes & Indemnités par Défaut (F CFA)</span>
+                  <h3 class="font-bold text-sm text-[var(--text-main)]">Primes & Indemnités d'Entreprise</h3>
                 </div>
-                <span class="text-[10px] text-emerald-600 font-bold bg-emerald-500/10 px-2 py-0.5 rounded">Gains Récurrents</span>
-              </h3>
+                <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20 w-fit">Catégories Personnalisables</span>
+              </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                <div>
-                  <label class="block text-[var(--text-muted)] mb-1 font-semibold">Prime de Transport :</label>
-                  <input type="number" id="setting-payroll-default-transport" value="25000" class="app-input text-xs font-num font-bold">
+              <p class="text-[11px] text-[var(--text-muted)]">Configurez les rubriques de primes et indemnités applicables à votre entreprise (transport, santé, logement, panier repas, assiduité, etc.). Vous pouvez ajouter vos propres catégories personnalisées ou ajuster les montants par défaut.</p>
+
+              <!-- Liste dynamique des rubriques de primes actives -->
+              <div id="payroll-primes-list-container" class="space-y-2">
+                <!-- Rendu dynamiquement via renderPayrollPrimesSettings() -->
+              </div>
+
+              <!-- Formulaire rapide d'ajout d'une nouvelle catégorie personnalisée -->
+              <div class="p-3.5 rounded-xl bg-[var(--bg-card-subtle)] border border-[var(--border)] space-y-2.5">
+                <div class="text-[11px] font-bold text-[var(--text-main)] flex items-center gap-1.5">
+                  <span class="w-4 h-4 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] font-black">+</span>
+                  <span>Ajouter une Nouvelle Rubrique (Santé, Enfant, Rendement...)</span>
                 </div>
-                <div>
-                  <label class="block text-[var(--text-muted)] mb-1 font-semibold">Indemnité de Logement :</label>
-                  <input type="number" id="setting-payroll-default-housing" value="0" class="app-input text-xs font-num font-bold">
-                </div>
-                <div>
-                  <label class="block text-[var(--text-muted)] mb-1 font-semibold">Panier / Repas :</label>
-                  <input type="number" id="setting-payroll-default-food" value="0" class="app-input text-xs font-num font-bold">
+                <div class="grid grid-cols-1 sm:grid-cols-12 gap-2 text-xs">
+                  <div class="sm:col-span-7">
+                    <input type="text" id="new-prime-name" placeholder="Ex: Prime de Santé, Allocation Enfant, Prime d'Assiduité..." class="app-input text-xs">
+                  </div>
+                  <div class="sm:col-span-3">
+                    <input type="number" id="new-prime-amount" placeholder="Montant F CFA (ex: 15000)" class="app-input text-xs font-num font-bold">
+                  </div>
+                  <div class="sm:col-span-2">
+                    <button type="button" onclick="addCustomPayrollPrimeCategory()" class="w-full app-btn-primary py-2 px-2 text-xs font-bold flex items-center justify-center gap-1 shadow-xs cursor-pointer">
+                      <span>Ajouter</span>
+                    </button>
+                  </div>
                 </div>
               </div>
+
+              <!-- Hidden inputs pour compatibilité continue -->
+              <input type="hidden" id="setting-payroll-default-transport" value="25000">
+              <input type="hidden" id="setting-payroll-default-housing" value="0">
+              <input type="hidden" id="setting-payroll-default-food" value="0">
             </div>
 
             <!-- Format & Mentions Légales du Bulletin -->
@@ -6608,343 +6623,7 @@
 
       
         <!-- SOUS-ONGLET 8 : BUREAU & DOCK OS (PERSONNALISATION MAC OS STYLE) -->
-        <div id="subview-settings-appearance" class="hidden space-y-6">
-          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
-            <!-- Carte 1 : Position & Ergonomie du Dock -->
-            <div class="app-card p-5 space-y-4">
-              <h3 class="font-bold text-sm text-[var(--text-main)] border-b border-[var(--border)] pb-2 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="4"/><line x1="3" y1="16" x2="21" y2="16"/></svg>
-                  <span>Position de la Barre de Navigation (Dock OS)</span>
-                </div>
-                <span class="text-[10px] text-sky-400 font-bold bg-sky-500/10 px-2 py-0.5 rounded border border-sky-500/20">macOS / Windows Style</span>
-              </h3>
-              <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-                Adaptez l'emplacement physique du Dock flottant selon votre confort tactile et la taille de votre écran de caisse.
-              </p>
-
-              <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-1">
-                <!-- En Bas -->
-                <button type="button" onclick="setAuraDockPosition('bottom')" id="dock-opt-bottom" class="dock-pos-card p-3 rounded-xl border border-sky-500 bg-sky-500/10 ring-1 ring-sky-500 transition-all flex flex-col items-center gap-2 text-center group cursor-pointer">
-                  <div class="w-12 h-9 rounded-lg border border-slate-700 bg-slate-900/60 relative flex flex-col justify-end p-1">
-                    <div class="w-8 h-1.5 rounded-full bg-sky-400 mx-auto shadow-sm shadow-sky-400/50"></div>
-                  </div>
-                  <div>
-                    <div class="font-bold text-xs text-sky-400">En Bas</div>
-                    <div class="text-[10px] text-[var(--text-muted)]">Défaut macOS</div>
-                  </div>
-                </button>
-
-                <!-- À Gauche -->
-                <button type="button" onclick="setAuraDockPosition('left')" id="dock-opt-left" class="dock-pos-card p-3 rounded-xl border border-[var(--border)] hover:border-sky-500/50 bg-[var(--bg-card)] transition-all flex flex-col items-center gap-2 text-center group cursor-pointer">
-                  <div class="w-12 h-9 rounded-lg border border-slate-700 bg-slate-900/60 relative flex items-center p-1">
-                    <div class="h-6 w-1.5 rounded-full bg-slate-500 group-hover:bg-sky-400 shadow-sm"></div>
-                  </div>
-                  <div>
-                    <div class="font-bold text-xs text-[var(--text-main)] group-hover:text-sky-400">À Gauche</div>
-                    <div class="text-[10px] text-[var(--text-muted)]">Vertical</div>
-                  </div>
-                </button>
-
-                <!-- À Droite -->
-                <button type="button" onclick="setAuraDockPosition('right')" id="dock-opt-right" class="dock-pos-card p-3 rounded-xl border border-[var(--border)] hover:border-sky-500/50 bg-[var(--bg-card)] transition-all flex flex-col items-center gap-2 text-center group cursor-pointer">
-                  <div class="w-12 h-9 rounded-lg border border-slate-700 bg-slate-900/60 relative flex items-center justify-end p-1">
-                    <div class="h-6 w-1.5 rounded-full bg-slate-500 group-hover:bg-sky-400 shadow-sm"></div>
-                  </div>
-                  <div>
-                    <div class="font-bold text-xs text-[var(--text-main)] group-hover:text-sky-400">À Droite</div>
-                    <div class="text-[10px] text-[var(--text-muted)]">Vertical</div>
-                  </div>
-                </button>
-
-                <!-- En Haut -->
-                <button type="button" onclick="setAuraDockPosition('top')" id="dock-opt-top" class="dock-pos-card p-3 rounded-xl border border-[var(--border)] hover:border-sky-500/50 bg-[var(--bg-card)] transition-all flex flex-col items-center gap-2 text-center group cursor-pointer">
-                  <div class="w-12 h-9 rounded-lg border border-slate-700 bg-slate-900/60 relative flex flex-col justify-start p-1">
-                    <div class="w-8 h-1.5 rounded-full bg-slate-500 group-hover:bg-sky-400 shadow-sm"></div>
-                  </div>
-                  <div>
-                    <div class="font-bold text-xs text-[var(--text-main)] group-hover:text-sky-400">En Haut</div>
-                    <div class="text-[10px] text-[var(--text-muted)]">Horizontal</div>
-                  </div>
-                </button>
-              </div>
-            </div>
-
-            <!-- Carte 2 : Fonds d'Écran Haute Définition & Import -->
-            <div class="app-card p-5 space-y-4">
-              <h3 class="font-bold text-sm text-[var(--text-main)] border-b border-[var(--border)] pb-2 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                  <span>Fonds d'Écran Ultra HD (3 Thèmes Pro & Import)</span>
-                </div>
-                <span class="text-[10px] text-amber-400 font-bold bg-amber-500/10 px-2 py-0.5 rounded border border-amber-500/20">Élégance Premium</span>
-              </h3>
-              <p class="text-xs text-[var(--text-muted)] leading-relaxed">
-                Sélectionnez un arrière-plan immersif ou importez la photo de votre boutique ou enseigne commerciale.
-              </p>
-
-              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <!-- Thème 1 : Big Sur Chromatic Waves -->
-                <div class="rounded-xl border border-[var(--border)] overflow-hidden bg-[var(--bg-card)] p-2.5 flex flex-col justify-between space-y-2">
-                  <div class="h-16 rounded-lg overflow-hidden relative shadow-inner bg-gradient-to-tr from-[#001738] via-[#0A337A] to-[#1D64D8] flex items-center justify-center">
-                    <svg class="w-full h-full object-cover" viewBox="0 0 160 80" fill="none">
-                      <path d="M0 50 C 40 20, 100 80, 160 30 L160 80 L0 80 Z" fill="#FF5722" opacity="0.9"/>
-                      <path d="M0 65 C 50 35, 110 75, 160 45 L160 80 L0 80 Z" fill="#D81B60" opacity="0.85"/>
-                      <path d="M0 35 C 45 10, 95 65, 160 20 L160 80 L0 80 Z" fill="#2979FF" opacity="0.8"/>
-                    </svg>
-                    <span class="absolute bottom-1 right-1.5 text-[8px] font-bold text-white bg-black/50 px-1 rounded">Vagues</span>
-                  </div>
-                  <div>
-                    <div class="font-bold text-xs text-[var(--text-main)]">macOS Big Sur</div>
-                    <div class="text-[10px] text-[var(--text-muted)]">Vagues chromatiques</div>
-                  </div>
-                  <button type="button" onclick="setAuraWallpaper('bigsur')" class="w-full py-1.5 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 text-sky-400 font-bold text-xs border border-sky-500/20 transition-all cursor-pointer">
-                    Appliquer
-                  </button>
-                </div>
-
-                <!-- Thème 2 : Sonoma Canyon Sunset -->
-                <div class="rounded-xl border border-[var(--border)] overflow-hidden bg-[var(--bg-card)] p-2.5 flex flex-col justify-between space-y-2">
-                  <div class="h-16 rounded-lg overflow-hidden relative shadow-inner bg-gradient-to-b from-[#180C24] via-[#481B34] to-[#A8432A] flex items-center justify-center">
-                    <svg class="w-full h-full object-cover" viewBox="0 0 160 80" fill="none">
-                      <polygon points="0,50 30,35 70,55 110,30 160,50 160,80 0,80" fill="#752934" opacity="0.9"/>
-                      <polygon points="0,65 40,48 85,62 130,44 160,60 160,80 0,80" fill="#BD5136"/>
-                    </svg>
-                    <span class="absolute bottom-1 right-1.5 text-[8px] font-bold text-white bg-black/50 px-1 rounded">Canyon</span>
-                  </div>
-                  <div>
-                    <div class="font-bold text-xs text-[var(--text-main)]">Sonoma Canyon</div>
-                    <div class="text-[10px] text-[var(--text-muted)]">Crépuscule ambré</div>
-                  </div>
-                  <button type="button" onclick="setAuraWallpaper('canyon')" class="w-full py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 text-amber-400 font-bold text-xs border border-amber-500/20 transition-all cursor-pointer">
-                    Appliquer
-                  </button>
-                </div>
-
-                <!-- Thème 3 : Sequoia Forest Aurora -->
-                <div class="rounded-xl border border-[var(--border)] overflow-hidden bg-[var(--bg-card)] p-2.5 flex flex-col justify-between space-y-2">
-                  <div class="h-16 rounded-lg overflow-hidden relative shadow-inner bg-[radial-gradient(circle_at_50%_20%,#1E4E42_0%,#0D2821_55%,#051410_100%)] flex items-center justify-center">
-                    <div class="w-10 h-10 rounded-full bg-emerald-400/20 blur-md"></div>
-                    <span class="absolute bottom-1 right-1.5 text-[8px] font-bold text-white bg-black/50 px-1 rounded">Aurore</span>
-                  </div>
-                  <div>
-                    <div class="font-bold text-xs text-[var(--text-main)]">Sequoia Aurora</div>
-                    <div class="text-[10px] text-[var(--text-muted)]">Forêt boréale émeraude</div>
-                  </div>
-                  <button type="button" onclick="setAuraWallpaper('sequoia')" class="w-full py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 text-emerald-400 font-bold text-xs border border-emerald-500/20 transition-all cursor-pointer">
-                    Appliquer
-                  </button>
-                </div>
-              </div>
-
-              <!-- Upload Fond d'Écran Personnalisé -->
-              <div class="pt-2 border-t border-[var(--border)] flex items-center justify-between gap-3">
-                <div class="text-xs">
-                  <span class="font-semibold text-[var(--text-main)]">Votre Propre Fond d'Écran :</span>
-                  <p class="text-[11px] text-[var(--text-muted)]">JPG, PNG ou WebP de votre enseigne ou logo.</p>
-                </div>
-                <input type="file" id="setting-custom-wp-input" accept="image/*" onchange="handleCustomWallpaperUpload(event)" class="hidden">
-                <button type="button" onclick="document.getElementById('setting-custom-wp-input').click()" class="px-3 py-1.5 rounded-lg bg-[var(--primary)] hover:bg-[var(--primary-hover)] text-white text-xs font-bold shadow-sm transition-all flex items-center gap-1.5 cursor-pointer whitespace-nowrap">
-                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
-                  <span>Importer une Image</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Carte 3 : Raccourcis et Applications Épinglées au Dock (Pleine largeur) -->
-            <div class="app-card p-5 space-y-4 lg:col-span-2">
-              <h3 class="font-bold text-sm text-[var(--text-main)] border-b border-[var(--border)] pb-2 flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                  <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  <span>Applications Épinglées au Dock (Raccourcis d'Action Rapide)</span>
-                </div>
-                <span class="text-[10px] text-purple-400 font-bold bg-purple-500/10 px-2 py-0.5 rounded border border-purple-500/20">Personnalisable</span>
-              </h3>
-              <p class="text-xs text-[var(--text-muted)]">
-                Activez ou désactivez les icônes présentes dans la barre de navigation pour n'afficher que les modules que vous utilisez au quotidien.
-              </p>
-
-              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 pt-1">
-                
-                <!-- Caisse POS -->
-                <label class="flex items-center justify-between p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] hover:border-slate-600 transition-all cursor-pointer">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center text-white text-xs">
-                      🛒
-                    </div>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Caisse POS</div>
-                      <div class="text-[10px] text-[var(--text-muted)]">Encaissement direct</div>
-                    </div>
-                  </div>
-                  <input type="checkbox" id="dock-pin-caisse" checked onchange="setDockPinnedApp('caisse', this.checked)" class="rounded text-[var(--primary)] focus:ring-0">
-                </label>
-
-                <!-- Factures A4 -->
-                <label class="flex items-center justify-between p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] hover:border-slate-600 transition-all cursor-pointer">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 to-blue-400 flex items-center justify-center text-white text-xs">
-                      📑
-                    </div>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Factures & Devis</div>
-                      <div class="text-[10px] text-[var(--text-muted)]">Édition A4</div>
-                    </div>
-                  </div>
-                  <input type="checkbox" id="dock-pin-documents" checked onchange="setDockPinnedApp('documents', this.checked)" class="rounded text-[var(--primary)] focus:ring-0">
-                </label>
-
-                <!-- Stocks & Dépôts -->
-                <label class="flex items-center justify-between p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] hover:border-slate-600 transition-all cursor-pointer">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-amber-600 to-yellow-400 flex items-center justify-center text-white text-xs">
-                      📦
-                    </div>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Stocks & Articles</div>
-                      <div class="text-[10px] text-[var(--text-muted)]">Inventaires & Dépôts</div>
-                    </div>
-                  </div>
-                  <input type="checkbox" id="dock-pin-stock" checked onchange="setDockPinnedApp('stock', this.checked)" class="rounded text-[var(--primary)] focus:ring-0">
-                </label>
-
-                <!-- Clients CRM -->
-                <label class="flex items-center justify-between p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] hover:border-slate-600 transition-all cursor-pointer">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-sky-600 to-cyan-400 flex items-center justify-center text-white text-xs">
-                      👥
-                    </div>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Clients & CRM</div>
-                      <div class="text-[10px] text-[var(--text-muted)]">Dettes & WhatsApp</div>
-                    </div>
-                  </div>
-                  <input type="checkbox" id="dock-pin-clients" checked onchange="setDockPinnedApp('clients', this.checked)" class="rounded text-[var(--primary)] focus:ring-0">
-                </label>
-
-                <!-- Livraison -->
-                <label class="flex items-center justify-between p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] hover:border-slate-600 transition-all cursor-pointer">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-red-600 to-rose-400 flex items-center justify-center text-white text-xs">
-                      🚚
-                    </div>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Logistique</div>
-                      <div class="text-[10px] text-[var(--text-muted)]">Flotte & Courses</div>
-                    </div>
-                  </div>
-                  <input type="checkbox" id="dock-pin-deliveries" checked onchange="setDockPinnedApp('deliveries', this.checked)" class="rounded text-[var(--primary)] focus:ring-0">
-                </label>
-
-                <!-- Équipe & Paie -->
-                <label class="flex items-center justify-between p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] hover:border-slate-600 transition-all cursor-pointer">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-purple-600 to-pink-400 flex items-center justify-center text-white text-xs">
-                      👤
-                    </div>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Équipe & Paie</div>
-                      <div class="text-[10px] text-[var(--text-muted)]">Salaires OHADA</div>
-                    </div>
-                  </div>
-                  <input type="checkbox" id="dock-pin-hr" checked onchange="setDockPinnedApp('hr', this.checked)" class="rounded text-[var(--primary)] focus:ring-0">
-                </label>
-
-                <!-- Finances -->
-                <label class="flex items-center justify-between p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] hover:border-slate-600 transition-all cursor-pointer">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-amber-700 to-yellow-500 flex items-center justify-center text-white text-xs">
-                      💰
-                    </div>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Finances & Caisse</div>
-                      <div class="text-[10px] text-[var(--text-muted)]">Trésorerie & Dépenses</div>
-                    </div>
-                  </div>
-                  <input type="checkbox" id="dock-pin-accounting" checked onchange="setDockPinnedApp('accounting', this.checked)" class="rounded text-[var(--primary)] focus:ring-0">
-                </label>
-
-                <!-- Réglages -->
-                <label class="flex items-center justify-between p-2.5 rounded-xl border border-[var(--border)] bg-[var(--bg-card)] hover:border-slate-600 transition-all cursor-pointer">
-                  <div class="flex items-center gap-2.5">
-                    <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-slate-600 to-slate-400 flex items-center justify-center text-white text-xs">
-                      ⚙️
-                    </div>
-                    <div>
-                      <div class="text-xs font-bold text-[var(--text-main)]">Paramètres</div>
-                      <div class="text-[10px] text-[var(--text-muted)]">Configuration Système</div>
-                    </div>
-                  </div>
-                  <input type="checkbox" id="dock-pin-settings" checked onchange="setDockPinnedApp('settings', this.checked)" class="rounded text-[var(--primary)] focus:ring-0">
-                </label>
-
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        
-        <!-- SOUS-ONGLET 10 : GESTION DES RÔLES & ACCÈS (RBAC STRICT ADMIN) -->
-        <div id="subview-tab-rbac-permissions" class="space-y-5 hidden">
-          <div class="app-card p-6 space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
-              <div>
-                <h3 class="text-base font-bold text-[var(--text-main)] flex items-center gap-2">
-                  <span>Matrice de Droits d'Accès & Cloisonnement des Agents (RBAC)</span>
-                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-teal-500/10 text-teal-400 font-bold border border-teal-500/20">Sécurité Interne</span>
-                </h3>
-                <p class="text-xs text-[var(--text-muted)]">Cochez ou décochez précisément les modules accessibles pour chaque profil d'employé. Seul le Gérant peut modifier ces règles.</p>
-              </div>
-              <button type="button" onclick="saveRBACPermissions()" class="app-btn-primary text-xs flex items-center gap-1.5 shadow-sm">
-                <span>Enregistrer la Matrice</span>
-              </button>
-            </div>
-
-            <!-- Tableau Matrice de Permissions -->
-            <div class="overflow-x-auto custom-scroll">
-              <table class="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr class="bg-[var(--bg-card-subtle)] border-b border-[var(--border)] text-[11px] font-bold text-[var(--text-muted)]">
-                    <th class="p-3 w-56">Module Système</th>
-                    <th class="p-3 text-center">Gérant / Super Admin</th>
-                    <th class="p-3 text-center">Responsable Magasin</th>
-                    <th class="p-3 text-center">Caissière Vendeuse</th>
-                    <th class="p-3 text-center">Comptable / DAF</th>
-                  </tr>
-                </thead>
-                <tbody class="divide-y divide-[var(--border)]" id="rbac-matrix-tbody">
-                  <!-- Rendu dynamique par renderRBACMatrix() -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        <!-- SOUS-ONGLET 11 : MULTI-MAGASINS & DÉPÔTS -->
-        <div id="subview-tab-multi-store" class="space-y-5 hidden">
-          <div class="app-card p-6 space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[var(--border)] pb-3">
-              <div>
-                <h3 class="text-base font-bold text-[var(--text-main)] flex items-center gap-2">
-                  <span>Configuration des Magasins, Boutiques & Dépôts Régionaux</span>
-                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 font-bold border border-blue-500/20">Multi-Sites</span>
-                </h3>
-                <p class="text-xs text-[var(--text-muted)]">Gérez vos points de vente physiques et visualisez les stocks et sessions de caisse par établissement.</p>
-              </div>
-              <button type="button" onclick="openNewStoreModal()" class="app-btn-primary text-xs flex items-center gap-1.5 shadow-sm">
-                <span>+ Ajouter une Succursale</span>
-              </button>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="multi-store-cards-container">
-              <!-- Rendu dynamique par renderStoreCards() -->
-            </div>
-          </div>
-        </div>
-
-<!-- SOUS-ONGLET 9 : CONFIGURATION AGENT IA & COPILOT -->
+        <!-- SOUS-ONGLET 8 : CONFIGURATION AGENT IA & COPILOT -->
         <div id="subview-settings-ai" class="hidden space-y-6">
           <div class="app-card p-6 space-y-6">
             
@@ -15165,10 +14844,46 @@ const DAILY_PRODUCTS_CATALOG = [
       const custom = emp.customRubrics || {};
 
       const salaryBase = (custom.baseSalary != null) ? Number(custom.baseSalary) : Number(emp.salaryBase || emp.salary || 185000);
-      const primeTransport = (custom.transport != null) ? Number(custom.transport) : (cfg.payrollDefaultTransport != null ? Number(cfg.payrollDefaultTransport) : 25000);
-      const primeLogement = (custom.housing != null) ? Number(custom.housing) : (Number(cfg.payrollDefaultHousing) || 0);
-      const primeBonus = (custom.bonus != null) ? Number(custom.bonus) : 0;
-      const totalPrimes = primeTransport + primeLogement + primeBonus;
+      
+      // Primes & Indemnités Dynamiques d'Entreprise
+      const activePrimesList = (Array.isArray(cfg.payrollPrimes) && cfg.payrollPrimes.length > 0)
+        ? cfg.payrollPrimes
+        : [
+            { id: 'transport', name: 'Indemnité Forfaitaire de Transport', amount: (cfg.payrollDefaultTransport != null ? Number(cfg.payrollDefaultTransport) : 25000) },
+            { id: 'housing', name: 'Indemnité de Logement', amount: (Number(cfg.payrollDefaultHousing) || 0) },
+            { id: 'food', name: 'Panier Repas', amount: (Number(cfg.payrollDefaultFood) || 0) }
+          ];
+
+      let totalPrimes = 0;
+      let primeRowsHtml = '';
+
+      activePrimesList.forEach((p, pIdx) => {
+        const pAmount = (custom[p.id] != null) ? Number(custom[p.id]) : Number(p.amount || 0);
+        if (pAmount > 0) {
+          totalPrimes += pAmount;
+          primeRowsHtml += `
+            <tr>
+              <td class="p-2 font-medium">${210 + (pIdx * 10)} - ${p.name}</td>
+              <td class="p-2 text-right font-mono">Forfait</td>
+              <td class="p-2 text-right font-mono font-bold">${pAmount.toLocaleString('fr-FR')} F</td>
+              <td class="p-2 text-right font-mono">-</td>
+            </tr>
+          `;
+        }
+      });
+
+      if (custom.bonus && Number(custom.bonus) > 0) {
+        const bonusVal = Number(custom.bonus);
+        totalPrimes += bonusVal;
+        primeRowsHtml += `
+          <tr>
+            <td class="p-2 font-medium">300 - Prime Exceptionnelle / Rendement</td>
+            <td class="p-2 text-right font-mono">Variable</td>
+            <td class="p-2 text-right font-mono font-bold">${bonusVal.toLocaleString('fr-FR')} F</td>
+            <td class="p-2 text-right font-mono">-</td>
+          </tr>
+        `;
+      }
       const totalBrut = salaryBase + totalPrimes;
 
       // Cotisations sociales
@@ -15210,38 +14925,7 @@ const DAILY_PRODUCTS_CATALOG = [
       const periodStr = custom.period || new Date().toLocaleDateString('fr-FR', { month: 'long', year: 'numeric' }).toUpperCase();
       const footerNotes = custom.footerNotes || cfg.payrollFooterNotes || 'Conforme au Code du Travail. Bulletin à conserver sans limitation de durée.';
 
-      let primeRowsHtml = '';
-      if (primeTransport > 0) {
-        primeRowsHtml += `
-          <tr>
-            <td class="p-2 font-medium">210 - Indemnité Forfaitaire de Transport & Panier</td>
-            <td class="p-2 text-right font-mono">Forfait</td>
-            <td class="p-2 text-right font-mono font-bold">${primeTransport.toLocaleString('fr-FR')} F</td>
-            <td class="p-2 text-right font-mono">-</td>
-          </tr>
-        `;
-      }
-      if (primeLogement > 0) {
-        primeRowsHtml += `
-          <tr>
-            <td class="p-2 font-medium">220 - Indemnité de Logement</td>
-            <td class="p-2 text-right font-mono">Forfait</td>
-            <td class="p-2 text-right font-mono font-bold">${primeLogement.toLocaleString('fr-FR')} F</td>
-            <td class="p-2 text-right font-mono">-</td>
-          </tr>
-        `;
-      }
-      if (primeBonus > 0) {
-        primeRowsHtml += `
-          <tr>
-            <td class="p-2 font-medium">300 - Prime Exceptionnelle / Rendement</td>
-            <td class="p-2 text-right font-mono">Bonus</td>
-            <td class="p-2 text-right font-mono font-bold">${primeBonus.toLocaleString('fr-FR')} F</td>
-            <td class="p-2 text-right font-mono">-</td>
-          </tr>
-        `;
-      }
-
+      // Rubriques de primes dynamiques déjà construites dans primeRowsHtml ci-dessus
       let deductionRowsHtml = '';
       if (enableCnss) {
         deductionRowsHtml += `
@@ -19378,7 +19062,7 @@ function getLiveMetricForPole(countKey) {
        SOUS-ONGLETS DU MODULE PARAMÈTRES (7 SOUS-ONGLETS)
        ======================================================== */
     function switchSettingsTab(tabKey) {
-      ['general', 'rbac', 'printers', 'tickets', 'zones', 'backups', 'payroll', 'appearance', 'ai'].forEach(k => {
+      ['general', 'rbac', 'printers', 'tickets', 'zones', 'backups', 'payroll', 'ai'].forEach(k => {
         const el = document.getElementById('subview-settings-' + k);
         const btn = document.getElementById('settings-tab-' + k);
         if (el) el.classList.add('hidden');
@@ -24393,6 +24077,11 @@ function getLiveMetricForPole(countKey) {
       payrollDefaultTransport: 25000,
       payrollDefaultHousing: 0,
       payrollDefaultFood: 0,
+      payrollPrimes: [
+        { id: 'transport', name: 'Prime de Transport', amount: 25000, type: 'gain' },
+        { id: 'housing', name: 'Indemnité de Logement', amount: 0, type: 'gain' },
+        { id: 'food', name: 'Panier Repas', amount: 0, type: 'gain' }
+      ],
       payrollDocTitle: 'BULLETIN DE PAIE',
       payrollPayMode: 'Virement Bancaire (Coris)',
       payrollFooterNotes: 'Conforme au Code du Travail. Bulletin à conserver sans limitation de durée.'
@@ -24571,6 +24260,113 @@ function getLiveMetricForPole(countKey) {
       showToast('Toutes les modifications des paramètres ont été enregistrées avec succès !', 'success');
     }
     window.saveAllSettings = saveAllSettings;
+
+    // Gestionnaire Dynamique des Catégories de Primes & Indemnités d'Entreprise
+    function renderPayrollPrimesSettings() {
+      const container = document.getElementById('payroll-primes-list-container');
+      if (!container) return;
+      if (!Array.isArray(SYSTEM_SETTINGS.payrollPrimes) || SYSTEM_SETTINGS.payrollPrimes.length === 0) {
+        SYSTEM_SETTINGS.payrollPrimes = [
+          { id: 'transport', name: 'Prime de Transport', amount: Number(SYSTEM_SETTINGS.payrollDefaultTransport) || 25000, type: 'gain' },
+          { id: 'housing', name: 'Indemnité de Logement', amount: Number(SYSTEM_SETTINGS.payrollDefaultHousing) || 0, type: 'gain' },
+          { id: 'food', name: 'Panier Repas', amount: Number(SYSTEM_SETTINGS.payrollDefaultFood) || 0, type: 'gain' }
+        ];
+      }
+      container.innerHTML = SYSTEM_SETTINGS.payrollPrimes.map((p, index) => `
+        <div class="flex items-center justify-between p-2.5 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] gap-3 hover:border-[var(--primary)]/40 transition-colors">
+          <div class="flex items-center gap-2 min-w-0 flex-1">
+            <span class="w-6 h-6 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-bold text-xs flex items-center justify-center shrink-0 font-num">
+              ${index + 1}
+            </span>
+            <div class="min-w-0">
+              <div class="font-bold text-xs text-[var(--text-main)] truncate">${p.name}</div>
+              <div class="text-[10px] text-[var(--text-muted)]">Rubrique d'entreprise récurrente</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <div class="relative w-28 sm:w-36">
+              <input type="number" value="${p.amount || 0}" min="0" step="500"
+                onchange="updateCustomPayrollPrimeAmount('${p.id}', this.value)"
+                class="app-input text-xs font-num font-bold text-right pr-6 py-1">
+              <span class="absolute right-2 top-1.5 text-[10px] text-[var(--text-muted)] font-bold">F</span>
+            </div>
+            <button type="button" onclick="removeCustomPayrollPrimeCategory('${p.id}')"
+              class="p-1.5 rounded-lg text-rose-500 hover:bg-rose-500/10 transition-colors cursor-pointer"
+              title="Supprimer cette catégorie de prime">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </button>
+          </div>
+        </div>
+      `).join('');
+
+      const transportPrime = SYSTEM_SETTINGS.payrollPrimes.find(p => p.id === 'transport' || p.name.toLowerCase().includes('transport'));
+      const housingPrime = SYSTEM_SETTINGS.payrollPrimes.find(p => p.id === 'housing' || p.name.toLowerCase().includes('logement'));
+      const foodPrime = SYSTEM_SETTINGS.payrollPrimes.find(p => p.id === 'food' || p.name.toLowerCase().includes('panier') || p.name.toLowerCase().includes('repas'));
+
+      const setHidden = (id, val) => {
+        const el = document.getElementById(id);
+        if (el) el.value = val;
+      };
+      if (transportPrime) setHidden('setting-payroll-default-transport', transportPrime.amount);
+      if (housingPrime) setHidden('setting-payroll-default-housing', housingPrime.amount);
+      if (foodPrime) setHidden('setting-payroll-default-food', foodPrime.amount);
+    }
+    window.renderPayrollPrimesSettings = renderPayrollPrimesSettings;
+
+    function addCustomPayrollPrimeCategory() {
+      const nameEl = document.getElementById('new-prime-name');
+      const amountEl = document.getElementById('new-prime-amount');
+      const name = nameEl ? nameEl.value.trim() : '';
+      const amount = amountEl ? (Number(amountEl.value) || 0) : 0;
+      if (!name) {
+        showToast('Veuillez saisir un intitulé pour la prime (ex: Prime de Santé)', 'warning');
+        return;
+      }
+      if (!Array.isArray(SYSTEM_SETTINGS.payrollPrimes)) {
+        SYSTEM_SETTINGS.payrollPrimes = [];
+      }
+      const newId = 'prime_' + Date.now().toString(36) + '_' + Math.random().toString(36).substr(2, 4);
+      SYSTEM_SETTINGS.payrollPrimes.push({
+        id: newId,
+        name: name,
+        amount: amount,
+        type: 'gain'
+      });
+      if (nameEl) nameEl.value = '';
+      if (amountEl) amountEl.value = '';
+      renderPayrollPrimesSettings();
+      try {
+        localStorage.setItem('aura_system_settings', JSON.stringify(SYSTEM_SETTINGS));
+      } catch (e) {}
+      showToast(`Catégorie « ${name} » ajoutée avec succès !`, 'success');
+    }
+    window.addCustomPayrollPrimeCategory = addCustomPayrollPrimeCategory;
+
+    function removeCustomPayrollPrimeCategory(primeId) {
+      if (!Array.isArray(SYSTEM_SETTINGS.payrollPrimes)) return;
+      const prime = SYSTEM_SETTINGS.payrollPrimes.find(p => p.id === primeId);
+      const primeName = prime ? prime.name : 'cette rubrique';
+      SYSTEM_SETTINGS.payrollPrimes = SYSTEM_SETTINGS.payrollPrimes.filter(p => p.id !== primeId);
+      renderPayrollPrimesSettings();
+      try {
+        localStorage.setItem('aura_system_settings', JSON.stringify(SYSTEM_SETTINGS));
+      } catch (e) {}
+      showToast(`Rubrique « ${primeName} » supprimée.`, 'info');
+    }
+    window.removeCustomPayrollPrimeCategory = removeCustomPayrollPrimeCategory;
+
+    function updateCustomPayrollPrimeAmount(primeId, val) {
+      if (!Array.isArray(SYSTEM_SETTINGS.payrollPrimes)) return;
+      const prime = SYSTEM_SETTINGS.payrollPrimes.find(p => p.id === primeId);
+      if (prime) {
+        prime.amount = Number(val) || 0;
+        try {
+          localStorage.setItem('aura_system_settings', JSON.stringify(SYSTEM_SETTINGS));
+        } catch (e) {}
+      }
+    }
+    window.updateCustomPayrollPrimeAmount = updateCustomPayrollPrimeAmount;
+
 
     // RBAC Collaborateurs & Permissions
     function renderRBACUsers() {
