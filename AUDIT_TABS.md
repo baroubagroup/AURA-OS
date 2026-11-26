@@ -484,19 +484,26 @@ Module financier de haut niveau dédié à la conformité fiscale et comptable d
 2. **Bilan Patrimonial Actif/Passif** (`acc-tab-balance`)
 3. **Déclaration Fiscale TVA 18% & BIC** (`acc-tab-tva`)
 4. **Grand Livre & Écritures SYSCOHADA** (`acc-tab-ledger`)
+5. **Balance Générale des Comptes à 6 Chiffres** (`acc-tab-six-digits-balance`)
 
 #### 3. Ce que chaque sous-onglet Affiche & Permet de Faire :
 - **Sous-onglet 1 : Compte de Résultat (P&L)** : Chiffre d'affaires HT, Coût d'achat des marchandises (COGS), Marge commerciale brute (en valeur et en %), Charges d'exploitation ventilées, Excédent Brut d'Exploitation (EBE) et Résultat Net d'exploitation.
 - **Sous-onglet 2 : Bilan Patrimonial** : Table de l'Actif (Immobilisations, Stocks 31, Créances 411, Disponibilités 571/521) et du Passif (Capitaux propres 10, Dettes fournisseurs 401, Dettes fiscales 44, Résultat 13). **Badge de validation confirmant l'équilibre strict : Total Actif = Total Passif**.
 - **Sous-onglet 3 : Déclaration de TVA DGI (e-SINTAX)** : Reproduction fidèle du formulaire officiel DGI : Lignes L01 à L05 (Base imposable et TVA collectée 18%), Lignes L06 à L10 (TVA déductible sur achats et charges), Ligne L11 (Solde net de TVA due), Ligne L12 (Acompte minimum forfaitaire BIC 1%), Ligne L13 (Total global à télépayer).
 - **Sous-onglet 4 : Grand Livre & Journal des Écritures** : Journal des écritures en partie double strictement équilibrées (Total Débit = Total Crédit) avec recherche par compte OHADA (571, 701, 411, 401, 443...).
+- **Sous-onglet 5 : Balance Générale à 6 Chiffres (SYSCOHADA)** :
+  - Tableau à 6 colonnes normalisé OHADA : N° Compte (6 chiffres), Intitulé, Mouvements Débit, Mouvements Crédit, Solde Débiteur, Solde Créditeur.
+  - Couvre l'ensemble des comptes de bilan et de gestion (101100, 401100, 411100, 422100, 443100, 445100, 521100, 571100, 578100, 601100, 605100, 612100, 622100, 661100, 701100).
+  - Contrôle mathématique rigoureux de la partie double : **Total Débit (45 425 000 F) = Total Crédit (45 425 000 F) & Total Soldes Débiteurs (17 845 000 F) = Total Soldes Créditeurs (17 845 000 F)** avec badge vert officiel `Balance Équilibrée (Écart = 0 F CFA)`.
+  - Actions : Impression A4 certifiée (`printSixDigitsBalanceA4`) et Export CSV comptable (`exportSixDigitsBalanceCSV`).
 - **Impressions & Certifications Officielles** :
   - *Bilan A4 Officiel* (`printBilanA4`) avec visas gérant et expert-comptable.
   - *Déclaration Fiscale TVA A4* (`printTVADeclarationA4`) conforme e-SINTAX.
-  - *Exports Tableurs* : Grand Livre CSV et Fichier de télédéclaration e-SINTAX CSV.
+  - *Balance Générale A4 & Grand Livre A4*.
+  - *Exports Tableurs* : Grand Livre CSV, Balance Générale CSV et Fichier de télédéclaration e-SINTAX CSV.
 
 #### 4. Résultat des Tests Automatisés
-- Suite Dédiée (`test_accounting_module.cjs`) : **68/68 assertions [PASS]**
+- Suite Dédiée (`test_accounting_module.cjs`) & Suite Complémentaire (`test_acc_balance_and_audit.cjs`) : **88/88 assertions [PASS]**
 - **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
 
 ---
@@ -522,15 +529,25 @@ Module analytique et décisionnel (Business Intelligence) permettant aux dirigea
 
 ---
 
-### 🟢 FICHE D'AUDIT N°15 — ONGLET 15 : JOURNAL D'AUDIT & LOG SYSTÈME (`audit`)
+### 🟢 FICHE D'AUDIT N°15 — ONGLET 15 : JOURNAL D'AUDIT & SÉCURITÉ SYSTÈME (`audit`)
 
 #### 1. Rôle Métier & Description
 Module de sécurité, d'immuabilité et de conformité légale. Il enregistre en temps réel chaque événement critique intervenant dans le système : connexions/déconnexions utilisateurs, créations de ventes, annulations de tickets, modifications manuelles de prix, dérogations de remises, suppressions d'articles ou de clients, et clôtures de shifts.
 
 #### 2. Ce que l'onglet Affiche & Permet de Faire :
-- **Tableau Immuable des Logs** : Date et heure précises (ISO), Utilisateur à l'origine de l'action, Catégorie d'événement, Description textuelle détaillée de l'opération, Adresse IP/Poste de travail.
-- **Filtres de Sécurité** : Recherche par utilisateur, par mot-clé et filtrage par niveau de criticité (`Info`, `Warning`, `Alerte Sécurité`).
-- **Export d'Audit** : Téléchargement du journal complet en CSV pour les audits externes et commissariats aux comptes.
+- **Tableau Immuable des Logs** : Date et heure précises (ISO), Utilisateur à l'origine de l'action, Poste de travail (Caisse 01, Direction...), Module concerné, Type d'action, Description détaillée de l'opération, et Niveau de sévérité (`Normal`, `Attention`, `Sensible`).
+- **Moteur Réactif de Recherche & Filtrage** :
+  - Recherche instantanée par mot-clé (opérateur, référence de ticket, type d'action).
+  - Filtrage thématique par module : *Tous les modules, Caisse & Ventes, Modifications Prix, Mouvements Stock, Clôture Caisse Z, Connexion & Sécurité PIN*.
+- **Export d'Audit Certifié** : Téléchargement du journal complet en CSV (`exportAuditLogCSV`) avec encodage UTF-8 BOM pour analyse commissariat aux comptes.
+- **Correction Ergonomique & Architecture** :
+  - Unification de la fonction canonique `switchView` pour éradiquer les doublons d'aiguillage.
+  - Titre dynamique de l'en-tête et fil d'Ariane restaurés (`Journal d'Audit & Sécurité Système`).
+  - Rendu instantané du tableau à chaque accès sans aucune zone vide.
+
+#### 3. Résultat des Tests Automatisés
+- Suite Dédiée (`test_acc_balance_and_audit.cjs`) : **20/20 assertions [PASS]**
+- **Statut Final de l'Onglet** : 🟢 **VALIDÉ & CONFORME PRODUCTION**
 
 ---
 

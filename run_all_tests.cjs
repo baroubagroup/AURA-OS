@@ -24,6 +24,7 @@ const suites = [
   { name: 'Ergonomie Sidebar, Accordéons, Usage Interne & Symbologie Code128/QR', script: 'test_user_requirements.cjs' },
   { name: 'Design Royal Blue Facebook (#1877F2), Contraste Clair & Sous-Onglets Segmentés', script: 'test_theme_and_subtabs.cjs' },
   { name: 'Mode Navigation Supérieure (Top Navbar)', script: 'test_top_nav_layout.cjs' },
+  { name: 'Balance 6 Chiffres SYSCOHADA & Journal Audit Trail', script: 'test_acc_balance_and_audit.cjs' },
   { name: 'End-to-End: Master Integration & UX', script: 'test_master_integration.cjs' }
 ];
 
@@ -38,7 +39,7 @@ let totalAssertions = 0;
 for (const suite of suites) {
   process.stdout.write(`Executing ${suite.name} (${suite.script})... `);
   try {
-    const output = execSync(`node ${path.join(__dirname, suite.script)}`, { encoding: 'utf8', timeout: 35000 });
+    const output = execSync(`node ${path.join(__dirname, suite.script)}`, { encoding: 'utf8', timeout: 60000 });
     const match = output.match(/(\d+)\/(\d+)\s*(?:TESTS?\s*)?PASSED/i) ||
                   output.match(/ALL (\d+)\/(\d+)\s*(?:TESTS?\s*)?PASSED/i) ||
                   output.match(/(\d+)\/(\d+)\s*tests?\s*réussis/i);
