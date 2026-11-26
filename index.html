@@ -2477,6 +2477,79 @@
     }
 
     /* ========================================================
+       1.B MODE BARRE SUPÉRIEURE (MENU EN HAUT / TOP NAVIGATION)
+       Espace de travail 100% horizontal avec bandeau de navigation supérieur
+       ======================================================== */
+    body.layout-top-nav #sidebar {
+      display: none !important;
+      width: 0 !important;
+      min-width: 0 !important;
+      margin: 0 !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+    body.layout-top-nav main {
+      width: 100vw !important;
+      max-width: 100vw !important;
+      flex: 1 1 100% !important;
+    }
+    body.layout-top-nav #aura-top-navbar {
+      display: flex !important;
+    }
+    body.layout-top-nav #topbar-brand {
+      display: flex !important;
+    }
+    body.layout-top-nav #topbar-user-profile {
+      display: flex !important;
+    }
+    body.layout-top-nav #btn-toggle-sidebar {
+      display: none !important;
+    }
+
+    /* Styles Dark Mode pour la Barre Supérieure */
+    html.dark #aura-top-navbar,
+    :root:not(.light) #aura-top-navbar {
+      background: linear-gradient(180deg, #0D2659 0%, #081738 100%) !important;
+      border-bottom: 1.5px solid rgba(24, 119, 242, 0.35) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    }
+    html.dark #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]),
+    :root:not(.light) #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]) {
+      color: #E2E8F0 !important;
+    }
+    html.dark #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]):hover,
+    :root:not(.light) #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]):hover {
+      color: #FFFFFF !important;
+      background-color: rgba(255, 255, 255, 0.12) !important;
+    }
+    html.dark #aura-top-navbar .top-nav-btn.bg-\[var\(--primary-light\)\] {
+      background: linear-gradient(135deg, rgba(24, 119, 242, 0.35), rgba(79, 70, 229, 0.35)) !important;
+      color: #FFFFFF !important;
+      border-color: rgba(24, 119, 242, 0.6) !important;
+      box-shadow: 0 0 12px rgba(24, 119, 242, 0.35) !important;
+    }
+
+    /* Styles Light Mode pour la Barre Supérieure */
+    html.light #aura-top-navbar {
+      background: #FFFFFF !important;
+      border-bottom: 1px solid #E2E8F0 !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+    }
+    html.light #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]) {
+      color: #334155 !important;
+    }
+    html.light #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]):hover {
+      color: #0F172A !important;
+      background-color: #F1F5F9 !important;
+    }
+    html.light #aura-top-navbar .top-nav-btn.bg-\[var\(--primary-light\)\] {
+      background-color: #EFF6FF !important;
+      color: #1877F2 !important;
+      border-color: rgba(24, 119, 242, 0.4) !important;
+      box-shadow: 0 1px 3px rgba(24, 119, 242, 0.15) !important;
+    }
+
+    /* ========================================================
        2. MODE SIDEBAR RÉDUITE (DOCK RAIL VERTICAL AVEC ICÔNES ET NOMS)
        Style inspiré du Dock macOS / Big Sur avec tuiles squircle et libellés sous l'icône
        ======================================================== */
@@ -3148,6 +3221,27 @@
           </div>
         </div>
 
+        <!-- Marque & Sélecteur d'établissement (Visible en Mode Barre Supérieure) -->
+        <div id="topbar-brand" class="hidden items-center gap-2.5 shrink-0 pr-3 border-r border-[var(--border)] mr-1">
+          <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-teal-500 to-indigo-600 flex items-center justify-center font-black text-white text-sm shadow-md shadow-teal-500/20 shrink-0 cursor-pointer" onclick="switchView('dashboard')" title="AURA OS — Tableau de Bord 360°">
+            A
+          </div>
+          <div class="min-w-0">
+            <div class="font-extrabold text-xs tracking-tight flex items-center gap-1 text-[var(--text-main)]">
+              <span>AURA OS</span>
+              <span class="text-[8px] px-1 py-0.2 rounded bg-[var(--primary-light)] text-[var(--primary)] font-bold border border-[var(--primary)]/30">TOP</span>
+            </div>
+            <div class="flex items-center gap-1" id="topbar-store-selector-container">
+              <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+              <select id="topbar-store-selector" onchange="syncStoreSelector(this.value)" class="bg-transparent text-[10px] text-[var(--text-muted)] focus:outline-none cursor-pointer hover:text-[var(--primary)] font-medium -ml-0.5">
+                <option value="s1">Magasin Central</option>
+                <option value="s2">Boutique Ouaga 2000</option>
+                <option value="s3">Dépôt Réserve Bobo</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
         <!-- Titre du module à pleine largeur (ne déborde jamais sur la recherche) -->
         <div class="min-w-0 pr-3 max-w-[200px] sm:max-w-[260px] md:max-w-[320px]">
           <h1 id="page-title" class="text-sm sm:text-base font-extrabold tracking-tight text-[var(--text-main)] truncate font-heading">Tableau de Bord Exécutif 360°</h1>
@@ -3186,6 +3280,12 @@
           <span id="window-theme-label" class="hidden sm:inline">Clair</span>
         </button>
 
+        <!-- Basculeur Disposition Navigation : Menu Latéral / Menu en Haut -->
+        <button id="btn-toggle-nav-layout" type="button" onclick="toggleNavLayout()" class="px-2.5 py-1.5 rounded-xl bg-[var(--bg-card-subtle)] hover:bg-[var(--bg-card)] border border-[var(--border)] text-xs font-bold text-[var(--text-main)] flex items-center gap-1.5 transition-all press-effect cursor-pointer" title="Basculer la disposition : Menu en Haut / Barre Latérale">
+          <span id="nav-layout-icon">◫</span>
+          <span id="nav-layout-label" class="hidden sm:inline">Menu Haut</span>
+        </button>
+
         <!-- Éléments du Mode Cartes retirés de l'interface visuelle (conservés masqués pour compatibilité interne) -->
         <div class="hidden" style="display:none !important;" aria-hidden="true">
           <button id="btn-header-os-settings" type="button" onclick="openOsAppearanceModal()"></button>
@@ -3200,8 +3300,136 @@
         <button onclick="openQuickExpenseModal()" class="app-btn-secondary py-1.5 px-3 text-xs hidden sm:flex">
           <span>+ Dépense</span>
         </button>
+
+        <!-- Profil & Verrouillage en Mode Barre Supérieure (Visible en layout-top-nav) -->
+        <div id="topbar-user-profile" class="hidden items-center gap-2 pl-2 border-l border-[var(--border)]">
+          <div class="w-7 h-7 rounded-full bg-[var(--primary)] flex items-center justify-center font-bold text-[11px] text-white shadow-sm shrink-0" title="Abdoul C. — Gérant">
+            AC
+          </div>
+          <button onclick="lockScreen()" class="p-1.5 rounded-lg text-[var(--text-muted)] hover:text-rose-500 hover:bg-[var(--border)] press-effect" title="Verrouiller la station de caisse">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+          </button>
+        </div>
       </div>
     </header>
+
+    <!-- ==================== BARRE DE NAVIGATION SUPÉRIEURE (MODE MENU EN HAUT) ==================== -->
+    <nav id="aura-top-navbar" class="hidden shrink-0 border-b border-[var(--border)] bg-[var(--bg-sidebar)] transition-all select-none z-20 shadow-xs" aria-label="Navigation Principale Supérieure">
+      <div class="px-4 py-2 w-full flex items-center justify-between gap-2 overflow-hidden">
+        <!-- Ruban de Navigation Scrollable avec Scrollbar Bleu Royal (#1877F2) -->
+        <div class="flex items-center gap-1.5 overflow-x-auto custom-scroll subtab-scroll-deck flex-1 py-0.5">
+          
+          <!-- PÔLE 1 : VUE PRINCIPALE -->
+          <button onclick="switchView('dashboard')" id="topnav-dashboard" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/30 transition-all cursor-pointer shadow-xs" title="Tableau de Bord 360° (F1)">
+            <svg class="w-4 h-4 text-[var(--primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+            <span class="truncate">Tableau 360°</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[var(--border)] text-[var(--text-muted)] font-bold">F1</span>
+          </button>
+
+          <button onclick="switchView('pos')" id="topnav-pos" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Caisse Comptoir POS (F2)">
+            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span class="truncate">Caisse (POS)</span>
+            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-600 font-bold">F2</span>
+          </button>
+
+          <div class="h-5 w-[1px] bg-[var(--border)] shrink-0 mx-1"></div>
+
+          <!-- PÔLE 2 : VENTES & COMMERCE -->
+          <button onclick="switchView('documents')" id="topnav-documents" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Documents & Factures A4">
+            <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span class="truncate">Documents A4</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-teal-500/20 text-teal-600 font-mono">Devis/BL</span>
+          </button>
+
+          <button onclick="switchView('credits')" id="topnav-credits" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Crédits Clients & Recouvrement">
+            <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="truncate">Créances</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-500 font-num">Suivi</span>
+          </button>
+
+          <button onclick="switchView('clients')" id="topnav-clients" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Portefeuille Clients CRM">
+            <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+            <span class="truncate">Clients CRM</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-500 font-mono">B2B</span>
+          </button>
+
+          <div class="h-5 w-[1px] bg-[var(--border)] shrink-0 mx-1"></div>
+
+          <!-- PÔLE 3 : STOCKS & ACHATS -->
+          <button onclick="switchView('stock')" id="topnav-stock" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Stock & Double Dépôt">
+            <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+            <span class="truncate">Stock & Dépôt</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-600 font-num">Rayon</span>
+          </button>
+
+          <button onclick="switchView('suppliers')" id="topnav-suppliers" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Fournisseurs & Commandes d'Achat">
+            <svg class="w-4 h-4 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+            <span class="truncate">Fournisseurs</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-orange-500/20 text-orange-500 font-mono">Achats</span>
+          </button>
+
+          <button onclick="switchView('deliveries')" id="topnav-deliveries" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Livraisons & Flotte">
+            <svg class="w-4 h-4 text-cyan-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+            <span class="truncate">Livraisons</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-600 font-num">Suivi</span>
+          </button>
+
+          <div class="h-5 w-[1px] bg-[var(--border)] shrink-0 mx-1"></div>
+
+          <!-- PÔLE 4 : FINANCES & GESTION -->
+          <button onclick="switchView('shifts')" id="topnav-shifts" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Shifts & Clôtures Journalières Z">
+            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+            <span class="truncate">Shifts & Z</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-600 font-num">Session</span>
+          </button>
+
+          <button onclick="switchView('expenses')" id="topnav-expenses" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Dépenses d'Exploitation & Charges">
+            <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <span class="truncate">Dépenses</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-500 font-num">Charges</span>
+          </button>
+
+          <button onclick="switchView('accounting')" id="topnav-accounting" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Grand Livre & Déclaration TVA 18% OHADA">
+            <svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+            <span class="truncate">Comptabilité TVA</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-500 font-mono">18%</span>
+          </button>
+
+          <button onclick="switchView('stats')" id="topnav-stats" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Statistiques & Marges Commerciales">
+            <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+            <span class="truncate">Statistiques</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-500 font-num">Marges</span>
+          </button>
+
+          <button onclick="switchView('hr')" id="topnav-hr" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Ressources Humaines & Paie OHADA">
+            <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            <span class="truncate">Équipe & Paie</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-600 font-mono">RH</span>
+          </button>
+
+          <div class="h-5 w-[1px] bg-[var(--border)] shrink-0 mx-1"></div>
+
+          <!-- PÔLE 5 : SYSTÈME & ADMINISTRATION -->
+          <button onclick="switchView('audit')" id="topnav-audit" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Journal d'Audit & Sécurité">
+            <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+            <span class="truncate">Audit</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-600 font-num">Log</span>
+          </button>
+
+          <button onclick="switchView('settings')" id="topnav-settings" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Paramètres Système & Configuration Fiscale">
+            <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            <span class="truncate">Paramètres</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-[var(--primary-light)] text-[var(--primary)] font-num">Admin</span>
+          </button>
+
+          <button onclick="switchView('about')" id="topnav-about" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP">
+            <img src="/barouba-group-logo.png" alt="BAROUBA" class="w-4 h-4 object-contain rounded-full border border-amber-500/40 shrink-0" onerror="this.src='barouba-group-logo.png'">
+            <span class="truncate">À Propos</span>
+            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-500 dark:text-amber-400 font-num">BAROUBA</span>
+          </button>
+        </div>
+      </div>
+    </nav>
 
     <!-- ==================== RUBAN HORIZONTAL DES SOUS-CARTES SPÉCIALISÉES (MODE CARTES VISUELLES) ==================== -->
     <div id="aura-card-navigation-deck" class="hidden shrink-0 border-b border-[var(--border)] bg-[var(--bg-sidebar)] transition-all" style="display:none !important;">
@@ -5967,6 +6195,43 @@
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            <!-- Préférences d'Affichage & Disposition Navigation -->
+            <div class="app-card p-5 space-y-4 md:col-span-2">
+              <div class="flex items-center justify-between border-b border-[var(--border)] pb-2">
+                <h3 class="font-bold text-sm text-[var(--text-main)] flex items-center gap-2">
+                  <span>Disposition & Mode de Navigation</span>
+                  <span class="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-bold border border-blue-500/20">Ergonomie & Écran</span>
+                </h3>
+                <span class="text-xs text-[var(--text-muted)]">Personnalisez l'emplacement des menus pour maximiser votre espace de travail.</span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-1">
+                <!-- Option 1 : Barre Latérale -->
+                <label class="relative flex items-start gap-3 p-3.5 rounded-xl border border-[var(--border)] hover:border-[var(--primary)]/50 bg-[var(--bg-card-subtle)] cursor-pointer transition-all group">
+                  <input type="radio" name="setting-nav-layout" id="setting-nav-layout-sidebar" value="sidebar" onchange="setNavLayout('sidebar', true)" class="mt-1 text-[var(--primary)] focus:ring-[var(--primary)]">
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-bold text-xs text-[var(--text-main)] group-hover:text-[var(--primary)]">☰ Barre Latérale (Classique)</span>
+                      <span class="text-[10px] px-1.5 py-0.5 rounded bg-[var(--border)] text-[var(--text-muted)] font-mono">Défaut</span>
+                    </div>
+                    <p class="text-[11px] text-[var(--text-muted)] mt-1">Menu vertical complet à gauche avec regroupement par sections pliables et raccourcis F1/F2.</p>
+                  </div>
+                </label>
+
+                <!-- Option 2 : Barre Supérieure -->
+                <label class="relative flex items-start gap-3 p-3.5 rounded-xl border border-[var(--border)] hover:border-[var(--primary)]/50 bg-[var(--bg-card-subtle)] cursor-pointer transition-all group">
+                  <input type="radio" name="setting-nav-layout" id="setting-nav-layout-top" value="top" onchange="setNavLayout('top', true)" class="mt-1 text-[var(--primary)] focus:ring-[var(--primary)]">
+                  <div class="min-w-0 flex-1">
+                    <div class="flex items-center justify-between">
+                      <span class="font-bold text-xs text-[var(--text-main)] group-hover:text-[var(--primary)]">◫ Barre Supérieure (Menu en Haut)</span>
+                      <span class="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/20 text-blue-500 font-bold font-mono">Plein Écran 100%</span>
+                    </div>
+                    <p class="text-[11px] text-[var(--text-muted)] mt-1">Menu horizontal fluide en bandeau supérieur. Idéal pour les grands écrans et les caisses tactiles.</p>
+                  </div>
+                </label>
               </div>
             </div>
 
@@ -17473,6 +17738,124 @@ function renderA4DocumentView() {
       }
     }
 
+    /* ========================================================
+       GESTION DU MODE DE NAVIGATION : BARRE LATÉRALE VS MENU EN HAUT
+       ======================================================== */
+    function getNavLayout() {
+      try {
+        const saved = localStorage.getItem('aura_nav_layout');
+        if (saved === 'top' || saved === 'sidebar') return saved;
+        if (window.SYSTEM_SETTINGS && (window.SYSTEM_SETTINGS.navLayout === 'top' || window.SYSTEM_SETTINGS.navLayout === 'sidebar')) {
+          return window.SYSTEM_SETTINGS.navLayout;
+        }
+      } catch (e) {}
+      return 'sidebar';
+    }
+    window.getNavLayout = getNavLayout;
+
+    function setNavLayout(mode, showNotification) {
+      const targetMode = (mode === 'top') ? 'top' : 'sidebar';
+      try {
+        localStorage.setItem('aura_nav_layout', targetMode);
+      } catch (e) {}
+      if (window.SYSTEM_SETTINGS) {
+        window.SYSTEM_SETTINGS.navLayout = targetMode;
+      }
+
+      const isTop = (targetMode === 'top');
+      if (typeof document !== 'undefined' && document.body) {
+        if (isTop) {
+          document.body.classList.add('layout-top-nav');
+        } else {
+          document.body.classList.remove('layout-top-nav');
+        }
+      }
+
+      // Bouton basculeur de l'en-tête
+      const btnIcon = document.getElementById('nav-layout-icon');
+      const btnLabel = document.getElementById('nav-layout-label');
+      const btnToggle = document.getElementById('btn-toggle-nav-layout');
+      if (btnIcon && btnLabel) {
+        if (isTop) {
+          btnIcon.innerHTML = '☰';
+          btnLabel.innerText = 'Menu Côté';
+          if (btnToggle) {
+            btnToggle.title = 'Basculer vers la Barre Latérale Classique (Menu Côté)';
+            btnToggle.classList.add('bg-blue-600/15', 'text-blue-500', 'border-blue-500/30');
+          }
+        } else {
+          btnIcon.innerHTML = '◫';
+          btnLabel.innerText = 'Menu Haut';
+          if (btnToggle) {
+            btnToggle.title = 'Basculer vers la Barre Supérieure (Menu en Haut)';
+            btnToggle.classList.remove('bg-blue-600/15', 'text-blue-500', 'border-blue-500/30');
+          }
+        }
+      }
+
+      // Radios dans les paramètres
+      const radioSidebar = document.getElementById('setting-nav-layout-sidebar');
+      const radioTop = document.getElementById('setting-nav-layout-top');
+      if (radioSidebar && radioTop) {
+        radioSidebar.checked = !isTop;
+        radioTop.checked = isTop;
+      }
+
+      // Synchroniser le bouton actif dans la barre supérieure
+      if (typeof syncTopNavActive === 'function') {
+        syncTopNavActive();
+      }
+
+      if (showNotification && typeof showToast === 'function') {
+        if (isTop) {
+          showToast('◫ Mode Barre Supérieure (Menu en Haut) activé — Espace maximisé', 'info');
+        } else {
+          showToast('☰ Mode Barre Latérale (Classique) réactivé', 'info');
+        }
+      }
+    }
+    window.setNavLayout = setNavLayout;
+
+    function toggleNavLayout() {
+      const current = getNavLayout();
+      const next = (current === 'top') ? 'sidebar' : 'top';
+      setNavLayout(next, true);
+    }
+    window.toggleNavLayout = toggleNavLayout;
+
+    function syncTopNavActive(currentViewId) {
+      if (!currentViewId) {
+        const visible = Array.from(document.querySelectorAll('.page-view')).find(el => !el.classList.contains('hidden'));
+        if (visible && visible.id) {
+          currentViewId = visible.id.replace('view-', '');
+        }
+      }
+      if (!currentViewId) currentViewId = 'dashboard';
+
+      document.querySelectorAll('.top-nav-btn').forEach(btn => {
+        btn.classList.remove('bg-[var(--primary-light)]', 'text-[var(--primary)]', 'font-semibold', 'border-[var(--primary)]/30', 'shadow-xs');
+        btn.classList.add('font-medium', 'text-[var(--text-secondary)]', 'border-transparent');
+      });
+      const activeTopNav = document.getElementById('topnav-' + currentViewId);
+      if (activeTopNav) {
+        activeTopNav.classList.add('bg-[var(--primary-light)]', 'text-[var(--primary)]', 'font-semibold', 'border-[var(--primary)]/30', 'shadow-xs');
+        activeTopNav.classList.remove('font-medium', 'text-[var(--text-secondary)]', 'border-transparent');
+        try {
+          activeTopNav.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'nearest' });
+        } catch (e) {}
+      }
+    }
+    window.syncTopNavActive = syncTopNavActive;
+
+    function syncStoreSelector(val) {
+      const s1 = document.getElementById('store-selector');
+      const s2 = document.getElementById('topbar-store-selector');
+      if (s1 && s1.value !== val) s1.value = val;
+      if (s2 && s2.value !== val) s2.value = val;
+      if (typeof switchStore === 'function') switchStore();
+    }
+    window.syncStoreSelector = syncStoreSelector;
+
     // Restaurer l'état au démarrage
     if (typeof document !== 'undefined') {
       const initSidebarState = () => {
@@ -17484,6 +17867,10 @@ function renderA4DocumentView() {
             document.body.classList.add('sidebar-collapsed');
           }
           updateSidebarToggleButtons();
+        } catch (e) {}
+        try {
+          const navLayout = getNavLayout();
+          setNavLayout(navLayout, false);
         } catch (e) {}
       };
       if (document.readyState === 'loading') {
@@ -18898,7 +19285,12 @@ function getLiveMetricForPole(countKey) {
         activeNav.classList.remove('font-medium', 'text-[var(--text-secondary)]');
       }
 
+      if (typeof syncTopNavActive === 'function') {
+        syncTopNavActive(viewId);
+      }
+
       const titles = {
+        dashboard: 'Tableau de Bord Exécutif 360°',
         pos: 'Caisse & Ventes (POS)',
         documents: 'Documents & Facturation',
         stock: 'Stock & Double Dépôt',
@@ -18911,7 +19303,9 @@ function getLiveMetricForPole(countKey) {
         shifts: 'Shifts & Clôture de Caisse',
         stats: 'Statistiques & Marges Réelles',
         accounting: 'Comptabilité Fiscale (TVA 18%)',
-        settings: 'Paramètres & Configuration Système'
+        settings: 'Paramètres & Configuration Système',
+        audit: 'Journal d\'Audit & Sécurité',
+        about: 'À Propos — BAROUBA GROUP'
       };
       const titleEl = document.getElementById('page-title');
       if (titleEl) titleEl.innerText = titles[viewId] || 'Plateforme';
@@ -24056,7 +24450,8 @@ function getLiveMetricForPole(countKey) {
       ],
       payrollDocTitle: 'BULLETIN DE PAIE',
       payrollPayMode: 'Virement Bancaire (Coris)',
-      payrollFooterNotes: 'Conforme au Code du Travail. Bulletin à conserver sans limitation de durée.'
+      payrollFooterNotes: 'Conforme au Code du Travail. Bulletin à conserver sans limitation de durée.',
+      navLayout: 'sidebar'
     };
 
     let SYSTEM_SETTINGS = Object.assign({}, DEFAULT_SYSTEM_SETTINGS);
@@ -24098,6 +24493,14 @@ function getLiveMetricForPole(countKey) {
       setCheck('setting-multidepot', SYSTEM_SETTINGS.multiDepot);
       setVal('setting-default-tva', SYSTEM_SETTINGS.defaultTva);
       setCheck('setting-esintax-active', SYSTEM_SETTINGS.esintaxActive);
+
+      const navLayout = SYSTEM_SETTINGS.navLayout || (typeof getNavLayout === 'function' ? getNavLayout() : 'sidebar');
+      const radioSidebar = document.getElementById('setting-nav-layout-sidebar');
+      const radioTop = document.getElementById('setting-nav-layout-top');
+      if (radioSidebar && radioTop) {
+        radioSidebar.checked = (navLayout === 'sidebar');
+        radioTop.checked = (navLayout === 'top');
+      }
 
       // 2. Matériel & Imprimantes
       setVal('setting-printer-type', SYSTEM_SETTINGS.printerType);
@@ -24178,6 +24581,15 @@ function getLiveMetricForPole(countKey) {
       SYSTEM_SETTINGS.multiDepot = getCheck('setting-multidepot', SYSTEM_SETTINGS.multiDepot);
       SYSTEM_SETTINGS.defaultTva = getVal('setting-default-tva', SYSTEM_SETTINGS.defaultTva);
       SYSTEM_SETTINGS.esintaxActive = getCheck('setting-esintax-active', SYSTEM_SETTINGS.esintaxActive);
+
+      const radioTop = document.getElementById('setting-nav-layout-top');
+      if (radioTop) {
+        SYSTEM_SETTINGS.navLayout = radioTop.checked ? 'top' : 'sidebar';
+        try {
+          localStorage.setItem('aura_nav_layout', SYSTEM_SETTINGS.navLayout);
+          if (typeof setNavLayout === 'function') setNavLayout(SYSTEM_SETTINGS.navLayout, false);
+        } catch (e) {}
+      }
 
       SYSTEM_SETTINGS.printerType = getVal('setting-printer-type', SYSTEM_SETTINGS.printerType);
       SYSTEM_SETTINGS.paperWidth = getVal('setting-paper-width', SYSTEM_SETTINGS.paperWidth);
