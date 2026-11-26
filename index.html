@@ -2477,8 +2477,8 @@
     }
 
     /* ========================================================
-       1.B MODE BARRE SUPÉRIEURE (MENU EN HAUT / TOP NAVIGATION)
-       Espace de travail 100% horizontal avec bandeau de navigation supérieur
+       1.B MODE BARRE SUPÉRIEURE (MENU EN HAUT / GRILLE MINI-CARTES)
+       Inspiré du design ergonomique cockpit : 2 lignes de 8 tuiles sans défilement
        ======================================================== */
     body.layout-top-nav #sidebar {
       display: none !important;
@@ -2494,7 +2494,7 @@
       flex: 1 1 100% !important;
     }
     body.layout-top-nav #aura-top-navbar {
-      display: flex !important;
+      display: block !important;
     }
     body.layout-top-nav #topbar-brand {
       display: flex !important;
@@ -2506,47 +2506,89 @@
       display: none !important;
     }
 
-    /* Styles Dark Mode pour la Barre Supérieure */
-    html.dark #aura-top-navbar,
-    :root:not(.light) #aura-top-navbar {
-      background: linear-gradient(180deg, #0D2659 0%, #081738 100%) !important;
-      border-bottom: 1.5px solid rgba(24, 119, 242, 0.35) !important;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    /* Style des Mini-Cartes de Navigation */
+    .top-nav-card {
+      transition: all 0.16s cubic-bezier(0.16, 1, 0.3, 1) !important;
     }
-    html.dark #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]),
-    :root:not(.light) #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]) {
-      color: #E2E8F0 !important;
+    .top-nav-card:hover {
+      transform: translateY(-2px) !important;
     }
-    html.dark #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]):hover,
-    :root:not(.light) #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]):hover {
-      color: #FFFFFF !important;
-      background-color: rgba(255, 255, 255, 0.12) !important;
-    }
-    html.dark #aura-top-navbar .top-nav-btn.bg-\[var\(--primary-light\)\] {
-      background: linear-gradient(135deg, rgba(24, 119, 242, 0.35), rgba(79, 70, 229, 0.35)) !important;
-      color: #FFFFFF !important;
-      border-color: rgba(24, 119, 242, 0.6) !important;
-      box-shadow: 0 0 12px rgba(24, 119, 242, 0.35) !important;
+    .top-nav-card:active {
+      transform: translateY(0.5px) scale(0.99) !important;
     }
 
-    /* Styles Light Mode pour la Barre Supérieure */
+    /* Styles Dark Mode pour le Bandeau et les Cartes */
+    html.dark #aura-top-navbar,
+    :root:not(.light) #aura-top-navbar {
+      background: linear-gradient(180deg, #071530 0%, #040C1E 100%) !important;
+      border-bottom: 1.5px solid rgba(24, 119, 242, 0.28) !important;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+    }
+    html.dark .top-nav-card {
+      background: rgba(11, 28, 62, 0.75) !important;
+      border: 1px solid rgba(24, 119, 242, 0.22) !important;
+      color: #94A3B8 !important;
+    }
+    html.dark .top-nav-card:hover {
+      background: rgba(16, 40, 88, 0.95) !important;
+      border-color: rgba(24, 119, 242, 0.6) !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45) !important;
+    }
+    html.dark .top-nav-card.active-top-card {
+      background: linear-gradient(135deg, #1877F2 0%, #1D4ED8 100%) !important;
+      border: 1.5px solid #60A5FA !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 0 16px rgba(24, 119, 242, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+    }
+    html.dark .top-nav-card.active-top-card svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+    html.dark .top-nav-card.active-top-card .top-nav-badge {
+      background: rgba(0, 0, 0, 0.35) !important;
+      color: #FFFFFF !important;
+      border-color: rgba(255, 255, 255, 0.4) !important;
+    }
+    html.dark .top-nav-card.active-top-card .top-nav-icon-tile {
+      background: rgba(255, 255, 255, 0.18) !important;
+    }
+
+    /* Styles Light Mode pour le Bandeau et les Cartes */
     html.light #aura-top-navbar {
+      background: #F8FAFC !important;
+      border-bottom: 1.5px solid #E2E8F0 !important;
+      box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05) !important;
+    }
+    html.light .top-nav-card {
       background: #FFFFFF !important;
-      border-bottom: 1px solid #E2E8F0 !important;
-      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05) !important;
+      border: 1px solid #E2E8F0 !important;
+      color: #475569 !important;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
     }
-    html.light #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]) {
-      color: #334155 !important;
-    }
-    html.light #aura-top-navbar .top-nav-btn:not(.bg-\[var\(--primary-light\)\]):hover {
-      color: #0F172A !important;
-      background-color: #F1F5F9 !important;
-    }
-    html.light #aura-top-navbar .top-nav-btn.bg-\[var\(--primary-light\)\] {
-      background-color: #EFF6FF !important;
+    html.light .top-nav-card:hover {
+      background: #EFF6FF !important;
+      border-color: #93C5FD !important;
       color: #1877F2 !important;
-      border-color: rgba(24, 119, 242, 0.4) !important;
-      box-shadow: 0 1px 3px rgba(24, 119, 242, 0.15) !important;
+      box-shadow: 0 3px 8px rgba(24, 119, 242, 0.12) !important;
+    }
+    html.light .top-nav-card.active-top-card {
+      background: linear-gradient(135deg, #1877F2 0%, #1D4ED8 100%) !important;
+      border: 1.5px solid #1877F2 !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 4px 14px rgba(24, 119, 242, 0.3) !important;
+    }
+    html.light .top-nav-card.active-top-card svg {
+      color: #FFFFFF !important;
+      stroke: #FFFFFF !important;
+    }
+    html.light .top-nav-card.active-top-card .top-nav-badge {
+      background: rgba(0, 0, 0, 0.3) !important;
+      color: #FFFFFF !important;
+      border-color: rgba(255, 255, 255, 0.4) !important;
+    }
+    html.light .top-nav-card.active-top-card .top-nav-icon-tile {
+      background: rgba(255, 255, 255, 0.18) !important;
     }
 
     /* ========================================================
@@ -3313,120 +3355,190 @@
       </div>
     </header>
 
-    <!-- ==================== BARRE DE NAVIGATION SUPÉRIEURE (MODE MENU EN HAUT) ==================== -->
+    <!-- ==================== BARRE DE NAVIGATION SUPÉRIEURE (MODE MINI-CARTES COCKPIT) ==================== -->
     <nav id="aura-top-navbar" class="hidden shrink-0 border-b border-[var(--border)] bg-[var(--bg-sidebar)] transition-all select-none z-20 shadow-xs" aria-label="Navigation Principale Supérieure">
-      <div class="px-4 py-2 w-full flex items-center justify-between gap-2 overflow-hidden">
-        <!-- Ruban de Navigation Scrollable avec Scrollbar Bleu Royal (#1877F2) -->
-        <div class="flex items-center gap-1.5 overflow-x-auto custom-scroll subtab-scroll-deck flex-1 py-0.5">
+      <div class="px-4 py-2 w-full">
+        <!-- Grille Répartie sur 2 Lignes de 8 Tuiles (Zéro Scroll, 100% visible à l'écran) -->
+        <div class="grid grid-cols-4 sm:grid-cols-8 gap-2 w-full">
           
-          <!-- PÔLE 1 : VUE PRINCIPALE -->
-          <button onclick="switchView('dashboard')" id="topnav-dashboard" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-semibold text-[var(--primary)] bg-[var(--primary-light)] border border-[var(--primary)]/30 transition-all cursor-pointer shadow-xs" title="Tableau de Bord 360° (F1)">
-            <svg class="w-4 h-4 text-[var(--primary)] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-            <span class="truncate">Tableau 360°</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-[var(--border)] text-[var(--text-muted)] font-bold">F1</span>
+          <!-- LIGNE 1 : OPÉRATIONS, COMMERCE, STOCKS & LOGISTIQUE (8 TUILES) -->
+          <!-- 1. TABLEAU DE BORD 360° -->
+          <button type="button" onclick="switchView('dashboard')" id="topnav-dashboard" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Tableau de Bord Exécutif 360° (F1)">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-blue-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-mono px-1 py-0.2 rounded-full font-bold bg-blue-500/20 text-blue-400 border border-blue-400/30">F1</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Tableau 360°</span>
           </button>
 
-          <button onclick="switchView('pos')" id="topnav-pos" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Caisse Comptoir POS (F2)">
-            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            <span class="truncate">Caisse (POS)</span>
-            <span class="text-[9px] font-mono px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-600 font-bold">F2</span>
+          <!-- 2. CAISSE COMPTOIR (POS) -->
+          <button type="button" onclick="switchView('pos')" id="topnav-pos" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Caisse Comptoir & Encaissement Direct (F2)">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-emerald-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-mono px-1 py-0.2 rounded-full font-bold bg-emerald-500/20 text-emerald-400 border border-emerald-400/30">F2</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Caisse POS</span>
           </button>
 
-          <div class="h-5 w-[1px] bg-[var(--border)] shrink-0 mx-1"></div>
-
-          <!-- PÔLE 2 : VENTES & COMMERCE -->
-          <button onclick="switchView('documents')" id="topnav-documents" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Documents & Factures A4">
-            <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            <span class="truncate">Documents A4</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-teal-500/20 text-teal-600 font-mono">Devis/BL</span>
+          <!-- 3. DOCUMENTS & FACTURES A4 -->
+          <button type="button" onclick="switchView('documents')" id="topnav-documents" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Factures A4, Devis & Bons de Livraison">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-teal-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-teal-500/20 text-teal-400 border border-teal-400/30 font-mono">Devis</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Documents A4</span>
           </button>
 
-          <button onclick="switchView('credits')" id="topnav-credits" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Crédits Clients & Recouvrement">
-            <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span class="truncate">Créances</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-500 font-num">Suivi</span>
+          <!-- 4. CRÉANCES & RECOUVREMENT -->
+          <button type="button" onclick="switchView('credits')" id="topnav-credits" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Crédits Clients & Suivi du Recouvrement">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-rose-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-rose-500/20 text-rose-400 border border-rose-400/30 font-num">Suivi</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Créances Recouv.</span>
           </button>
 
-          <button onclick="switchView('clients')" id="topnav-clients" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Portefeuille Clients CRM">
-            <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-            <span class="truncate">Clients CRM</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-500 font-mono">B2B</span>
+          <!-- 5. RÉPERTOIRE CLIENTS CRM -->
+          <button type="button" onclick="switchView('clients')" id="topnav-clients" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Portefeuille Clients & Gestion CRM">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-blue-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-blue-500/20 text-blue-400 border border-blue-400/30 font-mono">CRM</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Répertoire Clients</span>
           </button>
 
-          <div class="h-5 w-[1px] bg-[var(--border)] shrink-0 mx-1"></div>
-
-          <!-- PÔLE 3 : STOCKS & ACHATS -->
-          <button onclick="switchView('stock')" id="topnav-stock" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Stock & Double Dépôt">
-            <svg class="w-4 h-4 text-amber-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-            <span class="truncate">Stock & Dépôt</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/20 text-amber-600 font-num">Rayon</span>
+          <!-- 6. STOCK & DOUBLE DÉPÔT -->
+          <button type="button" onclick="switchView('stock')" id="topnav-stock" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Gestion du Stock, Double Dépôt & Étiquettes">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-amber-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-amber-500/20 text-amber-400 border border-amber-400/30 font-num">Rayon</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Stock & Dépôts</span>
           </button>
 
-          <button onclick="switchView('suppliers')" id="topnav-suppliers" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Fournisseurs & Commandes d'Achat">
-            <svg class="w-4 h-4 text-orange-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
-            <span class="truncate">Fournisseurs</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-orange-500/20 text-orange-500 font-mono">Achats</span>
+          <!-- 7. FOURNISSEURS & ACHATS -->
+          <button type="button" onclick="switchView('suppliers')" id="topnav-suppliers" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Fournisseurs, Commandes d'Achat & Dettes">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-orange-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-orange-500/20 text-orange-400 border border-orange-400/30 font-mono">Achats</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Fournisseurs</span>
           </button>
 
-          <button onclick="switchView('deliveries')" id="topnav-deliveries" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Livraisons & Flotte">
-            <svg class="w-4 h-4 text-cyan-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
-            <span class="truncate">Livraisons</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-cyan-500/20 text-cyan-600 font-num">Suivi</span>
+          <!-- 8. LIVRAISONS & FLOTTE -->
+          <button type="button" onclick="switchView('deliveries')" id="topnav-deliveries" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Livraisons, Expéditions & Suivi Flotte">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-cyan-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-cyan-500/20 text-cyan-400 border border-cyan-400/30 font-num">Flotte</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Livraisons Flotte</span>
           </button>
 
-          <div class="h-5 w-[1px] bg-[var(--border)] shrink-0 mx-1"></div>
-
-          <!-- PÔLE 4 : FINANCES & GESTION -->
-          <button onclick="switchView('shifts')" id="topnav-shifts" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Shifts & Clôtures Journalières Z">
-            <svg class="w-4 h-4 text-emerald-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-            <span class="truncate">Shifts & Z</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-600 font-num">Session</span>
+          <!-- LIGNE 2 : FINANCES, PILOTAGE, RH & ADMINISTRATION (8 TUILES) -->
+          <!-- 9. SHIFTS & CLÔTURE Z -->
+          <button type="button" onclick="switchView('shifts')" id="topnav-shifts" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Sessions de Caisse, Shifts & Clôtures Journalières Z">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-emerald-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-400/30 font-num">Session</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Shifts & Clôture Z</span>
           </button>
 
-          <button onclick="switchView('expenses')" id="topnav-expenses" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Dépenses d'Exploitation & Charges">
-            <svg class="w-4 h-4 text-rose-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-            <span class="truncate">Dépenses</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-rose-500/20 text-rose-500 font-num">Charges</span>
+          <!-- 10. DÉPENSES D'EXPLOITATION -->
+          <button type="button" onclick="switchView('expenses')" id="topnav-expenses" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Dépenses d'Exploitation & Charges">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-rose-500 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-rose-500/20 text-rose-400 border border-rose-400/30 font-num">Frais</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Dépenses Charges</span>
           </button>
 
-          <button onclick="switchView('accounting')" id="topnav-accounting" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Grand Livre & Déclaration TVA 18% OHADA">
-            <svg class="w-4 h-4 text-indigo-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-            <span class="truncate">Comptabilité TVA</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-indigo-500/20 text-indigo-500 font-mono">18%</span>
+          <!-- 11. COMPTABILITÉ & TVA 18% -->
+          <button type="button" onclick="switchView('accounting')" id="topnav-accounting" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Grand Livre Comptable, TVA 18% & Déclaration OHADA">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-indigo-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-indigo-500/20 text-indigo-400 border border-indigo-400/30 font-mono">18%</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Comptabilité TVA</span>
           </button>
 
-          <button onclick="switchView('stats')" id="topnav-stats" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Statistiques & Marges Commerciales">
-            <svg class="w-4 h-4 text-blue-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
-            <span class="truncate">Statistiques</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-blue-500/20 text-blue-500 font-num">Marges</span>
+          <!-- 12. STATISTIQUES & MARGES RÉELLES -->
+          <button type="button" onclick="switchView('stats')" id="topnav-stats" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Rapports Analytiques & Marges Commerciales">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-sky-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-sky-500/20 text-sky-400 border border-sky-400/30 font-num">Marges</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Statistiques Ventes</span>
           </button>
 
-          <button onclick="switchView('hr')" id="topnav-hr" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Ressources Humaines & Paie OHADA">
-            <svg class="w-4 h-4 text-purple-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-            <span class="truncate">Équipe & Paie</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-purple-500/20 text-purple-600 font-mono">RH</span>
+          <!-- 13. ÉQUIPE & PAIE OHADA -->
+          <button type="button" onclick="switchView('hr')" id="topnav-hr" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Ressources Humaines, Salaires & Paie OHADA">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-purple-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-purple-500/20 text-purple-400 border border-purple-400/30 font-mono">Social</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Équipe & Paie RH</span>
           </button>
 
-          <div class="h-5 w-[1px] bg-[var(--border)] shrink-0 mx-1"></div>
-
-          <!-- PÔLE 5 : SYSTÈME & ADMINISTRATION -->
-          <button onclick="switchView('audit')" id="topnav-audit" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Journal d'Audit & Sécurité">
-            <svg class="w-4 h-4 text-slate-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-            <span class="truncate">Audit</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-emerald-500/20 text-emerald-600 font-num">Log</span>
+          <!-- 14. JOURNAL D'AUDIT & LOG -->
+          <button type="button" onclick="switchView('audit')" id="topnav-audit" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Journal d'Audit & Sécurité">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-slate-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-400/30 font-num">Logs</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Journal d'Audit</span>
           </button>
 
-          <button onclick="switchView('settings')" id="topnav-settings" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="Paramètres Système & Configuration Fiscale">
-            <svg class="w-4 h-4 text-teal-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-            <span class="truncate">Paramètres</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-[var(--primary-light)] text-[var(--primary)] font-num">Admin</span>
+          <!-- 15. PARAMÈTRES & FISCALITÉ -->
+          <button type="button" onclick="switchView('settings')" id="topnav-settings" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="Paramètres Système & Configuration Fiscale">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <svg class="w-4 h-4 text-teal-400 group-hover:scale-110 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[8px] font-bold px-1 py-0.2 rounded-full bg-[var(--primary-light)] text-[var(--primary)] border border-[var(--primary)]/30 font-num">Admin</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 truncate max-w-full leading-tight">Paramètres Système</span>
           </button>
 
-          <button onclick="switchView('about')" id="topnav-about" class="top-nav-btn shrink-0 flex items-center gap-2 px-3 py-1.5 rounded-xl text-xs font-medium text-[var(--text-secondary)] hover:text-[var(--text-main)] hover:bg-[var(--bg-card)] transition-all cursor-pointer border border-transparent" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP">
-            <img src="/barouba-group-logo.png" alt="BAROUBA" class="w-4 h-4 object-contain rounded-full border border-amber-500/40 shrink-0" onerror="this.src='barouba-group-logo.png'">
-            <span class="truncate">À Propos</span>
-            <span class="text-[9px] font-bold px-1.5 py-0.2 rounded bg-amber-500/15 text-amber-500 dark:text-amber-400 font-num">BAROUBA</span>
+          <!-- 16. AUTEURS & ÉDITEUR (BAROUBA GROUP - STYLE PRO D'OR) -->
+          <button type="button" onclick="switchView('about')" id="topnav-about" class="top-nav-card top-nav-btn relative flex flex-col items-center justify-center p-1.5 sm:p-2 rounded-xl transition-all duration-150 cursor-pointer border border-amber-500/40 hover:border-amber-400 group select-none text-center shadow-xs h-[54px] sm:h-[58px]" title="À Propos du Concepteur & Éditeur — BAROUBA GROUP">
+            <div class="relative flex items-center justify-center">
+              <div class="top-nav-icon-tile w-6 h-6 rounded-lg flex items-center justify-center transition-colors">
+                <img src="/barouba-group-logo.png" alt="BAROUBA" class="w-4 h-4 object-contain rounded-full border border-amber-500/50 shrink-0 group-hover:scale-110 transition-transform" onerror="this.src='barouba-group-logo.png'">
+              </div>
+              <span class="top-nav-badge absolute -top-1.5 -right-3 text-[7.5px] font-black px-1 py-0.2 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 text-black border border-amber-300 shadow-xs">PRO</span>
+            </div>
+            <span class="top-nav-label text-[10.5px] font-bold tracking-tight mt-1 text-amber-500 dark:text-amber-400 group-hover:text-amber-300 truncate max-w-full leading-tight">Auteurs & Éditeur</span>
           </button>
+
         </div>
       </div>
     </nav>

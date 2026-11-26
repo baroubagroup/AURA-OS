@@ -552,13 +552,19 @@ Module de présentation légale, de propriété intellectuelle et de support tec
 #### 1. Rôle Métier & Description
 Afin de s'adapter aux différents formats d'écrans (caisses tactiles 16:9, tablettes de vente au comptoir, ordinateurs portables compacts ou écrans de bureau ultra-larges), AURA Business OS intègre désormais un **système de double disposition de navigation instantanée** :
 1. **Mode Barre Latérale (Classique / Sidebar)** : Navigation verticale organisée par sections accordéons rétractables, avec raccourcis clavier F1/F2 et badges de compteurs.
-2. **Mode Barre Supérieure (Menu en Haut / Top Navbar)** : Navigation horizontale fluide sous l'en-tête, libérant 100% de la largeur de l'écran pour l'espace de travail, les tableaux de données et la grille de caisse.
+2. **Mode Barre Supérieure Cockpit (Menu en Haut / Grille Mini-Cartes)** : Navigation ergonomique en grille compacte de mini-cartes (2 rangées symétriques de 8 tuiles sans défilement), inspirée des interfaces POS modernes haut de gamme. Elle libère 100% de la largeur de l'écran tout en affichant l'intégralité des 16 modules simultanément sous les yeux de l'opérateur en un seul coup d'œil.
 
 #### 2. Fonctionnalités & Commandes Implémentées :
-- **Bandeau Supérieur Dédié (`#aura-top-navbar`)** :
-  - Accès direct en un clic aux 16 modules du logiciel : *Tableau 360° (F1), Caisse (POS F2), Documents A4, Créances, Clients CRM, Stock & Dépôts, Fournisseurs, Livraisons, Shifts & Clôtures Z, Dépenses, Comptabilité TVA 18%, Statistiques, Équipe RH, Journal d'Audit, Paramètres, et À Propos*.
-  - Défilement horizontal fluide avec la barre aux couleurs officielles **Bleu Royal (`#1877F2`)** (`.subtab-scroll-deck`).
-  - Indicateur visuel du module actif avec effet lumineux et défilement automatique vers le bouton sélectionné.
+- **Grille Supérieure Cockpit Zéro Défilement (`#aura-top-navbar`)** :
+  - Accès direct en un clic aux 16 modules du logiciel disposés en **2 lignes équilibrées de 8 mini-cartes** (`grid-cols-4 sm:grid-cols-8`) :
+    - *Ligne 1 : Tableau 360° (F1), Caisse Tactile (F2), Documents Studio A4, Créances & Suivi, Clients CRM, Stock & Rayons, Fournisseurs, Livraisons & Flotte*.
+    - *Ligne 2 : Shifts Caisse, Dépenses & Frais, Comptabilité TVA 18%, Statistiques & Marges, Équipe RH, Journal d'Audit, Paramètres Système, et Auteurs & Éditeur (BAROUBA GROUP PRO)*.
+  - **Zéro Défilement (Zero Scroll)** : Les 16 modules tiennent parfaitement sur un seul écran standard de caisse ou laptop, supprimant tout besoin de scroller.
+  - **Design des Tuiles Mini-Cartes** :
+    - Cartouche vertical avec icône en carré arrondi (squircle), badge raccourci/notification en pastille en haut à droite, et intitulé en typographie grasse centrée.
+    - État Actif : habillage Bleu Royal éclatant (`#1877F2`), texte et icône blancs, lueur subtile et biseau supérieur.
+    - État Inactif : fond sombre translucide marine (`#0B1C3E`), bordure discrète, icônes colorées avec micro-interaction au survol (`translateY(-2px)`).
+    - 16e module (*Auteurs & Éditeur - BAROUBA GROUP*) : orné d'une bordure dorée, badge "PRO" dégradé or/ambre et logo d'origine.
 - **En-tête Adaptatif en Mode Plein Écran (`body.layout-top-nav`)** :
   - *Logo & Sélecteur d'Établissement (`#topbar-brand`)* : Rapatrié automatiquement à gauche du titre pour préserver l'accès multi-boutique.
   - *Profil Utilisateur & Verrouillage (`#topbar-user-profile`)* : Présent à droite avec avatar de l'opérateur et bouton de verrouillage PIN instantané.
